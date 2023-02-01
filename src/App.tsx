@@ -1,13 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import Header from './pages/header';
+import Footer from './pages/footer';
 import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="App wrapper">
+      <Header />
+
+
+      <div className="temporal-div">
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -20,8 +23,10 @@ function App() {
           Learn React
         </a>
         <br/><br/>
-        <Outlet />
-      </header>
+      </div>
+      
+      <Outlet />
+      <Footer />
     </div>
   );
 }
