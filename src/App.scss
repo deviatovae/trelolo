@@ -14,7 +14,6 @@ a {
   max-width: 1440px;
 }
 
-
 .header {
   width: 100%;
   height: 80px;
@@ -30,11 +29,11 @@ a {
     width: 60px;
     height: 60px;
     background-size: contain;
+    animation: App-logo-spin infinite 5s linear;
 
     &:hover {
       cursor: pointer;
-      animation: App-logo-spin infinite 5s linear;
-
+      animation: paused;
     }
   }
 
@@ -52,7 +51,6 @@ a {
       cursor: pointer;
     }
   }
-
 }
 
 
@@ -71,13 +69,18 @@ a {
     width: 140px;
     height: 52px;
     background-size: contain;
+    transition: transform 0.2s;
+    
+    &:hover {
+      transition: transform 0.2s;
+      transform: rotate(3deg);
+    }
   } 
 }
 
 .github-link {
   color: #000;
 }
-
 
 .temporal-div {
   height: 863px;

@@ -12,7 +12,11 @@ const Footer = () => {
         <div className="footer__dev">
           <a className="github-link" href="https://github.com/kira-zaytseva" target="_blank">kira-zaytseva</a>
         </div>
-      <div className="footer__school-img"></div>
+      <div className="footer__school">
+        <a className="footer__school-link" href="https://rs.school/js/" target="_blank">
+          <p className="footer__school-img"></p>
+        </a>
+      </div>
       <div className="footer__year">2023</div>
     </footer>
   );
