@@ -1,0 +1,26 @@
+
+.button {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  width: 100%;
+  background-color: #494bf4;
+  color: #F9F9FF;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 28px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #5464e3;
+  }
+}
+
+.round {
+  border-radius: 50px;
+}
