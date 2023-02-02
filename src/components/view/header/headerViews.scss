@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
+    border-bottom: 1px solid $mainBlue;
 
     &__logo-wrapper {
       padding-left: 30px;
@@ -23,10 +24,10 @@
     }
 
     &__logo-text {
-      font-family: 'Roboto' serif;
+      font-family: 'Roboto';
       font-size: 24px;
-      font-weight: 600;
-      color: #000;
+      font-weight: 700;
+      color: $black;
     }
 
     &__logo {
@@ -53,13 +54,13 @@
       justify-content: center;
       color: $mainBg;
       cursor: pointer;
-      background: #283CDC;
+      background: $mainBlue;
     }
 
     &__user {
       width: 40px;
       height: 40px;
-      border: 1px solid #D9D9D9;
+      border: 1px solid $greylight;
       border-radius: 50px;
       display: flex;
       align-items: center;

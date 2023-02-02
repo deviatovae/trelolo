@@ -8,11 +8,6 @@ function App() {
   return (
     <div className="App wrapper">
       <Header />
-
-      <div className="temporal-div">
-          Learn React
-      </div>
-
       <Outlet />
       <Footer />
     </div>
