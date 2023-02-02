@@ -8,7 +8,7 @@ interface ButtonProp {
 }
 
 export default function Button({ isRound, children, onclick }: ButtonProp) {
-    const roundClass = isRound ? 'round' : '';
+    const roundClass = isRound ? 'button_round' : '';
     const classes = `button ${roundClass}`;
 
     return <button className={classes} onClick={onclick}>{children}</button>;

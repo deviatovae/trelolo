@@ -1,18 +1,26 @@
-@import '../../../assets/styles/variables.scss';
+@import '/src/assets/styles/variables.scss';
 
 .header {
     width: 100%;
     height: 80px;
     background-color: $mainBg;
-    padding: 0 20px;
+    border-bottom: 1px solid $mainBlue;
+
+  &__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    border-bottom: 1px solid $mainBlue;
+    padding: 0 75px;
+    height: 100%;
+    margin: 0 auto;
+
+    @media screen and (max-width: 1100px) {
+      padding: 0 35px;
+    }
+  }
 
     &__logo-wrapper {
-      padding-left: 30px;
       width: 142px;
       display: flex;
       align-items: center;
@@ -24,21 +32,20 @@
     }
 
     &__logo-text {
-      font-family: 'Roboto';
+      font-family: 'Roboto', sans-serif;
       font-size: 24px;
       font-weight: 700;
       color: $black;
     }
 
     &__logo {
-      background: url(../../../../src/assets/img/logo_trelolo.svg) center no-repeat;
+      background: url('../../../../src/assets/img/logo_trelolo.svg') center no-repeat;
       width: 64px;
       height: 50px;
       background-size: contain;
     }
 
     &__lang-user-wrapper {
-      width: 105px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -47,14 +54,18 @@
     &__lang {
       width: 40px;
       height: 40px;
-      border: 1px solid;
       border-radius: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: $mainBg;
+      color: $mainBlue;
       cursor: pointer;
-      background: $mainBlue;
+      font-weight: 500;
+      background: rgba($mainBlue, 0.1);
+
+      &:hover {
+        background: rgba($mainBlue, 0.15);
+      }
     }
 
     &__user {
@@ -68,7 +79,7 @@
       color: $mainBlue;
 
       visibility: hidden;
-  
+
       &:hover {
         cursor: pointer;
       }

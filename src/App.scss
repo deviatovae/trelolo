@@ -1,5 +1,31 @@
-@import url('../src/assets/styles/normalize.css');
-@import url('../src/assets/styles/variables.scss');
+@import '/src/assets/styles/normalize.css';
+@import '/src/assets/styles/variables.scss';
+
+body {
+  background-color: $mainBg;
+}
+
+html, body, #root, .app {
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+}
+
+._container {
+  max-width: 1440px;
+}
 
 html {
   overflow-x: hidden;
@@ -12,19 +38,6 @@ a {
 .wrapper {
   margin: 0 auto;
 }
-
-.App {
-  max-width: 1440px;
-}
-
-.temporal-div {
-  height: 200px;
-  position: relative;
-  padding-top: 200px;
-  text-align: center;
-  font-size: 40px;
-}
-
 
 
 
