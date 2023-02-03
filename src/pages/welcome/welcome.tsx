@@ -1,16 +1,17 @@
 import React from 'react';
-import './welcomeViews.scss';
+import './welcome.scss';
+import Button from '../../components/button/button';
 
 export const Welcome = () => {
   return (
     <div className="welcome-wrapper">
       <div className="welcome-content wrapper">
         <div className="welcome-content__left">
-          <div className="welcome-content__header">
+          <h1 className="welcome-content__header">
             WORKSPACE FOR YOUR TEAM
-          </div>
+          </h1>
           <div className="welcome-content__btn">
-            LOG IN
+            <Button isRound>LOG IN</Button>
           </div>
         </div>
         <div className="welcome-content__img"></div>

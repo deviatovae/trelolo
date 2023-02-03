@@ -1,3 +1,4 @@
+@import "/src/assets/styles/variables";
 
 .button {
   display: flex;
@@ -6,8 +7,8 @@
   justify-content: center;
   padding: 16px;
   width: 100%;
-  background-color: #494bf4;
-  color: #F9F9FF;
+  background-color: $mainBlue;
+  color: $mainBg;
   border-radius: 10px;
   font-size: 24px;
   font-weight: bold;
@@ -15,12 +16,23 @@
   user-select: none;
   cursor: pointer;
   border: none;
+  transition: 0.3s transform, 0.3s background ;
+
+  &:active {
+    transition: 0.3s transform;
+    transform: scale(97%);
+  }
 
   &:hover {
-    background-color: #5464e3;
+    transition: 0.3s background;
+    background: $mainBlueHover;
+  }
+
+  @media screen and (max-width: 1100px) {
+    margin: 0 auto;
   }
 }
 
-.round {
+.button_round {
   border-radius: 50px;
 }
