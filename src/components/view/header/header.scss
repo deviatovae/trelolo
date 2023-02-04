@@ -39,7 +39,6 @@
     }
 
     &__logo {
-      // background: url('../../../../src/assets/img/logo_trelolo.svg') center no-repeat;
       background-color: $mainBlue;
       border-radius: 10px;
       width: 65px;
@@ -53,7 +52,6 @@
       position: absolute;
       top: 10px;
       left: 9px;
-      background-size: 9px 27px;
     }
 
     &__logo2 {
@@ -61,7 +59,6 @@
       position: absolute;
       top: 19px;
       left: 24px;
-      background-size: 9px 27px;
     }
 
     &__logo3 {
@@ -69,8 +66,6 @@
       position: absolute;
       top: 10px;
       left: 35px;
-      background-size: 9px 27px;
-
     }
 
     &__lang-user-wrapper {
