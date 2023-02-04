@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import './header.scss';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { FormattedMessage } from 'react-intl';
