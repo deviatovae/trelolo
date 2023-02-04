@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.scss';
-
+import { UserIcon } from '../../userIcon/userIcon';
 
 const Header = () => {
   const history = useNavigate();
@@ -19,7 +19,7 @@ const Header = () => {
         </div>
         <div className="header__lang-user-wrapper">
           <div className="header__lang">EN</div>
-          {/*<div className="header__user">KZ</div>*/}
+          <UserIcon />
         </div>
       </div>
     </header>
