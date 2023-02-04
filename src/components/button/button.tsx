@@ -1,17 +1,15 @@
 import React from 'react';
 import './button.scss';
+import { FormattedMessage } from 'react-intl';
+import { ButtonProp } from '../types/ButtonsProp';
 
-interface ButtonProp {
-    isRound: boolean,
-    children: string,
-    onclick?: React.MouseEventHandler
-}
-
-export default function Button({ isRound, children, onclick }: ButtonProp) {
+export default function Button({ isRound, children, id, onclick }: ButtonProp) {
     const roundClass = isRound ? 'button_round' : '';
     const classes = `button ${roundClass}`;
 
-    return <button className={classes} onClick={onclick}>{children}</button>;
+    return (
+    <button className={classes} onClick={onclick}>{ <FormattedMessage id={id} /> }</button>
+    );
 }
 
 Button.defaultProps = {

@@ -9,7 +9,8 @@ export default function ErrorPage() {
     if (isRouteErrorResponse(error)) {
         return (
           <div className="app wrapper">
-            <Header />
+            {/* <Header /> */}
+
             <div className="app__content">
               <div className="error-page__content">
                 <h1>Oops!</h1>
