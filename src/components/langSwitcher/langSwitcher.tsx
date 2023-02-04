@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import './langSwitcher.scss';
-import { LOCALES } from '../../../src/components/languagesComponents/locales';
+import { LOCALES } from '../languages/locales';
 import { LangSwitcherProps } from '../types/LangSwitcherProps';
 
 const LangSwitcher = (props: LangSwitcherProps) => {

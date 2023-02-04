@@ -3,9 +3,9 @@ import Header from './components/view/header/header';
 import Footer from './components/view/footer/footer';
 import { Outlet } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { LOCALES } from '../src/components/languagesComponents/locales';
-import { messages } from '../src/components/languagesComponents/messages';
-import { LanguagesManager } from '../src/components/languagesComponents/languagesManager';
+import { LOCALES } from './components/languages/locales';
+import { messages } from './components/languages/messages';
+import { LanguagesManager } from './components/languages/languagesManager';
 
 
 function App() {

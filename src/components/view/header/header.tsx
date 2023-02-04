@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { ChangeEvent } from 'react';
 import './header.scss';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
-import { FormattedMessage } from 'react-intl';
 
 interface HeaderProps {
   currentLocale: string;
@@ -21,7 +20,7 @@ const Header = (props: HeaderProps) => {
         <div className="header__logo-wrapper" onClick={handleLogoClick}>
           <div className="header__logo"></div>
           <div className="header__logo-text">
-          <FormattedMessage id='logoText' />
+          trelolo
           </div>
         </div> 
         <div className="header__lang-user-wrapper">
