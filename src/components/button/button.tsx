@@ -8,7 +8,7 @@ export default function Button({ isRound, children, id, onclick }: ButtonProp) {
     const classes = `button ${roundClass}`;
 
     return (
-    <button className={classes} onClick={onclick}>{ <FormattedMessage id={id} /> }</button>
+    <button className={classes} onClick={onclick}>{children}{ <FormattedMessage id={id} /> }</button>
     );
 }
 
