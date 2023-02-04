@@ -39,10 +39,38 @@
     }
 
     &__logo {
-      background: url('../../../../src/assets/img/logo_trelolo.svg') center no-repeat;
-      width: 64px;
+      // background: url('../../../../src/assets/img/logo_trelolo.svg') center no-repeat;
+      background-color: $mainBlue;
+      border-radius: 10px;
+      width: 65px;
       height: 50px;
       background-size: contain;
+      position: relative;
+    }
+
+    &__logo1 {
+      content: url('../../../../src/assets/img/Vector-1.svg');
+      position: absolute;
+      top: 10px;
+      left: 9px;
+      background-size: 9px 27px;
+    }
+
+    &__logo2 {
+      content: url('../../../../src/assets/img/Vector-2.svg');
+      position: absolute;
+      top: 19px;
+      left: 24px;
+      background-size: 9px 27px;
+    }
+
+    &__logo3 {
+      content: url('../../../../src/assets/img/Vector.svg');
+      position: absolute;
+      top: 10px;
+      left: 35px;
+      background-size: 9px 27px;
+
     }
 
     &__lang-user-wrapper {
@@ -85,3 +113,13 @@
       }
     }
   }
+
+.header__logo-wrapper:hover > .header__logo > .header__logo3 {
+  transform-origin: left bottom;
+  animation: 0.4s ease-in-out 0s normal none infinite running fly-animation;
+}
+
+.header__logo-wrapper:hover > .header__logo > .header__logo1 {
+  transform-origin: right bottom;
+  animation: 0.4s ease-in-out 0s normal none infinite running fly-animation-rev;
+}
