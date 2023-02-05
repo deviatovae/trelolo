@@ -72,6 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px
     }
 
     &__lang {
@@ -91,22 +92,22 @@
       }
     }
 
-    &__user {
-      width: 40px;
-      height: 40px;
-      border: 1px solid $greylight;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $mainBlue;
+    // &__user {
+    //   width: 40px;
+    //   height: 40px;
+    //   border: 1px solid $greylight;
+    //   border-radius: 50px;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   color: $mainBlue;
 
-      visibility: hidden;
+    //   visibility: hidden;
 
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    //   &:hover {
+    //     cursor: pointer;
+    //   }
+    // }
   }
 
 .header__logo-wrapper:hover > .header__logo > .header__logo3 {
