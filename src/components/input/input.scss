@@ -1,0 +1,20 @@
+@import "/src/assets/styles/variables";
+
+.input {
+    border: 1px solid $gray;
+    border-radius: 6px;
+    padding: 14px 9px;
+
+    &-error {
+        display: none;
+        color: red;
+    }
+}
+
+input::-moz-placeholder {
+    color: $greylight;
+}
+
+input::-webkit-input-placeholder {
+    color: $greylight;
+}
