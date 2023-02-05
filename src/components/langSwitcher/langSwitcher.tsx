@@ -1,12 +1,12 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import './langSwitcher.scss';
 import { LOCALES } from '../languages/locales';
 import { LangSwitcherProps } from '../types/LangSwitcherProps';
 
-const LangSwitcher = (props: LangSwitcherProps) => {
+const LangSwitcher = ({ handleChange, currentLocale }: LangSwitcherProps) => {
 
 const handleLocaleChange = (locale: string) => {
-  props.handleChange({
+  handleChange({
   target: {
    value: locale,
   },
@@ -14,15 +14,13 @@ const handleLocaleChange = (locale: string) => {
 };
 
 return (
-  <div className="lang-switcher">
     <button
-      className={`lang-switcher__button ${props.currentLocale === LOCALES.ENGLISH ? 'lang-switcher__button--active' : ''}`}
-      onClick={() => handleLocaleChange(props.currentLocale === LOCALES.ENGLISH ? LOCALES.RUSSIAN : LOCALES.ENGLISH)}
+      className={`lang-switcher__button ${currentLocale === LOCALES.ENGLISH ? 'lang-switcher__button--active' : ''}`}
+      onClick={() => handleLocaleChange(currentLocale === LOCALES.ENGLISH ? LOCALES.RUSSIAN : LOCALES.ENGLISH)}
       > 
-      {props.currentLocale === LOCALES.ENGLISH ? 'EN' : 'RU'}
+      {currentLocale === LOCALES.ENGLISH ? 'EN' : 'RU'}
     </button>
-  </div>
-);
+  );
 };
 
 export default LangSwitcher;
