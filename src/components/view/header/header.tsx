@@ -5,7 +5,7 @@ import LangSwitcher from '../../langSwitcher/langSwitcher';
 
 interface HeaderProps {
   currentLocale: string;
-  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  setLocale: (locale: string) => void;
 }
 
 const Header = (props: HeaderProps) => {
@@ -22,11 +22,11 @@ const Header = (props: HeaderProps) => {
           <div className="header__logo-text">
           trelolo
           </div>
-        </div> 
+        </div>
         <div className="header__lang-user-wrapper">
         <LangSwitcher
-        currentLocale={props.currentLocale} 
-        handleChange={props.handleChange} 
+        currentLocale={props.currentLocale}
+        setLocale={props.setLocale}
         />
         {/* <div className="header__user">KZ</div> */}
         </div>

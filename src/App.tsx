@@ -7,9 +7,8 @@ import { LOCALES } from './components/languages/locales';
 import { messages } from './components/languages/messages';
 import { LanguagesManager } from './components/languages/languagesManager';
 
-
 function App() {
-  const { currentLocale, handleChange } = LanguagesManager();
+  const { currentLocale, setLocale } = LanguagesManager();
 
   return (
     <IntlProvider
@@ -18,7 +17,7 @@ function App() {
       defaultLocale={LOCALES.ENGLISH}
       >
       <div className="app wrapper">
-      <Header currentLocale={currentLocale} handleChange={handleChange} />
+      <Header currentLocale={currentLocale} setLocale={setLocale} />
       <div className="app__content">
           <Outlet />
         </div>
