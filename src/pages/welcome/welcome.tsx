@@ -1,6 +1,7 @@
 import './welcome.scss';
 import Button from '../../components/button/button';
 import { FormattedMessage } from 'react-intl';
+import React from 'react';
 
 export const Welcome = () => {
 
@@ -12,7 +13,7 @@ export const Welcome = () => {
             <FormattedMessage id='welcomeHeader' />
           </h1>
           <div className="welcome-content__btn">
-            <Button isRound id='loginBtn'></Button>
+            <Button isRound>{ <FormattedMessage id='loginBtn' /> }</Button>
           </div>
         </div>
         <div className="welcome-content__img"></div>
@@ -21,4 +22,3 @@ export const Welcome = () => {
   );
 };
 
- 

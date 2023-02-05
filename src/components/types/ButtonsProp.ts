@@ -1,6 +1,7 @@
+import React, { ReactElement } from 'react';
+
 export interface ButtonProp {
     isRound: boolean,
-    children?: string,
-    id?: string,
+    children?: ReactElement | string,
     onclick?: React.MouseEventHandler,
 }
