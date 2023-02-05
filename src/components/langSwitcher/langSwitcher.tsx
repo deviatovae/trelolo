@@ -1,6 +1,6 @@
 import './langSwitcher.scss';
 import { LOCALES } from '../languages/locales';
-import { LangSwitcherProps } from '../types/LangSwitcherProps';
+import { LangSwitcherProps } from '../types/langSwitcherProps';
 
 const LangSwitcher = ({ setLocale, currentLocale }: LangSwitcherProps) => {
 
