@@ -18,13 +18,13 @@ export const Auth = () => {
 
     return (
         <main className='auth-main'>
-            <section className='auth-section' >
+            <section className='auth-section show-auth-section' >
                 <Logo textDisplay='logo-text-none' />
                 { currentStage === 1 ? <Login/> : <Signup/> }
                 <span className='auth-span'><strong>OR</strong></span>
                 <Button className='button-sign-up' onClick={onStageClick}>{ currentStage === 1 ? 'Sign up' : 'Log in' }</Button>
             </section>
-            <div className='auth-img'></div>
+            <div className='auth-img show-auth-img'></div>
         </main>
     );
 };
