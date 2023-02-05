@@ -1,0 +1,25 @@
+@import "/src/assets/styles/variables";
+
+.input {
+    border: 1px solid $gray;
+    border-radius: 6px;
+    padding: 14px 9px;
+
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &-error {
+        color: red;
+    }
+}
+
+input::-moz-placeholder {
+    color: $greylight;
+}
+
+input::-webkit-input-placeholder {
+    color: $greylight;
+}

@@ -1,0 +1,62 @@
+@import '/src/assets/styles/variables.scss';
+
+.logo {
+    background-color: $mainBlue;
+    border-radius: 10px;
+    width: 65px;
+    height: 50px;
+    background-size: contain;
+    position: relative;
+
+    &-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &1 {
+        content: url('../../../src/assets/img/Vector-1.svg');
+        position: absolute;
+        top: 10px;
+        left: 9px;
+    }
+
+    &2 {
+        content: url('../../../src/assets/img/Vector-2.svg');
+        position: absolute;
+        top: 19px;
+        left: 24px;
+    }
+
+    &3 {
+        content: url('../../../src/assets/img/Vector.svg');
+        position: absolute;
+        top: 10px;
+        left: 35px;
+    }
+
+    &-text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: $black;
+    }
+
+    &-text-none {
+        display: none;
+    }
+
+    &-wrapper:hover > & > &3 {
+        transform-origin: left bottom;
+        animation: 0.4s ease-in-out 0s normal none infinite running fly-animation;
+    }
+
+    &-wrapper:hover > & > &1 {
+        transform-origin: right bottom;
+        animation: 0.4s ease-in-out 0s normal none infinite running fly-animation-rev;
+    }
+}

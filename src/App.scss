@@ -1,6 +1,12 @@
 @import '/src/assets/styles/normalize.css';
 @import '/src/assets/styles/variables.scss';
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
   background-color: $mainBg;
 }

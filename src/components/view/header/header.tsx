@@ -4,6 +4,8 @@ import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
 import { useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
+import { Logo } from '../../logo/logo';
+import './header.scss';
 
 interface HeaderProps {
   currentLocale: string;
@@ -33,14 +35,7 @@ const Header = (props: HeaderProps) => {
   return (
     <header className="header">
       <div className="header__content _container">
-        <div className="header__logo-wrapper" onClick={handleLogoClick}>
-          <div className="header__logo">
-            <div className="header__logo1"></div>
-            <div className="header__logo2"></div>
-            <div className="header__logo3"></div>
-          </div>
-          <div className="header__logo-text">trelolo</div>
-        </div>
+        <Logo/>
         <div className="header__lang-user-wrapper">
           <LangSwitcher
             currentLocale={props.currentLocale}
