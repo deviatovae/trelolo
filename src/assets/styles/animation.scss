@@ -31,13 +31,10 @@
 
 @keyframes anim-show-auth-section {
     0% {
-      transform: translateY(-200%);
+      transform: translateY(-150%);
     }
-    // 80% {
-    //   transform: translateY(20px);
-    // }
     100% {
-      transform: translateY(0px);
+      transform: translateY(0);
     }
 }
 
@@ -46,6 +43,6 @@
       transform: translateX(-100%);
     }
     100% {
-      transform: translateX(0px);
+      transform: translateX(0);
     }
 }
