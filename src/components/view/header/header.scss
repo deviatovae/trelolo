@@ -21,7 +21,6 @@
   }
 
     &__logo-wrapper {
-      width: 142px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -75,7 +74,7 @@
       gap: 10px
     }
 
-    &__lang {
+    &__lang-button {
       width: 40px;
       height: 40px;
       border-radius: 50px;
@@ -86,9 +85,17 @@
       cursor: pointer;
       font-weight: 500;
       background: rgba($mainBlue, 0.1);
+      transition: 0.3s background, 0.3s transform;
+      border: none;
 
       &:hover {
         background: rgba($mainBlue, 0.15);
+        transition: 0.3s background;
+      }
+
+      &:active {
+        transform: scale(0.95);
+        transition: 0.3s transform;
       }
     }
 
