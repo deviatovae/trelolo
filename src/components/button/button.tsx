@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './button.scss';
-import { ButtonProp } from '../types/ButtonsProp';
 
-export default function Button({ isRound, children, onclick }: ButtonProp) {
+interface ButtonProp {
+    isRound: boolean,
+    children: ReactElement | string,
+    onclick?: React.MouseEventHandler,
+    className?: string,
+}
+
+export default function Button({ isRound, children, onclick, className }: ButtonProp) {
     const roundClass = isRound ? 'button_round' : '';
-    const classes = `button ${roundClass}`;
+    const classes = `button ${roundClass} ${className}`;
 
-    return (
-    <button className={classes} onClick={onclick}>{children}</button>
-    );
+    return <button className={classes} onClick={onclick}>{children}</button>;
 }
 
 Button.defaultProps = {
-    isRound: false
+    isRound: false,
 };
