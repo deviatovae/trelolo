@@ -1,7 +1,8 @@
-import './welcome.scss';
-import Button from '../../components/button/button';
 import { FormattedMessage } from 'react-intl';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../components/button/button';
+import './welcome.scss';
 
 export const Welcome = () => {
 
@@ -12,9 +13,9 @@ export const Welcome = () => {
           <h1 className="welcome-content__header">
             <FormattedMessage id='welcomeHeader' />
           </h1>
-          <div className="welcome-content__btn">
+          <Link to={'/login'} className="welcome-content__btn">
             <Button isRound>{ <FormattedMessage id='loginBtn' /> }</Button>
-          </div>
+          </Link>
         </div>
         <div className="welcome-content__img"></div>
       </div>
