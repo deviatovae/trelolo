@@ -1,10 +1,7 @@
-import './userIcon.scss';
+import Button from '../../components/button/button';
 
 export const UserIcon = () => {
-
     return (
-      <button className="header__user">
-        KZ
-      </button>
+      <Button className="header__user">KZ</Button>
     );
 };
