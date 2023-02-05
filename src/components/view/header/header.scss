@@ -52,39 +52,4 @@
       }
     }
 
-    // &__user {
-    //   width: 40px;
-    //   height: 40px;
-    //   border: 1px solid $greylight;
-    //   border-radius: 50px;
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   color: $mainBlue;
-
-    //   visibility: hidden;
-
-    //   &:hover {
-    //     cursor: pointer;
-    //   }
-    // }
   }
-
-.header__logo-wrapper:hover > .header__logo > .header__logo3 {
-  transform-origin: left bottom;
-  animation: 0.4s ease-in-out 0s normal none infinite running fly-animation;
-}
-
-.header__logo-wrapper:hover > .header__logo > .header__logo1 {
-  transform-origin: right bottom;
-  animation: 0.4s ease-in-out 0s normal none infinite running fly-animation-rev;
-}
-
-.modal-overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  // background: rgba(0, 0, 0, 0.5);
-}

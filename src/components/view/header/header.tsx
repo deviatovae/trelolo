@@ -1,5 +1,5 @@
 import './header.scss';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
 import { useState } from 'react';
@@ -13,12 +13,12 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const history = useNavigate();
+  // const history = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [hideModal, setHideModal] = useState(false);
-  const handleLogoClick = () => {
-    history('/');
-  };
+  // const handleLogoClick = () => {
+  //   history('/');
+  // };
 
   const handleUserIconClick = () => {
     setShowModal(!showModal);
