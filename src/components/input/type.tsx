@@ -4,7 +4,8 @@ interface InputProp {
     placeholder: string,
     value: string,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    error?: string
+    error?: string,
+    classNameWrapper?: string
 }
 
 export default InputProp;

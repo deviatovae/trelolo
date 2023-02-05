@@ -5,8 +5,13 @@
     border-radius: 6px;
     padding: 14px 9px;
 
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
     &-error {
-        display: none;
         color: red;
     }
 }

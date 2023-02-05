@@ -1,4 +1,4 @@
-.login {
+.signup {
     &-form {
         display: flex;
         flex-direction: column;
@@ -7,13 +7,13 @@
         width: 100%;
         gap: 32px;
 
-        .input-login-wrapper {
-            width: 86%;
-        }
-
-        .button-login {
+        .button-signup {
             width: 86%;
             padding: 8px;
+        }
+
+        .input-signup-wrapper {
+            width: 86%;
         }
     }
 

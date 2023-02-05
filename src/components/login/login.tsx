@@ -4,16 +4,17 @@ import Input from '../../components/input/input';
 import './login.scss';
 
 export const Login = () => {
-    const [emailValue, setEmailValue] = useState('');
-    const [passwordlValue, setPasswordValue] = useState('');
+    const [email, setEmail] = useState({ value: '', error: '' });
+    const [password, setPasswordValue] = useState({ value: '', error: '' });
+
     const [step, setStep] = useState(1);
 
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmailValue(e.target.value);
+        setEmail({ ...email, value: e.target.value });
     };
 
     const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPasswordValue(e.target.value);
+        setPasswordValue({ ...password, value: e.target.value });
     };
 
     const onSubmit = (e: FormEvent) => {
@@ -29,17 +30,17 @@ export const Login = () => {
             {step === 1 ? <Input
                 type='email'
                 placeholder='Enter email'
-                value={emailValue}
+                value={email.value}
                 onChange={onChangeEmail}
-                error='knf'
-                className='input-login'
-            /> : <Input
+                error={email.error}
+                classNameWrapper = 'input-login-wrapper'
+                /> : <Input
                 type='password'
                 placeholder='Enter password'
-                value={passwordlValue}
+                value={password.value}
                 onChange={onChangePassword}
-                error='knf'
-                className='input-login'
+                error={password.error}
+                classNameWrapper ='input-login-wrapper'
             />}
             <Button className='button-login '>
                 {step === 1 ? 'Continue' : 'Login'}
