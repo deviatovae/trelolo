@@ -1,9 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.scss';
 import { UserIcon } from '../../userIcon/userIcon';
-import Button from '../../../components/button/button';
-
 
 const Header = () => {
   const history = useNavigate();
