@@ -7,7 +7,6 @@
         justify-content: center;
         position: relative;
         height: 100%;
-        padding: 50px 0;
 
         .button-sign-up {
             width: 86%;
@@ -20,7 +19,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        padding: 68px 25px;
+        padding: 58px 15px;
         width: 30%;
         min-height: 500px;
         gap: 32px;
@@ -35,10 +34,30 @@
         bottom: 0;
         width: 25%;
         height: 390px;
-        background-image: url('../../assets/img/login_img.png');
+        background-image: url('../../assets/img/login-img.png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    &-separator {
+        width: 86%;
+        display: flex;
+        align-items: center;
+        text-align: center;
     }
 
     &-span {
-        font-size: 24px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+        padding: 0 5px;
     }
+}
+
+.separator-line {
+    border-top: 1px solid #edeae9;
+    flex: 1 1 auto;
+    margin-top: 8px;
+    min-width: 1px;
+    padding-top: 8px;
 }

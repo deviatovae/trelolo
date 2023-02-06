@@ -21,7 +21,11 @@ export const Auth = () => {
             <section className='auth-section' >
                 <Logo textDisplay='logo-text-none' />
                 { currentStage === 1 ? <Login/> : <Signup/> }
-                <span className='auth-span'><strong>OR</strong></span>
+                <div className="auth-separator">
+                    <span className="separator-line"></span>
+                    <span className='auth-span'>or</span>
+                    <span className="separator-line"></span>
+                </div>
                 <Button className='button-sign-up' onClick={onStageClick}>{ currentStage === 1 ? 'Sign up' : 'Log in' }</Button>
             </section>
             <div className='auth-img'></div>
