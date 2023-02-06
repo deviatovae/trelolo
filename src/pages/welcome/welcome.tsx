@@ -17,15 +17,15 @@ export const Welcome = () => {
           <div className="welcome-content__visuals visuals">
             <div className="visuals__card">
               <div className="visuals__icon visuals__icon_kanban"></div>
-              <div className="visuals__title">Kanban view</div>
+              <p className="visuals__title"><FormattedMessage id='iconKanban' /></p>
             </div>
             <div className="visuals__card">
               <div className="visuals__icon visuals__icon_discuss"></div>
-              <div className="visuals__title">Discuss tasks</div>
+              <p className="visuals__title"><FormattedMessage id='iconDiscuss' /></p>
             </div>
             <div className="visuals__card">
               <div className="visuals__icon visuals__icon_due-date"></div>
-              <div className="visuals__title">Set due date</div>
+              <p className="visuals__title"><FormattedMessage id='iconDueDate' /></p>
             </div>
           </div>
           <Link to={'/login'} className="welcome-content__btn">
