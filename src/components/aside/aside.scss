@@ -1,0 +1,88 @@
+@import "/src/assets/styles/variables";
+
+.aside {
+
+    &__container {
+        height: calc(100% - 120px);
+        width: 250px;
+        background-color: #efe9ff;   /*переведен в не прозрачный цвет*/
+        position: absolute;
+        z-index: 2;
+        top: 60px;
+        left: 0px;
+        border-right: 1px solid $borderBlueLight;
+
+        display: none;
+    }
+
+    &__tasks-team {
+        height: 155px;
+        border-bottom: 1px solid $borderBlueLight;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-top: 40px;
+        padding-left: 50px;
+    }
+
+    &__projects {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-top: 40px;
+        padding-left: 50px;
+    }
+
+}
+
+.tasks-team,
+.projects__my-projects,
+.projects__item {
+    font-family: Roboto;
+    font-style: Regular;
+    font-size: 24px;
+}
+
+.tasks-team {
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        
+    }
+}
+
+.projects {
+    &__my-projects {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__plus {
+        font-size: 40px;
+        color: $mainBlue;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            color: $mainBlueHover;
+        }
+    }
+
+    &__list {
+        padding-left: 20px;
+    }
+
+    &__item {
+      padding-bottom: 15px;
+
+      &::marker {
+        color: $mainBlue;
+      }
+    }
+}
