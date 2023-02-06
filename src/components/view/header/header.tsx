@@ -1,5 +1,4 @@
 import './header.scss';
-// import { useNavigate } from 'react-router-dom';
 import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
 import { useState } from 'react';
@@ -13,22 +12,16 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  // const history = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [hideModal, setHideModal] = useState(false);
-  // const handleLogoClick = () => {
-  //   history('/');
-  // };
+  // const [hideModal, setHideModal] = useState(false);
 
   const handleUserIconClick = () => {
     setShowModal(!showModal);
-    setHideModal(false);
   };
 
   const handleModalClickOutside = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
-      setHideModal(!hideModal);
-      setTimeout(() => setShowModal(false), 260);
+      setShowModal(false);
     }
   };
 
@@ -47,7 +40,7 @@ const Header = (props: HeaderProps) => {
         </div>
       </div>
       {showModal && (
-        <ProfileModal animShowModal={showModal} animHideModal={hideModal} onClickOutside={handleModalClickOutside}/>
+        <ProfileModal ShowModal={showModal} onClickOutside={handleModalClickOutside}/>
       )}
     </header>
   );

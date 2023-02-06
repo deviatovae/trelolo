@@ -1,31 +1,20 @@
 import './profileModal.scss';
 import { ProfileModalProps } from '../types/profileModalProps';
 import { useNavigate } from 'react-router-dom';
+import { UserIcon } from '../userIcon/userIcon';
 
-export const ProfileModal = ({ onClickOutside, animShowModal, animHideModal }: ProfileModalProps) => {
+export const ProfileModal = ({ onClickOutside }: ProfileModalProps) => {
   const history = useNavigate();
   const handleLogOutClick = () => {
     history('/');
   };
 
-  const handleClass = () => {
-    const modalWindows = document.querySelector('.modal-windows') as HTMLElement;
-    modalWindows.classList.remove('hide');
-    modalWindows.classList.remove('show');
-
-    if (animShowModal) {
-      modalWindows.classList.add('show');
-    } 
-    if (animHideModal) {
-      modalWindows.classList.add('hide');
-    }
-  };
   return (
     <div className="modal-overlay" onClick={onClickOutside}>
-      <div className="modal-windows" ref={handleClass}>
+      <div className="modal-windows">
         <div className="modal-windows__account">Account</div>
         <div className="modal-windows__person">
-          <div className="modal-person__logo">KZ</div>
+        <UserIcon />
           <div className="modal-person__name-email">
             <div className="modal-person__name">Kira Zaytseva</div>
             <div className="modal-person__email">kirazaytseva@gmail.com</div>
