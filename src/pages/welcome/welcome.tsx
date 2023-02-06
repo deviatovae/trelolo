@@ -3,10 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button/button';
 import './welcome.scss';
+import Greeting from '../../components/greeting/greeting';
+
 
 export const Welcome = () => {
 
   return (
+    <>
+    <Greeting />
     <div className="welcome-wrapper">
       <div className="welcome-content wrapper">
         <div className="welcome-content__left">
@@ -35,6 +39,7 @@ export const Welcome = () => {
         <div className="welcome-content__img"></div>
       </div>
     </div>
+    </>
   );
 };
 
