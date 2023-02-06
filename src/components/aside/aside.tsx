@@ -15,7 +15,7 @@ export const Aside = () => {
         <div className="aside__projects">
           <div className="projects__my-projects">
           <span className="projects__logo"></span>
-            My-projects
+            My projects
             <span className="projects__plus">+</span>
           </div>
           <ul className="projects__list">
