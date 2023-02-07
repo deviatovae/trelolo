@@ -3,17 +3,13 @@
 .aside {
 
     &__container {
-        height: calc(100% - 120px);
+        height: 100%;
         width: 250px;
-        background: rgba(73, 75, 244, 0.05);
-        position: absolute;
-        z-index: 2;
+        background: rgba(73, 75, 244, 0.1);
         top: 60px;
         left: 0px;
         border-right: 1px solid $borderBlueLight;
         font-family: "Roboto", sans-serif;
-
-        display: none;
     }
 
     &__tasks-team {

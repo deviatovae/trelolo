@@ -27,7 +27,7 @@ const Greeting = () => {
   }, []);
 
   return (
-    <div className="greeting__wrapper">
+    <div className="greeting__wrapper wrapper">
       <p className="greeting__date">{date}</p>
       <p className="greeting__word">{greeting}, Kira</p>
     </div>

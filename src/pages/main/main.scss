@@ -1,0 +1,11 @@
+@import "/src/assets/styles/variables";
+
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.main__section {
+    width: 100%;
+}
