@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
 import './button.scss';
+import { ReactElement } from 'react';
 
 interface ButtonProp {
     isRound: boolean,

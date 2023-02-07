@@ -12,9 +12,9 @@
     100% {
         transform: rotate(0deg);
     }
-  }
+}
   
-  @keyframes fly-animation-rev {
+@keyframes fly-animation-rev {
     0% {
         transform: rotate(0deg);
     }
@@ -27,4 +27,26 @@
     100% {
         transform: rotate(0deg);
     }
-  }
+}
+
+
+@keyframes appear-from-right {
+    0% {
+      transform: translateX(100%);
+    }
+    80% {
+      transform: translateX(-8px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+}
+  
+@keyframes appear-from-hide {
+    0%  {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(300px);
+    }
+}

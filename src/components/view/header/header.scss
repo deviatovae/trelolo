@@ -5,6 +5,7 @@
     height: 60px;
     background-color: $mainBg;
     border-bottom: 1px solid $borderBlueLight;
+    position: relative;
 
   &__content {
     display: flex;
@@ -25,4 +26,30 @@
       justify-content: space-between;
       gap: 10px
     }
+
+    &__lang-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $mainBlue;
+      cursor: pointer;
+      font-weight: 500;
+      background: rgba($mainBlue, 0.1);
+      transition: 0.3s background, 0.3s transform;
+      border: none;
+
+      &:hover {
+        background: rgba($mainBlue, 0.15);
+        transition: 0.3s background;
+      }
+
+      &:active {
+        transform: scale(0.95);
+        transition: 0.3s transform;
+      }
+    }
+
   }
