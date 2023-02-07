@@ -14,13 +14,12 @@ const Greeting = () => {
         day: 'numeric'
       })
     );
-
     const currentTime = currentDate.getHours();
-    if (currentTime < 12) {
+    if (currentTime > 6 && currentTime < 12) {
       setGreeting('Good morning');
-    } else if (currentTime < 18) {
+    } else if (currentTime >= 12 && currentTime < 18) {
       setGreeting('Good afternoon');
-    } else if (currentTime < 24) {
+    } else if (currentTime >= 18 && currentTime < 24) {
       setGreeting('Good evening');
     } else  {
       setGreeting('Good night');
