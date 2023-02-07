@@ -8,7 +8,7 @@ export const Welcome = () => {
   return (
     <>
     <div className="welcome-wrapper">
-      <div className="welcome-content wrapper">
+      <div className="welcome-content wrapper _container">
         <div className="welcome-content__left">
           <h1 className="welcome-content__header">
             <FormattedMessage id='welcomeHeader' />

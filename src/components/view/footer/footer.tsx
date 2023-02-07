@@ -3,6 +3,7 @@ import './footer.scss';
 const Footer = () => {
   return (
     <footer className="footer">
+      <div className='footer__wrapper _container wrapper'>
         <div className="footer__dev">
           <a className="github-link" href="https://github.com/deviatovae" target="_blank" rel="noreferrer">deviatovae</a>
         </div>
@@ -18,6 +19,7 @@ const Footer = () => {
         </a>
       </div>
       <div className="footer__year">2023</div>
+      </div>
     </footer>
   );
 };
