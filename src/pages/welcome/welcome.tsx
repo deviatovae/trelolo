@@ -1,17 +1,12 @@
 import { FormattedMessage } from 'react-intl';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/button/button';
 import './welcome.scss';
-import Aside from '../../components/aside/aside';
-import Greeting from '../../components/greeting/greeting';
 
 export const Welcome = () => {
 
   return (
     <>
-    <Aside />
-    <Greeting />
     <div className="welcome-wrapper">
       <div className="welcome-content wrapper">
         <div className="welcome-content__left">
@@ -40,7 +35,6 @@ export const Welcome = () => {
         <div className="welcome-content__img"></div>
       </div>
     </div>
-    
   </>
   );
 };

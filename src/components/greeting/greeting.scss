@@ -4,12 +4,12 @@
 .greeting {
 
     &__wrapper {
+        padding-top: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
-
-        display: none;
+        width: 300px;
     }
 
     &__date {
