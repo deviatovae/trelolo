@@ -4,7 +4,7 @@
 
     &__container {
         height: 100%;
-        width: 250px;
+        width: 270px;
         background: rgba(73, 75, 244, 0.1);
         top: 60px;
         left: 0px;
@@ -23,7 +23,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        padding: 5px 20px;
+        padding: 5px 15px;
     }
 
 }
@@ -32,7 +32,7 @@
 .projects__my-projects {
     font-weight: 600;
     font-size: 20px;
-    line-height: 32px;
+    line-height: 23px;
 }
 
 .projects__item {
@@ -43,9 +43,9 @@
 .tasks-team {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     background: rgba(73, 75, 244, 0.15);
-    padding-left: 20px;
+    padding-left: 15px;
 
     &__logo {
         background: url(../../../src/assets/img/tasks-team__logo.svg) no-repeat center;
@@ -67,7 +67,7 @@
     &__my-projects {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
     }
 
     &__logo {
@@ -79,6 +79,7 @@
     &__plus {
         font-size: 32px;
         color: $mainBlue;
+        font-weight: 400;
 
         &:hover {
             cursor: pointer;
