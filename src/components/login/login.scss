@@ -1,3 +1,5 @@
+@import '/src/assets/styles/variables.scss';
+
 .login {
     &-form {
         display: flex;
@@ -20,5 +22,9 @@
     &-title {
         font-weight: 400;
         margin: 0;
+    }
+
+    &-error {
+        color: $red;       
     }
 }

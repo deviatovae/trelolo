@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { redirect, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button';
 import { Login } from '../../components/login/login';
 import { Logo } from '../../components/logo/logo';
@@ -16,11 +17,15 @@ export const Auth = () => {
         setStage(currentStage + 1);
     };
 
+    const goToLogin = () => {
+        setStage(1);
+    };
+
     return (
         <main className='auth-main'>
             <section className='auth-section' >
                 <Logo textDisplay='logo-text-none' />
-                { currentStage === 1 ? <Login/> : <Signup/> }
+                { currentStage === 1 ? <Login/> : <Signup goToLogin={goToLogin} /> }
                 <div className="auth-separator">
                     <span className="separator-line"></span>
                     <span className='auth-span'>or</span>

@@ -6,6 +6,8 @@ import { IntlProvider } from 'react-intl';
 import { LOCALES } from './components/languages/locales';
 import { messages } from './components/languages/messages';
 import { LanguagesManager } from './components/languages/languagesManager';
+import { AuthProvider } from './context';
+
 
 function App() {
   const { currentLocale, setLocale } = LanguagesManager();
@@ -15,15 +17,17 @@ function App() {
       messages={messages[currentLocale]}
       locale={currentLocale}
       defaultLocale={LOCALES.ENGLISH}
-      >
+    >
+      <AuthProvider >
       <div className="app wrapper">
-      <Header currentLocale={currentLocale} setLocale={setLocale} />
-      <div className="app__content">
+        <Header currentLocale={currentLocale} setLocale={setLocale} />
+        <div className="app__content">
           <Outlet />
         </div>
         <Footer />
       </div>
-    </IntlProvider>
+    </AuthProvider>
+    </IntlProvider >
   );
 }
 
