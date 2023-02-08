@@ -14,6 +14,7 @@ export interface InitialContext {
         data: ResponseDataLogin | null;
     }>,
     userInfo: UserInfo | null,
+    token: string
 }
 
 export interface Errors {
@@ -82,6 +83,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
         submitSignup,
         submitLogin,
         userInfo,
+        token
       }}>
         {children}
     </AuthContext.Provider>;
