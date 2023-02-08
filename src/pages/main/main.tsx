@@ -5,7 +5,6 @@ import { MainModal } from '../../components/mainModal/mainModal';
 import { useState } from 'react';
 
 
-
 export const Main = () => {
     const [showModal, setShowModal] = useState(false);
     const [projects, setProjects] = useState([] as string[]);
@@ -24,7 +23,7 @@ export const Main = () => {
         setProjects([...projects, inputValue]);
         setShowModal(false);
     };
-    
+
   return (
     <main className="main-wrapper _container wrapper">
         <Aside />
