@@ -14,7 +14,7 @@ export const ProfileModal = ({ onClickOutside }: ProfileModalProps) => {
       <div className="modal-windows">
         <div className="modal-windows__account">Account</div>
         <div className="modal-windows__person">
-        <UserIcon />
+          <UserIcon>KZ</UserIcon>
           <div className="modal-person__name-email">
             <div className="modal-person__name">Kira Zaytseva</div>
             <div className="modal-person__email">kirazaytseva@gmail.com</div>
