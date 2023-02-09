@@ -354,3 +354,13 @@
   [hidden] {
     display: none;
   }
+
+  li {
+    list-style: none;
+    margin: 0;
+  }
+
+  button {
+    outline: none;
+    background-color: unset;
+  }
