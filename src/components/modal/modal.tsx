@@ -22,7 +22,7 @@ export function Modal({ title, children, onClose }: ModalProps) {
             <p className="modal-header__title">{title}</p>
             <div className="modal-header__close-btn" onClick={onClose}></div>
           </div>
-          <div className="modal__main modal-main">{children}</div>
+          <div className="modal__main">{children}</div>
         </div>
       </div>
     </div>
