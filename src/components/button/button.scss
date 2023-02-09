@@ -17,12 +17,12 @@
   border: none;
   transition: 0.3s transform, 0.3s background ;
 
-  &:active {
+  &:not(:disabled):active {
     transition: 0.3s transform;
     transform: scale(97%);
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     transition: 0.3s background;
     background: $mainBlueHover;
   }

@@ -7,9 +7,10 @@ interface ButtonProp {
     onClick?: React.MouseEventHandler,
     className?: string,
     bgColor?: string,
+    disabled?: boolean
 }
 
-export default function Button({ isRound, children, onClick, className, bgColor }: ButtonProp) {
+export default function Button({ isRound, children, onClick, className, bgColor, disabled }: ButtonProp) {
     const roundClass = isRound ? 'button_round' : '';
     const classes = `button ${roundClass} ${className}`;
     const styles: React.CSSProperties = {};
@@ -18,9 +19,10 @@ export default function Button({ isRound, children, onClick, className, bgColor 
     }
 
     return <button
-      className={classes}
-      onClick={onClick}
-      style={styles}
+        className={classes}
+        onClick={onClick}
+        style={styles}
+        disabled={disabled}
     >{children}</button>;
 }
 

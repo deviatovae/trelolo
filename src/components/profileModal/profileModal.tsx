@@ -3,10 +3,12 @@ import { ProfileModalProps } from '../types/profileModalProps';
 import { useNavigate } from 'react-router-dom';
 import { UserIcon } from '../userIcon/userIcon';
 
-export const ProfileModal = ({ onClickOutside }: ProfileModalProps) => {
+export const ProfileModal = ({ onClickOutside, avatarName, userInfo, logout }: ProfileModalProps) => {
+
   const history = useNavigate();
   const handleLogOutClick = () => {
     history('/');
+    logout();
   };
 
   return (
@@ -14,10 +16,10 @@ export const ProfileModal = ({ onClickOutside }: ProfileModalProps) => {
       <div className="modal-windows">
         <div className="modal-windows__account">Account</div>
         <div className="modal-windows__person">
-          <UserIcon>KZ</UserIcon>
+          <UserIcon>{ avatarName }</UserIcon>
           <div className="modal-person__name-email">
-            <div className="modal-person__name">Kira Zaytseva</div>
-            <div className="modal-person__email">kirazaytseva@gmail.com</div>
+            {<div className="modal-person__name">{ userInfo?.name }</div>}
+            <div className="modal-person__email">{ userInfo?.email }</div>
           </div>
         </div>
         <div className="modal-windows__line"></div>
