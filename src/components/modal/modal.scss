@@ -1,0 +1,122 @@
+@import "src/assets/styles/variables";
+
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal {
+  width: 100%;
+  margin: 15% auto;
+  max-width: 560px;
+  min-width: 350px;
+  height: 380px;
+  font-family: "Roboto", sans-serif;
+  background-color: white;
+  border-radius: 15px;
+
+  &__content {
+    padding: 25px 10px 15px 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    padding: 5px 0;
+    border-bottom: solid 1px $greylight;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+
+  &__add-btn {
+    width: 60px;
+    height: 36px;
+    border: solid 1px $greylight;
+    border-radius: 6px;
+    align-self: end;
+    color: $gray;
+  }
+
+  &__add-btn_active {
+    color: $gray;
+    background-color: $mainBlue;
+    cursor: pointer;
+
+    &:hover{
+      background-color: $mainBlueHover;
+    }
+  }
+}
+
+
+.modal-header {
+  &__title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding-left: 20px;
+  }
+
+  &__close-btn {
+    background: url("../../../src/assets/img/cross.svg");
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $greylight;
+      border-radius: 6px;
+      transition: ease-in-out;
+    }
+  }
+
+}
+
+.modal-main {
+  display: flex;
+  flex: 1 1 auto;
+  padding: 20px;
+
+  flex-direction: column;
+  gap: 40px;
+
+  &__title {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  &__input {
+    position: relative;
+    min-height: 40px;
+    gap: 5px;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 4px;
+    border: solid 1px $greylight;
+    cursor: text;
+
+    & > input {
+      border: none;
+      padding-left: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
