@@ -19,7 +19,7 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
 
   const [email, setEmail] = useState('');
   const [projects, setProjects] = useState<Option[]>([]);
-  const isEmailValid = email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,8}$/);
+  const isEmailValid = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,8}$/);
   const canAdd = projects.length > 0 && isEmailValid?.length;
   const handleChange = (values: MultiValue<Option>) => {
     setProjects([...values]);
