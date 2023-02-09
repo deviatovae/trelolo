@@ -16,11 +16,15 @@ export const Auth = () => {
         setStage(currentStage + 1);
     };
 
+    const goToLogin = () => {
+        setStage(1);
+    };
+
     return (
         <main className='auth-main'>
             <section className='auth-section' >
                 <Logo textDisplay='logo-text-none' />
-                { currentStage === 1 ? <Login/> : <Signup/> }
+                { currentStage === 1 ? <Login/> : <Signup goToLogin={goToLogin} /> }
                 <div className="auth-separator">
                     <span className="separator-line"></span>
                     <span className='auth-span'>or</span>
