@@ -1,7 +1,7 @@
 import './header.scss';
 import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
 import './header.scss';
@@ -35,7 +35,7 @@ const Header = (props: HeaderProps) => {
             setLocale={props.setLocale}
           />
           <div onClick={handleUserIconClick} >
-          <UserIcon />
+            <UserIcon>KZ</UserIcon>
           </div>
         </div>
       </div>

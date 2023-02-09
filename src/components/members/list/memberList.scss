@@ -1,0 +1,18 @@
+.members {
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+
+  &__list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+}
