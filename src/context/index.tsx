@@ -2,12 +2,12 @@ import React, { createContext, ReactElement, useState } from 'react';
 import { authorizeUser, createUser } from '../API/loginService';
 import { LoginData, ResponseDataLogin, UserInfo } from '../API/types';
 
-export interface InitialContext { 
-    isAuth: boolean, 
+export interface InitialContext {
+    isAuth: boolean,
     setIsAuth: (val: boolean) => void,
     submitSignup:  (info: LoginData) =>  Promise<{
         errors: Errors | null;
-        data: string | null;
+        data: UserInfo | null;
     }>,
     submitLogin:  (info: LoginData) =>  Promise<{
         errors: Errors | null;
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
         let errors: Errors | null = null;
         let data = null;
         try {
-            data = await createUser(info) as string;
+            data = await createUser(info);
         } catch (error) {
             if (error instanceof Error) {
                 errors = JSON.parse(error.message ) as Errors;
@@ -76,10 +76,10 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
         }
         return { errors, data };
     };
-   
+
     return <AuthContext.Provider value={{
         isAuth,
-        setIsAuth, 
+        setIsAuth,
         submitSignup,
         submitLogin,
         userInfo,
