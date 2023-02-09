@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement, useEffect, useState } from 'react';
+import React, { createContext, ReactElement, useEffect, useState, useCallback } from 'react';
 import { authorizeUser, createUser, getUser } from '../API/loginService';
 import { LoginData, ResponseDataLogin, ResponseDataUser, UserInfo } from '../API/types';
 
@@ -62,11 +62,9 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     setIsAuth(true);
   };
 
-  const updateUserInfo = async (user?: UserInfo) => {
+  const updateUserInfo = useCallback(async (user?: UserInfo) => {
     if (user) {
       setUserInfo(user);
-        console.log(user);
-
     }
 
     const { data, errors } = await getUserData();
@@ -74,7 +72,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     if (!errors && data) {
       setUserInfo(data.data);
     }
-  };
+  }, []);
 
   const submitLogin = async (info: LoginData) => {
     let errors: Errors | null = null;
@@ -117,9 +115,9 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     return { errors, data };
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     updateUserInfo();
-  }, []);
+  }, [updateUserInfo]);
 
   return <AuthContext.Provider value={{
     isAuth,
