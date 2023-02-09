@@ -1,8 +1,10 @@
 import { getResponse } from './response';
-import { Project, RequestsMethods } from './types';
+import { Project, ProjectData, RequestsMethods, ResponseList } from './types';
 
-export const createProject = (project: Project) => getResponse({ url: 'projects', method: RequestsMethods.POST, body: project });
+export const getProjects = () => getResponse<ResponseList<Project>>({ url: 'projects', method: RequestsMethods.GET });
 
-export const updateProject = (project: Project, id: number) => getResponse({ url: `projects/:${id}`, method: RequestsMethods.PATCH, body: project });
+export const createProject = (project: ProjectData) => getResponse({ url: 'projects', method: RequestsMethods.POST, body: project });
+
+export const updateProject = (project: ProjectData, id: number) => getResponse({ url: `projects/:${id}`, method: RequestsMethods.PATCH, body: project });
 
 export const deleteProject = (id: number) => getResponse({ url: `projects/${id}`, method: RequestsMethods.DELETE });

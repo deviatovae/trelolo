@@ -5,6 +5,11 @@ export interface LoginData {
 }
 
 export interface Project {
+    id: string,
+    name: string
+}
+
+export interface ProjectData {
     name: string
 }
 
@@ -29,7 +34,7 @@ export enum RequestsMethods {
 
 export interface UserInfo {
     id: string,
-    name: string, 
+    name: string,
     email: string,
 }
 
@@ -39,4 +44,15 @@ export interface ResponseDataLogin {
         token: string,
 
     }
+}
+
+export interface ServerResponse<T> {
+    result: boolean
+    data?: T
+    errors: string[] | object[]
+}
+
+export interface ResponseList<T> {
+    items: T[]
+    count: number
 }
