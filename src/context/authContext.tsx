@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     if (!errors.length && data) {
       setUserInfo(data);
     }
-  }, []);
+  }, [token]);
 
   const submitLogin = async (info: LoginData): Promise<Response<LoginResponse | null>> => {
     setIsInProgress(true);

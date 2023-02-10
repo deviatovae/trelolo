@@ -1,11 +1,9 @@
 import './header.scss';
 import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
-import './header.scss';
-import { AuthContext, InitialContext } from '../../../context/authContext';
 import { useAuth } from '../../../hooks/auth';
 
 interface HeaderProps {
