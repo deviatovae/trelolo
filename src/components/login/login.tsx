@@ -11,11 +11,11 @@ export const Login = () => {
     const [password, setPasswordValue] = useState({ value: '', error: '' });
     const { submitLogin, isInProgress } = useAuth();
     const [step, setStep] = useState(1);
-    const [errors, setError] = useState<Errors>([]);
+    const [errors, setErrors] = useState<Errors | null>(null);
 
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (errors) {
-            setError([]);
+            setErrors(null);
         }
         setEmail({ value: e.target.value, error: '' });
     };
@@ -41,13 +41,12 @@ export const Login = () => {
             return;
         }
 
-        const response = await submitLogin({ email: email.value, password: password.value });
-        const { errors: responseErrors } = response;
+        const { errors: responseErrors } = await submitLogin({ email: email.value, password: password.value });
 
-        if (responseErrors.length) {
+        if (responseErrors) {
             setStep(1);
             setPasswordValue({ value: '', error: '' });
-            setError(responseErrors);
+            setErrors(responseErrors);
         }
     };
 

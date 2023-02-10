@@ -16,21 +16,11 @@ export enum RequestMethod {
 
 export type Errors = string[] | ValidationError[];
 
-export interface IResponseErrors {
-    errors: Errors
-}
-
 export interface Response<T> {
     result: boolean
     data: T
-    errors: Errors
+    errors: Errors | null
 }
-
-// export interface FailureResponse {
-//     result: false
-//     data: null
-//     errors: Errors
-// }
 
 export interface ValidationError {
     param: string

@@ -15,7 +15,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
     const [name, setName] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
     const [passwordConfirmed, setPasswordConfirm] = useState({ value: '', error: '' });
-    const [generalErrors, setGeneralErrors] = useState<string[]>([]);
+    const [generalErrors, setGeneralErrors] = useState<string[] | null>(null);
 
     const { submitSignup, isInProgress } = useAuth();
 
@@ -36,7 +36,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
     };
 
     const handleErrors = (errors: Errors): void => {
-        if (!errors.length) {
+        if (!errors) {
             return;
         }
         const map = {
@@ -46,7 +46,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
         };
         errors.forEach(error => {
             if (typeof error === 'string') {
-                return setGeneralErrors(prev => [...prev, error]);
+                return setGeneralErrors(prev => prev ? [...prev, error] : [error]);
             }
             const param = error.param as keyof typeof map;
             map[param](prev => ({ value: prev.value, error: error.msg }));
@@ -77,7 +77,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
 
         if (password.value === passwordConfirmed.value) {
             const { errors: responseErrors } = await submitSignup({ email: email.value, name: name.value, password: password.value });
-            if (!responseErrors.length) {
+            if (!responseErrors) {
                 return goToLogin();
             }
             handleErrors(responseErrors);

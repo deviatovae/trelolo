@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     }
 
     const { data, errors } = await getUserData();
-    if (!errors.length && data) {
+    if (!errors && data) {
       setUserInfo(data);
     }
   }, [token]);
