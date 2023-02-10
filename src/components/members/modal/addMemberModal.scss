@@ -1,0 +1,37 @@
+@import "src/assets/styles/variables";
+
+.add-member {
+  display: flex;
+  flex: 1 1 auto;
+  padding: 20px;
+
+  flex-direction: column;
+  gap: 40px;
+
+  &__field-label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  &__input {
+    position: relative;
+    min-height: 40px;
+    gap: 5px;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 4px;
+    border: solid 1px $greylight;
+    cursor: text;
+
+    & > input {
+      border: none;
+      padding-left: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
