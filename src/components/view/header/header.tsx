@@ -6,6 +6,7 @@ import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
 import './header.scss';
 import { AuthContext, InitialContext } from '../../../context/authContext';
+import { useAuth } from '../../../hooks/auth';
 
 interface HeaderProps {
   currentLocale: string;
@@ -14,7 +15,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const [showModal, setShowModal] = useState(false);
-  const { userInfo, logout } = useContext(AuthContext) as InitialContext;
+  const { userInfo, logout } = useAuth();
 
   const handleUserIconClick = () => {
     setShowModal(!showModal);

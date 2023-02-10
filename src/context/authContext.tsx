@@ -3,6 +3,7 @@ import { authorizeUser, createUser, getUser } from '../API/loginService';
 import { LoginData, LoginResponse, Response } from '../API/types';
 import { User } from '../types/models';
 import { wrapErrors } from '../utils/errorsWrapper';
+import { useNavigate } from 'react-router-dom';
 
 export interface InitialContext {
   isAuth: boolean,
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [token, setToken] = useState<string>(getToken());
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [isInProgress, setIsInProgress] = useState(false);
+  const navigate = useNavigate();
 
   const submitSignup = async (info: LoginData): Promise<Response<User | null>> => {
     try {
@@ -37,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
-  const updateToken = (value: string) => {
+  const updateToken = async (value: string) => {
     localStorage.setItem('token', value);
     setToken(value);
     setIsAuth(true);
@@ -63,8 +65,10 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     try {
       const response = await authorizeUser(info) as Response<LoginResponse>;
       const { data: { user, token: tokenResponse } } = response;
-      updateToken(tokenResponse);
+      await updateToken(tokenResponse);
       await updateUserInfo(user);
+      navigate('/main');
+
       return response;
     } catch (error) {
       return wrapErrors(error);

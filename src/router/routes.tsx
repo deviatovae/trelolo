@@ -4,6 +4,7 @@ import { Auth } from '../pages/auth/auth';
 import { Welcome } from '../pages/welcome/welcome';
 import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
+import { AuthRoute } from '../components/authRoute/authRoute';
 
 export const routes = [
     {
@@ -20,13 +21,20 @@ export const routes = [
                 element: <Auth />
             },
             {
-                path: '/main',
-                element: <Main />
+                path: '/',
+                element: <AuthRoute/>,
+                children: [
+                    {
+                        path: '/main',
+                        element: <Main/>
+                    },
+                    {
+                        path: '/members',
+                        element: <MembersPage/>
+                    }
+                ]
             },
-            {
-                path: '/members',
-                element: <MembersPage />
-            }
+
         ]
     }
 ];

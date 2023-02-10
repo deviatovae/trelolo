@@ -6,15 +6,14 @@ import { AuthContext, InitialContext } from '../../context/authContext';
 import { validateEmail } from '../../pages/auth/validation';
 import './login.scss';
 import { Errors } from '../../API/types';
+import { useAuth } from '../../hooks/auth';
 
 export const Login = () => {
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPasswordValue] = useState({ value: '', error: '' });
-    const { submitLogin, isInProgress } = useContext(AuthContext) as InitialContext;
+    const { submitLogin, isInProgress } = useAuth();
     const [step, setStep] = useState(1);
     const [errors, setError] = useState<Errors>([]);
-
-    const history = useNavigate();
 
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (errors) {
@@ -51,8 +50,6 @@ export const Login = () => {
             setStep(1);
             setPasswordValue({ value: '', error: '' });
             setError(responseErrors);
-        } else {
-            history('/main');
         }
     };
 

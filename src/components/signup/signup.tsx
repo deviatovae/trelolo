@@ -5,6 +5,7 @@ import { AuthContext, InitialContext } from '../../context/authContext';
 import './signup.scss';
 import { validateEmail, validateName, validatePassword } from '../../pages/auth/validation';
 import { Errors } from '../../API/types';
+import { useAuth } from '../../hooks/auth';
 
 interface SignUp {
     goToLogin: () => void;
@@ -17,7 +18,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
     const [passwordConfirmed, setPasswordConfirm] = useState({ value: '', error: '' });
     const [generalErrors, setGeneralErrors] = useState<string[]>([]);
 
-    const { submitSignup, isInProgress } = useContext(AuthContext) as InitialContext;
+    const { submitSignup, isInProgress } = useAuth();
 
     const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail({ value: e.target.value, error: '' });
