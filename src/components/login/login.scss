@@ -16,6 +16,10 @@
         .button-login {
             width: 86%;
             padding: 8px;
+
+            &:disabled {
+                opacity: .5;
+            }
         }
     }
 
@@ -26,5 +30,9 @@
 
     &-error {
         color: $red;       
+    }
+
+    &:disabled {
+        opacity: .5;
     }
 }

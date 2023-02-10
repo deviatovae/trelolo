@@ -29,7 +29,7 @@ export enum RequestsMethods {
 
 export interface UserInfo {
     id: string,
-    name: string, 
+    name: string,
     email: string,
 }
 
@@ -37,6 +37,9 @@ export interface ResponseDataLogin {
     data: {
         user: UserInfo,
         token: string,
-
     }
+}
+
+export interface ResponseDataUser {
+    data: UserInfo
 }

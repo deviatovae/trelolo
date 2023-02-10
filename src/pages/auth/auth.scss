@@ -21,6 +21,7 @@
         justify-content: space-between;
         padding: 58px 15px;
         width: 30%;
+        min-width: 300px;
         min-height: 500px;
         gap: 32px;
         border-radius: 10px;
@@ -37,6 +38,7 @@
         background-image: url('../../assets/img/login-img.png');
         background-size: cover;
         background-position: center;
+        z-index: -1;
     }
 
     &-separator {
