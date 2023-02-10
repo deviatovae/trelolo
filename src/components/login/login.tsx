@@ -1,8 +1,6 @@
-import React, { FormEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FormEvent, useState } from 'react';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import { AuthContext, InitialContext } from '../../context/authContext';
 import { validateEmail } from '../../pages/auth/validation';
 import './login.scss';
 import { Errors } from '../../API/types';

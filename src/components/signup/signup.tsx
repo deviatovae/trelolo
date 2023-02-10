@@ -1,7 +1,6 @@
-import React, { FormEvent, useContext, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import { AuthContext, InitialContext } from '../../context/authContext';
 import './signup.scss';
 import { validateEmail, validateName, validatePassword } from '../../pages/auth/validation';
 import { Errors } from '../../API/types';
