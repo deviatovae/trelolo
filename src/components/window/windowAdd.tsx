@@ -1,9 +1,9 @@
-import './modal.scss';
+import './windowAdd.scss';
 import { MadalProps } from '../types/modalProps';
 import { useState } from 'react';
 
 
-export const Modal = ({ onCreateProject, placeholderProps }: MadalProps)=> {
+export const WindowAdd = ({ onCreateProject, placeholderProps }: MadalProps)=> {
   const [inputValue, setInputValue] = useState('');
   const handleCreateProject = () => onCreateProject(inputValue);
 

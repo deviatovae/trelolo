@@ -1,0 +1,84 @@
+@import '/src/assets/styles/variables.scss';
+
+.window-add-task {
+  width: 290px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+//   align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+
+  &__input {
+    margin: 0 auto;
+    width: 265px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid $borderBlueLight;
+
+    &:focus {
+        outline-offset: 0;
+        outline: 0;
+        border: 1px solid $mainBlueHover;
+      }
+  }
+
+  &__buttons-container {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: $mainBlue;
+
+  }
+
+  &__btn-add {
+    width: 70px;
+    height: 25px;
+    border-radius: 6px;
+    background-color: $mainBlue;
+    border: none;
+    font-size: 12px;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s;
+
+
+    &:hover {
+      cursor: pointer;
+      background: $mainBlueHover;
+      transition: background 0.3s;
+
+    }
+    
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.3s;
+    }
+
+    &:disabled {
+      background-color: $greylight;
+      cursor: default;
+      transform: none;
+    }
+  }
+
+  &__cross-add {
+    background: url(../../assets/img/cross_add_window.svg) no-repeat center;
+    width: 12px;
+    height: 12px;
+
+    &:hover {
+      cursor: pointer;
+    }
+      
+    &:active {
+
+    }
+  }
+}

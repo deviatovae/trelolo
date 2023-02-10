@@ -10,13 +10,13 @@
 body {
   background-color: $mainBg;
 
-    ::-webkit-scrollbar {
-      height: 6px;
-    }
-    ::-webkit-scrollbar-thumb {
-      border-radius: 3px;
-      background-color: $mainBlueHover;
-    }
+    // ::-webkit-scrollbar {
+    //   height: 6px;
+    // }
+    // ::-webkit-scrollbar-thumb {
+    //   border-radius: 3px;
+    //   background-color: $mainBlueHover;
+    // }
 }
 
 html, body, #root, .app {
