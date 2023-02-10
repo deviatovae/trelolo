@@ -22,6 +22,11 @@ export interface Response<T> {
     errors: Errors | null
 }
 
+export interface List<T> {
+    items: T[]
+    count: number
+}
+
 export interface ValidationError {
     param: string
     msg: string
@@ -33,11 +38,11 @@ export interface LoginData {
     password: string
 }
 
+export interface ProjectData {
+    name: string
+}
+
 export interface LoginResponse {
     user: User,
     token: string,
-}
-
-export interface ResponseDataUser {
-    data: User
 }
