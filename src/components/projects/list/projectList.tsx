@@ -1,12 +1,10 @@
 import './projectList.scss';
-import { useContext } from 'react';
-import { ProjectsContext } from '../../../context/projectsContext';
 import { UserIcon } from '../../userIcon/userIcon';
 import { IconColorProvider } from '../../../utils/iconColorProvider';
+import { useProjects } from '../../../hooks/projects';
 
 export function ProjectList() {
-
-  const { projects } = useContext(ProjectsContext);
+  const { projects } = useProjects();
 
   return (
     <section className="members-page__projects projects">

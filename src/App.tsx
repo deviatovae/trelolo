@@ -22,7 +22,7 @@ function App() {
       <div className="app wrapper">
         <Header currentLocale={currentLocale} setLocale={setLocale} />
         <div className="app__content">
-            <Outlet/>
+          <Outlet />
         </div>
         <Footer />
       </div>

@@ -33,7 +33,7 @@ export interface ValidationError {
 }
 
 export interface LoginData {
-    email?: string,
+    email: string,
     name?: string,
     password: string
 }

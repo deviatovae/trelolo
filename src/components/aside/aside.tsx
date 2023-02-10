@@ -1,10 +1,9 @@
 import './aside.scss';
-import { useContext } from 'react';
-import { ProjectsContext } from '../../context/projectsContext';
+import { useProjects } from '../../hooks/projects';
 
 
 export const Aside = () => {
-  const { projects } = useContext(ProjectsContext);
+  const { projects } = useProjects();
 
   return (
     <aside className="aside__container">

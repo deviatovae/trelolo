@@ -1,13 +1,12 @@
 import './projectCardList.scss';
-import { useContext } from 'react';
-import { ProjectsContext } from '../../../context/projectsContext';
+import { useProjects } from '../../../hooks/projects';
 
 interface ProjectCardListProps {
   onCreate: () => void
 }
 
 export function ProjectCardList({ onCreate }: ProjectCardListProps) {
-  const { projects, count } = useContext(ProjectsContext);
+  const { projects, count } = useProjects();
 
   return (
     <div className="projects-cards wrapper">
