@@ -1,0 +1,83 @@
+@import "src/assets/styles/variables";
+
+
+.project-page {
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        position: relative;
+    }
+
+    &__section {
+        width: 70%;
+        padding: 30px;
+
+    h4 {
+        padding: 25px;
+    }
+
+    }
+
+    &__projects-wrapper {
+        overflow-x: scroll;
+    }
+
+    &__column-list {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        width: 300px;
+        height: 100%;
+        // position: relative;
+    }
+
+    &__column-list-item {
+        width: 250px;
+        height: 400px;
+        background-color: #EBECF0;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $mainBlue;
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 50px;
+
+        &:hover {
+
+        }
+
+        &:active {
+            transform: scale(1);
+            transition: transform 0.1s ease-in-out;
+        }
+    }
+
+
+    &__column-list-btn {
+        width: 250px;
+        height: 100px;
+        background-color: #EBECF0;
+        border-radius: 6px;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $mainBlue;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.03);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        &:active {
+            transform: scale(1);
+            transition: transform 0.1s ease-in-out;
+        }
+
+    }
+}

@@ -4,6 +4,8 @@ import { Auth } from '../pages/auth/auth';
 import { Welcome } from '../pages/welcome/welcome';
 import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
+import { ProjectPage } from '../pages/projectPage/projectPage';
+
 
 export const routes = [
     {
@@ -26,6 +28,10 @@ export const routes = [
             {
                 path: '/members',
                 element: <MembersPage />
+            },
+            {
+                path: '/project',
+                element: <ProjectPage />
             }
         ]
     }
