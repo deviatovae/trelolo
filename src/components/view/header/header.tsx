@@ -5,7 +5,7 @@ import React, { useContext, useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
 import './header.scss';
-import { AuthContext, InitialContext } from '../../../context';
+import { AuthContext, InitialContext } from '../../../context/authContext';
 
 interface HeaderProps {
   currentLocale: string;

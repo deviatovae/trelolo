@@ -9,7 +9,7 @@ const Input = ({ type, classNameWrapper = '', className = '', placeholder, value
     return (
         <div className={classesWrapper}>
             <input type={type} value={value} className={classes} placeholder={placeholder} onChange={onChange} disabled={disabled}/>
-            {error && <span className='input-error-text'>Error: {error}</span>}
+            {error && <span className='input-error-text'>{error}</span>}
         </div>
     );
 };

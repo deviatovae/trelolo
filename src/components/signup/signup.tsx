@@ -1,9 +1,10 @@
 import React, { FormEvent, useContext, useState } from 'react';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import { AuthContext, InitialContext } from '../../context';
+import { AuthContext, InitialContext } from '../../context/authContext';
 import './signup.scss';
 import { validateEmail, validateName, validatePassword } from '../../pages/auth/validation';
+import { Errors } from '../../API/types';
 
 interface SignUp {
     goToLogin: () => void;
@@ -14,6 +15,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
     const [name, setName] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
     const [passwordConfirmed, setPasswordConfirm] = useState({ value: '', error: '' });
+    const [generalErrors, setGeneralErrors] = useState<string[]>([]);
 
     const { submitSignup, isInProgress } = useContext(AuthContext) as InitialContext;
 
@@ -31,6 +33,24 @@ export const Signup = ({ goToLogin }: SignUp) => {
 
     const onChangePasswordConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordConfirm({ value: e.target.value, error: '' });
+    };
+
+    const handleErrors = (errors: Errors): void => {
+        if (!errors.length) {
+            return;
+        }
+        const map = {
+            name: setName,
+            email: setEmail,
+            password: setPassword,
+        };
+        errors.forEach(error => {
+            if (typeof error === 'string') {
+                return setGeneralErrors(prev => [...prev, error]);
+            }
+            const param = error.param as keyof typeof map;
+            map[param](prev => ({ value: prev.value, error: error.msg }));
+        });
     };
 
     const onSubmit = async (e: FormEvent) => {
@@ -56,17 +76,19 @@ export const Signup = ({ goToLogin }: SignUp) => {
         }
 
         if (password.value === passwordConfirmed.value) {
-            const response = await submitSignup({ email: email.value, name: name.value, password: password.value });
+            const { errors: responseErrors } = await submitSignup({ email: email.value, name: name.value, password: password.value });
+            if (!responseErrors.length) {
+                return goToLogin();
+            }
+            handleErrors(responseErrors);
 
-            if (response.errors) {
-                console.log(response.errors);
-            } else goToLogin();
         } else setPasswordConfirm({ ...passwordConfirmed, error: 'Passwords are not the same' });
     };
 
     return (
         <form onSubmit={onSubmit} className='signup-form'>
             <h1 className='signup-title'>Sign up to Trelolo</h1>
+            {generalErrors && generalErrors.map(error => <span className="login-error">{error}</span>)}
             <Input
                 type='email'
                 placeholder='Enter email'
