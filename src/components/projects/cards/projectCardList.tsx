@@ -1,12 +1,22 @@
 import './projectCardList.scss';
 import { useProjects } from '../../../hooks/projects';
+import React, { useState } from 'react';
+import { MainModal } from '../../mainModal/mainModal';
 
-interface ProjectCardListProps {
-  onCreate: () => void
-}
+export function ProjectCardList() {
+  const { projects, count, addProject } = useProjects();
+  const [showCreate, setShowCreate] = useState(false);
 
-export function ProjectCardList({ onCreate }: ProjectCardListProps) {
-  const { projects, count } = useProjects();
+  const handleModalClickOutside = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      setShowCreate(false);
+    }
+  };
+
+  const onCreateProject = async (name: string) => {
+    await addProject({ name });
+    setShowCreate(false);
+  };
 
   return (
     <div className="projects-cards wrapper">
@@ -14,10 +24,12 @@ export function ProjectCardList({ onCreate }: ProjectCardListProps) {
       <div className="projects-cards__list">
         {projects.map(({ id, name }) => (
           <div key={id} className="projects-cards__item">{name}</div>
-        ))
-        }
-        <div className="projects-cards__create" onClick={onCreate}>+ Create new project</div>
+        ))}
+        <div className="projects-cards__create" onClick={() => setShowCreate(true)}>+ Create new project</div>
       </div>
+      {showCreate && (
+        <MainModal ShowModal={showCreate} onClickOutside={handleModalClickOutside} onCreateProject={onCreateProject} />
+      )}
     </div>
   );
 }
