@@ -4,6 +4,9 @@ import { Login } from '../../components/login/login';
 import { Logo } from '../../components/logo/logo';
 import { Signup } from '../../components/signup/signup';
 import './auth.scss';
+import { useAuth } from '../../hooks/auth';
+import { Navigate } from 'react-router-dom';
+import { Route } from '../../router/routes';
 
 export const Auth = () => {
     const [currentStage, setStage] = useState(1);
@@ -19,6 +22,11 @@ export const Auth = () => {
     const goToLogin = () => {
         setStage(1);
     };
+
+    const { isAuth } = useAuth();
+    if (isAuth) {
+        return <Navigate to={Route.MAIN}/>;
+    }
 
     return (
         <main className='auth-main'>

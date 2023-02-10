@@ -6,7 +6,7 @@ import { IntlProvider } from 'react-intl';
 import { LOCALES } from './components/languages/locales';
 import { messages } from './components/languages/messages';
 import { LanguagesManager } from './components/languages/languagesManager';
-import { AuthProvider } from './context';
+import { AuthProvider } from './context/authContext';
 
 
 function App() {

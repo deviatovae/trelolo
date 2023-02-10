@@ -1,26 +1,30 @@
-import { getToken } from '../context';
-import { RequestsMethods, Response, ServerResponse } from './types';
+import { getToken } from '../context/authContext';
+import { Request, RequestMethod, Response } from './types';
+import { ResponseErrors } from './responseErrors';
 
 const BASE_URL = 'https://trelolo.onrender.com/';
 
-export const getResponse = async <T>({ url, method, body }: Response): Promise<T> => {
+/**
+ * @throws {ResponseErrors}
+ */
+const parseResponse = async <T>(response: globalThis.Response) => {
+  const result = await response.json() as Response<T>;
+  if (!response.ok) {
+    throw new ResponseErrors(result.errors || ['Server error']);
+  }
+
+  return result;
+};
+
+export const getResponse = async <T>({ url, method, body }: Request): Promise<Response<T>> => {
   const response = await fetch(`${BASE_URL}${url}`, {
     headers: {
       'Content-Type': 'application/json',
       'X-TOKEN': getToken(),
     },
-    method: method || RequestsMethods.GET,
+    method: method || RequestMethod.GET,
     body: JSON.stringify(body),
   });
-  if (!response.ok) {
-    throw new Error(JSON.stringify(await response.json()));
-  }
-  const result = await response.json() as ServerResponse<T>;
-  const { data, errors } = result;
 
-  if (errors.length || !data) {
-    throw new Error(JSON.stringify(errors));
-  }
-
-  return data;
+  return parseResponse<T>(response);
 };

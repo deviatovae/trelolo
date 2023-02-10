@@ -4,6 +4,7 @@
     border: 1px solid $gray;
     border-radius: 6px;
     padding: 14px 9px;
+    font-size: 14px;
 
     &-wrapper {
         display: flex;
@@ -12,14 +13,20 @@
     }
 
     &-error {
-        color: $red;
+        border-color: $red;
+
+        &-text {
+            padding: 3px 0 3px 0;
+            color: $red;
+            font-size: 14px;
+        }
     }
 }
 
 input::-moz-placeholder {
-    color: $greylight;
+    color: $greyDark;
 }
 
 input::-webkit-input-placeholder {
-    color: $greylight;
+    color: $greyDark;
 }

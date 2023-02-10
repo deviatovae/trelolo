@@ -1,6 +1,7 @@
-import { Project, ResponseList } from '../API/types';
+import { List } from '../API/types';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { getProjects } from '../API/projectService';
+import { Project } from '../types/models';
 
 export interface ProjectsContextValue {
   projects: Project[]
@@ -13,14 +14,15 @@ export const ProjectsContext = createContext<ProjectsContextValue>({
 });
 
 export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
-  const [result, setResult] = useState<ResponseList<Project>>({
+  const [result, setResult] = useState<List<Project>>({
     items: [],
     count: 0,
   });
 
   useEffect(() => {
     const fetchProjects = async () => {
-      setResult(await getProjects());
+      const { data } = await getProjects();
+      setResult(data);
     };
 
     fetchProjects();
