@@ -6,30 +6,34 @@ import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
 import { AuthRoute } from '../components/authRoute/authRoute';
 
+export enum Route {
+    WELCOME = '/',
+    LOGIN = '/login',
+    MAIN = '/main',
+    MEMBERS = '/members',
+}
 export const routes = [
     {
-        path: '/',
         element: <App/>,
         errorElement: <ErrorPage/>,
         children: [
             {
-                path: '/',
+                path: Route.WELCOME,
                 element: <Welcome />
             },
             {
-                path: '/login',
+                path: Route.LOGIN,
                 element: <Auth />
             },
             {
-                path: '/',
                 element: <AuthRoute/>,
                 children: [
                     {
-                        path: '/main',
+                        path: Route.MAIN,
                         element: <Main/>
                     },
                     {
-                        path: '/members',
+                        path: Route.MEMBERS,
                         element: <MembersPage/>
                     }
                 ]

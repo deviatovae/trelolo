@@ -4,6 +4,7 @@ import { LoginData, LoginResponse, Response } from '../API/types';
 import { User } from '../types/models';
 import { wrapErrors } from '../utils/errorsWrapper';
 import { useNavigate } from 'react-router-dom';
+import { Route } from '../router/routes';
 
 export interface InitialContext {
   isAuth: boolean,
@@ -22,8 +23,8 @@ export const getToken = () => localStorage.getItem('token') || '';
 export const AuthContext = createContext<InitialContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
-  const [isAuth, setIsAuth] = useState(false);
   const [token, setToken] = useState<string>(getToken());
+  const [isAuth, setIsAuth] = useState(!!token);
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [isInProgress, setIsInProgress] = useState(false);
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       const { data: { user, token: tokenResponse } } = response;
       await updateToken(tokenResponse);
       await updateUserInfo(user);
-      navigate('/main');
+      navigate(Route.MAIN);
 
       return response;
     } catch (error) {
@@ -82,6 +83,8 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     localStorage.removeItem('user');
     setUserInfo(null);
     setToken('');
+    setIsAuth(false);
+    navigate(Route.WELCOME);
   };
 
   const getUserData = async (): Promise<Response<User | null>> => {
