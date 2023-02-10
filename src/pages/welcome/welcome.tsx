@@ -1,19 +1,24 @@
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '../../components/button/button';
 import './welcome.scss';
+import { useAuth } from '../../hooks/auth';
+import { Route } from '../../router/routes';
 
 export const Welcome = () => {
+  const { isAuth } = useAuth();
+  if (isAuth) {
+    return <Navigate to={Route.MAIN}/>;
+  }
 
   return (
-    <>
     <div className="welcome-wrapper">
       <div className="welcome-content wrapper _container">
         <div className="welcome-content__left">
           <h1 className="welcome-content__header">
-            <FormattedMessage id='welcomeHeader' />
+            <FormattedMessage id="welcomeHeader"/>
           </h1>
-          <div className="welcome-content__description"><FormattedMessage id='welcomeDescription' /></div>
+          <div className="welcome-content__description"><FormattedMessage id="welcomeDescription"/></div>
           <div className="welcome-content__visuals visuals">
             <div className="visuals__card">
               <div className="visuals__icon visuals__icon_kanban"></div>
@@ -35,7 +40,6 @@ export const Welcome = () => {
         <div className="welcome-content__img"></div>
       </div>
     </div>
-  </>
   );
 };
 

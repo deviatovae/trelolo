@@ -1,13 +1,9 @@
 import './profileModal.scss';
 import { ProfileModalProps } from '../types/profileModalProps';
-import { useNavigate } from 'react-router-dom';
 import { UserIcon } from '../userIcon/userIcon';
 
 export const ProfileModal = ({ onClickOutside, avatarName, userInfo, logout }: ProfileModalProps) => {
-
-  const history = useNavigate();
   const handleLogOutClick = () => {
-    history('/');
     logout();
   };
 
