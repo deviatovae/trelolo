@@ -51,9 +51,10 @@
   }
 
   &__add-btn_active {
-    color: $gray;
+    color: $white;
     background-color: $mainBlue;
     cursor: pointer;
+    border: none;
 
     &:hover{
       background-color: $mainBlueHover;
