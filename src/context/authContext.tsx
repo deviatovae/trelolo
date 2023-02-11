@@ -2,7 +2,7 @@ import React, { createContext, ReactElement, useCallback, useEffect, useState } 
 import { authorizeUser, createUser, getUser } from '../API/loginService';
 import { LoginData, LoginResponse, Response } from '../API/types';
 import { User } from '../types/models';
-import { wrapErrors } from '../utils/errorsWrapper';
+import { wrapErrors } from '../utils/errors';
 import { useNavigate } from 'react-router-dom';
 import { Route } from '../router/routes';
 
