@@ -23,7 +23,10 @@ export function ProjectCardList() {
       <h4>Your projects ({count})</h4>
       <div className="projects-cards__list">
         {projects.map(({ id, name }) => (
-          <div key={id} className="projects-cards__item">{name}</div>
+          <div key={id} className="projects-cards__item">{name}
+            <div className="projects-cards__edit"></div>
+            <div className="projects-cards__delete"></div>
+          </div>
         ))}
         <div className="projects-cards__create" onClick={() => setShowCreate(true)}>+ Create new project</div>
       </div>
