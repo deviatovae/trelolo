@@ -5,7 +5,7 @@ import { WindowAdd } from '../../components/window/windowAdd';
 import { useState, useEffect } from 'react';
 
 export const Main = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [newProjectWindow, setNewProjectWindow] = useState(false);
   const [projects, setProjects] = useState([] as string[]);
 
   useEffect(() => {
@@ -15,26 +15,26 @@ export const Main = () => {
     };
   }, []);
 
-  const handleUserIconClick = () => {
-      setShowModal(!showModal);
+  const handleUserClickNewProject = () => {
+    setNewProjectWindow(!newProjectWindow);
     };
   
   const onCreateProject = (inputValue: string) => {
       setProjects([...projects, inputValue]);
-      setShowModal(false);
+      setNewProjectWindow(false);
   };
 
   const checkModalOtsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (showModal && 
+    if (newProjectWindow && 
       (!(event.target as HTMLElement).classList.contains('modal-main')) &&
       (!(event.target as HTMLElement).classList.contains('modal-main__project-name'))) {
-      setShowModal(false);
+        setNewProjectWindow(false);
     }
   };
 
   const CheckKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === 27) {
-      setShowModal(false);
+      setNewProjectWindow(false);
     }
   };
 
@@ -52,10 +52,10 @@ export const Main = () => {
               ))
               }
 
-              {showModal ? (
-                <WindowAdd ShowModal={showModal} onCreateProject={onCreateProject} placeholderProps={'Write a project name'}/>
+              {newProjectWindow ? (
+                <WindowAdd showWindow={newProjectWindow} onCreateProject={onCreateProject} placeholderProps={'Write a project name'}/>
                  ) : (
-                  <div className='main__list-btn' onClick={handleUserIconClick}>+ Create new project</div>
+                  <div className='main__list-btn' onClick={handleUserClickNewProject}>+ Create new project</div>
                 )}
             </div>
           </div>

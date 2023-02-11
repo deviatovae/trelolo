@@ -1,5 +1,5 @@
 export interface MadalProps {
-    ShowModal: boolean,
+    showWindow: boolean,
     onCreateProject: (inputValue: string) => void;
     placeholderProps: string,
   }

@@ -97,15 +97,15 @@
     background-color: #EBECF0;
     height: 100%;
     border-radius: 6px;
+    padding-top: 10px;
   }
 
-  &__btn-add-task {
+  &__btn-add-task-plus {
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 10px;
     transition: transform 0.2s ease-in-out;
-
 
     &:hover {
       cursor: pointer;
@@ -118,5 +118,68 @@
       transition: transform 0.1s ease-in-out;
     }
 
+  }
+
+  &__task-container {
+    width: 270px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  &__task-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar {
+    border: 1px solid rgba(73, 75, 244, 0.5);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: url(../../assets/img/clarity_date-line.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+
+  &__settings {
+    width: 20px;
+    height: 20px;
+    background: url(../../assets/img/settinfg_add_task.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
   }
 }
