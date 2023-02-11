@@ -36,7 +36,10 @@ export const MembersProvider = ({ children }: { children: ReactNode }) => {
         items: [...items, ...data.items],
         count: count + data.count
       };
-    }, Promise.resolve(initialState)).then(result => setMembers(result));
+    }, Promise.resolve<List<Member>>({
+      items: [],
+      count: 0
+    })).then(result => setMembers(result));
   }, [projects]);
 
   return (
