@@ -1,5 +1,5 @@
 import { ResponseErrors } from '../API/responseErrors';
-import { Response } from '../API/types';
+import { Errors, Response } from '../API/types';
 
 export const wrapErrors = (e: unknown): Response<null> => {
   return {
@@ -7,4 +7,8 @@ export const wrapErrors = (e: unknown): Response<null> => {
     data: null,
     errors: e instanceof ResponseErrors ? e.errors : ['Unexpected error']
   };
+};
+
+export const castToErrors = (e: unknown): Errors => {
+  return e instanceof ResponseErrors ? e.errors : ['Unexpected error'];
 };
