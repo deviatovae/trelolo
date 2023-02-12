@@ -71,7 +71,7 @@
       transform: scale(1.04);
       transition: transform 0.3s ease-in-out;
     }
-    
+
     &:active {
       transform: scale(1);
       transition: transform 0.1s ease-in-out;
@@ -86,13 +86,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 5px;
   }
 
   &__header {
     color: #000;
     font-weight: 700;
     font-size: 16px;
-    padding: 10px;
   }
 
   &__setings {

@@ -44,10 +44,12 @@ export const ProjectCard = ({ name, id }: ProjectCardProps) => {
 
   return (
     <>
-      <div className="projects-cards__item">{name}
-        <div className="projects-cards__edit" onClick={() => setShowUpdate(true)}></div>
-        <div className="projects-cards__delete" onClick={() => setShowDelete(true)}></div>
-      </div>
+      {!showUpdate && !showDelete && (
+        <div className="projects-cards__item">{name}
+          <div className="projects-cards__edit" onClick={() => setShowUpdate(true)}></div>
+          <div className="projects-cards__delete" onClick={() => setShowDelete(true)}></div>
+        </div>
+      )}
       {showUpdate && project && <ProjectUpdateCard project={project} onClose={close} onUpdate={onUpdateProject} errors={errors} />}
       {showDelete && project && <ProjectDeleteCard project={project} onClose={close} onDelete={onDeleteProject} errors={errors} />}
     </>

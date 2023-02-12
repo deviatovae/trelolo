@@ -1,62 +1,60 @@
 @import '/src/assets/styles/variables.scss';
 
 .modal-main {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    width: 260px;
-    height: 100px;
-    background-color:$white;
-    border: 1px solid $mainBlue;
+  width: 260px;
+  height: 100px;
+  background-color: $white;
+  border: 1px solid $mainBlue;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: -13px 18px 13px -21px rgba(34, 60, 80, 0.56);
+
+
+  &__project-name {
+    width: 235px;
+    height: 30px;
     border-radius: 6px;
+    border: 1px solid $borderBlueLight;
+    padding: 0 5px;
+
+    &:focus {
+      outline-offset: 0;
+      outline: 0;
+      border: 1px solid $mainBlueHover;
+    }
+  }
+
+  &__btn-create-project {
+    width: 235px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid $borderBlueLight;
+    background: $mainBlue;
+    color: $white;
     display: flex;
-    flex-direction: column;
-    z-index: 5;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    transition: transform 0.2s;
 
-    &__project-name {
-      width: 220px;
-      height: 30px;
-      border-radius: 6px;
-      border: 1px solid $borderBlueLight;
-      padding: 0 5px;
-
-      &:focus {
-        outline-offset: 0;
-        outline: 0;
-        border: 1px solid $mainBlueHover;
-      }
+    &:hover {
+      cursor: pointer;
+      background: $mainBlueHover;
     }
 
-    &__btn-create-project {
-      width: 220px;
-      height: 30px;
-      border-radius: 6px;
-      border: 1px solid $borderBlueLight;
-      background: $mainBlue;
-      color: $white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s;
-
-      &:hover {
-        cursor: pointer;
-        background: $mainBlueHover;
-      }
-
-      &:active {
-        transform: scale(0.98);
-        transition: transform 0.1s;
-      }
-
-      &:disabled {
-        background: none;
-        color: $greyDark;
-        cursor: default;
-        transform: none;
-      }
-
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.1s;
     }
+
+    &:disabled {
+      background: none;
+      color: $greyDark;
+      cursor: default;
+      transform: none;
+    }
+  }
 }

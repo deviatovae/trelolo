@@ -1,9 +1,5 @@
 @import '/src/assets/styles/variables.scss';
 
-.modal-overl {
-  
-}
-
 .modal-main {
   width: 260px;
   height: 100px;
@@ -48,7 +44,7 @@
       cursor: pointer;
       background: $mainBlueHover;
     }
-    
+
     &:active {
       transform: scale(0.98);
       transition: transform 0.1s;
