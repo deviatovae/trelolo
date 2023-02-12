@@ -42,6 +42,10 @@ export interface ProjectData {
     name: string
 }
 
+export interface MemberData {
+    email: string
+}
+
 export interface LoginResponse {
     user: User,
     token: string,

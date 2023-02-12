@@ -36,11 +36,15 @@ export enum Message {
   Members = 'Members',
   AddMember = 'AddMember',
   InviteMemberHeader = 'InviteMemberHeader',
+  UpdateMemberHeader = 'UpdateMemberHeader',
   InviteMemberLabelEmail = 'InviteMemberLabelEmail',
   InviteMemberLabelProjects = 'InviteMemberLabelProjects',
+  MemberLabelProjects = 'MemberLabelProjects',
+  MemberLabelEmail = 'MemberLabelEmail',
   EnterProjects = 'EnterProjects',
   Add = 'Add',
   EnterMemberEmail = 'EnterMemberEmail',
   CreateNewProjectShort = 'CreateNewProjectShort',
+  MemberAlreadyExist = 'MemberAlreadyExist',
 }
 

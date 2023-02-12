@@ -1,11 +1,10 @@
 import './profileModal.scss';
 import { ProfileModalProps } from '../types/profileModalProps';
 import { UserIcon } from '../userIcon/userIcon';
-import { getInitials } from '../../utils/format';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../languages/messages';
 
-export const ProfileModal = ({ onClickOutside, userInfo: { name, email }, logout }: ProfileModalProps) => {
+export const ProfileModal = ({ onClickOutside, userInfo: { id, name, email }, logout }: ProfileModalProps) => {
   const handleLogOutClick = () => {
     logout();
   };
@@ -17,7 +16,7 @@ export const ProfileModal = ({ onClickOutside, userInfo: { name, email }, logout
           <FormattedMessage id={Message.Account} />
         </div>
         <div className="modal-windows__person">
-          <UserIcon>{getInitials(name)}</UserIcon>
+          <UserIcon userId={id}>{name}</UserIcon>
           <div className="modal-person__name-email">
             {<div className="modal-person__name">{name}</div>}
             <div className="modal-person__email">{email}</div>

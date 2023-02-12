@@ -20,3 +20,10 @@ export interface Member {
   project: Project
   user: User
 }
+
+export interface UserMembers {
+  id: string,
+  name: string,
+  email: string,
+  members: Member[]
+}
