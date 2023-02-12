@@ -12,3 +12,5 @@ export const wrapErrors = (e: unknown): Response<null> => {
 export const castToErrors = (e: unknown): Errors => {
   return e instanceof ResponseErrors ? e.errors : ['Unexpected error'];
 };
+
+export const errorsToString = (errors: Errors): string => errors.map(error => error.toString()).join('\n');

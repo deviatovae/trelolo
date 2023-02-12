@@ -46,6 +46,9 @@ export const translations = {
     [Message.Update]: 'Update',
     [Message.Delete]: 'Delete',
     [Message.Add]: 'Add',
+    [Message.UpdateMemberHeader]: 'Update member\'s projects',
+    [Message.MemberLabelEmail]: 'Member\'s email',
+    [Message.MemberLabelProjects]: 'Member\'s projects',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -91,5 +94,8 @@ export const translations = {
     [Message.Update]: 'Обновить',
     [Message.Delete]: 'Удалить',
     [Message.Add]: 'Добавить',
+    [Message.UpdateMemberHeader]: 'Обновить проекты участника',
+    [Message.MemberLabelEmail]: 'E-mail участника',
+    [Message.MemberLabelProjects]: 'Проекты участника',
   },
 };
