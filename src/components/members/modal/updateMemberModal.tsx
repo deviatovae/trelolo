@@ -52,8 +52,10 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
         .map(({ id }) => deleteMember(id));
     };
 
-    const errors = await Promise.all([addNewProjects(), removeProjects()]);
-    if (!errors.flat().length) {
+    const errors = await Promise.all([...addNewProjects(), ...removeProjects()]);
+    const hasErrors = errors.filter(error => !!error).length;
+
+    if (!hasErrors) {
       onClose();
     }
   };

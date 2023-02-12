@@ -45,5 +45,6 @@ export enum Message {
   Add = 'Add',
   EnterMemberEmail = 'EnterMemberEmail',
   CreateNewProjectShort = 'CreateNewProjectShort',
+  MemberAlreadyExist = 'MemberAlreadyExist',
 }
 

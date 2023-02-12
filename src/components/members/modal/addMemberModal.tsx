@@ -1,7 +1,7 @@
 import Input from '../../input/input';
 import { Modal } from '../../modal/modal';
 import Select from '../../select/select';
-import { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './addMemberModal.scss';
 import { MultiValue } from 'react-select';
 import { Field } from '../../../types/types';
@@ -21,23 +21,35 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
   const { trans } = useTranslate();
   type Option = { value: string, label: string };
   const options: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
-  const { addMembers } = useMembers();
+  const { addMembers, members: { items: members } } = useMembers();
 
   const [email, setEmail] = useState<Field>({ value: '', error: '' });
   const [projects, setProjects] = useState<Option[]>([]);
-  const canAdd = projects.length > 0 && email.value;
+  const canAdd = projects.length > 0 && email.value && !email.error;
   const handleChange = (values: MultiValue<Option>) => {
     setProjects([...values]);
   };
 
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const isMemberExist = members.some(({ user: { email: memberEmail } }) => memberEmail === value);
+    const error = isMemberExist ? trans(Message.MemberAlreadyExist) : '';
+    setEmail({ value, error });
+  };
+
   const handleSubmit = async () => {
     if (!validateEmail(email.value)) {
-      setEmail(prev => ({ value: prev.value, error: trans(Message.InvalidEmail) }));
+      return setEmail(prev => ({ value: prev.value, error: trans(Message.InvalidEmail) }));
     }
+
     const projectIds = projects.map(({ value: projectId }) => projectId);
     const errors = await addMembers(email.value, projectIds);
-    if (errors) {
+    const hasErrors = errors.filter(error => !!error).length;
+
+    if (hasErrors) {
       setEmail(prev => ({ value: prev.value, error: errorsToString(errors[0] || []) }));
+    } else {
+      onClose();
     }
   };
 
@@ -51,14 +63,14 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
                    placeholder={trans(Message.EnterMemberEmail)}
                    value={email.value}
                    error={email.error}
-                   onChange={(e) => setEmail({ value: e.target.value, error: '' })}
+                   onChange={handleEmailChange}
             />
           </div>
           <div className="add-member__field">
             <p className="add-member__field-label">{trans(Message.InviteMemberLabelProjects)}</p>
             <Select isMulti options={options} placeholder={trans(Message.EnterProjects)} onChange={handleChange}></Select>
           </div>
-          <button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')}>
+          <button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')} disabled={!canAdd}>
             {trans(Message.Add)}
           </button>
         </div>
