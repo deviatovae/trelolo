@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
 import { useAuth } from '../../../hooks/auth';
-import { getInitials } from '../../../utils/format';
 
 interface HeaderProps {
   currentLocale: string;

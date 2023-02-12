@@ -1,7 +1,6 @@
 import './profileModal.scss';
 import { ProfileModalProps } from '../types/profileModalProps';
 import { UserIcon } from '../userIcon/userIcon';
-import { getInitials } from '../../utils/format';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../languages/messages';
 

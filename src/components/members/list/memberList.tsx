@@ -3,8 +3,6 @@ import './memberList.scss';
 import { useState } from 'react';
 import { AddMemberModal } from '../modal/addMemberModal';
 import { useMembers } from '../../../hooks/members';
-import { getInitials, getName } from '../../../utils/format';
-import { useAuth } from '../../../hooks/auth';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../languages/messages';
 import { useTranslate } from '../../../hooks/useTranslate';

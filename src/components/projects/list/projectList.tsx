@@ -1,6 +1,5 @@
 import './projectList.scss';
 import { UserIcon } from '../../userIcon/userIcon';
-import { IconColorProvider } from '../../../utils/iconColorProvider';
 import { useProjects } from '../../../hooks/projects';
 import { useMembers } from '../../../hooks/members';
 import { useTranslate } from '../../../hooks/useTranslate';
