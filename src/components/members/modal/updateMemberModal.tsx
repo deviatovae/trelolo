@@ -4,14 +4,14 @@ import Select from '../../select/select';
 import { useState } from 'react';
 import './addMemberModal.scss';
 import { MultiValue } from 'react-select';
-import { Field, SelectOption } from '../../../types/types';
-import { validateEmail } from '../../../utils/validation';
+import { SelectOption } from '../../../types/types';
 import { useTranslate } from '../../../hooks/useTranslate';
 import { Message } from '../../languages/messages';
 import { useProjects } from '../../../hooks/projects';
 import { Form } from 'react-router-dom';
 import { Member, Project } from '../../../types/models';
 import { useMembers } from '../../../hooks/members';
+import { errorsToString } from '../../../utils/errors';
 
 interface UpdateMemberModalProps {
   onClose: () => void
@@ -24,8 +24,7 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
   const { addMember, deleteMember } = useMembers();
   const { projects: allProjects } = useProjects();
   const projects = members.map(({ project }) => project);
-
-  const [emailField, setEmailField] = useState<Field>({ value: email, error: '' });
+  const [inputError, setInputError] = useState('');
 
   const projectToOption: (project: Project) => SelectOption = ({ id, name }) => ({ value: id, label: name });
   const options: SelectOption[] = allProjects.map(projectToOption);
@@ -36,10 +35,6 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
   };
 
   const handleSubmit = async () => {
-    if (!validateEmail(emailField.value)) {
-      setEmailField(prev => ({ value: prev.value, error: trans(Message.InvalidEmail) }));
-    }
-
     const addNewProjects = () => {
       return selectedOptions
         .filter(({ value }) => !projects.some(({ id }) => id === value))
@@ -55,7 +50,9 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
     const errors = await Promise.all([...addNewProjects(), ...removeProjects()]);
     const hasErrors = errors.filter(error => !!error).length;
 
-    if (!hasErrors) {
+    if (hasErrors) {
+      setInputError(errorsToString(errors[0] || []));
+    } else {
       onClose();
     }
   };
@@ -68,9 +65,9 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
             <p className="add-member__field-label">{trans(Message.MemberLabelEmail)}</p>
             <Input type="email"
                    disabled
-                   value={emailField.value}
-                   error={emailField.error}
-                   onChange={(e) => setEmailField({ value: e.target.value, error: '' })}
+                   value={email}
+                   error={inputError}
+                   onChange={() => ({})}
             />
           </div>
           <div className="add-member__field">
