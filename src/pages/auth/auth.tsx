@@ -7,8 +7,12 @@ import './auth.scss';
 import { useAuth } from '../../hooks/auth';
 import { Navigate } from 'react-router-dom';
 import { Route } from '../../router/routes';
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../../components/languages/messages';
+import { FormattedMessage } from 'react-intl';
 
 export const Auth = () => {
+    const { trans } = useTranslate();
     const [currentStage, setStage] = useState(1);
 
     const onStageClick = () => {
@@ -35,10 +39,10 @@ export const Auth = () => {
                 { currentStage === 1 ? <Login/> : <Signup goToLogin={goToLogin} /> }
                 <div className="auth-separator">
                     <span className="separator-line"></span>
-                    <span className='auth-span'>or</span>
+                    <span className='auth-span'><FormattedMessage id={Message.Or}/></span>
                     <span className="separator-line"></span>
                 </div>
-                <Button className='button-sign-up' onClick={onStageClick}>{ currentStage === 1 ? 'Sign up' : 'Log in' }</Button>
+                <Button className='button-sign-up' onClick={onStageClick}>{ currentStage === 1 ? trans(Message.SignUp) : trans(Message.LogIn) }</Button>
             </section>
             <div className='auth-img'></div>
         </main>

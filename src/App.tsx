@@ -4,7 +4,7 @@ import Footer from './components/view/footer/footer';
 import { Outlet } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { LOCALES } from './components/languages/locales';
-import { messages } from './components/languages/messages';
+import { translations } from './components/languages/translations';
 import { LanguagesManager } from './components/languages/languagesManager';
 import { AuthProvider } from './context/authContext';
 
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <IntlProvider
-      messages={messages[currentLocale]}
+      messages={translations[currentLocale]}
       locale={currentLocale}
       defaultLocale={LOCALES.ENGLISH}
     >

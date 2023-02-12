@@ -1,12 +1,16 @@
 import React, { FormEvent, useState } from 'react';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import { validateEmail } from '../../pages/auth/validation';
+import { validateEmail } from '../../utils/validation';
 import './login.scss';
 import { Errors } from '../../API/types';
 import { useAuth } from '../../hooks/auth';
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
+import { FormattedMessage } from 'react-intl';
 
 export const Login = () => {
+    const { trans } = useTranslate();
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPasswordValue] = useState({ value: '', error: '' });
     const { submitLogin, isInProgress } = useAuth();
@@ -32,7 +36,7 @@ export const Login = () => {
         }
 
         if (!validateEmail(email.value)) {
-            setEmail({ ...email, error: 'Invalid email' });
+            setEmail({ ...email, error: trans(Message.InvalidEmail) });
             return;
         }
 
@@ -52,11 +56,11 @@ export const Login = () => {
 
     return (
         <form onSubmit={onSubmit} className='login-form'>
-            <h1 className='login-title'>Log in to Trelolo</h1>
+            <h1 className="login-title"><FormattedMessage id={Message.LoginTrelolo} /></h1>
             {errors && errors.map(error => <span className="login-error">{(typeof error === 'string' ? error : error.msg)}</span>)}
             {step === 1 ? <Input
               type="email"
-              placeholder="Enter email"
+              placeholder={trans(Message.EnterEmail)}
               value={email.value}
               onChange={onChangeEmail}
               error={email.error}
@@ -64,7 +68,7 @@ export const Login = () => {
               disabled={isInProgress}
             /> : <Input
               type="password"
-              placeholder="Enter password"
+              placeholder={trans(Message.EnterPassword)}
               value={password.value}
               onChange={onChangePassword}
               error={password.error}
@@ -72,7 +76,7 @@ export const Login = () => {
               disabled={isInProgress}
             />}
             <Button className='button-login' disabled={isInProgress}>
-                {step === 1 ? 'Continue' : 'Login'}
+                {step === 1 ? trans(Message.Continue) : trans(Message.LogIn)}
             </Button>
         </form>
     );
