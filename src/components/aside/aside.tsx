@@ -1,26 +1,28 @@
-
 import './aside.scss';
+import { useProjects } from '../../hooks/projects';
+import { FormattedMessage } from 'react-intl';
+import { Message } from '../languages/messages';
 
 
 export const Aside = () => {
+  const { projects } = useProjects();
+
   return (
     <aside className="aside__container">
-        <div className="aside__tasks-team">
-          {/* <div className="tasks-team">My tasks</div> */}
-          <div className="tasks-team">
-            <div className="tasks-team__logo"></div>
-            My team
+      <div className="aside__tasks-team">
+        <div className="tasks-team">
+          <div className="tasks-team__logo"></div>
+          <FormattedMessage id={Message.MyTeam} />
           </div>
         </div>
         <div className="aside__projects">
           <div className="projects__my-projects">
           <span className="projects__logo"></span>
-            My projects
+            <FormattedMessage id={Message.MyProjects} />
             <span className="projects__plus">+</span>
           </div>
           <ul className="projects__list">
-            <li className="projects__item"><span>trelolo</span></li>
-            <li className="projects__item"><span>my project</span></li>
+            {projects.map(({ name, id }) => <li className="projects__item" key={id}><span>{name}</span></li>)}
           </ul>
         </div>
     </aside>

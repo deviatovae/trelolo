@@ -24,7 +24,7 @@
   }
 
   &__icon {
-    background: url("../../../src/assets/img/projects__logo.svg");
+    background: url("../../../assets/img/projects__logo.svg");
   }
 
   &__icon, &__icon_new  {
@@ -34,7 +34,7 @@
   }
 
   &__icon_new {
-    background: url("../../../src/assets/img/new-project.svg");
+    background: url("../../../assets/img/new-project.svg");
     background-size: contain;
     width: 40px;
     height: 40px;
@@ -61,7 +61,7 @@
   }
 
   &__name_new {
-    color: $greylight;
+    color: $greyDark;
 
     &:hover {
       cursor: pointer;

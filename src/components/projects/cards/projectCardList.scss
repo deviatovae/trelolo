@@ -1,0 +1,107 @@
+@import 'src/assets/styles/variables';
+
+.projects-cards {
+  position: relative;
+  top: 50px;
+  width: 80%;
+  padding-left: 35px;
+
+
+  h4 {
+    padding-bottom: 20px;
+  }
+
+  &__list {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    padding-bottom: 100px;
+  }
+
+  &__item {
+    width: 250px;
+    height: 100px;
+    background-color: $white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $mainBlue;
+    transition: transform 0.2s ease-in-out;
+    color: $black;
+    font-weight: 700;
+    font-size: 24px;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover > .projects-cards__edit, &:hover > .projects-cards__delete {
+      display: block;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__create {
+    width: 250px;
+    height: 100px;
+    background-color: #EBECF0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $mainBlue;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__edit,
+  &__delete {
+    display: none;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    background: center no-repeat;
+    background-size: contain;
+    border-radius: 3px;
+    position: absolute;
+    top: 5px;
+    right: 0;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $borderBlueLight;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+
+  &__edit {
+    content: url("../../../assets/img/pencil.svg");
+    right: 28px;
+  }
+
+  &__delete {
+    content: url("../../../assets/img/cross.svg");
+    right: 3px;
+  }
+}

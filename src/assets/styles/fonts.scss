@@ -1,16 +1,1 @@
-@font-face {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/roboto-v30-latin-regular.woff');
-  src:  url('../fonts/roboto-v30-latin-regular.woff2');
-}
-
-@font-face {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 700;
-  src: url('../fonts/roboto-v30-latin-700.woff');
-  src: url('../fonts/roboto-v30-latin-700.woff2');
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');

@@ -1,10 +1,11 @@
 import './header.scss';
 import { UserIcon } from '../../userIcon/userIcon';
 import { ProfileModal } from '../../profileModal/profileModal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
-import './header.scss';
+import { useAuth } from '../../../hooks/auth';
+import { getInitials } from '../../../utils/format';
 
 interface HeaderProps {
   currentLocale: string;
@@ -13,7 +14,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const [showModal, setShowModal] = useState(false);
-  // const [hideModal, setHideModal] = useState(false);
+  const { userInfo, logout } = useAuth();
 
   const handleUserIconClick = () => {
     setShowModal(!showModal);
@@ -25,22 +26,27 @@ const Header = (props: HeaderProps) => {
     }
   };
 
+  useEffect(() => {
+    setShowModal(false);
+  }, [userInfo]);
+
   return (
     <header className="header">
       <div className="header__content _container">
-        <Logo/>
+        <Logo />
         <div className="header__lang-user-wrapper">
           <LangSwitcher
             currentLocale={props.currentLocale}
             setLocale={props.setLocale}
           />
-          <div onClick={handleUserIconClick} >
-            <UserIcon>KZ</UserIcon>
-          </div>
+          {userInfo && (<div onClick={handleUserIconClick} >
+            <UserIcon>{getInitials(userInfo.name)}</UserIcon>
+          </div>)}
+
         </div>
       </div>
-      {showModal && (
-        <ProfileModal ShowModal={showModal} onClickOutside={handleModalClickOutside}/>
+      {showModal && userInfo && (
+        <ProfileModal ShowModal={showModal} onClickOutside={handleModalClickOutside} userInfo={userInfo} logout={logout} />
       )}
     </header>
   );

@@ -4,35 +4,48 @@ import { Auth } from '../pages/auth/auth';
 import { Welcome } from '../pages/welcome/welcome';
 import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
+import { AuthRoute } from '../components/authRoute/authRoute';
 import { ProjectPage } from '../pages/projectPage/projectPage';
 
 
+export enum Route {
+    WELCOME = '/',
+    LOGIN = '/login',
+    MAIN = '/main',
+    MEMBERS = '/members',
+    PROJECT = '/project',
+}
 export const routes = [
     {
-        path: '/',
         element: <App/>,
         errorElement: <ErrorPage/>,
         children: [
             {
-                path: '/',
+                path: Route.WELCOME,
                 element: <Welcome />
             },
             {
-                path: '/login',
+                path: Route.LOGIN,
                 element: <Auth />
             },
             {
-                path: '/main',
-                element: <Main />
+                element: <AuthRoute/>,
+                children: [
+                    {
+                        path: Route.MAIN,
+                        element: <Main/>
+                    },
+                    {
+                        path: Route.MEMBERS,
+                        element: <MembersPage/>
+                    },
+                    {
+                        path: Route.PROJECT,
+                        element: <ProjectPage />
+                    }
+                ]
             },
-            {
-                path: '/members',
-                element: <MembersPage />
-            },
-            {
-                path: '/project',
-                element: <ProjectPage />
-            }
+
         ]
     }
 ];

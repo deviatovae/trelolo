@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface InputProp {
     type: string,
     className?: string,
@@ -5,7 +7,8 @@ interface InputProp {
     value: string,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     error?: string,
-    classNameWrapper?: string
+    classNameWrapper?: string,
+    disabled?: boolean
 }
 
 export default InputProp;
