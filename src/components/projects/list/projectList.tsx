@@ -23,11 +23,13 @@ export function ProjectList() {
           <div className="project-row__icon"></div>
           <span className="project-row__name">{name}</span>
           <ul className="project-row__members row-members">
-            {members.filter(({ project: { id: projectId } }) => projectId === id).map(({ id: memberId, user: { name: userName } }) => (
-              <li key={memberId} className="row-members__member">
-                <UserIcon bgColor={IconColorProvider.getColor()}>{userName}</UserIcon>
-              </li>)
-            )}
+            {members
+              .filter(({ project: { id: projectId } }) => projectId === id)
+              .map(({ id: memberId, user: { id: userId, name: userName } }) => (
+                <li key={memberId} className="row-members__member">
+                  <UserIcon userId={userId}>{userName}</UserIcon>
+                </li>)
+              )}
           </ul>
         </div>
       ))}

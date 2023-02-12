@@ -40,7 +40,7 @@ const Header = (props: HeaderProps) => {
             setLocale={props.setLocale}
           />
           {userInfo && (<div onClick={handleUserIconClick} >
-            <UserIcon>{getInitials(userInfo.name)}</UserIcon>
+            <UserIcon userId={userInfo.id}>{userInfo.name}</UserIcon>
           </div>)}
 
         </div>
