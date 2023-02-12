@@ -1,4 +1,4 @@
-import React, { ChangeEvent, RefObject, useEffect, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import { Field } from '../types/types';
 
 interface UseProjectCardProps {
@@ -18,21 +18,21 @@ export const useProjectCard = ({ onClose, onSubmit, cardRef, name = '' }: UsePro
     setIsChanged(value !== name);
   };
 
-  const close = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      return onClose();
-    }
-    if (e.key === 'Enter') {
-      return onSubmit(fieldName.value);
-    }
-  };
-  const onClick = (e: MouseEvent) => {
-    if (cardRef.current && !cardRef.current.contains(e.target as HTMLElement)) {
-      return onClose();
-    }
-  };
-
   useEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        return onClose();
+      }
+      if (e.key === 'Enter') {
+        return onSubmit(fieldName.value);
+      }
+    };
+    const onClick = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as HTMLElement)) {
+        return onClose();
+      }
+    };
+
     window.addEventListener('keydown', close);
     document.addEventListener('mousedown', onClick);
 
@@ -40,7 +40,7 @@ export const useProjectCard = ({ onClose, onSubmit, cardRef, name = '' }: UsePro
       document.body.removeEventListener('mousedown', onClick);
       window.removeEventListener('keydown', close);
     };
-  }, [close, onClick]);
+  }, [cardRef, fieldName, onClose, onSubmit]);
 
   return { fieldName, setFieldName, handleNameChange, isChanged };
 };
