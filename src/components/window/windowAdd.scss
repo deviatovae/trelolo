@@ -5,7 +5,7 @@
 }
 
 .modal-main {
-  width: 250px;
+  width: 260px;
   height: 100px;
   background-color:$white;
   border: 1px solid $mainBlue;
@@ -15,9 +15,11 @@
   z-index: 5;
   align-items: center;
   justify-content: space-evenly;
+  box-shadow: -13px 18px 13px -21px rgba(34, 60, 80, 0.56);
+
 
   &__project-name {
-    width: 220px;
+    width: 235px;
     height: 30px;
     border-radius: 6px;
     border: 1px solid $borderBlueLight;
@@ -30,7 +32,7 @@
   }
 
   &__btn-create-project {
-    width: 220px;
+    width: 235px;
     height: 30px;
     border-radius: 6px;
     border: 1px solid $borderBlueLight;

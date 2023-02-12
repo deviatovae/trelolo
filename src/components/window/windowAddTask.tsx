@@ -1,20 +1,17 @@
 import './windowAddTask.scss';
 import { useState } from 'react';
+import { WindowProps } from './../../components/types/windowProps';
 
- interface WindowProps {
-  onCreateProject: (inputValue: string) => void;
- }
-
-export const WindowAddTask = ({ onCreateProject }: WindowProps)=> {
+export const WindowAddTask = ({ onClickCross, onCreateProject }: WindowProps)=> {
   const [inputValue, setInputValue] = useState('');
   const handleCreateProject = () => onCreateProject(inputValue);
+
 
   const CheckKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       handleCreateProject();
     }
   };
-
 
   return (
     <div className="window-add-task">
@@ -23,7 +20,7 @@ export const WindowAddTask = ({ onCreateProject }: WindowProps)=> {
       </input>
       <div className='window-add-task__buttons-container'>
         <button className='window-add-task__btn-add' disabled={inputValue.length === 0} onClick={handleCreateProject}>Add tasks</button>
-        <div className='window-add-task__cross-add'></div>
+        <div className='window-add-task__cross-add' onClick={onClickCross}></div>
       </div>
     </div>
   );

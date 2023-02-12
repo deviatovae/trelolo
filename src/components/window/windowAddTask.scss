@@ -1,39 +1,39 @@
 @import '/src/assets/styles/variables.scss';
 
 .window-add-task {
-  width: 270px;
+  width: 265px;
   height: 100px;
   background-color: #fff;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
-  // align-items: center;
   justify-content: space-evenly;
   position: relative;
   margin: 0 auto;
+  margin-bottom: 15px;
+  box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4); 
 
   &__input {
     margin: 0 auto;
-    width: 250px;
+    width: 240px;
     height: 40px;
     border-radius: 6px;
     border: 1px solid $borderBlueLight;
 
     &:focus {
-        outline-offset: 0;
-        outline: 0;
-        border: 1px solid $mainBlueHover;
-      }
+      outline-offset: 0;
+      outline: 0;
+      border: 1px solid $mainBlueHover;
+    }
   }
 
   &__buttons-container {
-    padding-left: 10px;
+    padding-left: 12px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
     color: $mainBlue;
-
   }
 
   &__btn-add {
@@ -77,7 +77,7 @@
     &:hover {
       cursor: pointer;
     }
-      
+
     &:active {
 
     }

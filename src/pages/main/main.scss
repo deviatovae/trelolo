@@ -29,12 +29,12 @@
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 35px;
+    gap: 20px;
     padding-bottom: 100px;
   }
 
   &__your-project-item {
-    width: 250px;
+    width: 260px;
     height: 100px;
     background-color: $white;
     border-radius: 6px;
@@ -60,7 +60,7 @@
     }
 
   &__list-btn {
-    width: 250px;
+    width: 260px;
     height: 100px;
     background-color: #EBECF0;
     border-radius: 6px;
