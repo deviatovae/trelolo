@@ -1,10 +1,8 @@
 import './taskModal.scss';
-import { useState } from 'react';
 import Button from '../button/button';
 import { UserIcon } from '../userIcon/userIcon';
 import { useAuth } from '../../hooks/auth';
 import Select from '../select/select';
-import { MultiValue } from 'react-select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
 import './taskModal.scss';
@@ -22,17 +20,12 @@ export function TaskModal({ onClose, title }: TaskModalProps) {
 
   const { userInfo } = useAuth();
   const options: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
-  const [projects, setProjects] = useState<Option[]>([]);
 
   const statusOptions: Option[] = [
     { value: '1', label: 'ToDo' },
     { value: '2', label: 'in progress' },
     { value: '3', label: 'Done' }
   ];
-
-  const handleChange = (values: MultiValue<Option>) => {
-    setProjects([...values]);
-  };
 
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain='task-main' onClose={onClose}>
@@ -57,7 +50,7 @@ export function TaskModal({ onClose, title }: TaskModalProps) {
         <span>Status</span>
         <Select options={statusOptions}></Select>
         <span>Projects</span>
-        <Select isMulti options={options} placeholder="Projects..." onChange={handleChange}></Select>
+        <Select isMulti options={options} placeholder="Projects..."></Select>
       </div>
 
       <div className='task-description'>
