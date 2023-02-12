@@ -1,0 +1,222 @@
+@import "src/assets/styles/variables";
+
+
+.project-page {
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    position: relative;
+  }
+
+  &__section {
+    width: 80%;
+    padding: 30px;
+
+    h4 {
+      padding: 25px;
+    }
+  }
+
+  &__projects-wrapper {
+    overflow-x: scroll;
+    height: 90%;
+  }
+
+  &__column-list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 300px;
+  }
+
+  &__column-list-item {
+    width: 300px;
+    height: 500px;
+    border-radius: 6px;
+    color: $mainBlue;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__column-list-btn {
+    width: 260px;
+    height: 30px;
+    background-color: #EBECF0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $mainBlue;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover > span {
+      transform: scale(1.04);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+}
+
+
+.column-list-item {
+
+  &__header-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  &__header {
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  &__setings {
+    background: url(./../../assets/img/dat_dat_dat.svg) no-repeat center;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EBECF0;
+    border-radius: 6px;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+    top: 40px;
+    z-index: 1;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__content-wrapper {
+    background-color: #EBECF0;
+    height: 100%;
+    border-radius: 6px;
+    padding-top: 15px;
+    overflow-x: scroll;
+    box-shadow: -3px 0px 12px -8px rgba(34, 60, 80, 0.4);
+    position: relative;
+    z-index: 2;
+  }
+
+  &__btn-add-task-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+    padding-bottom: 50px;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.04);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__task-container {
+    width: 265px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);  }
+
+  &__task-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar {
+    border: 1px solid rgba(73, 75, 244, 0.5);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: url(../../assets/img/clarity_date-line.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+
+  &__settings {
+    width: 20px;
+    height: 20px;
+    background: url(../../assets/img/settinfg_add_task.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+}
+
+.column-list-item__header-settings-container:hover > .column-list-item__setings {
+  top: 0px;
+  transition: 0.3s all;
+}

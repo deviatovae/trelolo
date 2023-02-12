@@ -3,7 +3,7 @@
 .modal-main {
   width: 260px;
   height: 100px;
-  background-color: $white;
+  background-color:$white;
   border: 1px solid $mainBlue;
   border-radius: 6px;
   display: flex;
@@ -19,7 +19,6 @@
     height: 30px;
     border-radius: 6px;
     border: 1px solid $borderBlueLight;
-    padding: 0 5px;
 
     &:focus {
       outline-offset: 0;
@@ -35,6 +34,7 @@
     border: 1px solid $borderBlueLight;
     background: $mainBlue;
     color: $white;
+    transition: transform 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +52,7 @@
 
     &:disabled {
       background: none;
-      color: $greyDark;
+      color: $greylight;
       cursor: default;
       transform: none;
     }

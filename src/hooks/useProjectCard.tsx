@@ -1,12 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import { Field } from '../types/types';
 
 interface UseProjectCardProps {
-  onClose: () => void,
+  onClose: () => void
+  onSubmit: (name: string) => void
   name?: string
+  cardRef: RefObject<HTMLDivElement>
 }
 
-export const useProjectCard = ({ onClose, name = '' }: UseProjectCardProps) => {
+export const useProjectCard = ({ onClose, onSubmit, cardRef, name = '' }: UseProjectCardProps) => {
   const [fieldName, setFieldName] = useState<Field>({ value: name, error: '' });
   const [isChanged, setIsChanged] = useState(false);
 
@@ -19,19 +21,26 @@ export const useProjectCard = ({ onClose, name = '' }: UseProjectCardProps) => {
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        return onClose();
+      }
+      if (e.key === 'Enter') {
+        return onSubmit(fieldName.value);
       }
     };
+    const onClick = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as HTMLElement)) {
+        return onClose();
+      }
+    };
+
     window.addEventListener('keydown', close);
-    return () => window.removeEventListener('keydown', close);
-  });
+    document.addEventListener('mousedown', onClick);
 
-  const onClickOverlay = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+    return () => {
+      document.body.removeEventListener('mousedown', onClick);
+      window.removeEventListener('keydown', close);
+    };
+  }, [cardRef, fieldName, onClose, onSubmit]);
 
-
-  return { onClickOverlay, fieldName, setFieldName, handleNameChange, isChanged };
+  return { fieldName, setFieldName, handleNameChange, isChanged };
 };

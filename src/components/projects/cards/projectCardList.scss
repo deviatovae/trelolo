@@ -3,9 +3,7 @@
 .projects-cards {
   position: relative;
   top: 50px;
-  width: 80%;
   padding-left: 35px;
-
 
   h4 {
     padding-bottom: 20px;
@@ -21,7 +19,7 @@
   }
 
   &__item {
-    width: 250px;
+    width: 260px;
     height: 100px;
     background-color: $white;
     border-radius: 6px;
@@ -52,7 +50,7 @@
   }
 
   &__create {
-    width: 250px;
+    width: 260px;
     height: 100px;
     background-color: #EBECF0;
     border-radius: 6px;

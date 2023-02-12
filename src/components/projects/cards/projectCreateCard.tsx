@@ -1,5 +1,5 @@
 import './projectCardAction.scss';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Errors } from '../../../API/types';
 import Input from '../../input/input';
 import { useValidationErrors } from '../../../hooks/validation';
@@ -16,26 +16,25 @@ interface ProjectCreateCardProps {
 
 export const ProjectCreateCard = ({ onClose, onCreate, errors }: ProjectCreateCardProps) => {
   const { trans } = useTranslate();
-  const { fieldName, setFieldName, isChanged, handleNameChange, onClickOverlay } = useProjectCard({ onClose });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { fieldName, setFieldName, isChanged, handleNameChange } = useProjectCard({ onClose, onSubmit: onCreate, cardRef });
   const handleButtonClick = () => onCreate(fieldName.value);
 
   useValidationErrors(errors || [], { name: setFieldName });
 
   return (
-    <div className="modal-overlay" onClick={onClickOverlay}>
-      <div className="modal-main">
-        <Input
-          type="text"
-          className="modal-main__project-name"
-          placeholder={trans(Message.EnterProjectName)}
-          value={fieldName.value}
-          onChange={handleNameChange}
-          error={fieldName.error}
-        />
-        <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
-          <FormattedMessage id={Message.Create} />
-        </button>
-      </div>
+    <div className="modal-main" ref={cardRef}>
+      <Input
+        type="text"
+        className="modal-main__project-name"
+        placeholder={trans(Message.EnterProjectName)}
+        value={fieldName.value}
+        onChange={handleNameChange}
+        error={fieldName.error}
+      />
+      <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
+        <FormattedMessage id={Message.Create} />
+      </button>
     </div>
   );
 };
