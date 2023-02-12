@@ -4,6 +4,9 @@ import { Errors } from '../../../API/types';
 import Input from '../../input/input';
 import { useValidationErrors } from '../../../hooks/validation';
 import { useProjectCard } from '../../../hooks/useProjectCard';
+import { useTranslate } from '../../../hooks/useTranslate';
+import { Message } from '../../languages/messages';
+import { FormattedMessage } from 'react-intl';
 
 interface ProjectCreateCardProps {
   onClose: () => void,
@@ -12,6 +15,7 @@ interface ProjectCreateCardProps {
 }
 
 export const ProjectCreateCard = ({ onClose, onCreate, errors }: ProjectCreateCardProps) => {
+  const { trans } = useTranslate();
   const { fieldName, setFieldName, isChanged, handleNameChange, onClickOverlay } = useProjectCard({ onClose });
   const handleButtonClick = () => onCreate(fieldName.value);
 
@@ -23,12 +27,14 @@ export const ProjectCreateCard = ({ onClose, onCreate, errors }: ProjectCreateCa
         <Input
           type="text"
           className="modal-main__project-name"
-          placeholder="Write a project name"
+          placeholder={trans(Message.EnterProjectName)}
           value={fieldName.value}
           onChange={handleNameChange}
           error={fieldName.error}
         />
-        <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>Create</button>
+        <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
+          <FormattedMessage id={Message.Create} />
+        </button>
       </div>
     </div>
   );

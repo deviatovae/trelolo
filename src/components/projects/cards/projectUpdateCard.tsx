@@ -5,6 +5,9 @@ import Input from '../../input/input';
 import { Project } from '../../../types/models';
 import { useProjectCard } from '../../../hooks/useProjectCard';
 import { useValidationErrors } from '../../../hooks/validation';
+import { Message } from '../../languages/messages';
+import { FormattedMessage } from 'react-intl';
+import { useTranslate } from '../../../hooks/useTranslate';
 
 interface ProjectUpdateCardProps {
   project: Project
@@ -14,6 +17,7 @@ interface ProjectUpdateCardProps {
 }
 
 export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors }: ProjectUpdateCardProps) => {
+  const { trans } = useTranslate();
   const { fieldName, setFieldName, isChanged, handleNameChange, onClickOverlay } = useProjectCard({ onClose, name });
   useValidationErrors(errors || [], { name: setFieldName });
   const handleButtonClick = () => onUpdate(fieldName.value);
@@ -24,12 +28,14 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
         <Input
           type="text"
           className="modal-main__project-name"
-          placeholder="Write a project name"
+          placeholder={trans(Message.EnterProjectName)}
           value={fieldName.value}
           onChange={handleNameChange}
           error={fieldName.error}
         />
-        <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>Update</button>
+        <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
+          <FormattedMessage id={Message.Update} />
+        </button>
       </div>
     </div>
   );

@@ -4,12 +4,18 @@ import Select from '../../select/select';
 import { useState } from 'react';
 import './addMemberModal.scss';
 import { MultiValue } from 'react-select';
+import { Field } from '../../../types/types';
+import { validateEmail } from '../../../utils/validation';
+import { useTranslate } from '../../../hooks/useTranslate';
+import { Message } from '../../languages/messages';
 
 interface AddMemberModalProps {
   onClose: () => void
 }
 
 export function AddMemberModal({ onClose }: AddMemberModalProps) {
+  const { trans } = useTranslate();
+
   type Option = { value: string, label: string };
   const options: Option[] = [
     { value: '1', label: 'My project' },
@@ -17,26 +23,38 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
     { value: '3', label: 'Vanilla' }
   ];
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<Field>({ value: '', error: '' });
   const [projects, setProjects] = useState<Option[]>([]);
-  const isEmailValid = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,8}$/);
-  const canAdd = projects.length > 0 && isEmailValid?.length;
+  const canAdd = projects.length > 0 && email.value;
   const handleChange = (values: MultiValue<Option>) => {
     setProjects([...values]);
   };
 
+  const handleSubmit = () => {
+    if (!validateEmail(email.value)) {
+      setEmail(prev => ({ value: prev.value, error: trans(Message.InvalidEmail) }));
+    }
+  };
+
   return (
-    <Modal title="Invite people to My Projects" onClose={onClose}>
+    <Modal title={trans(Message.InviteMemberHeader)} onClose={onClose}>
       <div className="add-member">
-        <div>
-          <p className="add-member__field-label">Add a team member to your project</p>
-          <Input type="email" placeholder="Email..." value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <div className="add-member__field">
+          <p className="add-member__field-label">{trans(Message.InviteMemberLabelEmail)}</p>
+          <Input type="email"
+                 placeholder={trans(Message.EnterMemberEmail)}
+                 value={email.value}
+                 error={email.error}
+                 onChange={(e) => setEmail({ value: e.target.value, error: '' })}
+          />
         </div>
-        <div>
-          <p className="add-member__field-label">Add to projects</p>
-          <Select isMulti options={options} placeholder="Projects..." onChange={handleChange}></Select>
+        <div className="add-member__field">
+          <p className="add-member__field-label">{trans(Message.InviteMemberLabelProjects)}</p>
+          <Select isMulti options={options} placeholder={trans(Message.EnterProjects)} onChange={handleChange}></Select>
         </div>
-        <button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')}>Add</button>
+        <button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')} onClick={handleSubmit}>
+          {trans(Message.Add)}
+        </button>
       </div>
     </Modal>
   );

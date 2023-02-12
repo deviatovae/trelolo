@@ -2,15 +2,19 @@ import React, { FormEvent, useState } from 'react';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
 import './signup.scss';
-import { validateEmail, validateName, validatePassword } from '../../pages/auth/validation';
+import { validateEmail, validateName, validatePassword } from '../../utils/validation';
 import { Errors } from '../../API/types';
 import { useAuth } from '../../hooks/auth';
+import { Message } from '../languages/messages';
+import { useTranslate } from '../../hooks/useTranslate';
+import { FormattedMessage } from 'react-intl';
 
 interface SignUp {
     goToLogin: () => void;
 }
 
 export const Signup = ({ goToLogin }: SignUp) => {
+    const { trans } = useTranslate();
     const [email, setEmail] = useState({ value: '', error: '' });
     const [name, setName] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
@@ -62,15 +66,18 @@ export const Signup = ({ goToLogin }: SignUp) => {
 
         if (!(isValidEmail && isValidName && isValidPassword)) {
             if (!isValidEmail) {
-                setEmail({ ...email, error: 'Invalid mail' });
+                setEmail({ ...email, error: trans(Message.InvalidEmail) });
             }
 
             if (!isValidName) {
-                setName({ ...name, error: 'Invalid name, surname. At least two words, each at least 3 characters long' });
+                setName({ ...name, error: trans(Message.InvalidUserName) });
             }
 
             if (!isValidPassword) {
-                setPassword({ ...password, error: 'Minimum eight characters, at least one letter and one number' });
+                setPassword({ ...password, error: trans(Message.InvalidPassword) });
+            }
+            if (!passwordConfirmed.value) {
+                setPasswordConfirm(prev => ({ ...prev, error: trans(Message.EnterPasswordConfirm) }));
             }
             return;
         }
@@ -82,46 +89,46 @@ export const Signup = ({ goToLogin }: SignUp) => {
             }
             handleErrors(responseErrors);
 
-        } else setPasswordConfirm({ ...passwordConfirmed, error: 'Passwords are not the same' });
+        } else setPasswordConfirm({ ...passwordConfirmed, error: trans(Message.InvalidPasswordConfirm) });
     };
 
     return (
         <form onSubmit={onSubmit} className='signup-form'>
-            <h1 className='signup-title'>Sign up to Trelolo</h1>
+            <h1 className="signup-title"><FormattedMessage id={Message.SignUpTrelolo} /></h1>
             {generalErrors && generalErrors.map(error => <span className="login-error">{error}</span>)}
             <Input
-                type='email'
-                placeholder='Enter email'
-                value={email.value}
-                onChange={onChangeEmail}
-                error={email.error}
-                classNameWrapper='input-signup-wrapper'
+              type="email"
+              placeholder={trans(Message.EnterEmail)}
+              value={email.value}
+              onChange={onChangeEmail}
+              error={email.error}
+              classNameWrapper='input-signup-wrapper'
             />
             <Input
-                type='text'
-                placeholder='Enter name, surname'
-                value={name.value}
-                onChange={onChangeName}
-                error={name.error}
-                classNameWrapper='input-signup-wrapper'
+              type="text"
+              placeholder={trans(Message.EnterUsername)}
+              value={name.value}
+              onChange={onChangeName}
+              error={name.error}
+              classNameWrapper='input-signup-wrapper'
             />
             <Input
-                type='password'
-                placeholder='Enter password'
-                value={password.value}
-                onChange={onChangePassword}
-                error={password.error}
-                classNameWrapper='input-signup-wrapper'
+              type="password"
+              placeholder={trans(Message.EnterPassword)}
+              value={password.value}
+              onChange={onChangePassword}
+              error={password.error}
+              classNameWrapper='input-signup-wrapper'
             />
             <Input
-                type='password'
-                placeholder='Confirm password'
-                value={passwordConfirmed.value}
-                onChange={onChangePasswordConfirm}
-                error={passwordConfirmed.error}
-                classNameWrapper='input-signup-wrapper'
+              type="password"
+              placeholder={trans(Message.EnterPasswordConfirm)}
+              value={passwordConfirmed.value}
+              onChange={onChangePasswordConfirm}
+              error={passwordConfirmed.error}
+              classNameWrapper="input-signup-wrapper"
             />
-            <Button className='button-signup' disabled={isInProgress}>Sign Up</Button>
+            <Button className="button-signup" disabled={isInProgress}><FormattedMessage id={Message.SignUp} /></Button>
         </form>
     );
 };

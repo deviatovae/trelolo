@@ -3,17 +3,20 @@ import { UserIcon } from '../../userIcon/userIcon';
 import { IconColorProvider } from '../../../utils/iconColorProvider';
 import { useProjects } from '../../../hooks/projects';
 import { useMembers } from '../../../hooks/members';
+import { useTranslate } from '../../../hooks/useTranslate';
+import { Message } from '../../languages/messages';
 
 export function ProjectList() {
+  const { trans } = useTranslate();
   const { projects, count } = useProjects();
   const { members: { items: members } } = useMembers();
 
   return (
     <section className="members-page__projects projects">
-      <p className="projects__title">Projects({count})</p>
+      <p className="projects__title">{trans(Message.Projects)}({count})</p>
       <div className="projects__row project-row">
         <div className="project-row__icon_new"></div>
-        <span className="project-row__name_new">New project</span>
+        <span className="project-row__name_new">{trans(Message.CreateNewProjectShort)}</span>
       </div>
       {projects.map(({ id, name }) => (
         <div className="projects__row project-row" key={id}>
