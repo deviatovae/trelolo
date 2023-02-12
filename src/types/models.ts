@@ -14,3 +14,9 @@ export interface Section {
   name: string,
   position: number
 }
+
+export interface Member {
+  id: string
+  project: Project
+  user: User
+}

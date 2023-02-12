@@ -1,4 +1,5 @@
 import Button from '../../components/button/button';
+import { getInitials } from '../../utils/format';
 
 interface UserIconProps {
     bgColor?: string
@@ -7,6 +8,6 @@ interface UserIconProps {
 }
 export const UserIcon = ({ bgColor, children }: UserIconProps) => {
     return (
-      <Button className="header__user" bgColor={bgColor}>{children}</Button>
+      <Button className="header__user" bgColor={bgColor}>{getInitials(children)}</Button>
     );
 };

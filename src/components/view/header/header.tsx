@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import LangSwitcher from '../../langSwitcher/langSwitcher';
 import { Logo } from '../../logo/logo';
 import { useAuth } from '../../../hooks/auth';
+import { getInitials } from '../../../utils/format';
 
 interface HeaderProps {
   currentLocale: string;
@@ -29,7 +30,6 @@ const Header = (props: HeaderProps) => {
     setShowModal(false);
   }, [userInfo]);
 
-  const avatarName = userInfo?.name.split(' ').reduce((acc, rec) => acc + rec[0], '').toUpperCase() || '';
   return (
     <header className="header">
       <div className="header__content _container">
@@ -40,13 +40,13 @@ const Header = (props: HeaderProps) => {
             setLocale={props.setLocale}
           />
           {userInfo && (<div onClick={handleUserIconClick} >
-            <UserIcon>{avatarName}</UserIcon>
+            <UserIcon>{getInitials(userInfo.name)}</UserIcon>
           </div>)}
 
         </div>
       </div>
       {showModal && userInfo && (
-        <ProfileModal ShowModal={showModal} onClickOutside={handleModalClickOutside} avatarName={avatarName} userInfo={userInfo} logout={logout} />
+        <ProfileModal ShowModal={showModal} onClickOutside={handleModalClickOutside} userInfo={userInfo} logout={logout} />
       )}
     </header>
   );

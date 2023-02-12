@@ -1,8 +1,9 @@
 import './profileModal.scss';
 import { ProfileModalProps } from '../types/profileModalProps';
 import { UserIcon } from '../userIcon/userIcon';
+import { getInitials } from '../../utils/format';
 
-export const ProfileModal = ({ onClickOutside, avatarName, userInfo, logout }: ProfileModalProps) => {
+export const ProfileModal = ({ onClickOutside, userInfo: { name, email }, logout }: ProfileModalProps) => {
   const handleLogOutClick = () => {
     logout();
   };
@@ -12,10 +13,10 @@ export const ProfileModal = ({ onClickOutside, avatarName, userInfo, logout }: P
       <div className="modal-windows">
         <div className="modal-windows__account">Account</div>
         <div className="modal-windows__person">
-          <UserIcon>{ avatarName }</UserIcon>
+          <UserIcon>{getInitials(name)}</UserIcon>
           <div className="modal-person__name-email">
-            {<div className="modal-person__name">{ userInfo?.name }</div>}
-            <div className="modal-person__email">{ userInfo?.email }</div>
+            {<div className="modal-person__name">{name}</div>}
+            <div className="modal-person__email">{email}</div>
           </div>
         </div>
         <div className="modal-windows__line"></div>

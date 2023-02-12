@@ -4,7 +4,6 @@ import React from 'react';
 export interface ProfileModalProps {
     onClickOutside: (event: React.MouseEvent) => void,
     ShowModal: boolean,
-    avatarName: string,
-    userInfo: User | null,
+    userInfo: User,
     logout: () => void
-  }
+}
