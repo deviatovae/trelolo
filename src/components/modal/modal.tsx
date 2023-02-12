@@ -2,27 +2,34 @@ import './modal.scss';
 import { ReactNode, MouseEvent } from 'react';
 
 interface ModalProps {
-  title: string
+  title?: string
   children: ReactNode
   onClose: () => void
+  className?: string
+  classNameWrapper?: string
+  classNameMain?: string
 }
 
-export function Modal({ title, children, onClose }: ModalProps) {
+export function Modal({ title, children, onClose, className, classNameWrapper, classNameMain }: ModalProps) {
   const handleClickOutside = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
+  const classes = `modal ${className}`;
+  const classesWrapper = `modal-wrapper ${classNameWrapper}`;
+  const classesMain = `modal__main ${classNameMain}`;
+
   return (
-    <div className="modal-wrapper" onClick={handleClickOutside}>
-      <div className="modal">
+    <div className={classesWrapper} onClick={handleClickOutside}>
+      <div className={classes}>
         <div className="modal__content">
           <div className="modal__header modal-header">
-            <p className="modal-header__title">{title}</p>
+            {title && <p className="modal-header__title">{title}</p>}
             <div className="modal-header__close-btn" onClick={onClose}></div>
           </div>
-          <div className="modal__main">{children}</div>
+          <div className={classesMain}>{children}</div>
         </div>
       </div>
     </div>

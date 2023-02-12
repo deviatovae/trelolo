@@ -5,12 +5,11 @@ import React from 'react';
 import { ProjectsProvider } from '../../context/projectsContext';
 import { ProjectCardList } from '../../components/projects/cards/projectCardList';
 
-
 export const Main = () => {
   return (
     <main className="main-wrapper _container wrapper">
       <ProjectsProvider>
-        <Aside/>
+        <Aside />
         <section className="main__section">
           < Greeting />
           <ProjectCardList />

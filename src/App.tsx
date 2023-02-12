@@ -7,6 +7,7 @@ import { LOCALES } from './components/languages/locales';
 import { translations } from './components/languages/translations';
 import { LanguagesManager } from './components/languages/languagesManager';
 import { AuthProvider } from './context/authContext';
+import { ProjectsProvider } from './context/projectsContext';
 
 
 function App() {
@@ -18,15 +19,17 @@ function App() {
       locale={currentLocale}
       defaultLocale={LOCALES.ENGLISH}
     >
-      <AuthProvider >
-      <div className="app wrapper">
-        <Header currentLocale={currentLocale} setLocale={setLocale} />
-        <div className="app__content">
-          <Outlet />
-        </div>
-        <Footer />
-      </div>
-    </AuthProvider>
+      <ProjectsProvider>
+        <AuthProvider >
+          <div className="app wrapper">
+            <Header currentLocale={currentLocale} setLocale={setLocale} />
+            <div className="app__content">
+              <Outlet />
+            </div>
+            <Footer />
+          </div>
+        </AuthProvider>
+      </ProjectsProvider>
     </IntlProvider >
   );
 }

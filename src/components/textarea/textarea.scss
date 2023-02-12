@@ -1,0 +1,9 @@
+@import './../../assets/styles/variables.scss';
+
+.textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 5px;
+  border-radius: 10px;
+  border-color: $gray;
+}

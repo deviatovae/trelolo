@@ -1,0 +1,26 @@
+@import './../../assets/styles/variables.scss';
+
+.comment {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &-name-time {
+    display: flex;
+    gap: 10px;
+  }
+
+  &-name {
+    font-weight: 500;
+  }
+
+  &-time {
+    color: $gray;
+  }
+}
