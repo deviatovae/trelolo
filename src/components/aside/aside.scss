@@ -26,10 +26,10 @@
 .tasks-team,
 .projects__my-projects,
 .tasks-home {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 36px;
-    padding-left: 15px;
+    padding-left: 25px;
 }
 
 .tasks-team, .tasks-home {
@@ -40,7 +40,6 @@
 }
 
 .projects__item {
-    font-weight: 500;
     font-size: 18px;
 }
 
@@ -88,16 +87,15 @@
     }
 
     &__plus {
-        font-size: 24px;
+        background: url("../../assets/img/plus.svg") center no-repeat;
+        background-size: contain;
+        width: 26px;
+        height: 26px;
         line-height: 32px;
-        width: 32px;
-        color: $mainBlue;
-        font-weight: 700;
-        text-align: center;
 
         &:hover {
             cursor: pointer;
-            background: $asideHover;
+            background-color: $asideHover;
             border-radius: 6px;
             transition: 0.2s all;
         }
@@ -111,6 +109,7 @@
     &__item {
         font-size: 14px;
         transition: 0.2s all;
+        line-height: 36px;
 
         &:hover {
             cursor: pointer;
@@ -120,7 +119,7 @@
 
         & > a {
             display: flex;
-            padding-left: 45px;
+            padding-left: 55px;
             line-height: 30px;
         }
     }

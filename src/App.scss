@@ -9,14 +9,9 @@
 
 body {
   background-color: $mainBg;
-
-    // ::-webkit-scrollbar {
-    //   height: 6px;
-    // }
-    // ::-webkit-scrollbar-thumb {
-    //   border-radius: 3px;
-    //   background-color: $mainBlueHover;
-    // }
+  color: $mainBlack;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 html, body, #root, .app {

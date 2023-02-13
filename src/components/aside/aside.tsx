@@ -28,7 +28,7 @@ export const Aside = () => {
           <div className="projects__my-projects">
             <span className="projects__logo"></span>
             <FormattedMessage id={Message.MyProjects} />
-            <span className="projects__plus">+</span>
+            <span className="projects__plus"></span>
           </div>
           <ul className="projects__list">
             {projects.map(({ name, id }) => <li className="projects__item" key={id}>
