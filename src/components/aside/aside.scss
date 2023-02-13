@@ -3,63 +3,69 @@
 .aside {
 
     &__container {
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        gap: 15px;
         height: 100%;
-        width: 270px;
-        background: rgba(73, 75, 244, 0.1);
-        top: 60px;
-        left: 0px;
+        width: 240px;
+        background: $asideBg;
         border-right: 1px solid $borderBlueLight;
         font-family: "Roboto", sans-serif;
         flex-shrink: 0;
     }
 
-    &__tasks-team {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 30px 0;
-    }
-
+    &__tasks-team,
     &__projects {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        padding: 5px 15px;
     }
-
 }
 
 .tasks-team,
-.projects__my-projects {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 23px;
+.projects__my-projects,
+.tasks-home {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+    padding-left: 25px;
+}
+
+.tasks-team, .tasks-home {
+    &:hover {
+        cursor: pointer;
+        background: $asideHover;
+    }
 }
 
 .projects__item {
-    font-weight: 500;
     font-size: 18px;
+}
+
+.tasks-home {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__icon {
+        background: url("../../assets/img/home.svg") no-repeat center;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+    }
 }
 
 .tasks-team {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(73, 75, 244, 0.15);
-    padding-left: 15px;
 
     &__logo {
         background: url(../../../src/assets/img/tasks-team__logo.svg) no-repeat center;
-        width: 32px;
-        height: 32px;
-    }
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &:active {
-
+        width: 20px;
+        height: 20px;
+        background-size: contain;
     }
 }
 
@@ -68,50 +74,53 @@
     &__my-projects {
         display: flex;
         align-items: center;
+        padding-top: 8px;
         gap: 10px;
+        border-top: solid 1px $borderBlueLight;
     }
 
     &__logo {
         background: url(../../../src/assets/img/projects__logo.svg) no-repeat center;
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
     }
 
     &__plus {
-        font-size: 32px;
-        color: $mainBlue;
-        font-weight: 400;
+        background: url("../../assets/img/plus.svg") center no-repeat;
+        background-size: contain;
+        width: 26px;
+        height: 26px;
+        line-height: 32px;
 
         &:hover {
             cursor: pointer;
-        }
-
-        &:active {
-            color: $mainBlueHover;
+            background-color: $asideHover;
+            border-radius: 6px;
+            transition: 0.2s all;
         }
     }
 
     &__list {
-        padding-left: 30px;
-
+        margin: 0;
+        padding: 0;
     }
 
     &__item {
-      padding-bottom: 15px;
-      font-size: 18px;
-      transition: 0.3s all;
+        font-size: 14px;
+        transition: 0.2s all;
+        line-height: 36px;
 
-      &:hover {
-        cursor: pointer;
-    }
+        &:hover {
+            cursor: pointer;
+            background-color: $asideHover;
+            transition: 0.2s all;
+        }
 
-      &::marker {
-        content: '● ';
-        color: $mainBlue;
-      }
-
-      span:hover {
-        border-bottom: 1px solid black;
-    }
+        & > a {
+            display: flex;
+            padding-left: 55px;
+            line-height: 30px;
+        }
     }
 }
