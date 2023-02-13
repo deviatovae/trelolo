@@ -159,8 +159,8 @@ export const ProjectPage = () => {
                     </div>
                     <div className="column-list-item__calendar-settings-container">
                       <div className="column-list-item__calendar"></div>
-                          <div className='column-list-item__settings'></div>
-                        </div>
+                      <div className="column-list-item__settings"></div>
+                    </div>
                       </div>
                   ))}
 
