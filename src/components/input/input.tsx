@@ -14,4 +14,8 @@ const Input = ({ type, classNameWrapper = '', className = '', placeholder, value
     );
 };
 
+Input.defaultProps = {
+    placeholder: ''
+};
+
 export default Input;
