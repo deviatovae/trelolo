@@ -2,7 +2,7 @@ import { getToken } from '../context/authContext';
 import { Request, RequestMethod, Response } from './types';
 import { ResponseErrors } from './responseErrors';
 
-const BASE_URL = 'https://trelolo.onrender.com/';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 /**
  * @throws {ResponseErrors}
