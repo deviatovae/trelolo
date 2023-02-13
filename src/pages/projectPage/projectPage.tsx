@@ -1,6 +1,6 @@
 import './projectPage.scss';
 import Aside from '../../components/aside/aside';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { WindowAdd } from '../../components/window/windowAdd';
 import { WindowAddTask } from '../../components/window/windowAddTask';
 import { UserIcon } from '../../components/userIcon/userIcon';
@@ -36,18 +36,18 @@ export const ProjectPage = () => {
 };
 
   const checkWindowAddOtsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (columnNameWindow && 
+    if (columnNameWindow &&
       (!(event.target as HTMLElement).classList.contains('modal-main')) &&
       (!(event.target as HTMLElement).classList.contains('modal-main__project-name'))) {
-        setColumnNameWindow(false);
-      }
+      setColumnNameWindow(false);
+    }
 
-    if (taskNameInColumnWindow && 
+    if (taskNameInColumnWindow &&
       (!(event.target as HTMLElement).classList.contains('window-add-task__input')) &&
       (!(event.target as HTMLElement).classList.contains('window-add-task')) &&
       (!(event.target as HTMLElement).classList.contains('window-add-task__buttons-container'))) {
-        setTaskNameInColumnWindow(false);
-      }
+      setTaskNameInColumnWindow(false);
+    }
   };
 
   const CheckKeyDown = (event: KeyboardEvent) => {
@@ -100,11 +100,11 @@ export const ProjectPage = () => {
     e.dataTransfer.setData('text/column', JSON.stringify({ index }));
     e.stopPropagation();
   };
-  
+
   const dragOverHandleColumn = (e: React.DragEvent) => {
     e.preventDefault();
   };
-  
+
   const dropHandlerColumn = (e: React.DragEvent, index: number) => {
     const data = JSON.parse(e.dataTransfer.getData('text/column'));
     const oldIndex = data.index;
@@ -125,42 +125,42 @@ export const ProjectPage = () => {
 
           {/* create column */}
           {columns.map((project, index) => (
-            <div 
-                key={index}
+            <div
+              key={index}
 
-                // drag and drop column
-                draggable={true}
-                onDragOver={(e)=> dragOverHandleColumn(e)}
-                onDrop={(e)=> dropHandlerColumn(e, index)}
-                onDragStart={(e)=> dragStartHandlerColumn(e, index)}
+              // drag and drop column
+              draggable={true}
+              onDragOver={(e) => dragOverHandleColumn(e)}
+              onDrop={(e) => dropHandlerColumn(e, index)}
+              onDragStart={(e) => dragStartHandlerColumn(e, index)}
 
-                      className='project-page__column-list-item'>
-                <div className='column-list-item__header-settings-container'>
-                  <div className='column-list-item__header'>{project}</div>
-                  <div className='column-list-item__setings'></div>
-                </div>
-                <div 
+              className="project-page__column-list-item">
+              <div className="column-list-item__header-settings-container">
+                <div className="column-list-item__header">{project}</div>
+                <div className="column-list-item__setings"></div>
+              </div>
+              <div
 
-                  // drag and drop task
-                  onDragOver={(e)=> dragOverHandleTask(e)}
-                  onDrop={(e)=> dropHandlerTask(e, project)}
-                  className='column-list-item__content-wrapper'>
+                // drag and drop task
+                onDragOver={(e) => dragOverHandleTask(e)}
+                onDrop={(e) => dropHandlerTask(e, project)}
+                className="column-list-item__content-wrapper">
 
-                  {/* create tasks */}
-                  {tasks[project]?.map((task, taskIndex) => (
-                    <div 
+                {/* create tasks */}
+                {tasks[project]?.map((task, taskIndex) => (
+                  <div
                     key={taskIndex}
                     draggable={true}
-                    onDragStart={(e)=> dragStartHandlerTask(e, project, task)}
-                    className='column-list-item__task-container wrapper'>
-                        <div className='column-list-item__task-logo-container'>
-                          <div className='column-list-item__task'>{task}</div>
-                          <div className='column-list-item__logo'><UserIcon>KZ</UserIcon></div>
-                        </div>
-                        <div className='column-list-item__calendar-settings-container'>
-                          <div className='column-list-item__calendar'></div>
-                          <div className='column-list-item__settings'></div>
-                        </div>
+                    onDragStart={(e) => dragStartHandlerTask(e, project, task)}
+                    className="column-list-item__task-container wrapper">
+                    <div className="column-list-item__task-logo-container">
+                      <div className="column-list-item__task">{task}</div>
+                      <div className="column-list-item__logo"><UserIcon userId={''}>KZ</UserIcon></div>
+                    </div>
+                    <div className="column-list-item__calendar-settings-container">
+                      <div className="column-list-item__calendar"></div>
+                      <div className="column-list-item__settings"></div>
+                    </div>
                       </div>
                   ))}
 
