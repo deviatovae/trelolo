@@ -19,6 +19,7 @@ export enum Message {
   LogIn = 'logIn',
   Or = 'or',
   MyTeam = 'myTeam',
+  MyHome = 'MyHome',
   MyProjects = 'myProjects',
   GoodMorning = 'goodMorning',
   GoodAfternoon = 'goodAfternoon',

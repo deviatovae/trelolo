@@ -13,7 +13,7 @@ export enum Route {
     LOGIN = '/login',
     MAIN = '/main',
     MEMBERS = '/members',
-    PROJECT = '/project',
+    PROJECT = '/project/:id',
 }
 export const routes = [
     {
