@@ -1,5 +1,5 @@
 import './modal.scss';
-import { ReactNode, MouseEvent } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
 interface ModalProps {
   title: string
@@ -15,7 +15,7 @@ export function Modal({ title, children, onClose }: ModalProps) {
   };
 
   return (
-    <div className="modal-wrapper" onClick={handleClickOutside}>
+    <div className="modal-wrapper" onMouseDown={handleClickOutside}>
       <div className="modal">
         <div className="modal__content">
           <div className="modal__header modal-header">
