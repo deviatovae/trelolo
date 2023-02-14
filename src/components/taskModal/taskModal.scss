@@ -20,6 +20,10 @@
         border-radius: 0;
         overflow-y: scroll;
 
+        .deadline {
+          align-self: start;
+        }
+
         .assignee-info,
         .deadline-info {
           display: flex;
@@ -28,10 +32,17 @@
           gap: 10px;
         }
 
+        .delete-button {
+          border: none;
+          background-color: transparent;
+          width: 20px;
+          height: 20px;
+          padding: 3px;
+        }
+
         .delete {
           width: 15px;
           height: 15px;
-          padding: 5px;
           position: relative;
 
           &::before,
@@ -52,11 +63,10 @@
           }
 
           &:hover {
-            cursor: pointer;
 
             &::before,
             &::after {
-              background-color: $greyDark;
+              background-color: $white;
             }
           }
         }
