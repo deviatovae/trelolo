@@ -7,12 +7,20 @@
         flex-direction: column;
         padding-top: 30px;
         gap: 15px;
-        height: 100%;
+        min-height: 100%;
         width: 240px;
         background: $asideBg;
         border-right: 1px solid $borderBlueLight;
         font-family: "Roboto", sans-serif;
         flex-shrink: 0;
+    }
+
+    &__projects {
+        overflow: auto;
+    }
+
+    &__tasks-team {
+        height: 100%;
     }
 
     &__tasks-team,
@@ -104,6 +112,7 @@
     &__list {
         margin: 0;
         padding: 0;
+        overflow: auto;
     }
 
     &__item {

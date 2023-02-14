@@ -52,10 +52,11 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: $mainBlue;
+  border-radius: 50px;
+  background-color: $asideHover;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 7px;
+  height: 7px;
 }

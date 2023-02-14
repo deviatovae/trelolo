@@ -54,19 +54,16 @@ export const Sections = () => {
 
   return (
     <TaskModalProvider>
-      <section className="project-page__section">
-        <div className="project-page__projects-wrapper">
-          <div className="project-page__column-list" style={{ width: increaseWidth() }}>
+      <section className="project-page__board">
+        <div className="project-page__column-list" style={{ width: increaseWidth() }}>
+          {sections.map((section, index) => (
+            <TasksProvider sectionId={section.id}>
+              <Section key={index} section={section}></Section>
+            </TasksProvider>
+          ))}
 
-            {sections.map((section, index) => (
-              <TasksProvider sectionId={section.id}>
-                <Section key={index} section={section}></Section>
-              </TasksProvider>
-            ))}
-
-            {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
-            {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
-          </div>
+          {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
+          {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
         </div>
       </section>
     </TaskModalProvider>
