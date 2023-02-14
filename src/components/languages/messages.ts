@@ -47,5 +47,14 @@ export enum Message {
   EnterMemberEmail = 'EnterMemberEmail',
   CreateNewProjectShort = 'CreateNewProjectShort',
   MemberAlreadyExist = 'MemberAlreadyExist',
+  MarkCompleted = 'MarkCompleted',
+  DeleteTask = 'DeleteTask',
+  Assignee = 'Assignee',
+  DueDate = 'DueDate',
+  NoDueDate = 'NoDueDate',
+  Status = 'Status',
+  Description = 'Description',
+  WhatIsThisTaskAbout = 'WhatIsThisTaskAbout',
+  WriteAComment = 'WriteAComment',
 }
 

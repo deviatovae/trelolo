@@ -4,7 +4,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -14,7 +14,10 @@ body {
   font-size: 1rem;
 }
 
-html, body, #root, .app {
+html,
+body,
+#root,
+.app {
   height: 100%;
 }
 
@@ -23,7 +26,7 @@ html, body, #root, .app {
   flex-direction: column;
   justify-content: space-between;
 
-  & > * {
+  &>* {
     flex: 0 0 auto;
   }
 
@@ -48,6 +51,11 @@ a {
   margin: 0 auto;
 }
 
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $mainBlue;
+}
 
-
-
+::-webkit-scrollbar {
+  width: 5px;
+}

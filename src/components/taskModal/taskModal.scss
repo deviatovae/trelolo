@@ -1,0 +1,125 @@
+@import './../../assets/styles/variables.scss';
+
+.task {
+  &-wrapper {
+    @at-root {
+      div#{&} {
+        justify-content: right;
+        padding: 0;
+      }
+    }
+  }
+
+
+  &-section {
+    @at-root {
+      div#{&} {
+        height: 100%;
+        margin: 0;
+        padding: 0 35px;
+        border-radius: 0;
+        overflow-y: scroll;
+
+        .deadline {
+          align-self: start;
+        }
+
+        .assignee-info,
+        .deadline-info {
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .delete-button {
+          border: none;
+          background-color: transparent;
+          width: 20px;
+          height: 20px;
+          padding: 3px;
+        }
+
+        .delete {
+          width: 15px;
+          height: 15px;
+          position: relative;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            bottom: 1px;
+            transform: rotate(45deg);
+            height: 12px;
+            width: 1px;
+            border-radius: 3px;
+            background-color: $gray;
+          }
+
+          &::after {
+            transform: rotate(-45deg);
+          }
+
+          &:hover {
+
+            &::before,
+            &::after {
+              background-color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-main {
+    @at-root {
+      div#{&} {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 15px;
+        height: 100%;
+      }
+    }
+  }
+
+  &-management {
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  &-button {
+    max-width: 120px;
+    margin: 0;
+    padding: 6px 8px;
+    border: 1px solid $greylight;
+    font-size: 12px;
+    background-color: transparent;
+    color: $black;
+    line-height: 14px;
+    font-weight: 400;
+  }
+
+  &-info {
+    display: grid;
+    grid-template-columns: 120px auto;
+    justify-items: start;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-input {
+      height: 140px;
+    }
+  }
+}

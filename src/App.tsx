@@ -8,7 +8,6 @@ import { translations } from './components/languages/translations';
 import { LanguagesManager } from './components/languages/languagesManager';
 import { AuthProvider } from './context/authContext';
 
-
 function App() {
   const { currentLocale, setLocale } = LanguagesManager();
 
@@ -19,14 +18,14 @@ function App() {
       defaultLocale={LOCALES.ENGLISH}
     >
       <AuthProvider >
-      <div className="app wrapper">
-        <Header currentLocale={currentLocale} setLocale={setLocale} />
-        <div className="app__content">
-          <Outlet />
+        <div className="app wrapper">
+          <Header currentLocale={currentLocale} setLocale={setLocale} />
+          <div className="app__content">
+            <Outlet />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </AuthProvider>
+      </AuthProvider>
     </IntlProvider >
   );
 }
