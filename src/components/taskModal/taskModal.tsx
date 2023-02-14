@@ -1,6 +1,5 @@
 import './taskModal.scss';
 import Button from '../button/button';
-import { UserIcon } from '../userIcon/userIcon';
 import { useAuth } from '../../hooks/auth';
 import Select from '../select/select';
 import Comment from '../comment/comment';
