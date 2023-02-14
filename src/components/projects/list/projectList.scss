@@ -16,7 +16,7 @@
   gap: 20px;
   padding: 10px 0;
   align-items: center;
-  height: 60px;
+  height: 50px;
   border-top: solid 1px rgba($mainBlue, 0.3);
 
   &:last-child {
@@ -27,23 +27,14 @@
     background: url("../../../assets/img/projects__logo.svg");
   }
 
-  &__icon, &__icon_new  {
+  &__icon, &__icon_new {
     background-size: contain;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   &__icon_new {
     background: url("../../../assets/img/new-project.svg");
-    background-size: contain;
-    width: 40px;
-    height: 40px;
-
-    &:hover {
-      cursor: pointer;
-      scale: 1.03;
-      transition: ease-in-out;
-    }
   }
 
   &__name {
@@ -51,17 +42,16 @@
 
     &:hover {
       cursor: pointer;
-      text-decoration: underline;
+      color: #7d88B1ff;
     }
   }
   &__name, &__name_new {
-    font-size: 1.3rem;
-    font-weight: 600;
-
+    font-size: 1.1rem;
+    font-weight: 500;
   }
 
   &__name_new {
-    color: $greyDark;
+    color: #7d88B1ff;
 
     &:hover {
       cursor: pointer;

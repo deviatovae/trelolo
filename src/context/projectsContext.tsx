@@ -38,17 +38,21 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addProject = async (data: ProjectData): Promise<Errors | null> => {
-    const { data: project, errors } = await apiCreateProject(data);
-    if (errors) {
-      return errors;
+    try {
+      const { data: project, errors } = await apiCreateProject(data);
+      if (errors) {
+        return errors;
+      }
+
+      setResult(({ items, count }) => ({
+        items: [...items, project],
+        count: count + 1
+      }));
+
+      return null;
+    } catch (e) {
+      return castToErrors(e);
     }
-
-    setResult(({ items, count }) => ({
-      items: [...items, project],
-      count: count + 1
-    }));
-
-    return null;
   };
 
   const updateProject = async (id: string, data: ProjectData): Promise<Errors | null> => {

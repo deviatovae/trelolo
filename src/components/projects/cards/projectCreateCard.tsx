@@ -2,7 +2,7 @@ import './projectCardAction.scss';
 import React, { useRef } from 'react';
 import { Errors } from '../../../API/types';
 import Input from '../../input/input';
-import { useValidationErrors } from '../../../hooks/validation';
+import { useFieldValidator } from '../../../hooks/validation';
 import { useProjectCard } from '../../../hooks/useProjectCard';
 import { useTranslate } from '../../../hooks/useTranslate';
 import { Message } from '../../languages/messages';
@@ -20,7 +20,8 @@ export const ProjectCreateCard = ({ onClose, onCreate, errors }: ProjectCreateCa
   const { fieldName, setFieldName, isChanged, handleNameChange } = useProjectCard({ onClose, onSubmit: onCreate, cardRef });
   const handleButtonClick = () => onCreate(fieldName.value);
 
-  useValidationErrors(errors || [], { name: setFieldName });
+  const { validate } = useFieldValidator();
+  validate(errors || [], { name: setFieldName });
 
   return (
     <div className="modal-main" ref={cardRef}>
