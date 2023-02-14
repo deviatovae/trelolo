@@ -4,10 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { Message } from '../languages/messages';
 import { Route } from '../../router/routes';
 import { MenuLink } from '../menuLink/menuLink';
+import { useState } from 'react';
+import { CreateProjectModal } from './createProjectModal';
 
 
 export const Aside = () => {
   const { projects } = useProjects();
+  const [showUpdate, setShowUpdate] = useState(false);
 
   return (
     <aside className="aside__container">
@@ -28,7 +31,8 @@ export const Aside = () => {
           <div className="projects__my-projects">
             <span className="projects__logo"></span>
             <FormattedMessage id={Message.MyProjects} />
-            <span className="projects__plus"></span>
+            <span className="projects__plus" onClick={() => setShowUpdate(true)}></span>
+            {showUpdate && <CreateProjectModal onClose={() => setShowUpdate(false)}></CreateProjectModal>}
           </div>
           <ul className="projects__list">
             {projects.map(({ name, id }) => <li className="projects__item" key={id}>

@@ -4,7 +4,7 @@ import { Errors } from '../../../API/types';
 import Input from '../../input/input';
 import { Project } from '../../../types/models';
 import { useProjectCard } from '../../../hooks/useProjectCard';
-import { useValidationErrors } from '../../../hooks/validation';
+import { useFieldValidator } from '../../../hooks/validation';
 import { Message } from '../../languages/messages';
 import { FormattedMessage } from 'react-intl';
 import { useTranslate } from '../../../hooks/useTranslate';
@@ -20,7 +20,9 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
   const { trans } = useTranslate();
   const cardRef = useRef<HTMLDivElement>(null);
   const { fieldName, setFieldName, isChanged, handleNameChange } = useProjectCard({ onClose, onSubmit: onUpdate, name, cardRef });
-  useValidationErrors(errors || [], { name: setFieldName });
+
+  const { validate } = useFieldValidator();
+  validate(errors || [], { name: setFieldName });
   const handleButtonClick = () => onUpdate(fieldName.value);
 
   return (
