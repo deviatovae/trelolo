@@ -39,7 +39,6 @@ export function TaskModal({ onClose, task }: TaskModalProps) {
 
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain='task-main' onClose={onClose}>
-      {/* <div className="task-close"></div> */}
       <div className='task-management'>
         <Button className='task-button'>✓ {trans(Message.MarkCompleted)}</Button>
         <Button className='task-button'>{trans(Message.DeleteTask)}</Button>
