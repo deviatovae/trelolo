@@ -1,7 +1,7 @@
 import { UserIcon } from '../userIcon/userIcon';
 import React from 'react';
 import { Task as TaskModel } from '../../types/models';
-import { useTaskModal } from '../../hooks/taskModal';
+import { useTaskModal } from '../../hooks/useTaskModal';
 
 export const Task = ({ task }: { task: TaskModel }) => {
   const { showTaskModal } = useTaskModal();

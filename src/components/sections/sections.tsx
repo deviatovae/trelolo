@@ -1,8 +1,9 @@
 import { WindowAdd } from '../window/windowAdd';
 import React, { useEffect, useState } from 'react';
-import { useSections } from '../../hooks/sections';
+import { useSections } from '../../hooks/useSections';
 import { Section } from './section';
 import { TaskModalProvider } from '../../context/taskModalContext';
+import { TasksProvider } from '../../context/tasksContext';
 
 export const Sections = () => {
   const { sections: { items: sections, count }, createSection } = useSections();
@@ -43,8 +44,8 @@ export const Sections = () => {
     }
   };
 
-  const handleAddColumn = async (inputValue: string) => {
-    await createSection(inputValue);
+  const handleAddSection = async (name: string) => {
+    await createSection({ name });
     // setTasks({ ...tasks, [inputValue]: [] });
     setColumnNameWindow(false);
   };
@@ -58,10 +59,12 @@ export const Sections = () => {
           <div className="project-page__column-list" style={{ width: increaseWidth() }}>
 
             {sections.map((section, index) => (
-              <Section key={index} section={section} tasks={[section.id]}></Section>
+              <TasksProvider sectionId={section.id}>
+                <Section key={index} section={section}></Section>
+              </TasksProvider>
             ))}
 
-            {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreateProject={handleAddColumn} placeholderProps={'Write a column name'} />}
+            {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
             {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
           </div>
         </div>

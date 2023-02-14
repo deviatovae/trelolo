@@ -1,4 +1,4 @@
-import { Errors, List } from '../API/types';
+import { Errors, List, SectionCreateData } from '../API/types';
 import { Section } from '../types/models';
 import { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
 import { castToErrors } from '../utils/errors';
@@ -6,7 +6,7 @@ import { SectionService } from '../API/sectionService';
 
 export interface SectionsContextValue {
   sections: List<Section>
-  createSection: (name: string) => Promise<(Errors | null)>
+  createSection: (data: SectionCreateData) => Promise<(Errors | null)>
 }
 
 export const SectionsContext = createContext<SectionsContextValue>({
@@ -39,9 +39,9 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
     }
   }, [projectId]);
 
-  const createSection = async (name: string) => {
+  const createSection = async (data: SectionCreateData) => {
     try {
-      const { data: sectionItem, errors } = await SectionService.createSection(projectId, { name });
+      const { data: sectionItem, errors } = await SectionService.createSection(projectId, data);
       if (errors) {
         return errors;
       }

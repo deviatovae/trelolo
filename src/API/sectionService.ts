@@ -11,8 +11,8 @@ export class SectionService {
     body: data
   });
 
-  static updateSection = (id: string, section: Section) => getResponse({ url: `sections/:${id}`, method: RequestMethod.PATCH, body: section });
+  static updateSection = (id: string, section: Section) => getResponse<Section>({ url: `sections/:${id}`, method: RequestMethod.PATCH, body: section });
 
-  static deleteSection = (id: string) => getResponse({ url: `sections/:${id}`, method: RequestMethod.DELETE });
+  static deleteSection = (id: string) => getResponse<void>({ url: `sections/:${id}`, method: RequestMethod.DELETE });
 
 }

@@ -31,4 +31,8 @@ export interface UserMembers {
 export interface Task {
   id: string
   name: string
+  position: number
+  description: string
+  dueDate: string
+  isCompleted: boolean
 }

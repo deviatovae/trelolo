@@ -2,11 +2,14 @@ import { WindowAddTask } from '../window/windowAddTask';
 import React, { useState } from 'react';
 import { Task } from '../task/task';
 import { Section as SectionModel } from '../../types/models';
+import { useTasks } from '../../hooks/useTasks';
 
-export const Section = ({ section: { id, name }, tasks: sectionTasks }: { section: SectionModel, tasks: string[] }) => {
-  const [tasks, setTasks] = useState<{ [key: string]: string[] }>({
-    [id]: sectionTasks
-  });
+export const Section = ({ section: { id, name } }: { section: SectionModel }) => {
+  const { tasks: { items: tasks }, createTask } = useTasks();
+  // const [tasks, setTasks] = useState<{ [key: string]: string[] }>({
+  //   [id]: sectionTasks
+  // });
+
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [taskNameInColumnWindow, setTaskNameInColumnWindow] = useState(false);
 
@@ -19,8 +22,9 @@ export const Section = ({ section: { id, name }, tasks: sectionTasks }: { sectio
     setTaskNameInColumnWindow(false);
   };
 
-  const handleAddTask = (column: string, inputValue: string) => {
-    setTasks({ ...tasks, [column]: [...tasks[column], inputValue] });
+  const handleAddTask = (taskName: string) => {
+    createTask({ name: taskName });
+    // setTasks({ ...tasks, [column]: [...tasks[column], inputValue] });
     setTaskNameInColumnWindow(false);
   };
 
@@ -34,19 +38,19 @@ export const Section = ({ section: { id, name }, tasks: sectionTasks }: { sectio
   // };
 
   const dropHandlerTask = (e: React.DragEvent, column: string) => {
-    let data;
-    try {
-      data = JSON.parse(e.dataTransfer.getData('text/task'));
-    } catch (error) {
-      return;
-    }
-    const oldColumn = data.column;
-    const oldTask = data.task;
-    const newTasks = { ...tasks };
-    const oldTaskIndex = tasks[oldColumn].indexOf(oldTask);
-    newTasks[oldColumn].splice(oldTaskIndex, 1);
-    newTasks[column] = [...newTasks[column], oldTask];
-    setTasks(newTasks);
+    // let data;
+    // try {
+    // data = JSON.parse(e.dataTransfer.getData('text/task'));
+    // } catch (error) {
+    //   return;
+    // }
+    // const oldColumn = data.column;
+    // const oldTask = data.task;
+    // const newTasks = { ...tasks };
+    // const oldTaskIndex = tasks[oldColumn].indexOf(oldTask);
+    // newTasks[oldColumn].splice(oldTaskIndex, 1);
+    // newTasks[column] = [...newTasks[column], oldTask];
+    // setTasks(newTasks);
     e.stopPropagation();
   };
 
@@ -90,13 +94,11 @@ export const Section = ({ section: { id, name }, tasks: sectionTasks }: { sectio
           className="column-list-item__content-wrapper">
 
           {/* create tasks */}
-          {tasks[id]?.map((task, taskIndex) => (
-            <Task key={taskIndex} task={{ id: taskIndex.toString(), name: task }} />
-          ))}
+          {tasks.map((task, idx) => <Task key={idx} task={task} />)}
 
           {/* window add task */}
           {taskNameInColumnWindow && activeColumn === name ? (
-            <WindowAddTask onCreateProject={(inputValue) => handleAddTask(activeColumn, inputValue)} onClickCross={handleCrossClick} />
+            <WindowAddTask onCreateProject={(inputValue) => handleAddTask(inputValue)} onClickCross={handleCrossClick} />
           ) : ('')
           }
           <div className="column-list-item__btn-add-task-plus" onClick={() => handleClickAddTaskPlus(name)}>+ Add task</div>

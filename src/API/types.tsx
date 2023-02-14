@@ -52,5 +52,9 @@ export interface LoginResponse {
 }
 
 export interface SectionCreateData {
-    name: string,
+    name: string
+}
+
+export interface TaskCreateData {
+    name: string
 }
