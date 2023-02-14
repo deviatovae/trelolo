@@ -1,11 +1,18 @@
 import { getResponse } from './response';
-import { RequestMethod } from './types';
+import { List, RequestMethod, SectionCreateData } from './types';
 import { Section } from '../types/models';
 
-export const createSection = (section: Section, projectId: number) => getResponse({ url: `projects/${projectId}/sections`, method: RequestMethod.POST, body: section });
+export class SectionService {
+  static getSections = (projectId: string) => getResponse<List<Section>>({ url: `projects/${projectId}/sections`, method: RequestMethod.GET });
 
-export const updateSection = (section: Section, id: number) => getResponse({ url: `sections/:${id}`, method: RequestMethod.PATCH, body: section });
+  static createSection = (projectId: string, data: SectionCreateData) => getResponse<Section>({
+    url: `projects/${projectId}/sections`,
+    method: RequestMethod.POST,
+    body: data
+  });
 
-export const deleteSection = (id: number) => getResponse({ url: `sections/:${id}`, method: RequestMethod.DELETE });
+  static updateSection = (id: string, section: Section) => getResponse<Section>({ url: `sections/:${id}`, method: RequestMethod.PATCH, body: section });
 
-export const getSections = (projectId: number) => getResponse({ url: `projects/${projectId}/sections`, method: RequestMethod.GET });
+  static deleteSection = (id: string) => getResponse<void>({ url: `sections/:${id}`, method: RequestMethod.DELETE });
+
+}

@@ -1,11 +1,11 @@
 import './windowAdd.scss';
-import { MadalProps } from '../types/modalProps';
+import { ModalProps } from '../types/modalProps';
 import { useState } from 'react';
 
 
-export const WindowAdd = ({ onCreateProject, placeholderProps }: MadalProps)=> {
+export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
   const [inputValue, setInputValue] = useState('');
-  const handleCreateProject = () => onCreateProject(inputValue);
+  const handleCreateProject = () => onCreate(inputValue);
 
   const CheckKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {

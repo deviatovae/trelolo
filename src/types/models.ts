@@ -27,3 +27,12 @@ export interface UserMembers {
   email: string,
   members: Member[]
 }
+
+export interface Task {
+  id: string
+  name: string
+  position: number
+  description: string
+  dueDate: string
+  isCompleted: boolean
+}
