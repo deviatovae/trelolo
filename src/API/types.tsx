@@ -50,3 +50,7 @@ export interface LoginResponse {
     user: User,
     token: string,
 }
+
+export interface SectionCreateData {
+    name: string,
+}

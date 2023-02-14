@@ -22,7 +22,7 @@ export function Modal({ title, children, onClose, className, classNameWrapper, c
   const classesMain = `modal__main ${classNameMain}`;
 
   return (
-    <div className={classesWrapper} onMouseDown={handleClickOutside}>
+    <div className={classesWrapper} onMouseDown={handleClickOutside} style={{ zIndex: 10 }}>
       <div className={classes}>
         <div className="modal__content">
           <div className="modal__header modal-header">

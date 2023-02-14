@@ -4,21 +4,20 @@ import { useAuth } from '../../hooks/auth';
 import Select from '../select/select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
-import './taskModal.scss';
 import { Textearea } from '../textarea/textearea';
 import { useProjects } from '../../hooks/projects';
 import { DatePicker } from '../date-picker/DatePicker';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
 import { useMembers } from '../../hooks/members';
-// import { MembersProvider } from '../../context/membersContext';
+import { Task } from '../../types/models';
 
 interface TaskModalProps {
   onClose: () => void
-  title: string
+  task: Task
 }
 
-export function TaskModal({ onClose, title }: TaskModalProps) {
+export function TaskModal({ onClose, task }: TaskModalProps) {
 
   type Option = { value: string, label: string };
 
@@ -45,7 +44,7 @@ export function TaskModal({ onClose, title }: TaskModalProps) {
         <Button className='task-button'>✓ {trans(Message.MarkCompleted)}</Button>
         <Button className='task-button'>{trans(Message.DeleteTask)}</Button>
       </div>
-      {<h2>{title}</h2>}
+      {<h2>{task.name}</h2>}
       <div className='task-info'>
         <span>{trans(Message.Assignee)}</span>
         <div className='assignee-info'>

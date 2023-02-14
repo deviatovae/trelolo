@@ -27,3 +27,8 @@ export interface UserMembers {
   email: string,
   members: Member[]
 }
+
+export interface Task {
+  id: string
+  name: string
+}
