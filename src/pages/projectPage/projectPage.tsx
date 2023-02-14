@@ -1,4 +1,5 @@
 import './projectPage.scss';
+import '../../components/sections/section.scss';
 import Aside from '../../components/aside/aside';
 import { ProjectsProvider } from '../../context/projectsContext';
 import { useParams } from 'react-router-dom';
@@ -11,7 +12,7 @@ export const ProjectPage = () => {
 
   return (
     <ProjectsProvider>
-      <div className="project-page__container _container wrapper">
+      <div className="project-page__container wrapper">
         <Aside></Aside>
         <SectionsProvider projectId={projectId || ''}>
           {/* todo: заменить на MemberProvider, который получает мемберов только для текущего проекта */}
