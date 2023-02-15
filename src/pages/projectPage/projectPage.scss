@@ -25,12 +25,6 @@
   &__column-list-item {
     border-radius: 6px;
     color: $mainBlack;
-    transition: transform 0.2s ease-in-out;
-
-    &:active {
-      transform: scale(1);
-      transition: transform 0.1s ease-in-out;
-    }
   }
 
   &__column-list-btn {

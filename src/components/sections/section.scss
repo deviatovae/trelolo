@@ -28,18 +28,7 @@
     overflow: hidden;
     position: relative;
     top: 40px;
-    z-index: 1;
-
-    &:hover {
-      cursor: pointer;
-      transform: scale(1.08);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    &:active {
-      transform: scale(1);
-      transition: transform 0.1s ease-in-out;
-    }
+    z-index: -1;
   }
 
   &__content-wrapper {
@@ -51,7 +40,6 @@
     border-radius: 6px;
     box-shadow: -3px 0px 12px -8px rgba(34, 60, 80, 0.4);
     position: relative;
-    z-index: 2;
   }
 
   &__btn-add-task-plus {
@@ -73,12 +61,14 @@
   }
 
   &__task-container {
+    position: relative;
     width: 265px;
     height: 100px;
     background-color: #fff;
     border-radius: 6px;
     margin-bottom: 15px;
-    box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);  }
+    box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
+  }
 
   &__task-logo-container {
     display: flex;
