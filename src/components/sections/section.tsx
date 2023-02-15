@@ -1,8 +1,9 @@
 import { WindowAddTask } from '../window/windowAddTask';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Task } from '../task/task';
 import { Section as SectionModel } from '../../types/models';
 import { useTasks } from '../../hooks/useTasks';
+import { WindowDelete } from '../window/windowDelete';
 
 export const Section = ({ section: { id, name } }: { section: SectionModel }) => {
   const { tasks: { items: tasks }, createTask } = useTasks();
@@ -12,6 +13,15 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
 
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [taskNameInColumnWindow, setTaskNameInColumnWindow] = useState(false);
+  const [deleteColumnWindow, setDeleteColumnWindow] = useState(false);
+  const [inputValuecolumn, setInputValue] = useState(name);
+
+  useEffect(() => {
+    document.addEventListener('keydown', checkKeyDown);
+    return () => {
+      document.removeEventListener('keydown', checkKeyDown);
+    };
+  });
 
   const handleClickAddTaskPlus = (column: string) => {
     setActiveColumn(column);
@@ -72,6 +82,36 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
     e.stopPropagation();
   };
 
+
+
+
+  
+  const renameHandleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    // const newName = e.target.value;
+    // setInputValue(newName);
+  };
+
+  const checkKeyDown = (event: KeyboardEvent) => {
+    if (event.keyCode === 13) {
+    // setInputValue(newName);
+    }
+    if (event.keyCode === 27) {
+      setDeleteColumnWindow(false);
+      setTaskNameInColumnWindow(false);
+      setInputValue(name);
+    }
+  };
+
+  const handleCrossColumnClick = ( column: string) => {
+    setActiveColumn(column);
+    setDeleteColumnWindow(!deleteColumnWindow);
+  };
+
+  const handleDeleteColumn = () => {
+    // setDeleteColumnWindow(false);
+    // deleteColumn();
+  };
+
   return (
     <>
       <div
@@ -83,15 +123,32 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
 
         className="project-page__column-list-item">
         <div className="column-list-item__header-settings-container">
-          <div className="column-list-item__header">{name}</div>
-          <div className="column-list-item__setings"></div>
-        </div>
-        <div
+          <div className="column-list-item__header">
+            <input 
+              className="column-list-item__header-input" 
+              type="text" 
+              value={inputValuecolumn}
+              onChange={(e) => setInputValue(e.target.value)}
+              onBlur={renameHandleInputBlur}
+              />
+            </div>
+            <div className="column-list-item__cross" onClick={() => handleCrossColumnClick(name)}></div>
+          </div>
+          <div
 
           // drag and drop task
           onDragOver={(e) => dragOverHandleTask(e)}
           onDrop={(e) => dropHandlerTask(e, name)}
           className="column-list-item__content-wrapper">
+
+          {/* window delete column */}
+          {deleteColumnWindow && activeColumn === name ? (
+          <WindowDelete 
+          deleteColumn={handleDeleteColumn}
+          // column={activeColumn}
+          />
+          ) : ('')
+          }
 
           {/* create tasks */}
           {tasks.map((task, idx) => <Task key={idx} task={task} />)}

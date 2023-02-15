@@ -50,3 +50,12 @@
       transform: translateX(300px);
     }
 }
+
+@keyframes down-animation {
+    0%  {
+      transform: translateY(-120px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
