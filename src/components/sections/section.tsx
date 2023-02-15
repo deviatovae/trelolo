@@ -18,7 +18,7 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [taskNameInColumnWindow, setTaskNameInColumnWindow] = useState(false);
   const [deleteColumnWindow, setDeleteColumnWindow] = useState(false);
-  const [inputValuecolumn, setInputValue] = useState(name);
+  const [, setInputValue] = useState(name);
 
   useEffect(() => {
     document.addEventListener('keydown', checkKeyDown);
@@ -87,10 +87,10 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
   };
 
 
-  const renameHandleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    // const newName = e.target.value;
-    // setInputValue(newName);
-  };
+  // const renameHandleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  //   const newName = e.target.value;
+  //   setInputValue(newName);
+  // };
 
   const checkKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === 27) {
