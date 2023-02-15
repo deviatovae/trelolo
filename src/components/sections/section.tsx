@@ -18,7 +18,7 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [taskNameInColumnWindow, setTaskNameInColumnWindow] = useState(false);
   const [deleteColumnWindow, setDeleteColumnWindow] = useState(false);
-  const [, setInputValue] = useState(name);
+  const [inputValuecolumn, setInputValue] = useState(name);
 
   useEffect(() => {
     document.addEventListener('keydown', checkKeyDown);
@@ -96,7 +96,7 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
     if (event.keyCode === 27) {
       setDeleteColumnWindow(false);
       setTaskNameInColumnWindow(false);
-      setInputValue(name);
+      // setInputValue(name);
     }
   };
 
@@ -122,16 +122,17 @@ export const Section = ({ section: { id, name } }: { section: SectionModel }) =>
 
         className="project-page__column-list-item">
         <div className="column-list-item__header-settings-container">
-          <div className="column-list-item__header">{name}
-            {/* <input 
+          <div className="column-list-item__header">
+            {/* {name} */}
+            <input 
               className="column-list-item__header-input"
               type="text" 
-              value={name}
+              // value={name}
+              value={inputValuecolumn}
               onChange={(e) => setInputValue(e.target.value)}
-              // value={inputValuecolumn}
-              // onBlur={renameHandleInputBlur}
+              onBlur={(e) => setInputValue(e.target.value)}
               // onKeyDown={checkKeyDown}
-              /> */}
+              />
             </div>
 
             <div className="column-list-item__cross" onClick={() => handleCrossColumnClick(name)}></div>
