@@ -1,9 +1,10 @@
 import { Task } from '../types/models';
 import React, { createContext, ReactNode, useState } from 'react';
 import { TaskModal } from '../components/taskModal/taskModal';
+import { TasksContextValue } from './tasksContext';
 
 interface TaskModalContextValue {
-  showTaskModal: (task: Task) => void
+  showTaskModal: (task: Task, context: TasksContextValue) => void
   closeTaskModal: () => void
 }
 
@@ -14,10 +15,10 @@ export const TaskModalContext = createContext<TaskModalContextValue>({
 
 export const TaskModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [task, setTask] = useState<Task | null>(null);
+  const [task, setTask] = useState<{ task: Task, context: TasksContextValue } | null>(null);
 
-  const show = (shownTask: Task) => {
-    setTask(shownTask);
+  const show = (shownTask: Task, context: TasksContextValue) => {
+    setTask({ task: shownTask, context });
     setIsOpen(true);
   };
 
@@ -28,7 +29,7 @@ export const TaskModalProvider = ({ children }: { children: ReactNode }) => {
   return (
     <TaskModalContext.Provider value={{ showTaskModal: show, closeTaskModal: close }}>
       {children}
-      {isOpen && task && <TaskModal task={task} onClose={close}></TaskModal>}
+      {isOpen && task && <TaskModal task={task.task} context={task.context} onClose={close}></TaskModal>}
     </TaskModalContext.Provider>
   );
 };

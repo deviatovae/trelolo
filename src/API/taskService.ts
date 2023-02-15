@@ -14,5 +14,4 @@ export class TaskService {
   static updateTask = (id: string, section: Task) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.PATCH, body: section });
 
   static deleteTask = (id: string) => getResponse<void>({ url: `tasks/${id}`, method: RequestMethod.DELETE });
-
 }

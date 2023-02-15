@@ -24,7 +24,7 @@ export const MembersContext = createContext<MembersContextValue>({
   deleteMember: async () => null,
 });
 
-export const MembersProvider = ({ children }: { children: ReactNode }) => {
+export const MembersProvider = ({ children, projectId: selectedProjectId }: { children: ReactNode, projectId?: string }) => {
   const initialState: List<Member> = {
     items: [],
     count: 0
@@ -87,7 +87,10 @@ export const MembersProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    projects.reduce(async (acc, { id }) => {
+    const selectedProject = selectedProjectId ? projects.find(({ id }) => id === selectedProjectId) : null;
+    const usedProjects = selectedProject ? [selectedProject] : projects;
+
+    usedProjects.reduce(async (acc, { id }) => {
       const { data } = await MemberService.getMembers(id);
       const { items, count } = await acc;
       return {
@@ -98,7 +101,7 @@ export const MembersProvider = ({ children }: { children: ReactNode }) => {
       items: [],
       count: 0
     })).then(result => setMembers(result));
-  }, [projects]);
+  }, [projects, selectedProjectId]);
 
   return (
     <MembersContext.Provider value={{ members, addMember, addMembers, getGroupedMembers, deleteMember }}>{children}</MembersContext.Provider>

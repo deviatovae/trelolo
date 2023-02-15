@@ -12,21 +12,22 @@ import { Message } from '../languages/messages';
 import { useMembers } from '../../hooks/members';
 import { Task } from '../../types/models';
 import { useSections } from '../../hooks/useSections';
-import { useTasks } from '../../hooks/useTasks';
+import { TasksContextValue } from '../../context/tasksContext';
 
 interface TaskModalProps {
   onClose: () => void
   task: Task
+  context: TasksContextValue
 }
 
-export function TaskModal({ onClose, task }: TaskModalProps) {
+export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   type Option = { value: string, label: string };
 
   const { userInfo } = useAuth();
   const { trans } = useTranslate();
 
-  const { deleteTask } = useTasks();
+  const { deleteTask } = context;
 
   const { getGroupedMembers } = useMembers();
   const members = getGroupedMembers();
@@ -39,28 +40,31 @@ export function TaskModal({ onClose, task }: TaskModalProps) {
 
   const statusOptions: Option[] = sections.items.map(({ id, name }) => ({ value: id, label: name }));
 
-  const deleteCurrentTask = () => {
-    deleteTask(task.id);
+  const deleteCurrentTask = async () => {
+    const errors = await deleteTask(task.id);
+    if (!errors) {
+      onClose();
+    }
   };
 
   return (
-    <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain='task-main' onClose={onClose}>
-      <div className='task-management'>
-        <Button className='task-button'>✓ {trans(Message.MarkCompleted)}</Button>
-        <Button className='task-button' onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
+    <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
+      <div className="task-management">
+        <Button className="task-button">✓ {trans(Message.MarkCompleted)}</Button>
+        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
       {<h2>{task.name}</h2>}
-      <div className='task-info'>
+      <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
-        <div className='assignee-info'>
+        <div className="assignee-info">
           <Select options={membersOptions}></Select>
           {/* {userInfo && <UserIcon userId={userInfo.id}>{userInfo.name}</UserIcon>}
           <p>{userInfo?.name}</p> */}
-          <Button className='delete-button'>
-            <div className='delete'></div>
+          <Button className="delete-button">
+            <div className="delete"></div>
           </Button>
         </div>
-        <span className='deadline'>{trans(Message.DueDate)}</span>
+        <span className="deadline">{trans(Message.DueDate)}</span>
         <div className="deadline-info">
           <DatePicker></DatePicker>
         </div>
