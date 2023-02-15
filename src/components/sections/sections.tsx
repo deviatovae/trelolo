@@ -6,7 +6,7 @@ import { TaskModalProvider } from '../../context/taskModalContext';
 import { TasksProvider } from '../../context/tasksContext';
 
 export const Sections = () => {
-  const { sections: { items: sections, count }, createSection } = useSections();
+  const { sections: { items: sections, count }, createSection, deleteSection } = useSections();
 
   const [columnNameWindow, setColumnNameWindow] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);

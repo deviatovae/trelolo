@@ -7,6 +7,7 @@ import { SectionService } from '../API/sectionService';
 export interface SectionsContextValue {
   sections: List<Section>
   createSection: (data: SectionCreateData) => Promise<(Errors | null)>
+  deleteSection: (id: string) => Promise<(Errors | null)>
 }
 
 export const SectionsContext = createContext<SectionsContextValue>({
@@ -14,7 +15,8 @@ export const SectionsContext = createContext<SectionsContextValue>({
     items: [],
     count: 0,
   },
-  createSection: async () => null
+  createSection: async () => null,
+  deleteSection: async () => null,
 });
 
 
@@ -56,12 +58,30 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
       return castToErrors(e);
     }
   };
+  
+  const deleteSection = async (id: string): Promise<Errors | null> => {
+    try {
+      const { errors } = await SectionService.deleteSection(id);
+      if (errors) {
+        return errors;
+      }
+
+      setSections(({ items, count }) => ({
+        items: [...items.filter((section) => section.id !== id)],
+        count: count - 1,
+      }));
+
+      return null;
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
 
   useEffect(() => {
     fetchSections();
   }, [fetchSections]);
 
   return (
-    <SectionsContext.Provider value={{ sections, createSection }}>{children}</SectionsContext.Provider>
+    <SectionsContext.Provider value={{ sections, createSection, deleteSection }}>{children}</SectionsContext.Provider>
   );
 };
