@@ -11,6 +11,8 @@ import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
 import { useMembers } from '../../hooks/members';
 import { Task } from '../../types/models';
+import { useSections } from '../../hooks/useSections';
+import { useTasks } from '../../hooks/useTasks';
 
 interface TaskModalProps {
   onClose: () => void
@@ -24,24 +26,28 @@ export function TaskModal({ onClose, task }: TaskModalProps) {
   const { userInfo } = useAuth();
   const { trans } = useTranslate();
 
+  const { deleteTask } = useTasks();
+
   const { getGroupedMembers } = useMembers();
   const members = getGroupedMembers();
+
+  const { sections } = useSections();
 
   const projectsPptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
 
   const membersOptions: Option[] = members.map(({ id, name }) => ({ value: id, label: name }));
 
-  const statusOptions: Option[] = [
-    { value: '1', label: 'ToDo' },
-    { value: '2', label: 'in progress' },
-    { value: '3', label: 'Done' }
-  ];
+  const statusOptions: Option[] = sections.items.map(({ id, name }) => ({ value: id, label: name }));
+
+  const deleteCurrentTask = () => {
+    deleteTask(task.id);
+  };
 
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain='task-main' onClose={onClose}>
       <div className='task-management'>
         <Button className='task-button'>✓ {trans(Message.MarkCompleted)}</Button>
-        <Button className='task-button'>{trans(Message.DeleteTask)}</Button>
+        <Button className='task-button' onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
       {<h2>{task.name}</h2>}
       <div className='task-info'>
@@ -59,7 +65,7 @@ export function TaskModal({ onClose, task }: TaskModalProps) {
           <DatePicker></DatePicker>
         </div>
         <span>{trans(Message.Status)}</span>
-        <Select options={statusOptions}></Select>
+        <Select options={statusOptions} placeholder="Status..."></Select>
         <span>{trans(Message.Projects)}</span>
         <Select isMulti options={projectsPptions} placeholder="Projects..."></Select>
       </div>

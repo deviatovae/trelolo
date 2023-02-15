@@ -61,7 +61,6 @@ export const Sections = () => {
               <Section key={index} section={section}></Section>
             </TasksProvider>
           ))}
-
           {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
           {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
         </div>
