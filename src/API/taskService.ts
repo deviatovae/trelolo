@@ -1,5 +1,5 @@
 import { getResponse } from './response';
-import { List, RequestMethod, TaskCreateData } from './types';
+import { List, RequestMethod, TaskCreateData, TaskUpdateData } from './types';
 import { Task } from '../types/models';
 
 export class TaskService {
@@ -11,8 +11,10 @@ export class TaskService {
     body: data
   });
 
-  static updateTask = (id: string, section: Task) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.PATCH, body: section });
+  static updateTask = (id: string, task: TaskUpdateData) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.PATCH, body: task });
 
   static deleteTask = (id: string) => getResponse<void>({ url: `tasks/${id}`, method: RequestMethod.DELETE });
+
+  static moveTask = (taskId: string, sectionId: string) => getResponse<Task>({ url: `tasks/${taskId}/move/${sectionId}`, method: RequestMethod.PATCH });
 
 }

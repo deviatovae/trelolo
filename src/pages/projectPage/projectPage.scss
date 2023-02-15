@@ -12,6 +12,7 @@
   &__board {
     height: 100%;
     overflow: auto auto;
+    user-select: none;
   }
 
   &__column-list {

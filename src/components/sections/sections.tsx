@@ -1,10 +1,10 @@
 import { WindowAdd } from '../window/windowAdd';
 import React, { useEffect, useState } from 'react';
 import { useSections } from '../../hooks/useSections';
-import { Section } from './section';
 import { TaskModalProvider } from '../../context/taskModalContext';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { TasksProvider } from '../../context/tasksContext';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { Section } from './section';
 
 export const Sections = () => {
   const { sections: { items: sections, count }, createSection } = useSections();
@@ -52,11 +52,20 @@ export const Sections = () => {
       <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
         <div className="project-page__column-list">
           <DragDropContext onDragEnd={onTaskDragEnd}>
-            {sections.map((section, index) => (
-              <TasksProvider sectionId={section.id}>
-                <Section section={section}></Section>
-              </TasksProvider>
-            ))}
+            <Droppable droppableId="sections" direction="horizontal" type="section">
+              {provided => (
+                <div className="columns-drop-container"
+                     {...provided.droppableProps}
+                     ref={provided.innerRef}>
+                  {sections.map((section, index) => (
+                    <TasksProvider sectionId={section.id}>
+                      <Section section={section}></Section>
+                    </TasksProvider>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
           </DragDropContext>
           {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
           {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
