@@ -1,4 +1,5 @@
 import ReactSelect, { GroupBase, Props } from 'react-select';
+import './select.scss';
 
 export default function Select<
   Option,

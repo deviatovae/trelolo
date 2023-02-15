@@ -7,6 +7,7 @@ import { TaskService } from '../API/taskService';
 export interface TasksContextValue {
   tasks: List<Task>
   createTask: (data: TaskCreateData ) => Promise<(Errors | null)>
+  deleteTask: (id: string) => Promise<(Errors | null)>
 }
 
 export const TasksContext = createContext<TasksContextValue>({
@@ -14,7 +15,8 @@ export const TasksContext = createContext<TasksContextValue>({
     items: [],
     count: 0,
   },
-  createTask: async () => null
+  createTask: async () => null,
+  deleteTask: async () => null
 });
 
 
@@ -57,11 +59,29 @@ export const TasksProvider = ({ children, sectionId }: { sectionId: string, chil
     }
   };
 
+  const deleteTask = async (id: string) => {
+    try {
+      const { errors } = await TaskService.deleteTask(id);
+      if (errors) {
+        return errors;
+      }
+
+      setTasks(({ items, count }) => ({
+        items: items.filter((task) => task.id !== id),
+        count: count - 1,
+      }));
+
+      return null;
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
 
   return (
-    <TasksContext.Provider value={{ tasks, createTask }}>{children}</TasksContext.Provider>
+    <TasksContext.Provider value={{ tasks, createTask, deleteTask }}>{children}</TasksContext.Provider>
   );
 };

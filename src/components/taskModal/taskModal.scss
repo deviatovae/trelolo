@@ -95,7 +95,7 @@
   }
 
   &-button {
-    max-width: 120px;
+    max-width: 130px;
     margin: 0;
     padding: 6px 8px;
     border: 1px solid $greylight;
@@ -104,6 +104,10 @@
     color: $black;
     line-height: 14px;
     font-weight: 400;
+
+    &:not(:disabled):hover {
+      color: $mainTextWhite;
+    }
   }
 
   &-info {

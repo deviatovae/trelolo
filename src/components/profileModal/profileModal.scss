@@ -53,6 +53,7 @@
 
     &:hover {
       cursor: pointer;
+      color: $red;
     }
 
     &:active {
@@ -86,17 +87,17 @@
   }
 
   &__name {
-   font-family: 'Roboto', sans-serif;
-   font-size: 14px;
-   font-weight: 400;
-   color: $black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: $black;
   }
 
   &__email {
-   font-family: 'Roboto', sans-serif;
-   font-size: 12px;
-   font-weight: 400;
-   color: #B3BAC5;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #B3BAC5;
   }
 
 }
