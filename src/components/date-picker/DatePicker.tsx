@@ -55,7 +55,7 @@ export function DatePicker() {
       }
     </form>
     {
-      !isCalendarOpen && <Button className='delete-button' onClick={deleteDeadline}>
+      !isCalendarOpen && inputValue !== trans(Message.NoDueDate) && <Button className='delete-button' onClick={deleteDeadline}>
         <div className='delete'></div>
       </Button>
     }

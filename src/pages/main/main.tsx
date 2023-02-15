@@ -7,7 +7,7 @@ import { ProjectsProvider } from '../../context/projectsContext';
 
 export const Main = () => {
   return (
-    <main className="main-wrapper _container wrapper">
+    <main className="main-wrapper">
       <ProjectsProvider>
         <Aside />
         <section className="main__section">
