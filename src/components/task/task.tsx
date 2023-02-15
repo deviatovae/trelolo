@@ -3,8 +3,10 @@ import React from 'react';
 import { Task as TaskModel } from '../../types/models';
 import { useTaskModal } from '../../hooks/useTaskModal';
 import { Draggable } from 'react-beautiful-dnd';
+import { useTasks } from '../../hooks/useTasks';
 
 export const Task = ({ task }: { task: TaskModel }) => {
+  const context = useTasks();
   const { showTaskModal } = useTaskModal();
   const { name } = task;
 
@@ -15,7 +17,7 @@ export const Task = ({ task }: { task: TaskModel }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          onClick={() => showTaskModal(task)}
+          onClick={() => showTaskModal(task, context)}
           className="column-list-item__task-container wrapper"
         >
           <div className="column-list-item__task-logo-container">
