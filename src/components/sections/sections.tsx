@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useSections } from '../../hooks/useSections';
 import { TaskModalProvider } from '../../context/taskModalContext';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { TasksProvider } from '../../context/tasksContext';
 import { Section } from './section';
+import { DnDType } from '../../types/types';
+import { useTasks } from '../../hooks/useTasks';
 
 export const Sections = () => {
-  const { sections: { items: sections, count }, createSection } = useSections();
+  const { sections: { items: sections }, createSection } = useSections();
+  const { updateTask, moveTask } = useTasks();
 
   const [showCreateSection, setShowCreateSection] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);
@@ -43,8 +45,28 @@ export const Sections = () => {
     setShowCreateSection(false);
   };
 
-  const onTaskDragEnd = (result: DropResult) => {
-    console.log(result);
+  const onTaskDragEnd = async ({ draggableId, source, destination, type }: DropResult) => {
+    const toSectionId = destination?.droppableId || source.droppableId;
+    const curPosition = source.index;
+    const toPosition = destination?.index || curPosition;
+
+    switch (type) {
+      case DnDType.Task:
+        if (source.droppableId !== destination?.droppableId) {
+          return moveTask(draggableId, toSectionId, toPosition).then((errors) => {
+            if (errors) {
+              console.error(errors);
+            }
+          });
+        }
+        return updateTask(draggableId, { position: toPosition }).then(errors => {
+          if (errors) {
+            console.error(errors);
+          }
+        });
+      case DnDType.Section:
+        break;
+    }
   };
 
   return (
@@ -52,15 +74,13 @@ export const Sections = () => {
       <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
         <div className="project-page__column-list">
           <DragDropContext onDragEnd={onTaskDragEnd}>
-            <Droppable droppableId="sections" direction="horizontal" type="section">
+            <Droppable droppableId="sections" direction="horizontal" type={DnDType.Section}>
               {provided => (
                 <div className="columns-drop-container"
                      {...provided.droppableProps}
                      ref={provided.innerRef}>
                   {sections.map((section, index) => (
-                    <TasksProvider sectionId={section.id}>
-                      <Section section={section}></Section>
-                    </TasksProvider>
+                    <Section section={section}></Section>
                   ))}
                   {provided.placeholder}
                 </div>

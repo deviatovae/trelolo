@@ -13,8 +13,12 @@ export class TaskService {
 
   static updateTask = (id: string, task: TaskUpdateData) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.PATCH, body: task });
 
-  static deleteTask = (id: string) => getResponse<void>({ url: `tasks/${id}`, method: RequestMethod.DELETE });
+  static deleteTask = (id: string) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.DELETE });
 
-  static moveTask = (taskId: string, sectionId: string) => getResponse<Task>({ url: `tasks/${taskId}/move/${sectionId}`, method: RequestMethod.PATCH });
+  static moveTask = (taskId: string, sectionId: string, position: number) => getResponse<Task>({
+    url: `tasks/${taskId}/move/${sectionId}`,
+    method: RequestMethod.PATCH,
+    body: { position }
+  });
 
 }

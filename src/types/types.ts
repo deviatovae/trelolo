@@ -7,3 +7,8 @@ export type SelectOption = {
   value: string
   label: string
 };
+
+export enum DnDType {
+  Section = 'section',
+  Task = 'task',
+}

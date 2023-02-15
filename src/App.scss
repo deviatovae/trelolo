@@ -47,16 +47,12 @@ a {
   text-decoration: none;
 }
 
-// .wrapper {
-//   margin: 0 auto;
-// }
-
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background-color: $asideHover;
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
 }

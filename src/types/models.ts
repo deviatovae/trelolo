@@ -30,6 +30,7 @@ export interface UserMembers {
 
 export interface Task {
   id: string
+  sectionId: string
   name: string
   position: number
   description: string
