@@ -1,16 +1,19 @@
 import { WindowAdd } from '../window/windowAdd';
 import React, { useEffect, useState } from 'react';
 import { useSections } from '../../hooks/useSections';
-import { Section } from './section';
 import { TaskModalProvider } from '../../context/taskModalContext';
-import { TasksProvider } from '../../context/tasksContext';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { Section } from './section';
+import { DnDType } from '../../types/types';
+import { useTasks } from '../../hooks/useTasks';
 import { PreloaderCircle } from '../preloader/preloaderCircle';
 
 
 export const Sections = () => {
-  const { sections: { items: sections, count }, createSection, isFetchingSection } = useSections();
+  const { sections: { items: sections }, createSection, isFetchingSection } = useSections();
+  const { updateTask, moveTask } = useTasks();
 
-  const [columnNameWindow, setColumnNameWindow] = useState(false);
+  const [showCreateSection, setShowCreateSection] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);
 
   useEffect(() => {
@@ -21,52 +24,75 @@ export const Sections = () => {
   }, []);
 
   const handleClickAddColumn = () => {
-    setColumnNameWindow(!columnNameWindow);
+    setShowCreateSection(!showCreateSection);
   };
 
-  // const checkWindowAddOtsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  //   if (columnNameWindow &&
-  //     (!(event.target as HTMLElement).classList.contains('modal-main')) &&
-  //     (!(event.target as HTMLElement).classList.contains('modal-main__project-name'))) {
-  //     setColumnNameWindow(false);
-  //   }
-  //
-  //   if (taskNameInColumnWindow &&
-  //     (!(event.target as HTMLElement).classList.contains('window-add-task__input')) &&
-  //     (!(event.target as HTMLElement).classList.contains('window-add-task')) &&
-  //     (!(event.target as HTMLElement).classList.contains('window-add-task__buttons-container'))) {
-  //     setTaskNameInColumnWindow(false);
-  //   }
-  // };
+  const checkWindowAddOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (showCreateSection &&
+      (!(event.target as HTMLElement).classList.contains('modal-main')) &&
+      (!(event.target as HTMLElement).classList.contains('modal-main__project-name'))) {
+      setShowCreateSection(false);
+    }
+  };
 
   const CheckKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === 27) {
-      setColumnNameWindow(false);
+      setShowCreateSection(false);
       setTaskNameInColumnWindow(false);
     }
   };
 
   const handleAddSection = async (name: string) => {
     await createSection({ name });
-    // setTasks({ ...tasks, [inputValue]: [] });
-    setColumnNameWindow(false);
+    setShowCreateSection(false);
   };
 
-  const increaseWidth = () => `${390 + 290 * count}px`;
+  const onTaskDragEnd = async ({ draggableId, source, destination, type }: DropResult) => {
+    const toSectionId = destination?.droppableId || source.droppableId;
+    const curPosition = source.index;
+    const toPosition = destination?.index || curPosition;
+
+    switch (type) {
+      case DnDType.Task:
+        if (source.droppableId !== destination?.droppableId) {
+          return moveTask(draggableId, toSectionId, toPosition).then((errors) => {
+            if (errors) {
+              console.error(errors);
+            }
+          });
+        }
+        return updateTask(draggableId, { position: toPosition }).then(errors => {
+          if (errors) {
+            console.error(errors);
+          }
+        });
+      case DnDType.Section:
+        break;
+    }
+  };
 
   return (
     <TaskModalProvider>
-      <section className="project-page__board">
+      <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
         {isFetchingSection && <PreloaderCircle/>}
         {!isFetchingSection 
-          && <div className="project-page__column-list" style={{ width: increaseWidth() }}>
-              {sections.map((section, index) => (
-                <TasksProvider sectionId={section.id}>
-                <Section key={index} section={section}></Section>
-                </TasksProvider>
-              ))}
-              {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
-              {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
+          && <div className="project-page__column-list">
+          <DragDropContext onDragEnd={onTaskDragEnd}>
+            <Droppable droppableId="sections" direction="horizontal" type={DnDType.Section}>
+              {provided => (
+                <div className="columns-drop-container"
+                     {...provided.droppableProps}
+                     ref={provided.innerRef}>
+                      {sections.map((section, index) => (
+                          <Section section={section}></Section>
+                          ))}
+                      {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+          {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
+              {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
           </div>
         }
       </section>

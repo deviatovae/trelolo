@@ -53,8 +53,8 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   };
 
   const updateInfo = async (updatedData: Partial<typeof task>) => {
-  
-    const errors = await updateTask(task.id, { ...task, ...updatedData });
+
+    const errors = await updateTask(task.id, { ...updatedData });
     if (errors) {
       onClose();
     }
@@ -74,7 +74,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
         <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)} 🗑️</Button>
       </div>
-      <Input placeholder="Write a task title" value={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input" ></Input>
+      <Input placeholder="Write a task title" value={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
         <div className="assignee-info">

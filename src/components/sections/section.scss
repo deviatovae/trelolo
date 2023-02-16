@@ -1,4 +1,8 @@
 @import "src/assets/styles/variables";
+.columns-drop-container {
+  display: flex;
+  gap: 20px;
+}
 
 .column-list-item {
 
@@ -17,7 +21,7 @@
   }
 
   &__header-input {
-    border: none; 
+    border: none;
     outline: none;
     background-color: $mainBg;
     font-size: 16px;
@@ -39,8 +43,14 @@
     overflow: hidden;
     position: relative;
     top: 40px;
-    z-index: 1;
+    z-index: -1;
     background-size: contain;
+    visibility: hidden;
+
+    &_visible {
+      visibility: initial;
+      z-index: 1;
+    }
 
     &:hover {
       cursor: pointer;
@@ -56,15 +66,19 @@
   }
 
   &__content-wrapper {
+    width: 285px;
     overflow: hidden auto;
-    background-color: #EBECF0;
+    background: rgb(235, 236, 240);
+    background: linear-gradient(180deg, rgba(235, 236, 240, 1) 0%, rgba(245, 245, 247, 1) 100%);
     height: calc(100% - 30px);
     min-height: 150px;
     padding: 12px 10px;
     border-radius: 6px;
-    box-shadow: -3px 0px 12px -8px rgba(34, 60, 80, 0.4);
     position: relative;
-    z-index: 2;
+  }
+
+  &__content-wrapper_active {
+    background: linear-gradient(180deg, rgba(217, 217, 251, 1) 0%, rgba(236, 240, 255, 1) 100%);
   }
 
   &__btn-add-task-plus {
@@ -72,10 +86,76 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease-in-out;
+    color: $mainBlue;
 
     &:hover {
       cursor: pointer;
       transform: scale(1.04);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__task-container {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
+  }
+
+  &__task-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &__calendar {
+    border: 1px solid rgba(73, 75, 244, 0.5);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: url(../../assets/img/clarity_date-line.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+
+  &__settings {
+    width: 20px;
+    height: 20px;
+    background: url(../../assets/img/settinfg_add_task.svg) no-repeat center;
+    transition: transform 0.2s ease-in-out;
+
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
       transition: transform 0.2s ease-in-out;
     }
 
