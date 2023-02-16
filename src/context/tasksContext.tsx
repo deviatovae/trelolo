@@ -11,6 +11,7 @@ export interface TasksContextValue {
   updateTask: (id: string, data: TaskUpdateData) => Promise<(Errors | null)>
   deleteTask: (id: string) => Promise<(Errors | null)>
   moveTask: (id: string, toSectionId: string, toPosition: number) => Promise<(Errors | null)>
+  getTasksAll: () => List<Task>
 }
 
 export const TasksContext = createContext<TasksContextValue>({
@@ -22,6 +23,10 @@ export const TasksContext = createContext<TasksContextValue>({
   updateTask: async () => null,
   deleteTask: async () => null,
   moveTask: async () => null,
+  getTasksAll: () => ({
+    items: [],
+    count: 0
+  }),
 });
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
@@ -46,6 +51,17 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       items: items.sort((a, b) => a.position - b.position),
       count
     };
+  };
+
+  const getTasksAll = (): List<Task> => {
+    return Object.values(tasks).reduce((acc, task) => {
+      acc.items = [...acc.items, ...task.items];
+      acc.count = acc.count + task.count;
+      return acc;
+    }, {
+      items: [],
+      count: 0
+    });
   };
 
   const getTask = (id: string): Task => {
@@ -164,6 +180,6 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   }, [fetchTasks]);
 
   return (
-    <TasksContext.Provider value={{ getTasks, createTask, updateTask, deleteTask, moveTask }}>{children}</TasksContext.Provider>
+    <TasksContext.Provider value={{ getTasks, getTasksAll, createTask, updateTask, deleteTask, moveTask }}>{children}</TasksContext.Provider>
   );
 };

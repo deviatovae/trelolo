@@ -3,6 +3,7 @@ import { ProjectUpdateCard } from './projectUpdateCard';
 import { Errors } from '../../../API/types';
 import { useProjects } from '../../../hooks/projects';
 import { ProjectDeleteCard } from './projectDeleteCard';
+import { NavLink } from 'react-router-dom';
 
 interface ProjectCardProps {
   id: string
@@ -45,7 +46,8 @@ export const ProjectCard = ({ name, id }: ProjectCardProps) => {
   return (
     <>
       {!showUpdate && !showDelete && (
-        <div className="projects-cards__item">{name}
+        <div className="projects-cards__item">
+          <div className="projects-cards__name"><NavLink to={`/project/${id}`}>{name}</NavLink></div>
           <div className="projects-cards__edit" onClick={() => setShowUpdate(true)}></div>
           <div className="projects-cards__delete" onClick={() => setShowDelete(true)}></div>
         </div>

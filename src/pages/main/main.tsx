@@ -4,6 +4,7 @@ import Greeting from '../../components/greeting/greeting';
 import React from 'react';
 import { ProjectCardList } from '../../components/projects/cards/projectCardList';
 import { ProjectsProvider } from '../../context/projectsContext';
+import { MyTasks } from '../../components/myTasks/myTasks';
 
 export const Main = () => {
   return (
@@ -12,9 +13,12 @@ export const Main = () => {
         <Aside />
         <section className="main__section">
           < Greeting />
-          <ProjectCardList />
-          <div className="main__img"></div>
+          <div className="main__content">
+            <ProjectCardList />
+            <MyTasks />
+          </div>
         </section>
+        {/*<div className="main__img"></div>*/}
       </ProjectsProvider>
     </main>
   );
