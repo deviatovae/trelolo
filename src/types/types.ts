@@ -12,3 +12,9 @@ export enum DnDType {
   Section = 'section',
   Task = 'task',
 }
+
+export type Assignee = {
+  id?: string,
+  memberId: string,
+  taskId: string,
+};

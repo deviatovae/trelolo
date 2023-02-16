@@ -1,3 +1,5 @@
+import { Assignee } from './types';
+
 export interface User {
   id: string,
   name: string,
@@ -30,6 +32,7 @@ export interface UserMembers {
 
 export interface Task {
   id: string
+  assignees: Assignee[] | []
   sectionId: string
   name: string
   position: number
