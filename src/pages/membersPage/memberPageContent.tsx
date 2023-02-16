@@ -5,9 +5,6 @@ import { useMembers } from '../../hooks/members';
 import { MemberList } from '../../components/members/list/memberList';
 import { ProjectList } from '../../components/projects/list/projectList';
 
-
-
-
 export const MemberPageContent = () => {
 
   const { isFetchingProject } = useProjects();
