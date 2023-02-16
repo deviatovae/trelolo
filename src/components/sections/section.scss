@@ -16,23 +16,36 @@
     font-size: 16px;
   }
 
-  &__setings {
-    width: 30px;
-    height: 30px;
+  &__header-input {
+    border: none; 
+    outline: none;
+    background-color: $mainBg;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    border-bottom: 0.5px solid $greylight;
+  }
+
+  &__cross {
+    background: url(./../../assets/img/cross.svg) no-repeat center;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #EBECF0 url(./../../assets/img/dat_dat_dat.svg) no-repeat center;
+    background-color: #EBECF0;
     border-radius: 6px;
     transition: 0.3s ease-in-out;
     overflow: hidden;
     position: relative;
     top: 40px;
     z-index: 1;
+    background-size: contain;
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.08);
+      transform: scale(1.05);
+      background-color: $asideHover;
       transition: transform 0.3s ease-in-out;
     }
 
@@ -136,7 +149,7 @@
   }
 }
 
-.column-list-item__header-settings-container:hover > .column-list-item__setings {
+.column-list-item__header-settings-container:hover > .column-list-item__cross {
   top: 0px;
   transition: 0.3s all;
 }

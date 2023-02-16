@@ -1,0 +1,53 @@
+@import '/src/assets/styles/variables.scss';
+
+.window-delete {
+  width: 265px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
+  animation: 0.2s ease-in-out 0s normal running down-animation;
+
+  &__text {
+    text-align: center;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__btn {
+    width: 235px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid $borderBlueLight;
+    background: $mainBlue;
+    color: $white;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      background: $mainBlueHover;
+      transition: background 0.2s;
+    }
+  
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.1s;
+    }
+  }
+}
