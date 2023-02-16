@@ -5,7 +5,7 @@ import Select from '../select/select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
 import { Textearea } from '../textarea/textearea';
-import { useProjects } from '../../hooks/projects';
+// import { useProjects } from '../../hooks/projects';
 import { DatePicker } from '../date-picker/DatePicker';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
@@ -30,7 +30,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const { trans } = useTranslate();
 
   const [title, setTitle] = useState(task.name || '');
-  // const [assignee, setAssignee] = useState('');
+  // const [assignee, setAssignee] = useState('No assignee');
 
   const { deleteTask, updateTask } = context;
 
@@ -39,7 +39,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const { sections } = useSections();
 
-  const projectsPptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
+  // const projectsPptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
 
   const membersOptions: Option[] = members.map(({ id, name }) => ({ value: id, label: name }));
 
@@ -91,8 +91,8 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         </div>
         <span>{trans(Message.Status)}</span>
         <Select options={statusOptions} placeholder="Status..."></Select>
-        <span>{trans(Message.Projects)}</span>
-        <Select isMulti options={projectsPptions} placeholder="Projects..."></Select>
+        {/* <span>{trans(Message.Projects)}</span>
+        <Select isMulti options={projectsPptions} placeholder="Projects..."></Select> */}
       </div>
 
       <div className='task-description'>
