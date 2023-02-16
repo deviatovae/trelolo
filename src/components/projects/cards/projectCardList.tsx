@@ -6,9 +6,11 @@ import { ProjectCard } from './projectCard';
 import { ProjectCreateCard } from './projectCreateCard';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../languages/messages';
+import { PreloaderCircle } from '../../../components/preloader/preloaderCircle';
+
 
 export function ProjectCardList() {
-  const { projects, count, addProject } = useProjects();
+  const { projects, count, addProject, isFetchingProject } = useProjects();
   const [showCreate, setShowCreate] = useState(false);
   const [errors, setErrors] = useState<Errors | null>(null);
 
@@ -27,13 +29,18 @@ export function ProjectCardList() {
   };
 
   return (
-    <div className="projects-cards wrapper">
-      <h4><FormattedMessage id={Message.MyProjects} /> ({count})</h4>
-      <div className="projects-cards__list">
-        {projects.map(({ id, name }) => <ProjectCard key={id} id={id} name={name} />)}
-        {!showCreate && <div className="projects-cards__create" onClick={onClickCreate}>+ <FormattedMessage id={Message.CreateNewProject} /></div>}
-        {showCreate && <ProjectCreateCard onClose={close} onCreate={onCreateProject} errors={errors} />}
+    <>
+    {isFetchingProject && <PreloaderCircle/>}
+    {!isFetchingProject && 
+      <div className="projects-cards wrapper">
+        <h4><FormattedMessage id={Message.MyProjects} /> ({count})</h4>
+        <div className="projects-cards__list">
+          {projects.map(({ id, name }) => <ProjectCard key={id} id={id} name={name} />)}
+          {!showCreate && <div className="projects-cards__create" onClick={onClickCreate}>+ <FormattedMessage id={Message.CreateNewProject} /></div>}
+          {showCreate && <ProjectCreateCard onClose={close} onCreate={onCreateProject} errors={errors} />}
+         </div>
       </div>
-    </div>
+    }
+    </>
   );
 }

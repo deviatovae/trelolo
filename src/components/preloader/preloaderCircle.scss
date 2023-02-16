@@ -1,0 +1,17 @@
+@import '/src/assets/styles/variables.scss';
+
+.preloader-circle {
+  position: relative;
+  top: 35%;
+  left: 50%;
+  z-index: 12;
+
+  &__circle {
+    border: 9px solid rgba(109, 130, 255, 0.2);
+    border-top: 9px solid $mainBlueHover;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+}

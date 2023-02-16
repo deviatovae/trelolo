@@ -16,6 +16,7 @@ export interface ProjectsContextValue {
   addProject: (project: ProjectData) => Promise<Errors | null>
   updateProject: (id: string, project: ProjectData) => Promise<Errors | null>
   deleteProject: (id: string) => Promise<Errors | null>
+  isFetchingProject: boolean
 }
 
 export const ProjectsContext = createContext<ProjectsContextValue>({
@@ -25,6 +26,7 @@ export const ProjectsContext = createContext<ProjectsContextValue>({
   addProject: async () => null,
   updateProject: async () => null,
   deleteProject: async () => null,
+  isFetchingProject: false,
 });
 
 export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
@@ -32,6 +34,9 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
     items: [],
     count: 0,
   });
+
+  const [isFetchingProject, setIsFetchingProject] = useState<boolean>(false);
+
 
   const getProject = (id: string): Project | null => {
     return result.items.find(project => project.id === id) || null;
@@ -70,7 +75,7 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
       return null;
     } catch (e) {
       return castToErrors(e);
-    }
+    } 
   };
 
   const deleteProject = async (id: string): Promise<Errors | null> => {
@@ -85,6 +90,7 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
       });
       return null;
 
+
     } catch (e) {
       return castToErrors(e);
     }
@@ -92,16 +98,17 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setIsFetchingProject(true);
       const { data } = await apiGetProjects();
       setResult(data);
+      setIsFetchingProject(false);
     };
-
     fetchProjects();
   }, []);
 
   const { items: projects, count } = result;
 
   return (
-    <ProjectsContext.Provider value={{ projects, count, getProject, addProject, updateProject, deleteProject }}>{children}</ProjectsContext.Provider>
+    <ProjectsContext.Provider value={{ projects, count, getProject, addProject, updateProject, deleteProject, isFetchingProject }}>{children}</ProjectsContext.Provider>
   );
 };

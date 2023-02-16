@@ -11,6 +11,7 @@ export interface MembersContextValue {
   addMembers: (email: string, projectIds: string[]) => Promise<(Errors | null)[]>
   addMember: (projectId: string, member: MemberData) => Promise<Errors | null>
   deleteMember: (id: string) => Promise<Errors | null>
+  isFetchingMembers: boolean
 }
 
 export const MembersContext = createContext<MembersContextValue>({
@@ -22,6 +23,7 @@ export const MembersContext = createContext<MembersContextValue>({
   addMembers: async () => [],
   getGroupedMembers: () => [],
   deleteMember: async () => null,
+  isFetchingMembers: false
 });
 
 export const MembersProvider = ({ children, projectId: selectedProjectId }: { children: ReactNode, projectId?: string }) => {
@@ -30,8 +32,10 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     count: 0
   };
 
+
   const [members, setMembers] = useState(initialState);
   const { projects } = useProjects();
+  const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(false);
 
   const getGroupedMembers = (): UserMembers[] => {
     const membersByUser = members.items.reduce((acc, member) => {
@@ -90,13 +94,17 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     const selectedProject = selectedProjectId ? projects.find(({ id }) => id === selectedProjectId) : null;
     const usedProjects = selectedProject ? [selectedProject] : projects;
 
+
     usedProjects.reduce(async (acc, { id }) => {
+      setIsFetchingMembers(true);
       const { data } = await MemberService.getMembers(id);
       const { items, count } = await acc;
+      setIsFetchingMembers(false);
       return {
         items: [...items, ...data.items],
         count: count + data.count
       };
+      
     }, Promise.resolve<List<Member>>({
       items: [],
       count: 0
@@ -104,6 +112,6 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
   }, [projects, selectedProjectId]);
 
   return (
-    <MembersContext.Provider value={{ members, addMember, addMembers, getGroupedMembers, deleteMember }}>{children}</MembersContext.Provider>
+    <MembersContext.Provider value={{ members, addMember, addMembers, getGroupedMembers, deleteMember, isFetchingMembers }}>{children}</MembersContext.Provider>
   );
 };

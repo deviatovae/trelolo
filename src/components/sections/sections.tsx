@@ -4,9 +4,11 @@ import { useSections } from '../../hooks/useSections';
 import { Section } from './section';
 import { TaskModalProvider } from '../../context/taskModalContext';
 import { TasksProvider } from '../../context/tasksContext';
+import { PreloaderCircle } from '../preloader/preloaderCircle';
+
 
 export const Sections = () => {
-  const { sections: { items: sections, count }, createSection } = useSections();
+  const { sections: { items: sections, count }, createSection, isFetchingSection } = useSections();
 
   const [columnNameWindow, setColumnNameWindow] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);
@@ -55,15 +57,18 @@ export const Sections = () => {
   return (
     <TaskModalProvider>
       <section className="project-page__board">
-        <div className="project-page__column-list" style={{ width: increaseWidth() }}>
-          {sections.map((section, index) => (
-            <TasksProvider sectionId={section.id}>
-              <Section key={index} section={section}></Section>
-            </TasksProvider>
-          ))}
-          {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
-          {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
-        </div>
+        {isFetchingSection && <PreloaderCircle/>}
+        {!isFetchingSection 
+          && <div className="project-page__column-list" style={{ width: increaseWidth() }}>
+              {sections.map((section, index) => (
+                <TasksProvider sectionId={section.id}>
+                <Section key={index} section={section}></Section>
+                </TasksProvider>
+              ))}
+              {columnNameWindow && <WindowAdd showWindow={columnNameWindow} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
+              {!columnNameWindow && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
+          </div>
+        }
       </section>
     </TaskModalProvider>
   );

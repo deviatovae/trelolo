@@ -8,6 +8,7 @@ export interface SectionsContextValue {
   sections: List<Section>
   createSection: (data: SectionCreateData) => Promise<(Errors | null)>
   deleteSection: (id: string) => Promise<(Errors | null)>
+  isFetchingSection: boolean
 }
 
 export const SectionsContext = createContext<SectionsContextValue>({
@@ -17,6 +18,7 @@ export const SectionsContext = createContext<SectionsContextValue>({
   },
   createSection: async () => null,
   deleteSection: async () => null,
+  isFetchingSection: false,
 });
 
 
@@ -26,7 +28,10 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
     count: 0
   });
 
+  const [isFetchingSection, setIsFetchingSection] = useState<boolean>(false);
+
   const fetchSections = useCallback(async (): Promise<Errors | null> => {
+    setIsFetchingSection(true);
     try {
       const { data: sectionItems, errors } = await SectionService.getSections(projectId);
       if (errors) {
@@ -34,11 +39,11 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
       }
 
       setSections(sectionItems);
-
+      setIsFetchingSection(false);
       return null;
     } catch (e) {
       return castToErrors(e);
-    }
+    } 
   }, [projectId]);
 
   const createSection = async (data: SectionCreateData) => {
@@ -82,6 +87,6 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
   }, [fetchSections]);
 
   return (
-    <SectionsContext.Provider value={{ sections, createSection, deleteSection }}>{children}</SectionsContext.Provider>
+    <SectionsContext.Provider value={{ sections, createSection, deleteSection, isFetchingSection }}>{children}</SectionsContext.Provider>
   );
 };
