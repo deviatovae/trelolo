@@ -18,7 +18,7 @@ export function DatePicker({ onClick, dueDate }: DatePickerProp) {
 
   const [selectedDay, setSelectedDay] = useState<Date>();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<string>(formatDate(dueDate ? new Date(dueDate) : new Date()));
+  const [inputValue, setInputValue] = useState<string>(dueDate ? formatDate(new Date(dueDate)) : trans(Message.NoDueDate));
 
   const handleDayClick = (day: Date) => {
     setInputValue(formatDate(day));
