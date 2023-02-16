@@ -58,3 +58,11 @@ export interface SectionCreateData {
 export interface TaskCreateData {
     name: string
 }
+
+export interface TaskUpdateData {
+    name?: string
+    position?: number
+    description?: string
+    dueDate?: string
+    isCompleted?: boolean
+}
