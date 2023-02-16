@@ -1,24 +1,30 @@
 import { FormEvent, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { format } from 'date-fns';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
 import './DatePicker.scss';
 import Button from '../button/button';
+import { formatDate } from '../../utils/formatDate';
 
-export function DatePicker() {
+interface DatePickerProp {
+  onClick: ({ dueDate } : { dueDate: string }) => void
+  dueDate: string
+}
+
+export function DatePicker({ onClick, dueDate }: DatePickerProp) {
 
   const { trans } = useTranslate();
 
   const [selectedDay, setSelectedDay] = useState<Date>();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<string>(format(new Date(), 'PPP'));
+  const [inputValue, setInputValue] = useState<string>(formatDate(dueDate ? new Date(dueDate) : new Date()));
 
   const handleDayClick = (day: Date) => {
-    setInputValue(format(day, 'PPP'));
+    setInputValue(formatDate(day));
     setSelectedDay(day);
     closeCalendar();
+    onClick({ dueDate: day.toDateString() });
   };
 
   const handleButtonClick = () => {

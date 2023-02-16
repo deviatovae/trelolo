@@ -8,6 +8,7 @@ export interface TasksContextValue {
   tasks: List<Task>
   createTask: (data: TaskCreateData ) => Promise<(Errors | null)>
   deleteTask: (id: string) => Promise<(Errors | null)>
+  updateTask: (id: string, taskInfo: Task) => Promise<(Errors | null)>
 }
 
 export const TasksContext = createContext<TasksContextValue>({
@@ -16,7 +17,8 @@ export const TasksContext = createContext<TasksContextValue>({
     count: 0,
   },
   createTask: async () => null,
-  deleteTask: async () => null
+  deleteTask: async () => null,
+  updateTask: async () => null
 });
 
 
@@ -77,11 +79,29 @@ export const TasksProvider = ({ children, sectionId }: { sectionId: string, chil
     }
   };
 
+  const updateTask = async (id: string, taskInfo: Task) => {
+    try {
+      const { data: taskItem, errors } = await TaskService.updateTask(id, taskInfo);
+      if (errors) {
+        return errors;
+      }
+
+      setTasks(({ items, count }) => ({
+        items: items.map((task) => task.id === taskItem.id ? taskItem : task),
+        count: count,
+      }));
+
+      return null;
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
 
   return (
-    <TasksContext.Provider value={{ tasks, createTask, deleteTask }}>{children}</TasksContext.Provider>
+    <TasksContext.Provider value={{ tasks, createTask, deleteTask, updateTask }}>{children}</TasksContext.Provider>
   );
 };
