@@ -5,6 +5,8 @@ import { Section as SectionModel } from '../../types/models';
 import { useTasks } from '../../hooks/useTasks';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { DnDType } from '../../types/types';
+import { WindowDelete } from '../window/windowDelete';
+import { useSections } from '../../hooks/useSections';
 
 interface SectionProps {
   section: SectionModel
@@ -12,10 +14,14 @@ interface SectionProps {
 
 export const Section = ({ section: { id, name, position } }: SectionProps) => {
   const { getTasks, createTask } = useTasks();
+  const { deleteSection } = useSections();
   const { items: tasks } = getTasks(id);
 
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [showCreatTask, setShowCreatTask] = useState(false);
+  const [showDeleteSection, setShowDeleteSection] = useState(false);
+  const [sectionNameInput, setSectionNameInput] = useState(name);
+  const [showCross, setShowCross] = useState(false);
 
   const handleClickAddTaskPlus = (column: string) => {
     setActiveColumn(column);
@@ -35,15 +41,34 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
     }
   };
 
+  const handleCrossColumnClick = (column: string) => {
+    setActiveColumn(column);
+    setShowDeleteSection(!showDeleteSection);
+  };
+
+  const handleDeleteColumn = async () => {
+    setShowDeleteSection(false);
+    await deleteSection(id);
+  };
+
   return (
     <Draggable draggableId={id} index={position}>
       {(DragProvided) => (
         <div className="project-page__column-list-item"
              {...DragProvided.draggableProps} ref={DragProvided.innerRef}
         >
-          <div className="column-list-item__header-settings-container" {...DragProvided.dragHandleProps}>
-            <div className="column-list-item__header">{name}</div>
-            <div className="column-list-item__setings"></div>
+          <div className="column-list-item__header-settings-container" {...DragProvided.dragHandleProps} onMouseOver={() => setShowCross(true)}
+               onMouseOut={() => setShowCross(false)}>
+            <div className="column-list-item__header">
+              <input
+                className="column-list-item__header-input"
+                type="text"
+                value={sectionNameInput}
+                onChange={(e) => setSectionNameInput(e.target.value)}
+                onBlur={(e) => setSectionNameInput(e.target.value)}
+              />
+            </div>
+            <div className={`column-list-item__cross ${showCross ? 'column-list-item__cross_visible' : ''}`} onClick={() => handleCrossColumnClick(name)}></div>
           </div>
           <Droppable droppableId={id} type={DnDType.Task}>
             {(provided, snapshot) => {
@@ -56,6 +81,9 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
                 {...provided.droppableProps}
                 className={`column-list-item__content-wrapper ${classes}`}
               >
+                {showDeleteSection && activeColumn === name &&
+                  (<WindowDelete deleteColumn={handleDeleteColumn} />)}
+
                 {tasks.map((task, idx) => <Task key={idx} task={task} index={idx + 1} />)}
                 {showCreatTask && activeColumn === name && (
                   <WindowAddTask onCreateProject={(inputValue) => handleAddTask(inputValue)} onClickCross={handleCrossClick} />

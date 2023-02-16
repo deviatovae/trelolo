@@ -4,6 +4,8 @@ import { Task as TaskModel } from '../../types/models';
 import { useTaskModal } from '../../hooks/useTaskModal';
 import { Draggable } from 'react-beautiful-dnd';
 import { useTasks } from '../../hooks/useTasks';
+import { formatDate } from '../../utils/formatDate';
+import './task.scss';
 
 export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
   const context = useTasks();
@@ -18,19 +20,21 @@ export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           onClick={() => showTaskModal(task, context)}
-          className="column-list-item__task-container wrapper"
+          className="task-container wrapper"
         >
-          <div className="column-list-item__task-logo-container">
-            <div className="column-list-item__task">{name}</div>
-            <div className="column-list-item__logo"><UserIcon userId="24">KZ</UserIcon></div>
+          <div className="task-title-logo-container">
+            <p className="task-title">{name}</p>
+            <UserIcon userId="24">KZ</UserIcon>
           </div>
-          <div className="column-list-item__calendar-settings-container">
-            <div className="column-list-item__calendar"></div>
-            <div className="column-list-item__settings"></div>
+          <div className="task-calendar-settings-container">
+            <div className="task-deadline">
+              <div className="task-calendar"></div>
+              {task.dueDate && <span className="task-deadline">{formatDate(new Date(task.dueDate), 'PP')}</span>}
+            </div>
+            <div className="task-settings"></div>
           </div>
         </div>
       )}
-
     </Draggable>
   );
 };

@@ -22,7 +22,7 @@ export const WindowAddTask = ({ onClickCross, onCreateProject }: WindowProps)=> 
         onKeyDown={CheckKeyDown}
       />
       <div className="window-add-task__buttons-container">
-        <button className="window-add-task__btn-add" disabled={inputValue.length === 0} onClick={handleCreateProject}>Add tasks</button>
+        <button className="window-add-task__btn-add" disabled={inputValue.length === 0} onClick={handleCreateProject}>Add task</button>
         <div className="window-add-task__cross-add" onClick={onClickCross}></div>
       </div>
     </div>

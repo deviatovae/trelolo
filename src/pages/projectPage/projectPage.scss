@@ -18,7 +18,7 @@
   &__column-list {
     padding: 25px;
     height: 100%;
-    min-width: 100vw;
+    min-width: calc(100vw - 240px);
     display: inline-flex;
     column-gap: 20px;
   }

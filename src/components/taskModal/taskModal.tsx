@@ -13,6 +13,8 @@ import { useMembers } from '../../hooks/members';
 import { Task } from '../../types/models';
 import { useSections } from '../../hooks/useSections';
 import { TasksContextValue } from '../../context/tasksContext';
+import Input from '../input/input';
+import { useState } from 'react';
 
 interface TaskModalProps {
   onClose: () => void
@@ -27,7 +29,10 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const { userInfo } = useAuth();
   const { trans } = useTranslate();
 
-  const { deleteTask } = context;
+  const [title, setTitle] = useState(task.name || '');
+  // const [assignee, setAssignee] = useState('');
+
+  const { deleteTask, updateTask } = context;
 
   const { getGroupedMembers } = useMembers();
   const members = getGroupedMembers();
@@ -47,13 +52,29 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     }
   };
 
+  const updateInfo = async (updatedData: Partial<typeof task>) => {
+
+    const errors = await updateTask(task.id, { ...updatedData });
+    if (errors) {
+      onClose();
+    }
+  };
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const onBlurTitle = () => {
+    updateInfo({ name: title });
+  };
+
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
       <div className="task-management">
-        <Button className="task-button">✓ {trans(Message.MarkCompleted)}</Button>
-        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
+        {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
+        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)} 🗑️</Button>
       </div>
-      {<h2>{task.name}</h2>}
+      <Input placeholder="Write a task title" value={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
         <div className="assignee-info">
@@ -66,7 +87,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         </div>
         <span className="deadline">{trans(Message.DueDate)}</span>
         <div className="deadline-info">
-          <DatePicker></DatePicker>
+          <DatePicker dueDate={task.dueDate} onClick={updateInfo}></DatePicker>
         </div>
         <span>{trans(Message.Status)}</span>
         <Select options={statusOptions} placeholder="Status..."></Select>
