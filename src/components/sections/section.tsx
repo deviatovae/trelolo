@@ -1,5 +1,5 @@
 import { WindowAddTask } from '../window/windowAddTask';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Task } from '../task/task';
 import { Section as SectionModel } from '../../types/models';
 import { useTasks } from '../../hooks/useTasks';
@@ -22,6 +22,21 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   const [showDeleteSection, setShowDeleteSection] = useState(false);
   const [sectionNameInput, setSectionNameInput] = useState(name);
   const [showCross, setShowCross] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener('keydown', checkKeyDown);
+    return () => {
+      document.removeEventListener('keydown', checkKeyDown);
+    };
+  });
+
+  const checkKeyDown = (event: KeyboardEvent) => {
+    if (event.keyCode === 27) {
+      setShowDeleteSection(false);
+      setShowCreatTask(false);
+      // setInputValue(name);
+    }
+  };
 
   const handleClickAddTaskPlus = (column: string) => {
     setActiveColumn(column);
