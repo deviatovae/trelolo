@@ -63,9 +63,10 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   };
 
   const handleDeleteColumn = async () => {
-    setShowDeleteSection(false);
     await deleteSection(id);
+    setShowDeleteSection(false);
   };
+  const closeDeleteSection = () => setShowDeleteSection(false);
 
   return (
     <Draggable key={id} draggableId={id} index={position} isDragDisabled={isSectionDraggable}>
@@ -96,7 +97,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
                 className={`column-list-item__content-wrapper ${classes}`}
               >
                 {showDeleteSection && activeColumn === name &&
-                  (<WindowDelete deleteColumn={handleDeleteColumn} />)}
+                  (<WindowDelete deleteColumn={handleDeleteColumn} onClose={closeDeleteSection} />)}
 
                 {tasks.map((task, idx) => <Task key={idx} task={task} index={idx} />)}
                 {showCreatTask && activeColumn === name && (
