@@ -17,6 +17,7 @@ import Input from '../input/input';
 import React, { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { Assignee } from '../../types/types';
+import { TaskUpdateData } from '../../API/types';
 
 interface TaskModalProps {
   onClose: () => void
@@ -60,8 +61,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     }
   };
 
-  const updateInfo = async (updatedData: Partial<typeof task>) => {
-
+  const updateInfo = async (updatedData: TaskUpdateData) => {
     const errors = await updateTask(task.id, { ...updatedData });
     if (errors) {
       onClose();
@@ -85,8 +85,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
       setAssignee(newAssignee);
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       updateInfo({ assignees: [option.value] });
     }
   };
@@ -95,7 +93,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     if (option?.value) {
 
       setStatus(option.value);
-      moveTask(task.id, option.value, 1 );
+      moveTask(task.id, option.value);
     }
   };
 
@@ -130,7 +128,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         </div>
         <span className="deadline">{trans(Message.DueDate)}</span>
         <div className="deadline-info">
-          <DatePicker dueDate={task.dueDate} onClick={updateInfo}></DatePicker>
+          <DatePicker dueDate={task.dueDate} onChange={updateInfo}></DatePicker>
         </div>
         <span>{trans(Message.Status)}</span>
         <Select options={statusOptions} onChange={statusHandleChange} defaultValue={defaultValueStatus}></Select>
@@ -138,19 +136,19 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         <Select isMulti options={projectsPptions} placeholder="Projects..."></Select> */}
       </div>
 
-      <div className='task-description'>
+      <div className="task-description">
         <span>{trans(Message.Description)}</span>
         <Textearea placeholder={trans(Message.WhatIsThisTaskAbout)}
-          className="task-description-textarea"
-          onBlur={descriptionOnBlur}
-          onChange={descriptionOnChange}
-          value={description} />
+                   className="task-description-textarea"
+                   onBlur={descriptionOnBlur}
+                   onChange={descriptionOnChange}
+                   value={description} />
       </div>
-      <div className='separator-line'></div>
-      <div className='task-comments'></div>
-      {userInfo && <Comment id={userInfo?.id} name={userInfo?.name} text='sdfd'></Comment>}
-      <div className='separator-line'></div>
-      <Textearea placeholder={trans(Message.WriteAComment)} value=""/>
+      <div className="separator-line"></div>
+      <div className="task-comments"></div>
+      {userInfo && <Comment id={userInfo?.id} name={userInfo?.name} text="sdfd"></Comment>}
+      <div className="separator-line"></div>
+      <Textearea placeholder={trans(Message.WriteAComment)} value="" onChange={() => null} />
     </Modal>
   );
 }

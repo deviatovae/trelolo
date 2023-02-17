@@ -37,6 +37,6 @@ export interface Task {
   name: string
   position: number
   description: string
-  dueDate: string
+  dueDate: string | null
   isCompleted: boolean
 }
