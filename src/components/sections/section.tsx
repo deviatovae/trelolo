@@ -69,7 +69,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   const closeDeleteSection = () => setShowDeleteSection(false);
 
   return (
-    <Draggable key={id} draggableId={id} index={position} isDragDisabled={isSectionDraggable}>
+    <Draggable key={id} draggableId={id} index={position} isDragDisabled={!isSectionDraggable}>
       {(DragProvided) => (
         <div className="project-page__column-list-item"
              {...DragProvided.draggableProps} ref={DragProvided.innerRef}
@@ -80,8 +80,8 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
             <SectionNameInput
               sectionId={id}
               name={name}
-              onMouseOver={() => setIsSectionDraggable(true)}
-              onMouseOut={() => setIsSectionDraggable(false)}
+              onMouseOver={() => setIsSectionDraggable(false)}
+              onMouseOut={() => setIsSectionDraggable(true)}
             />
             <div className={`column-list-item__cross ${showCross ? 'column-list-item__cross_visible' : ''}`} onClick={() => handleCrossColumnClick(name)}></div>
           </div>

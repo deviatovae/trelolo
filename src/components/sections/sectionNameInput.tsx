@@ -20,12 +20,13 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
   const { updateSection } = useSections();
   const { trans } = useTranslate();
 
-  const onEdit = () => {
+  const edit = () => {
     setIsEditing(true);
   };
 
-  const onEditCancel = () => {
+  const editCancel = () => {
     setIsEditing(false);
+    onMouseOut();
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +40,7 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
 
   const onBlur = async () => {
     if (name === value) {
-      setIsEditing(false);
+      editCancel();
       return;
     }
     if (error) {
@@ -47,7 +48,7 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
     }
     const errors = await updateSection(sectionId, { name: value });
     if (!errors) {
-      setIsEditing(false);
+      editCancel();
     } else {
       setError(errorsToString(errors));
     }
@@ -55,7 +56,7 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
 
   if (isEditing) {
     return (<>
-      <KeyboardHandler onEnter={onBlur} onEsc={onEditCancel} />
+      <KeyboardHandler onEnter={onBlur} onEsc={editCancel} />
       <Input
         type="text"
         autoFocus={true}
@@ -70,7 +71,7 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
 
   return (
     <div className="column-list-item__header"
-         onClick={onEdit}
+         onClick={edit}
          onMouseOver={onMouseOver}
          onMouseOut={onMouseOut}>
       {name}
