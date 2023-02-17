@@ -5,10 +5,13 @@ import './menuLink.scss';
 interface MenuLinkProps {
   to: string
   children: ReactNode
+  className?: string
 }
 
-export const MenuLink = ({ to, children }: MenuLinkProps) => {
+export const MenuLink = ({ to, className = '', children }: MenuLinkProps) => {
+  const classNames = ['menu-link', className].join(' ');
+
   return (
-    <NavLink to={to} className={({ isActive }) => isActive ? 'active-link' : ''}>{children}</NavLink>
+    <NavLink to={to} className={({ isActive }) => isActive ? `${classNames} menu-link_active` : classNames}>{children}</NavLink>
   );
 };

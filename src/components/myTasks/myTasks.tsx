@@ -1,33 +1,14 @@
 import './myTasks.scss';
-import { useEffect, useState } from 'react';
-import { MyTask } from '../../types/models';
-import { castToErrors, errorsToString } from '../../utils/errors';
-import { TaskService } from '../../API/taskService';
+import { useState } from 'react';
 import { MyTaskItem } from './myTaskItem';
-import { List } from '../../API/types';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
+import { useMyTasks } from '../../hooks/useMyTasks';
 
 export const MyTasks = () => {
   const { trans } = useTranslate();
   const [showAssignedToMe, setAssignedToMe] = useState(false);
-  const [allTasks, setAllTasks] = useState<List<MyTask>>({
-    items: [],
-    count: 0
-  });
-  const [myTasks, setMyTasks] = useState<List<MyTask>>({
-    items: [],
-    count: 0
-  });
-
-  useEffect(() => {
-    const fetchTasks = () => {
-      const logErrors = (e: unknown) => console.error(errorsToString(castToErrors(e)));
-      TaskService.getAllTasks().then(({ data }) => setAllTasks(data)).catch(logErrors);
-      TaskService.getAllTasks(true).then(({ data }) => setMyTasks(data)).catch(logErrors);
-    };
-    fetchTasks();
-  });
+  const { myTasks, allTasks } = useMyTasks();
 
   return (
     <div className="my-tasks__container">

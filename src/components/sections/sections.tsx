@@ -6,9 +6,11 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Section } from './section';
 import { DnDType } from '../../types/types';
 import { useTasks } from '../../hooks/useTasks';
+import { PreloaderCircle } from '../preloader/preloaderCircle';
+
 
 export const Sections = () => {
-  const { sections: { items: sections }, createSection } = useSections();
+  const { sections: { items: sections }, createSection, isFetchingSection } = useSections();
   const { moveTask } = useTasks();
 
   const [showCreateSection, setShowCreateSection] = useState(false);
@@ -66,24 +68,26 @@ export const Sections = () => {
   return (
     <TaskModalProvider>
       <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
-        <div className="project-page__column-list">
-          <DragDropContext onDragEnd={onTaskDragEnd}>
-            <Droppable droppableId="sections" direction="horizontal" type={DnDType.Section}>
-              {provided => (
-                <div className="columns-drop-container"
-                     {...provided.droppableProps}
-                     ref={provided.innerRef}>
-                  {sections.map((section, index) => (
-                    <Section key={section.id} section={section}></Section>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-          {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
-          {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
-        </div>
+        <PreloaderCircle isLoading={isFetchingSection}>
+          <div className="project-page__column-list">
+            <DragDropContext onDragEnd={onTaskDragEnd}>
+              <Droppable droppableId="sections" direction="horizontal" type={DnDType.Section}>
+                {provided => (
+                  <div className="columns-drop-container"
+                       {...provided.droppableProps}
+                       ref={provided.innerRef}>
+                    {sections.map((section) => (
+                      <Section key={section.id} section={section}></Section>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+            {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
+            {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
+          </div>
+        </PreloaderCircle>
       </section>
     </TaskModalProvider>
   );
