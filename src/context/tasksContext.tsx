@@ -152,8 +152,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
         };
       });
 
-      // const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex + 1);
-      // return errors;
+      const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex + 1);
+      return errors;
       return null;
     } catch (e) {
       return castToErrors(e);
