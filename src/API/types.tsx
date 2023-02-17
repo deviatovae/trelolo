@@ -55,6 +55,10 @@ export interface SectionCreateData {
     name: string
 }
 
+export interface SectionUpdateData {
+    name?: string
+}
+
 export interface TaskCreateData {
     name: string
 }

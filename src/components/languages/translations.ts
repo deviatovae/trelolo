@@ -60,6 +60,7 @@ export const translations = {
     [Message.WhatIsThisTaskAbout]: 'What is this task about',
     [Message.WriteAComment]: 'Write a comment...',
     [Message.NoDueDate]: 'No due date',
+    [Message.EnterName]: 'Enter a name',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -119,5 +120,6 @@ export const translations = {
     [Message.WhatIsThisTaskAbout]: 'О чем эта задача?',
     [Message.WriteAComment]: 'Напишите комментарий...',
     [Message.NoDueDate]: 'Нет дедлайна',
+    [Message.EnterName]: 'Введите название',
   },
 };

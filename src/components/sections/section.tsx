@@ -7,6 +7,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { DnDType } from '../../types/types';
 import { WindowDelete } from '../window/windowDelete';
 import { useSections } from '../../hooks/useSections';
+import { SectionNameInput } from './sectionNameInput';
 
 interface SectionProps {
   section: SectionModel
@@ -17,10 +18,10 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   const { deleteSection } = useSections();
   const { items: tasks } = getTasks(id);
 
+  const [isSectionDraggable, setIsSectionDraggable] = useState(true);
   const [activeColumn, setActiveColumn] = useState<string | undefined>(undefined);
   const [showCreatTask, setShowCreatTask] = useState(false);
   const [showDeleteSection, setShowDeleteSection] = useState(false);
-  const [sectionNameInput, setSectionNameInput] = useState(name);
   const [showCross, setShowCross] = useState(false);
 
   useEffect(() => {
@@ -67,22 +68,20 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   };
 
   return (
-    <Draggable key={id} draggableId={id} index={position}>
+    <Draggable key={id} draggableId={id} index={position} isDragDisabled={isSectionDraggable}>
       {(DragProvided) => (
         <div className="project-page__column-list-item"
              {...DragProvided.draggableProps} ref={DragProvided.innerRef}
         >
-          <div className="column-list-item__header-settings-container" {...DragProvided.dragHandleProps} onMouseOver={() => setShowCross(true)}
+          <div className="column-list-item__header-settings-container" {...DragProvided.dragHandleProps}
+               onMouseOver={() => setShowCross(true)}
                onMouseOut={() => setShowCross(false)}>
-            <div className="column-list-item__header">
-              <input
-                className="column-list-item__header-input"
-                type="text"
-                value={sectionNameInput}
-                onChange={(e) => setSectionNameInput(e.target.value)}
-                onBlur={(e) => setSectionNameInput(e.target.value)}
-              />
-            </div>
+            <SectionNameInput
+              sectionId={id}
+              name={name}
+              onMouseOver={() => setIsSectionDraggable(true)}
+              onMouseOut={() => setIsSectionDraggable(false)}
+            />
             <div className={`column-list-item__cross ${showCross ? 'column-list-item__cross_visible' : ''}`} onClick={() => handleCrossColumnClick(name)}></div>
           </div>
           <Droppable key={id} droppableId={id} type={DnDType.Task}>
