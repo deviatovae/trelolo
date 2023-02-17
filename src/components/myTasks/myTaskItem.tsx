@@ -10,7 +10,7 @@ export const MyTaskItem = ({ task: { section, name, dueDate } }: { task: MyTask 
       <NavLink to={`/project/${projectId}`} className="my-tasks-task-list__name">{name}</NavLink>
       <div>
         <span className="my-tasks-task-list__project">{projectName}</span>
-        <span className="my-tasks-task-list__dueDate">{formatDateString(dueDate, 'dd MMM')}</span>
+        <span className="my-tasks-task-list__dueDate">{dueDate && formatDateString(dueDate, 'dd MMM')}</span>
       </div>
     </div>
   );
