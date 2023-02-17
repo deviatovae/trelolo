@@ -1,9 +1,14 @@
 import { getResponse } from './response';
 import { List, RequestMethod, TaskCreateData, TaskUpdateData } from './types';
-import { Task } from '../types/models';
+import { MyTask, Task } from '../types/models';
 
 export class TaskService {
   static getTasks = (sectionId: string) => getResponse<List<Task>>({ url: `sections/${sectionId}/tasks`, method: RequestMethod.GET });
+
+  static getAllTasks = (assignedToMe = false) => getResponse<List<MyTask>>({
+    url: `tasks/${assignedToMe ? '?assignee=me' : ''}`,
+    method: RequestMethod.GET
+  });
 
   static createTask = (sectionId: string, data: TaskCreateData) => getResponse<Task>({
     url: `sections/${sectionId}/tasks`,
