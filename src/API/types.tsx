@@ -62,7 +62,8 @@ export interface TaskCreateData {
 export interface TaskUpdateData {
     name?: string
     position?: number
+    assignees?: string[]
     description?: string
-    dueDate?: string
+    dueDate?: string | null
     isCompleted?: boolean
 }
