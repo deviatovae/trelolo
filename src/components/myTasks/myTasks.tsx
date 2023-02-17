@@ -21,7 +21,7 @@ export const MyTasks = () => {
   });
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchTasks = () => {
       const logErrors = (e: unknown) => console.error(errorsToString(castToErrors(e)));
       TaskService.getAllTasks().then(({ data }) => setAllTasks(data)).catch(logErrors);
       TaskService.getAllTasks(true).then(({ data }) => setMyTasks(data)).catch(logErrors);
