@@ -13,6 +13,7 @@ export interface Project {
 
 export interface Section {
   id: string
+  projectId: string
   name: string,
   position: number
 }
@@ -40,3 +41,5 @@ export interface Task {
   dueDate: string | null
   isCompleted: boolean
 }
+
+export type MyTask = Task & { section: Section & { project: { name: string } } };
