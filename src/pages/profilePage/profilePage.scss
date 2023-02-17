@@ -1,0 +1,11 @@
+@import "src/assets/styles/variables";
+
+.profilePage {
+
+    &__wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    position: relative;
+    }
+  }

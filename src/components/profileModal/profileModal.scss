@@ -10,7 +10,7 @@
 }
 
 .modal-windows {
-  padding: 15px 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   width: 230px;
   height: 160px;
@@ -41,10 +41,11 @@
     border-bottom: 1px solid $greylight;
   }
 
-  &__log-out {
+  &__log-out,
+  &__profile {
     box-sizing: border-box;
     margin: 5px 0px;
-    width: 60px;
+    width: 100px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -54,6 +55,7 @@
     &:hover {
       cursor: pointer;
       color: $red;
+      transition: 0.2s color;
     }
 
     &:active {
