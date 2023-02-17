@@ -20,7 +20,8 @@ export enum Message {
   Or = 'or',
   MyTeam = 'myTeam',
   MyHome = 'MyHome',
-  MyProjects = 'myProjects',
+  MyProjects = 'MyProjects',
+  ManageProjects = 'ManageProjects',
   GoodMorning = 'goodMorning',
   GoodAfternoon = 'goodAfternoon',
   GoodEvening = 'goodEvening',
@@ -56,6 +57,9 @@ export enum Message {
   Description = 'Description',
   WhatIsThisTaskAbout = 'WhatIsThisTaskAbout',
   WriteAComment = 'WriteAComment',
+  MyTasks = 'MyTasks',
+  AllTasks = 'AllTasks',
+  AssignedToMe = 'AssignedToMe',
   EnterName = 'EnterName',
 }
 

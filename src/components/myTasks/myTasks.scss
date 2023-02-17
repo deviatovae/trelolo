@@ -1,0 +1,137 @@
+@import 'src/assets/styles/variables';
+
+.my-tasks {
+
+  &__container {
+    height: fit-content;
+    flex: 1;
+    display: flex;
+    max-width: 500px;
+    border-radius: 6px;
+    border: solid 1px $borderBlueLight;
+    background-color: $white;
+    max-height: 700px;
+    min-height: 200px;
+    padding: 1.3rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.my-tasks-content {
+
+  &__header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 0;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__task-list {
+    flex: 1;
+    overflow-x: hidden;
+    padding: 0 5px 5px 5px;
+  }
+}
+
+.tabs-content {
+
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__tabs-bar {
+    display: block;
+    margin: 0;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+  }
+
+  &__tab {
+    margin: 0;
+    display: inline-flex;
+    list-style: none;
+    flex: 0 1 auto;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  &__tab-link {
+    color: $greyDark;
+    font-weight: 500;
+    padding: 10px 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: $mainBlack;
+    }
+
+    &.active {
+      background-color: $borderBlueLight;
+      border-radius: 6px;
+      color: $mainBlack;
+    }
+  }
+}
+
+.my-tasks-task-list {
+
+  &__item {
+    border-bottom: 1px solid $borderBlueLight;
+    height: 34px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    overflow: visible;
+    position: relative;
+    transition: box-shadow 0s ease-in;
+    white-space: nowrap;
+
+    &:first-child {
+      border-top: 1px solid $borderBlueLight;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    max-width: 250px;
+    overflow-y: hidden;
+    font-size: 0.9rem;
+
+    &:hover {
+      color: $mainBlueHover;
+      cursor: pointer;
+    }
+  }
+
+  &__project{
+    max-width: 100px;
+    overflow: hidden;
+    padding: 3px 8px;
+    font-size: 0.9rem;
+    background-color: $greylight;
+    border-radius: 8px;
+  }
+}
