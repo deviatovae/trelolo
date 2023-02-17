@@ -9,7 +9,7 @@ import { useTasks } from '../../hooks/useTasks';
 
 export const Sections = () => {
   const { sections: { items: sections }, createSection } = useSections();
-  const { updateTask, moveTask } = useTasks();
+  const { moveTask } = useTasks();
 
   const [showCreateSection, setShowCreateSection] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);
@@ -46,20 +46,14 @@ export const Sections = () => {
   };
 
   const onTaskDragEnd = async ({ draggableId, source, destination, type }: DropResult) => {
-    const toSectionId = destination?.droppableId || source.droppableId;
-    const curPosition = source.index;
-    const toPosition = destination?.index || curPosition;
+    const fromSectionId = source.droppableId;
+    const toSectionId = destination?.droppableId || fromSectionId;
+    const curIndex = source.index;
+    const toIndex = destination?.index ?? curIndex;
 
     switch (type) {
       case DnDType.Task:
-        if (source.droppableId !== destination?.droppableId) {
-          return moveTask(draggableId, toSectionId, toPosition).then((errors) => {
-            if (errors) {
-              console.error(errors);
-            }
-          });
-        }
-        return updateTask(draggableId, { position: toPosition }).then(errors => {
+        return moveTask(draggableId, toSectionId, toIndex).then((errors) => {
           if (errors) {
             console.error(errors);
           }
@@ -80,7 +74,7 @@ export const Sections = () => {
                      {...provided.droppableProps}
                      ref={provided.innerRef}>
                   {sections.map((section, index) => (
-                    <Section section={section}></Section>
+                    <Section key={section.id} section={section}></Section>
                   ))}
                   {provided.placeholder}
                 </div>
