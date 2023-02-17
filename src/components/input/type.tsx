@@ -10,6 +10,8 @@ interface InputProp {
     error?: string,
     classNameWrapper?: string,
     disabled?: boolean
+
+    autoFocus: boolean
 }
 
 export default InputProp;

@@ -60,5 +60,6 @@ export enum Message {
   MyTasks = 'MyTasks',
   AllTasks = 'AllTasks',
   AssignedToMe = 'AssignedToMe',
+  EnterName = 'EnterName',
 }
 

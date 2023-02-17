@@ -15,19 +15,25 @@
   }
 
   &__header {
+    cursor: pointer;
     color: #000;
     font-weight: 700;
     font-size: 16px;
+    padding: 0 0 5px 6px;
   }
 
-  &__header-input {
+  &__header-input > input {
+    width: 100%;
+    max-width: 250px;
     border: none;
     outline: none;
     background-color: $mainBg;
     font-size: 16px;
     font-weight: 700;
     color: #000;
-    border-bottom: 0.5px solid $greylight;
+    padding: 0 0 4px 0;
+    border-radius: initial;
+    border-bottom: 1px solid $greyDark;
   }
 
   &__cross {

@@ -64,6 +64,7 @@ export const translations = {
     [Message.MyTasks]: 'My tasks',
     [Message.AllTasks]: 'All tasks',
     [Message.AssignedToMe]: 'Assigned to me',
+    [Message.EnterName]: 'Enter a name',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -127,5 +128,6 @@ export const translations = {
     [Message.MyTasks]: 'Задачи',
     [Message.AllTasks]: 'Все задачи',
     [Message.AssignedToMe]: 'Мои задачи',
+    [Message.EnterName]: 'Введите название',
   },
 };
