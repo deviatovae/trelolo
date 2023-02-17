@@ -13,7 +13,7 @@ export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
   const { name } = task;
 
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided) => (
         <div
           ref={provided.innerRef}

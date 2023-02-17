@@ -67,7 +67,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   };
 
   return (
-    <Draggable draggableId={id} index={position}>
+    <Draggable key={id} draggableId={id} index={position}>
       {(DragProvided) => (
         <div className="project-page__column-list-item"
              {...DragProvided.draggableProps} ref={DragProvided.innerRef}
@@ -85,7 +85,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
             </div>
             <div className={`column-list-item__cross ${showCross ? 'column-list-item__cross_visible' : ''}`} onClick={() => handleCrossColumnClick(name)}></div>
           </div>
-          <Droppable droppableId={id} type={DnDType.Task}>
+          <Droppable key={id} droppableId={id} type={DnDType.Task}>
             {(provided, snapshot) => {
               const classes = [
                 snapshot.isUsingPlaceholder ? 'column-list-item__content-wrapper_active2' : '',
@@ -99,7 +99,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
                 {showDeleteSection && activeColumn === name &&
                   (<WindowDelete deleteColumn={handleDeleteColumn} />)}
 
-                {tasks.map((task, idx) => <Task key={idx} task={task} index={idx + 1} />)}
+                {tasks.map((task, idx) => <Task key={idx} task={task} index={idx} />)}
                 {showCreatTask && activeColumn === name && (
                   <WindowAddTask onCreateProject={(inputValue) => handleAddTask(inputValue)} onClickCross={handleCrossClick} />
                 )}
