@@ -4,7 +4,7 @@ export const formatDate = (date: Date, dateFormat = 'PPP') => {
   return format(date, dateFormat);
 };
 
-export const formatDateString = (date: string, dateFormat = 'PPP'): string => {
+export const formatDateString = (date: string, dateFormat = 'dd MMM'): string => {
   if (!date) {
     return '';
   }

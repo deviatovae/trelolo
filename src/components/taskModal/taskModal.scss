@@ -100,12 +100,14 @@
 
   &-management {
     display: flex;
-    justify-content: left;
+    justify-content: right;
     gap: 15px;
     flex-wrap: wrap;
   }
 
   &-button {
+    display: flex;
+    gap: 5px;
     max-width: 130px;
     margin: 0;
     padding: 6px 8px;
@@ -118,6 +120,10 @@
 
     &:not(:disabled):hover {
       color: $mainTextWhite;
+    }
+
+    .delete-bin {
+      background-image: url('../../assets/img/bin.svg');;
     }
   }
 

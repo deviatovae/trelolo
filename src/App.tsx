@@ -7,9 +7,12 @@ import { LOCALES } from './components/languages/locales';
 import { translations } from './components/languages/translations';
 import { LanguagesManager } from './components/languages/languagesManager';
 import { AuthProvider } from './context/authContext';
+import { setDefaultOptions } from 'date-fns';
 
 function App() {
-  const { currentLocale, setLocale } = LanguagesManager();
+  const { currentLocale, setLocale, fnsLocale } = LanguagesManager();
+
+  setDefaultOptions({ locale: fnsLocale });
 
   return (
     <IntlProvider
@@ -17,7 +20,7 @@ function App() {
       locale={currentLocale}
       defaultLocale={LOCALES.ENGLISH}
     >
-      <AuthProvider >
+      <AuthProvider>
         <div className="app wrapper">
           <Header currentLocale={currentLocale} setLocale={setLocale} />
           <div className="app__content">

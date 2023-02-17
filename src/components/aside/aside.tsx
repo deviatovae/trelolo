@@ -35,8 +35,10 @@ export const Aside = () => {
             {showUpdate && <CreateProjectModal onClose={() => setShowUpdate(false)}></CreateProjectModal>}
           </div>
           <ul className="projects__list">
-            {projects.map(({ name, id }) => <li className="projects__item" key={id}>
-              <MenuLink to={`/project/${id}`}>{name}</MenuLink>
+            {projects.map(({ name, id }) => <li className="" key={id}>
+              <MenuLink className="projects__item" to={`/project/${id}`}>
+                {name}
+              </MenuLink>
             </li>)}
           </ul>
         </div>
