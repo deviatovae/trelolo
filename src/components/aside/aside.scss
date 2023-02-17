@@ -40,15 +40,9 @@
     padding-left: 25px;
 }
 
-.tasks-team, .tasks-home {
-    &:hover {
-        cursor: pointer;
-        background: $asideHover;
-    }
-}
-
 .projects__item {
     font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .tasks-home {
@@ -122,14 +116,16 @@
 
         &:hover {
             cursor: pointer;
-            background-color: $asideHover;
+            background-color: $asideLink;
             transition: 0.2s all;
         }
 
+        display: flex;
+        padding-left: 55px;
+        line-height: 30px;
+
         & > a {
-            display: flex;
-            padding-left: 55px;
-            line-height: 30px;
+
         }
     }
 }

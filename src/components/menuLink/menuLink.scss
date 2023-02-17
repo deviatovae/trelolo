@@ -1,9 +1,11 @@
 @import "src/assets/styles/variables";
-
-.active-link {
-  background-color: rgba(109, 130, 255, 0.2);
-
+.menu-link {
   &:hover {
-    background-color: inherit;
+    cursor: pointer;
+    background: $asideLink;
   }
+}
+
+.menu-link_active {
+  background-color: $asideLink;
 }

@@ -35,7 +35,7 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
     count: 0,
   });
 
-  const [isFetchingProject, setIsFetchingProject] = useState<boolean>(false);
+  const [isFetchingProject, setIsFetchingProject] = useState<boolean>(true);
 
 
   const getProject = (id: string): Project | null => {
@@ -75,7 +75,7 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
       return null;
     } catch (e) {
       return castToErrors(e);
-    } 
+    }
   };
 
   const deleteProject = async (id: string): Promise<Errors | null> => {
@@ -98,7 +98,6 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      setIsFetchingProject(true);
       const { data } = await apiGetProjects();
       setResult(data);
       setIsFetchingProject(false);

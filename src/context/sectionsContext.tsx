@@ -28,10 +28,9 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
     count: 0
   });
 
-  const [isFetchingSection, setIsFetchingSection] = useState<boolean>(false);
+  const [isFetchingSection, setIsFetchingSection] = useState<boolean>(true);
 
   const fetchSections = useCallback(async (): Promise<Errors | null> => {
-    setIsFetchingSection(true);
     try {
       const { data: sectionItems, errors } = await SectionService.getSections(projectId);
       if (errors) {
@@ -43,7 +42,7 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
       return null;
     } catch (e) {
       return castToErrors(e);
-    } 
+    }
   }, [projectId]);
 
   const createSection = async (data: SectionCreateData) => {
@@ -63,7 +62,7 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
       return castToErrors(e);
     }
   };
-  
+
   const deleteSection = async (id: string): Promise<Errors | null> => {
     try {
       const { errors } = await SectionService.deleteSection(id);

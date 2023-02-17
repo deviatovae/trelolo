@@ -35,7 +35,7 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
 
   const [members, setMembers] = useState(initialState);
   const { projects } = useProjects();
-  const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(false);
+  const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(true);
 
   const getGroupedMembers = (): UserMembers[] => {
     const membersByUser = members.items.reduce((acc, member) => {
@@ -96,7 +96,6 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
 
 
     usedProjects.reduce(async (acc, { id }) => {
-      setIsFetchingMembers(true);
       const { data } = await MemberService.getMembers(id);
       const { items, count } = await acc;
       setIsFetchingMembers(false);
@@ -104,7 +103,7 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
         items: [...items, ...data.items],
         count: count + data.count
       };
-      
+
     }, Promise.resolve<List<Member>>({
       items: [],
       count: 0
