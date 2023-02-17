@@ -10,7 +10,7 @@ export interface TasksContextValue {
   createTask: (sectionId: string, data: TaskCreateData) => Promise<(Errors | null)>
   updateTask: (id: string, data: TaskUpdateData) => Promise<(Errors | null)>
   deleteTask: (id: string) => Promise<(Errors | null)>
-  moveTask: (id: string, toSectionId: string, toPosition: number) => Promise<(Errors | null)>
+  moveTask: (id: string, toSectionId: string, toIndex: number) => Promise<(Errors | null)>
 }
 
 export const TasksContext = createContext<TasksContextValue>({
@@ -43,7 +43,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const getTasks = (sectionId: string): List<Task> => {
     const { items, count } = tasks[sectionId] || { items: [], count: 0 };
     return {
-      items: items.sort((a, b) => a.position - b.position),
+      items: items,
       count
     };
   };
@@ -104,29 +104,55 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const moveTask = async (taskId: string, sectionToId: string, position: number) => {
+  const moveTask = async (taskId: string, toSectionId: string, toIndex: number) => {
     try {
       const taskItem = getTask(taskId);
-      setTasks((prev) => {
-        for (const key in prev) {
-          const filtered = prev[key].items.filter((item) => item.id !== taskId);
-          prev[key] = {
-            items: filtered,
-            count: filtered.length
+      const { sectionId: fromSectionId } = taskItem;
+      const fromIndex = tasks[fromSectionId].items.indexOf(taskItem);
+      const isSameSection = fromSectionId === toSectionId;
+      const isSamePosition = fromIndex === toIndex;
+
+      if (isSameSection && isSamePosition) {
+        return null;
+      }
+
+      setTasks((sectionsTasks) => {
+        if (isSameSection) {
+          const toSection = sectionsTasks[fromSectionId];
+          const sectionItems = [...toSection.items];
+          const [movedTask] = sectionItems.splice(fromIndex, 1);
+          sectionItems.splice(toIndex, 0, movedTask);
+
+          return {
+            ...sectionsTasks,
+            [toSectionId]: {
+              ...toSection,
+              items: sectionItems,
+            },
           };
         }
 
-        const { items, count } = prev[sectionToId];
+        const fromSection = sectionsTasks[fromSectionId];
+        const toSection = sectionsTasks[toSectionId];
+        const fromSectionItems = [...fromSection.items];
+        const toSectionItems = [...toSection.items];
+        const [movedTask] = fromSectionItems.splice(fromIndex, 1);
+        toSectionItems.splice(toIndex, 0, { ...movedTask, sectionId: toSectionId });
+
         return {
-          ...prev,
-          [sectionToId]: {
-            items: [...items, taskItem],
-            count: count + 1
-          }
+          ...sectionsTasks,
+          [fromSectionId]: {
+            ...fromSection,
+            items: fromSectionItems,
+          },
+          [toSectionId]: {
+            ...toSection,
+            items: toSectionItems,
+          },
         };
       });
 
-      const { errors } = await TaskService.moveTask(taskId, sectionToId, position);
+      const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex + 1);
       return errors;
     } catch (e) {
       return castToErrors(e);
