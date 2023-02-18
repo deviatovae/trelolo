@@ -64,8 +64,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const getTask = (id: string): Task => {
-    const task = Object.values(tasks).map(({ items }) => [...items]).flat().find(item => item.id === id);
+  const getTask = (id: string, fromTaskList?: { [key: string]: List<Task> }): Task => {
+    const task = Object.values(fromTaskList || tasks).map(({ items }) => [...items]).flat().find(item => item.id === id);
     if (!task) {
       throw new Error('Task not found');
     }
@@ -122,18 +122,18 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
   const moveTask = async (taskId: string, toSectionId: string, toIndex?: number) => {
     try {
-      const moveToIndex = toIndex ?? tasks[toSectionId].count;
-      const taskItem = getTask(taskId);
-      const { sectionId: fromSectionId } = taskItem;
-      const fromIndex = tasks[fromSectionId].items.indexOf(taskItem);
-      const isSameSection = fromSectionId === toSectionId;
-      const isSamePosition = fromIndex === moveToIndex;
-
-      if (isSameSection && isSamePosition) {
-        return null;
-      }
-
       setTasks((sectionsTasks) => {
+        const moveToIndex = toIndex ?? tasks[toSectionId].count;
+        const taskItem = getTask(taskId, sectionsTasks);
+        const { sectionId: fromSectionId } = taskItem;
+        const fromIndex = tasks[fromSectionId].items.indexOf(taskItem);
+        const isSameSection = fromSectionId === toSectionId;
+        const isSamePosition = fromIndex === moveToIndex;
+
+        if (isSameSection && isSamePosition) {
+          return { ...sectionsTasks };
+        }
+
         if (isSameSection) {
           const toSection = sectionsTasks[fromSectionId];
           const sectionItems = [...toSection.items];
@@ -169,7 +169,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
         };
       });
 
-      const { errors } = await TaskService.moveTask(taskId, toSectionId, moveToIndex + 1);
+      const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex);
       return errors;
     } catch (e) {
       return castToErrors(e);
