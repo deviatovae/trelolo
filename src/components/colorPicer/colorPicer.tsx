@@ -1,12 +1,11 @@
 import './colorPicer.scss';
-import { SketchPicker } from 'react-color';
+import { HuePicker } from 'react-color';
 
 export const ColorPicer = () => {
-  
     return (
-        <div className="color-picer__wrapper">
-          <SketchPicker />
-        </div>
+      <div className="color-picer__wrapper">
+        <HuePicker />
+      </div>
     );
   };
   

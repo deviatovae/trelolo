@@ -2,9 +2,11 @@
 
 .color-picer {
 
-    &__wrapper {
-      position: absolute;
-      top: 50%;
-      right: 50%;
-    }
+  &__wrapper {
+    padding-top: 20px;
+  }
+}
+
+.hue-horizontal {
+  width: 300px;
 }
