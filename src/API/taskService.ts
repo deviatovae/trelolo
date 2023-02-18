@@ -20,7 +20,7 @@ export class TaskService {
 
   static deleteTask = (id: string) => getResponse<Task>({ url: `tasks/${id}`, method: RequestMethod.DELETE });
 
-  static moveTask = (taskId: string, sectionId: string, position: number) => getResponse<Task>({
+  static moveTask = (taskId: string, sectionId: string, position?: number) => getResponse<Task>({
     url: `tasks/${taskId}/move/${sectionId}`,
     method: RequestMethod.PATCH,
     body: { position }
