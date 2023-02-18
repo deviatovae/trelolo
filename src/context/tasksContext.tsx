@@ -169,7 +169,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
         };
       });
 
-      const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex ? toIndex + 1 : undefined);
+      const { errors } = await TaskService.moveTask(taskId, toSectionId, toIndex === undefined ? toIndex : toIndex + 1);
       return errors;
     } catch (e) {
       return castToErrors(e);
