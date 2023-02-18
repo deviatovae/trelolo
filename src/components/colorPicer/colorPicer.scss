@@ -1,0 +1,10 @@
+@import "/src/assets/styles/variables";
+
+.color-picer {
+
+    &__wrapper {
+      position: absolute;
+      top: 50%;
+      right: 50%;
+    }
+}

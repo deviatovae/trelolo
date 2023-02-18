@@ -5,6 +5,8 @@ import { ProfilePerson } from './../../components/profileModal/profilePerson';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../components/languages/messages';
 import { useTranslate } from '../../hooks/useTranslate';
+import { ColorPicer } from './../../components/colorPicer/colorPicer';
+import { useState } from 'react';
 
 
 
@@ -12,6 +14,12 @@ export const ProfilePage = () => {
 
   const { userInfo } = useAuth();
   const { trans } = useTranslate();
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  const handlePickerBtnClick = () => {
+    setShowColorPicker(!showColorPicker); 
+  };
+
 
   return (
     <main className="profilePage__wrapper">
@@ -31,19 +39,30 @@ export const ProfilePage = () => {
                         <div className="profilePage__name-header">
                         <FormattedMessage id={Message.YourFullName} />
                         </div>
-                        <input type="text" value={userInfo?.name} className="profilePage__input-name profilePage-inputs"></input>
+                        <input 
+                          type="text"
+                          value={userInfo?.name} 
+                          className="profilePage__input-name profilePage-inputs">
+                        </input>
                       </div>
                       <div className="profilePage__color-container">
                         <div className="profilePage__color-header">
                         <FormattedMessage id={Message.PickColor} />
                         </div>
-                        <input type="color" className="profilePage__palitra"></input>
+                        <div className="profilePage__color-picer-btn" 
+                          onClick={handlePickerBtnClick}>
+                        </div>
+                        {showColorPicker && <ColorPicer />}
                       </div>
                       <div className="profilePage__email-container">
                         <div className="profilePage__email-header">
                         <FormattedMessage id={Message.EmailAddress} />
                         </div>
-                        <input type="text" disabled value={userInfo?.email} className="profilePage__email profilePage-inputs"></input>
+                        <input type="text" 
+                          disabled 
+                          value={userInfo?.email}
+                          className="profilePage__email profilePage-inputs">
+                        </input>
                       </div>
                     </div>
                     <div className="profilePage__right-side">
