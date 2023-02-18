@@ -62,5 +62,13 @@ export enum Message {
   AssignedToMe = 'AssignedToMe',
   EnterName = 'EnterName',
   MyProfile = 'MyProfile',
+  ProfileSettings = 'ProfileSettings',
+  YourFullName = 'YourFullName',
+  PickColor = 'PickColor',
+  EmailAddress = 'EmailAddress',
+  ChangePassword = 'ChangePassword',
+  EnterCurrentPassword = 'EnterCurrentPassword',
+  EnterNewPassword = 'EnterNewPassword',
+  ConfirmPassword = 'ConfirmPassword',
 }
 
