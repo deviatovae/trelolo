@@ -2,10 +2,121 @@
 
 .profilePage {
 
-    &__wrapper {
+  &__wrapper {
     display: flex;
     flex-direction: row;
     height: 100%;
+  }
+
+  &__section-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__section {
     position: relative;
+    animation: profile-hide 0.8s ease-in-out;
+  }
+
+  &__header {
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Roboto';
+    color: $black;
+  }
+
+  &__content-wrapper {
+    width: 850px;
+    height: 580px;
+    border-radius: 15px;
+    background: $white;
+    padding: 60px; 
+    box-shadow: 5px 2px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &__person-wrapper {
+    padding-bottom: 60px;
+  }
+
+  &__left-right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__left-side {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+  }
+
+  &__name-header,
+  &__color-header,
+  &__email-header,
+  &__pasword-header {
+    font-weight: 500;
+    font-size: 16px;
+    color: $greyDark;
+    padding-bottom: 15px;
+  }
+
+  &__right-side {
+    width: 300px;
+  }
+
+  &__pasword-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px
+  }
+
+  &__save-btn {
+    width: 158px;
+    height: 52px;
+    background: $mainBlue;
+    color: $white;
+    border: 1px solid #C0C0C0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    transition: background 0.3s, transform 0.2s;
+    position: relative;
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+      background: $mainBlueHover;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.05s;
+    }
+
+    &:disabled {
+      background: #F5F5F7;
+      color: $black;
+      cursor: auto;
+      }
+    }
+  }
+
+  .profilePage-inputs {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #C0C0C0;
+    border-radius: 6px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $mainBlueHover;
     }
   }
