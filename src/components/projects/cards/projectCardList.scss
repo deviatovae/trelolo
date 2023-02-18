@@ -1,41 +1,66 @@
 @import 'src/assets/styles/variables';
 
 .projects-cards {
-  position: relative;
-  top: 50px;
-  padding: 0 35px;
 
-  h4 {
-    padding-bottom: 20px;
+  &__container {
+    display: flex;
+    max-width: 875px;
+    width: fit-content;
+    border-radius: 6px;
+    border: solid 1px $borderBlueLight;
+    background-color: $white;
+    max-height: 700px;
+    height: fit-content;
+    padding: 1.3rem;
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.1);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+
+    & > h4 {
+
+      font-size: 1rem;
+      font-weight: 700;
+      padding-left: 10px;
+    }
   }
 
   &__list {
+    padding: 10px;
     position: relative;
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 35px;
-    padding-bottom: 100px;
+    overflow: auto;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
   }
 
   &__item {
     width: 260px;
     height: 100px;
-    background-color: $white;
+    background-color: $asideBg;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid $mainBlue;
+    border: 1px solid $borderBlueLight;
     transition: transform 0.2s ease-in-out;
-    color: $black;
+    color: $mainBlack;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 18px;
     position: relative;
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.03);
+      transform: scale(1.02);
       transition: transform 0.2s ease-in-out;
     }
 
@@ -49,17 +74,30 @@
     }
   }
 
+  &__name, &__name > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__name > a {
+    display: flex;
+    inline-size: 230px;
+    overflow-wrap: break-word;
+  }
+
   &__create {
     width: 260px;
     height: 100px;
-    background-color: #EBECF0;
+    background-color: #ebecf0;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: $mainBlue;
     transition: transform 0.2s ease-in-out;
-
 
     &:hover {
       cursor: pointer;
@@ -83,13 +121,15 @@
     background-size: contain;
     border-radius: 3px;
     position: absolute;
+    z-index: 4;
     top: 5px;
     right: 0;
+    transition: background 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
       background-color: $borderBlueLight;
-      transition: transform 0.2s ease-in-out;
+      transition: background 0.3s ease-in-out;
     }
   }
 

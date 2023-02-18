@@ -28,6 +28,7 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
   return (
     <div className="modal-main" ref={cardRef}>
       <Input
+        autoFocus={true}
         type="text"
         className="modal-main__project-name"
         placeholder={trans(Message.EnterProjectName)}

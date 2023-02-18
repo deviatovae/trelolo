@@ -1,12 +1,14 @@
-
 import './windowDelete.scss';
-import { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { MouseHandler } from '../mouse/mouseHandler';
 
 interface WindowDeleteProps {
-    deleteColumn: () => void;
-  }
+  deleteColumn: () => void
+  onClose: () => void
+}
 
-export const WindowDelete = ({ deleteColumn }: WindowDeleteProps ) => {
+export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.addEventListener('keydown', checkKeyDown);
@@ -26,7 +28,8 @@ export const WindowDelete = ({ deleteColumn }: WindowDeleteProps ) => {
   };
 
   return (
-    <div className="window-delete">
+    <div className="window-delete" ref={ref}>
+      <MouseHandler elementRef={ref} onClickOutside={onClose}></MouseHandler>
       <div className="window-delete__container">
         <div className="window-delete__text">
           are you sure?

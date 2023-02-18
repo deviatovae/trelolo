@@ -1,3 +1,5 @@
+import { Assignee } from './types';
+
 export interface User {
   id: string,
   name: string,
@@ -11,6 +13,7 @@ export interface Project {
 
 export interface Section {
   id: string
+  projectId: string
   name: string,
   position: number
 }
@@ -30,10 +33,13 @@ export interface UserMembers {
 
 export interface Task {
   id: string
+  assignees: Assignee[] | []
   sectionId: string
   name: string
   position: number
   description: string
-  dueDate: string
+  dueDate: string | null
   isCompleted: boolean
 }
+
+export type MyTask = Task & { section: Section & { project: { name: string } } };

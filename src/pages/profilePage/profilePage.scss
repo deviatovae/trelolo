@@ -18,7 +18,7 @@
 
   &__section {
     position: relative;
-    animation: profile-hide 0.8s ease-in-out;
+    animation: profile-hide 0.6s ease-in-out;
   }
 
   &__header {
@@ -35,7 +35,7 @@
     border-radius: 15px;
     background: $white;
     padding: 60px; 
-    box-shadow: 5px 2px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.12);
   }
 
   &__person-wrapper {
@@ -86,7 +86,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 40px;
-    transition: background 0.3s, transform 0.2s;
+    transition: background 0.3s, transform 0.3s;
     position: relative;
     float: right;
 

@@ -8,11 +8,11 @@ import Button from '../button/button';
 import { formatDate } from '../../utils/formatDate';
 
 interface DatePickerProp {
-  onClick: ({ dueDate } : { dueDate: string }) => void
-  dueDate: string
+  onChange: ({ dueDate }: { dueDate: string | null }) => void
+  dueDate: string | null
 }
 
-export function DatePicker({ onClick, dueDate }: DatePickerProp) {
+export function DatePicker({ onChange, dueDate }: DatePickerProp) {
 
   const { trans } = useTranslate();
 
@@ -24,7 +24,7 @@ export function DatePicker({ onClick, dueDate }: DatePickerProp) {
     setInputValue(formatDate(day));
     setSelectedDay(day);
     closeCalendar();
-    onClick({ dueDate: day.toDateString() });
+    onChange({ dueDate: day.toDateString() });
   };
 
   const handleButtonClick = () => {
@@ -42,6 +42,7 @@ export function DatePicker({ onClick, dueDate }: DatePickerProp) {
   const deleteDeadline = () => {
     setSelectedDay(undefined);
     setInputValue(trans(Message.NoDueDate));
+    onChange({ dueDate: null });
   };
 
   return <>
