@@ -42,4 +42,13 @@ export interface Task {
   isCompleted: boolean
 }
 
+export interface Comment {
+  id: string,
+  taskId: string,
+  text: string,
+  user: User,
+  likes: number,
+  createdAt: string
+}
+
 export type MyTask = Task & { section: Section & { project: { name: string } } };

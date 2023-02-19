@@ -1,6 +1,5 @@
 import './taskModal.scss';
 import Button from '../button/button';
-import { useAuth } from '../../hooks/auth';
 import Select from '../select/select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
@@ -14,10 +13,10 @@ import { Task } from '../../types/models';
 import { useSections } from '../../hooks/useSections';
 import { TasksContextValue } from '../../context/tasksContext';
 import Input from '../input/input';
-import React, { useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { ActionMeta } from 'react-select';
-import { Assignee } from '../../types/types';
 import { TaskUpdateData } from '../../API/types';
+import { useComments } from '../../hooks/comments';
 
 interface TaskModalProps {
   onClose: () => void
@@ -25,18 +24,20 @@ interface TaskModalProps {
   context: TasksContextValue
 }
 
+const DEFAULT_ASSIGNEE_OPTION = { value: '0', label: 'No assignee' }; 
+
 export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   type Option = { value: string, label: string };
 
-  const { userInfo } = useAuth();
+  const { createComment, deleteComment, updateComments, editComment, comments } = useComments();
   const { trans } = useTranslate();
-
   const [title, setTitle] = useState(task.name || '');
-  const [assignee, setAssignee] = useState<Assignee | null>((task.assignees.length > 0 && task.assignees[0]) || null);
   const [status, setStatus] = useState(task.sectionId || null);
   const [description, setDescription] = useState(task.description || '');
-
+  const [comment, setComment] = useState('');
+  // const comments = getComments(task.id);
+  // const [comments, setComments] = useState(getComments(task.id));
 
   const { deleteTask, updateTask, moveTask } = context;
 
@@ -45,14 +46,21 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const { sections } = useSections();
 
-  // const projectsPptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
+  // const projectsOptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
+
+  useEffect(() => {
+    updateComments(task.id);
+  }, [updateComments, task.id]);
 
   const membersOptions: Option[] = members.map(({ id, name }) => ({ value: id, label: name }));
 
   const statusOptions: Option[] = sections.items.map(({ id, name }) => ({ value: id, label: name }));
 
-  const defaultValueAssignee = membersOptions.find(({ value }) => value === assignee?.memberId) || { value: '0', label: 'No assignee' };
+  const defaultValueAssignee = membersOptions.find(({ value }) => value === task.assignees[0]?.memberId) || DEFAULT_ASSIGNEE_OPTION;
+  const [assignee, setAssignee] = useState<Option>(defaultValueAssignee);
+
   const defaultValueStatus = statusOptions.find(({ value }) => value === status);
+
 
   const deleteCurrentTask = async () => {
     const errors = await deleteTask(task.id);
@@ -79,14 +87,19 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const assigneeHandleChange = (option: Option | null, actionMeta: ActionMeta<Option>) => {
     if (option?.value) {
       const newAssignee = {
-        taskId: task.id,
-        memberId: option.value,
+        value: option.value,
+        label:  option.label,
       };
 
       setAssignee(newAssignee);
 
       updateInfo({ assignees: [option.value] });
     }
+  };
+
+  const deleteAssignee = () => {
+    updateInfo({ assignees: [] });
+    setAssignee(DEFAULT_ASSIGNEE_OPTION);
   };
 
   const statusHandleChange = (option: Option | null, actionMeta: ActionMeta<Option>) => {
@@ -101,28 +114,36 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     setDescription(e.target.value);
   };
 
+  const commentOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
+
   const descriptionOnBlur = () => {
     if (description) {
       updateInfo({ description: description });
     }
   };
 
+  const onSubmitComment = async (e: FormEvent) => {
+    e.preventDefault();
+    await createComment(task.id, comment);
+    setComment('');
+  };
+
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
       <div className="task-management">
         {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
-        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}
-          <div className="delete-bin"></div>
-        </Button>
+        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
       <Input placeholder="Write a task title" value={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
         <div className="assignee-info">
-          <Select options={membersOptions} onChange={assigneeHandleChange} defaultValue={defaultValueAssignee}></Select>
+          <Select value={assignee} options={membersOptions} onChange={assigneeHandleChange} defaultValue={defaultValueAssignee}></Select>
           {/* {userInfo && <UserIcon userId={userInfo.id}>{userInfo.name}</UserIcon>}
           <p>{userInfo?.name}</p> */}
-          <Button className="delete-button">
+          <Button className="delete-button" onClick={deleteAssignee}>
             <div className="delete"></div>
           </Button>
         </div>
@@ -139,16 +160,29 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
       <div className="task-description">
         <span>{trans(Message.Description)}</span>
         <Textearea placeholder={trans(Message.WhatIsThisTaskAbout)}
-                   className="task-description-textarea"
-                   onBlur={descriptionOnBlur}
-                   onChange={descriptionOnChange}
-                   value={description} />
+          className="task-description-textarea"
+          onBlur={descriptionOnBlur}
+          onChange={descriptionOnChange}
+          value={description} />
       </div>
       <div className="separator-line"></div>
-      <div className="task-comments"></div>
-      {userInfo && <Comment id={userInfo?.id} name={userInfo?.name} text="sdfd"></Comment>}
+      <ul className="task-comments">
+        {comments.items.map(({ user: { id: userId, name }, text, createdAt, id }) => <Comment
+          key={id}
+          userId={userId}
+          commentId={id}
+          name={name}
+          text={text}
+          createdAt={createdAt}
+          deleteComment={deleteComment}
+          editComment={editComment}
+          />)}
+      </ul>
       <div className="separator-line"></div>
-      <Textearea placeholder={trans(Message.WriteAComment)} value="" onChange={() => null} />
+      <form action="" className="comment-form" onSubmit={onSubmitComment}>
+        <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />
+        <Button className="comment-button" disabled={!comment}>Comment</Button>
+      </form>
     </Modal>
   );
 }
