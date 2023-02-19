@@ -30,17 +30,6 @@ export const CommentsContext = createContext<CommentContextValue>({
 export const CommentsProvider = ({ children }: { children: ReactNode }) => {
   const [comments, setComments] = useState(initialState);
 
-  // const fetchTasks = useCallback(async (): Promise<void> => {
-  //   const promises = sectionIds.reduce<Promise<Response<List<Task>>>[]>((acc, sectionId) => {
-  //     return [...acc, TaskService.getTasks(sectionId)];
-  //   }, []);
-
-  //   const results = await Promise.all(promises);
-  //   results.forEach(({ data: taskItems }, idx) => {
-  //     setTasks(prev => ({ ...prev, [sectionIds[idx]]: taskItems }));
-  //   });
-  // }, [sections]);
-
   const updateComments = useCallback(async (taskId: string) => {
     const { data, errors } = await CommentService.getComments(taskId);
 
@@ -109,10 +98,6 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
       return castToErrors(e);
     }
   };
-
-  // useEffect(() => {
-  //   fetchTasks();
-  // }, [fetchTasks]);
 
   return (
     <CommentsContext.Provider value={{ createComment, editComment, deleteComment, getComment, updateComments, comments  }}>{children}</CommentsContext.Provider>

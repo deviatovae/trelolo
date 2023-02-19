@@ -36,8 +36,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const [status, setStatus] = useState(task.sectionId || null);
   const [description, setDescription] = useState(task.description || '');
   const [comment, setComment] = useState('');
-  // const comments = getComments(task.id);
-  // const [comments, setComments] = useState(getComments(task.id));
 
   const { deleteTask, updateTask, moveTask } = context;
 
