@@ -7,7 +7,7 @@ import { Message } from '../../components/languages/messages';
 import { useTranslate } from '../../hooks/useTranslate';
 import { ColorPicker } from '../../components/colorPicer/colorPicker';
 import Input from '../../components/input/input';
-// import { useState } from 'react';
+import Button from '../../components/button/button';
 
 export const ProfilePage = () => {
 
@@ -105,7 +105,12 @@ export const ProfilePage = () => {
                       onChange={handleConfirmPasswordChange}
                     />
                    </div>
-                  <button className="profilePage__save-btn">Save changes</button> 
+                   <Button 
+                     className="profilePage__save-btn"
+                    //  disabled
+                    >
+                    {trans(Message.SaveChanges)}
+                  </Button>
                 </div>
               </div>
           </div>
