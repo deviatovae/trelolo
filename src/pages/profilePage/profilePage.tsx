@@ -5,7 +5,7 @@ import { ProfilePerson } from './../../components/profileModal/profilePerson';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../components/languages/messages';
 import { useTranslate } from '../../hooks/useTranslate';
-import { ColorPicker } from '../../components/colorPicer/colorPicker';
+import { ColorPicker } from '../../components/colorPicker/colorPicker';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
 
