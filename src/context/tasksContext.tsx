@@ -183,8 +183,6 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
         return errors;
       }
 
-      console.log(taskItem);
-
       setTasks((prev) => {
         const { sectionId } = taskItem;
         const { items, count } = prev[sectionId];

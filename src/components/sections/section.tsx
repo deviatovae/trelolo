@@ -11,9 +11,10 @@ import { SectionNameInput } from './sectionNameInput';
 
 interface SectionProps {
   section: SectionModel
+  idx: number
 }
 
-export const Section = ({ section: { id, name, position } }: SectionProps) => {
+export const Section = ({ section: { id, name }, idx }: SectionProps) => {
   const { getTasks, createTask } = useTasks();
   const { deleteSection } = useSections();
   const { items: tasks } = getTasks(id);
@@ -69,7 +70,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
   const closeDeleteSection = () => setShowDeleteSection(false);
 
   return (
-    <Draggable key={id} draggableId={id} index={position} isDragDisabled={!isSectionDraggable}>
+    <Draggable key={id} draggableId={id} index={idx} isDragDisabled={!isSectionDraggable}>
       {(DragProvided) => (
         <div className="project-page__column-list-item"
              {...DragProvided.draggableProps} ref={DragProvided.innerRef}
@@ -99,7 +100,7 @@ export const Section = ({ section: { id, name, position } }: SectionProps) => {
                 {showDeleteSection && activeColumn === name &&
                   (<WindowDelete deleteColumn={handleDeleteColumn} onClose={closeDeleteSection} />)}
 
-                {tasks.map((task, idx) => <Task key={idx} task={task} index={idx} />)}
+                {tasks.map((task, taskIdx) => <Task key={task.id} task={task} index={taskIdx} />)}
                 {showCreatTask && activeColumn === name && (
                   <WindowAddTask onCreateProject={(inputValue) => handleAddTask(inputValue)} onClickCross={handleCrossClick} />
                 )}
