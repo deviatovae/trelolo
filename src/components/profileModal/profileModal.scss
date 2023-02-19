@@ -50,7 +50,7 @@
     font-size: 14px;
     font-weight: 400;
     color: $black;
-    transition: 0.3s transform;
+    transition: 0.3s color;
 
     &:hover {
       cursor: pointer;
@@ -59,8 +59,7 @@
     }
 
     &:active {
-      transform: scale(0.95);
-      transition: 0.3s transform;
+
     }
   }
 }
