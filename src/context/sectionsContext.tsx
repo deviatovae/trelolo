@@ -9,6 +9,7 @@ export interface SectionsContextValue {
   createSection: (data: SectionCreateData) => Promise<(Errors | null)>
   updateSection: (sectionId: string, data: SectionCreateData) => Promise<Errors | null>
   deleteSection: (id: string) => Promise<(Errors | null)>
+  moveSection: (id: string, position: number) => Promise<Errors | null>
   isFetchingSection: boolean
 }
 
@@ -20,6 +21,7 @@ export const SectionsContext = createContext<SectionsContextValue>({
   createSection: async () => null,
   updateSection: async () => null,
   deleteSection: async () => null,
+  moveSection: async () => null,
   isFetchingSection: false,
 });
 
@@ -103,11 +105,38 @@ export const SectionsProvider = ({ children, projectId }: { projectId: string, c
     }
   };
 
+  const moveSection = async (id: string, toIndex: number) => {
+    try {
+      setSections((prevSections) => {
+        const fromIndex = prevSections.items.findIndex(({ id: sectionId }) => sectionId === id);
+        const isSamePosition = fromIndex === toIndex;
+
+        if (isSamePosition) {
+          return { ...prevSections };
+        }
+
+        const sectionItems = [...prevSections.items];
+        const [movedTask] = sectionItems.splice(fromIndex, 1);
+        sectionItems.splice(toIndex, 0, movedTask);
+
+        return {
+          ...prevSections,
+          items: [...sectionItems]
+        };
+      });
+
+      const { errors } = await SectionService.moveSection(id, toIndex + 1);
+      return errors;
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
+
   useEffect(() => {
     fetchSections();
   }, [fetchSections]);
 
   return (
-    <SectionsContext.Provider value={{ sections, createSection, updateSection, deleteSection, isFetchingSection }}>{children}</SectionsContext.Provider>
+    <SectionsContext.Provider value={{ sections, createSection, updateSection, moveSection, deleteSection, isFetchingSection }}>{children}</SectionsContext.Provider>
   );
 };
