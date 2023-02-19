@@ -1,4 +1,4 @@
-import React from 'react';
+import { RefObject } from 'react';
 
 interface InputProp {
     type: string,
@@ -10,7 +10,7 @@ interface InputProp {
     error?: string,
     classNameWrapper?: string,
     disabled?: boolean
-
+    inputRef?: RefObject<HTMLInputElement>
     autoFocus: boolean
 }
 
