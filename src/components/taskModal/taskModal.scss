@@ -23,6 +23,8 @@
   }
 
   &-section {
+    animation: task-block 0.4s cubic-bezier(.92,.14,.4,.57);
+
     @at-root {
       div#{&} {
         height: 100%;
