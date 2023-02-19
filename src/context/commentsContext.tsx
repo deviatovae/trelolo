@@ -1,5 +1,5 @@
 import { Errors, List } from '../API/types';
-import { Comment } from '../types/models';
+import { Comment, Like } from '../types/models';
 
 import { createContext, ReactNode, useCallback, useState } from 'react';
 import { castToErrors } from '../utils/errors';
@@ -12,6 +12,8 @@ export interface CommentContextValue {
   deleteComment: (id: string) => Promise<(Errors | null)>
   comments: List<Comment>
   updateComments: (taskId: string) => Promise<void>
+  addLike: (commentId: string) => Promise<(Errors | undefined)>
+  removeLike: (commentId: string) => Promise<(Errors | undefined)>
 }
 const initialState: List<Comment>  = {
   items: [],
@@ -25,6 +27,8 @@ export const CommentsContext = createContext<CommentContextValue>({
   getComment: () => null,
   comments:  initialState,
   updateComments: async (taskId: string) => undefined,
+  addLike: async (commentId: string) => undefined,
+  removeLike: async (commentId: string) => undefined,
 });
 
 export const CommentsProvider = ({ children }: { children: ReactNode }) => {
@@ -99,7 +103,52 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const addLike = async (commentId: string) => {
+    try {
+      const { data: likeItem, errors } = await CommentService.addLike(commentId);
+
+      if (errors) {
+        return errors;
+      }
+
+      updateLikes(likeItem);
+
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
+
+  const removeLike = async (commentId: string) => {
+    try {
+      const { data: likeItem, errors } = await CommentService.removeLike(commentId);
+
+      if (errors) {
+        return errors;
+      }
+
+      updateLikes(likeItem);
+      
+    } catch (e) {
+      return castToErrors(e);
+    }
+  };
+
+  const updateLikes = (like: Like) => {
+    const preparedComments = comments.items.map((comment) => {
+      if (comment.id === like.id) {
+        return { ...comment, ...like };
+      }
+      return comment;
+    });
+
+    setComments(({ items, count }) => ({
+      items: preparedComments,
+      count
+    }));
+  };
+
   return (
-    <CommentsContext.Provider value={{ createComment, editComment, deleteComment, getComment, updateComments, comments  }}>{children}</CommentsContext.Provider>
+    <CommentsContext.Provider 
+      value={{ createComment, editComment, deleteComment, getComment, updateComments, comments, addLike, removeLike  }}>{children}</CommentsContext.Provider>
   );
 };

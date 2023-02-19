@@ -57,6 +57,7 @@ export enum Message {
   Description = 'Description',
   WhatIsThisTaskAbout = 'WhatIsThisTaskAbout',
   WriteAComment = 'WriteAComment',
+  Comment = 'Comment',
   MyTasks = 'MyTasks',
   AllTasks = 'AllTasks',
   AssignedToMe = 'AssignedToMe',

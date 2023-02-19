@@ -9,7 +9,7 @@ import './comment.scss';
 import './types';
 import { CommentProp } from './types';
 
-export default function Comment({ className, text, userId, commentId, name, createdAt, deleteComment, editComment }: CommentProp) {
+export default function Comment({ className, text, userId, commentId, name, createdAt, deleteComment, editComment, addLike, removeLike, likes, isLiked }: CommentProp) {
 
   const { userInfo } = useAuth();
   const [comment, setComment] = useState(text);
@@ -38,7 +38,11 @@ export default function Comment({ className, text, userId, commentId, name, crea
   };
 
   const onClickLike = () => {
+    addLike(commentId);
+  };
 
+  const onClickUnLike = () => {
+    removeLike(commentId);
   };
 
   const onClickSubmitEdit = () => {
@@ -54,7 +58,7 @@ export default function Comment({ className, text, userId, commentId, name, crea
           {<span className="comment-name">{name}</span>}
           <span className="comment-time">{formatDateString(createdAt, 'HH:mm')}</span>
         </div>
-        {editDisabled && <pre className="comment-text">{text}</pre>}
+        {editDisabled && <p className="comment-text">{text}</p>}
         {!editDisabled && <Textearea
           className="comment-texteria"
           placeholder=""
@@ -64,12 +68,17 @@ export default function Comment({ className, text, userId, commentId, name, crea
         }
       </div>
     </div>
-    {userInfo?.id === userId && <div className="comment-management">
-      <Button className="comment-like" onClick={onClickLike}><span></span></Button>
-      {editDisabled && <Button className="comment-edit" onClick={onClickEdit}><span></span></Button>}
-      {!editDisabled && <Button className="comment-submit-edit" onClick={onClickSubmitEdit}><span></span></Button>}
-      <Button className="comment-delete" onClick={onClickDelete}><span></span></Button>
+    <div className="comment-management">
+      <div className="comment-likes">
+        {!isLiked && <Button className="comment-like" onClick={onClickLike}><span></span></Button>}
+        {isLiked && <Button className="comment-unlike" onClick={onClickUnLike}><span>{likes}</span></Button>}
+        <span className="comment-likes-count">{likes}</span>
+      </div>
+      {userInfo?.id === userId && <>
+        {editDisabled && <Button className="comment-edit" onClick={onClickEdit}><span></span></Button>}
+        {!editDisabled && <Button className="comment-submit-edit" onClick={onClickSubmitEdit}><span></span></Button>}
+        <Button className="comment-delete" onClick={onClickDelete}><span></span></Button>
+      </>}
     </div>
-    }
   </li>;
 }

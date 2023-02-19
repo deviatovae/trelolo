@@ -30,7 +30,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   type Option = { value: string, label: string };
 
-  const { createComment, deleteComment, updateComments, editComment, comments } = useComments();
+  const { createComment, deleteComment, updateComments, editComment, comments, addLike, removeLike } = useComments();
   const { trans } = useTranslate();
   const [title, setTitle] = useState(task.name || '');
   const [status, setStatus] = useState(task.sectionId || null);
@@ -165,7 +165,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
       </div>
       <div className="separator-line"></div>
       <ul className="task-comments">
-        {comments.items.map(({ user: { id: userId, name }, text, createdAt, id }) => <Comment
+        {comments.items.map(({ user: { id: userId, name }, text, createdAt, id, likes, isLiked }) => <Comment
           key={id}
           userId={userId}
           commentId={id}
@@ -174,12 +174,16 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
           createdAt={createdAt}
           deleteComment={deleteComment}
           editComment={editComment}
+          addLike={addLike}
+          removeLike={removeLike}
+          likes={likes}
+          isLiked={isLiked}
           />)}
       </ul>
       <div className="separator-line"></div>
       <form action="" className="comment-form" onSubmit={onSubmitComment}>
         <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />
-        <Button className="comment-button" disabled={!comment}>Comment</Button>
+        <Button className="comment-button" disabled={!comment}>{trans(Message.Comment)}</Button>
       </form>
     </Modal>
   );

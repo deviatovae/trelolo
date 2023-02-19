@@ -8,5 +8,9 @@ export interface CommentProp {
   name: string,
   createdAt: string,
   deleteComment: (id: string) => Promise<Errors | null>,
-  editComment: (id: string, text: string) => void
+  editComment: (id: string, text: string) => void,
+  addLike: (id: string) => Promise<Errors | undefined>,
+  removeLike: (id: string) => Promise<Errors | undefined>,
+  likes: number,
+  isLiked: boolean,
 }

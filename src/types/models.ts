@@ -48,7 +48,14 @@ export interface Comment {
   text: string,
   user: User,
   likes: number,
+  isLiked: boolean,
   createdAt: string
+}
+
+export interface Like {
+  id: string,
+  likes: number,
+  isLiked: boolean,
 }
 
 export type MyTask = Task & { section: Section & { project: { name: string } } };
