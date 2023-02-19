@@ -1,6 +1,5 @@
 import './projectPage.scss';
 import '../../components/sections/section.scss';
-import Aside from '../../components/aside/aside';
 import { ProjectsProvider } from '../../context/projectsContext';
 import { useParams } from 'react-router-dom';
 import { SectionsProvider } from '../../context/sectionsContext';
@@ -13,8 +12,7 @@ export const ProjectPage = () => {
 
   return (
     <ProjectsProvider>
-      <div className="project-page__container wrapper">
-        <Aside></Aside>
+      <div className="project-page__container">
         <SectionsProvider projectId={projectId || ''}>
           <TasksProvider>
             <MembersProvider projectId={projectId}>
