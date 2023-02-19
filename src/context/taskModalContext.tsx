@@ -27,7 +27,7 @@ export const TaskModalProvider = ({ children }: { children: ReactNode }) => {
     taskSection.classList.toggle('task-hide');
     setTimeout(() => {
       setIsOpen(false);
-    }, 400);
+    }, 350);
   };
 
   return (
