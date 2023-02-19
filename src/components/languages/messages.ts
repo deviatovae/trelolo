@@ -69,6 +69,5 @@ export enum Message {
   ChangePassword = 'ChangePassword',
   EnterCurrentPassword = 'EnterCurrentPassword',
   EnterNewPassword = 'EnterNewPassword',
-  ConfirmPassword = 'ConfirmPassword',
 }
 

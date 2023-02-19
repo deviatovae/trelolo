@@ -5,7 +5,8 @@ import { ProfilePerson } from './../../components/profileModal/profilePerson';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../components/languages/messages';
 import { useTranslate } from '../../hooks/useTranslate';
-import { ColorPicer } from './../../components/colorPicer/colorPicer';
+import { ColorPicker } from '../../components/colorPicer/colorPicker';
+import Input from '../../components/input/input';
 // import { useState } from 'react';
 
 export const ProfilePage = () => {
@@ -17,6 +18,22 @@ export const ProfilePage = () => {
   // const handlePickerBtnClick = () => {
   //   setShowColorPicker(!showColorPicker); 
   // };
+
+  const handleNameChange = () => {
+
+  };
+
+  const handlePasswordChange = () => {
+
+  };
+
+  const handleNewPasswordChange = () => {
+
+  };
+
+  const handleConfirmPasswordChange = () => {
+
+  };
 
   return (
     <main className="profilePage__wrapper">
@@ -36,11 +53,11 @@ export const ProfilePage = () => {
                       <div className="profilePage__name-header">
                       <FormattedMessage id={Message.YourFullName} />
                       </div>
-                      <input 
-                        type="text"
-                        value={userInfo?.name}
-                        className="profilePage__input-name profilePage-inputs">
-                      </input>
+                      <Input type="text"
+                        value={userInfo?.name ?? ''}
+                        onChange={handleNameChange}
+                        className="profilePage__input-name profilePage-inputs"
+                      />
                     </div>
                     <div className="profilePage__color-container">
                       <div className="profilePage__color-header">
@@ -50,18 +67,18 @@ export const ProfilePage = () => {
                         // onClick={handlePickerBtnClick}
                         >
                       </div>
-                      <ColorPicer />
+                      <ColorPicker />
                       {/* {showColorPicker && <ColorPicer />} */}
                     </div>
                     <div className="profilePage__email-container">
                       <div className="profilePage__email-header">
                       <FormattedMessage id={Message.EmailAddress} />
                       </div>
-                      <input type="text"
-                        disabled 
-                        value={userInfo?.email}
-                        className="profilePage__email profilePage-inputs">
-                      </input>
+                      <Input type="text"
+                        value={userInfo?.email ?? ''}
+                        disabled
+                        className="profilePage__email profilePage-inputs"
+                      />
                     </div>
                   </div>
                   <div className="profilePage__right-side">
@@ -69,21 +86,24 @@ export const ProfilePage = () => {
                     <FormattedMessage id={Message.ChangePassword} />
                   </div>
                    <div className="profilePage__pasword-container">
-                     <input 
-                       type="pasword"
-                       placeholder={trans(Message.EnterCurrentPassword)}
-                       className="profilePage__pasword profilePage-inputs">
-                     </input>
-                     <input 
-                       type="pasword"
-                       placeholder={trans(Message.EnterNewPassword)}
-                       className="profilePage__pasword profilePage-inputs">
-                      </input>
-                     <input 
-                      type="pasword" 
-                      placeholder={trans(Message.ConfirmPassword)}
-                      className="profilePage__pasword profilePage-inputs">
-                     </input>
+                    <Input type="password"
+                      value={''}
+                      placeholder={trans(Message.EnterCurrentPassword)}
+                      className="profilePage__pasword profilePage-inputs"
+                      onChange={handlePasswordChange}
+                    />
+                    <Input type="password"
+                      value={''}
+                      placeholder={trans(Message.EnterNewPassword)}
+                      className="profilePage__pasword profilePage-inputs"
+                      onChange={handleNewPasswordChange}
+                    />
+                    <Input type="password"
+                      value={''}
+                      placeholder={trans(Message.EnterPasswordConfirm)}
+                      className="profilePage__pasword profilePage-inputs"
+                      onChange={handleConfirmPasswordChange}
+                    />
                    </div>
                   <button className="profilePage__save-btn">Save changes</button> 
                 </div>

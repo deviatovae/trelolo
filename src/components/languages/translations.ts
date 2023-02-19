@@ -73,7 +73,6 @@ export const translations = {
     [Message.ChangePassword]: 'Change password',
     [Message.EnterCurrentPassword]: 'Enter current password',
     [Message.EnterNewPassword]: 'Enter new password',
-    [Message.ConfirmPassword]: 'Confirm password',
 
   },
   [LOCALES.RUSSIAN]: {
@@ -147,6 +146,5 @@ export const translations = {
     [Message.ChangePassword]: 'Изменить пароль',
     [Message.EnterCurrentPassword]: 'Введите текущий пароль',
     [Message.EnterNewPassword]: 'Введите новый пароль',
-    [Message.ConfirmPassword]: 'Повторите пароль',
   },
 };
