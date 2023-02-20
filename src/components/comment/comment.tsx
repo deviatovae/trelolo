@@ -55,7 +55,7 @@ export default function Comment({ className, text, userId, commentId, name, crea
   };
 
   const createdDay = formatDateString(createdAt, 'yyyy-MM-dd') === formatDateString(new Date().toString(), 'yyyy-MM-dd')
-    ? `Today, ${formatDateString(createdAt, 'HH:mm')}`
+    ? `${trans(Message.Today)}, ${formatDateString(createdAt, 'HH:mm')}`
     : formatDateString(createdAt, 'dd MMMM, HH:mm');
 
   return <li className={classes}>

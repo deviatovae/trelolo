@@ -72,6 +72,7 @@ export enum Message {
   EnterNewPassword = 'EnterNewPassword',
   SaveChanges = 'SaveChanges',
   Edited = 'Edited',
-  NoComments = 'NoComments'
+  NoComments = 'NoComments',
+  Today = 'Today'
 }
 
