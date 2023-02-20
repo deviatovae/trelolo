@@ -6,6 +6,7 @@ import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
 import { AuthRoute } from '../components/authRoute/authRoute';
 import { ProjectPage } from '../pages/projectPage/projectPage';
+import { MyProjectsPage } from '../pages/myProjects/myProjects';
 
 
 export enum Route {
@@ -13,7 +14,8 @@ export enum Route {
     LOGIN = '/login',
     MAIN = '/main',
     MEMBERS = '/members',
-    PROJECT = '/project/:id',
+    PROJECTS = '/projects',
+    PROJECT_BOARD = '/project/:id',
 }
 export const routes = [
     {
@@ -33,14 +35,18 @@ export const routes = [
                 children: [
                     {
                         path: Route.MAIN,
-                        element: <Main/>
+                        element: <Main />
                     },
                     {
                         path: Route.MEMBERS,
-                        element: <MembersPage/>
+                        element: <MembersPage />
                     },
                     {
-                        path: Route.PROJECT,
+                        path: Route.PROJECTS,
+                        element: <MyProjectsPage />
+                    },
+                    {
+                        path: Route.PROJECT_BOARD,
                         element: <ProjectPage />
                     }
                 ]

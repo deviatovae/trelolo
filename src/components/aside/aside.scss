@@ -76,9 +76,7 @@
     &__my-projects {
         display: flex;
         align-items: center;
-        padding-top: 8px;
         gap: 10px;
-        border-top: solid 1px $borderBlueLight;
     }
 
     &__logo {
@@ -105,7 +103,7 @@
 
     &__list {
         margin: 0;
-        padding: 0;
+        padding: 0 0 10px 0;
         overflow: auto;
     }
 
@@ -122,10 +120,5 @@
 
         display: flex;
         padding-left: 55px;
-        line-height: 30px;
-
-        & > a {
-
-        }
     }
 }

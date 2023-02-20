@@ -17,12 +17,12 @@ export function Modal({ title, children, onClose, className, classNameWrapper, c
     }
   };
 
-  const classes = `modal ${className}`;
-  const classesWrapper = `modal-wrapper ${classNameWrapper}`;
-  const classesMain = `modal__main ${classNameMain}`;
+  const classes = `modal ${className || ''}`;
+  const classesWrapper = `modal-wrapper ${classNameWrapper || ''}`;
+  const classesMain = `modal__main ${classNameMain || ''}`;
 
   return (
-    <div className={classesWrapper} onMouseDown={handleClickOutside} style={{ zIndex: 10 }}>
+    <div className={classesWrapper} onMouseDown={handleClickOutside} style={{ zIndex: 10, cursor: 'auto' }}>
       <div className={classes}>
         <div className="modal__content">
           <div className="modal__header modal-header">

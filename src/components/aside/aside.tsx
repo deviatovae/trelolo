@@ -10,7 +10,7 @@ import { CreateProjectModal } from './createProjectModal';
 
 export const Aside = () => {
   const { projects } = useProjects();
-  const [showUpdate, setShowUpdate] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
 
   return (
     <aside className="aside__container">
@@ -28,12 +28,14 @@ export const Aside = () => {
           </div>
         </MenuLink>
         <div className="aside__projects">
-          <div className="projects__my-projects">
-            <span className="projects__logo"></span>
-            <FormattedMessage id={Message.MyProjects} />
-            <span className="projects__plus" onClick={() => setShowUpdate(true)}></span>
-            {showUpdate && <CreateProjectModal onClose={() => setShowUpdate(false)}></CreateProjectModal>}
-          </div>
+          <MenuLink to={Route.PROJECTS}>
+            <div className="projects__my-projects">
+              <span className="projects__logo"></span>
+              <FormattedMessage id={Message.MyProjects} />
+              <span className="projects__plus" onClick={() => setShowCreate(true)}></span>
+              {showCreate && <CreateProjectModal onClose={() => setShowCreate(false)}></CreateProjectModal>}
+            </div>
+          </MenuLink>
           <ul className="projects__list">
             {projects.map(({ name, id }) => <li className="" key={id}>
               <MenuLink className="projects__item" to={`/project/${id}`}>

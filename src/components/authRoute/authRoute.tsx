@@ -10,7 +10,7 @@ export const AuthRoute = () => {
   }
   return (
     <ProjectsProvider>
-      <div className="project-page__container wrapper">
+      <div className="project-page__container">
         <Aside></Aside>
         <Outlet />
       </div>
