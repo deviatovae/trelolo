@@ -39,10 +39,12 @@
 
   &__name {
     font-weight: 600;
+    transition: color 0.2s;
 
     &:hover {
       cursor: pointer;
       color: #7d88B1ff;
+      transition: color 0.2s;
     }
   }
   &__name, &__name_new {
@@ -52,10 +54,12 @@
 
   &__name_new {
     color: #7d88B1ff;
+    transition: color 0.2s;
 
     &:hover {
       cursor: pointer;
       color: $mainBlueHover;
+            transition: color 0.2s;
     }
   }
 }

@@ -6,7 +6,7 @@ import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
 import { AuthRoute } from '../components/authRoute/authRoute';
 import { ProjectPage } from '../pages/projectPage/projectPage';
-
+import { ProfilePage } from '../pages/profilePage/profilePage';
 
 export enum Route {
     WELCOME = '/',
@@ -14,6 +14,7 @@ export enum Route {
     MAIN = '/main',
     MEMBERS = '/members',
     PROJECT = '/project/:id',
+    PROFILE = '/profile',
 }
 export const routes = [
     {
@@ -42,6 +43,10 @@ export const routes = [
                     {
                         path: Route.PROJECT,
                         element: <ProjectPage />
+                    },
+                    {
+                        path: Route.PROFILE,
+                        element: <ProfilePage />
                     }
                 ]
             },

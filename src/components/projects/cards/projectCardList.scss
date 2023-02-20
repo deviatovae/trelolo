@@ -12,6 +12,7 @@
     max-height: 700px;
     height: fit-content;
     padding: 1.3rem;
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.1);
   }
 
   &__content {
@@ -98,7 +99,6 @@
     color: $mainBlue;
     transition: transform 0.2s ease-in-out;
 
-
     &:hover {
       cursor: pointer;
       transform: scale(1.03);
@@ -124,11 +124,12 @@
     z-index: 4;
     top: 5px;
     right: 0;
+    transition: background 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
       background-color: $borderBlueLight;
-      transition: transform 0.2s ease-in-out;
+      transition: background 0.3s ease-in-out;
     }
   }
 

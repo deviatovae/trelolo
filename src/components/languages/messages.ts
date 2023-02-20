@@ -62,5 +62,14 @@ export enum Message {
   AllTasks = 'AllTasks',
   AssignedToMe = 'AssignedToMe',
   EnterName = 'EnterName',
+  MyProfile = 'MyProfile',
+  ProfileSettings = 'ProfileSettings',
+  YourFullName = 'YourFullName',
+  PickColor = 'PickColor',
+  EmailAddress = 'EmailAddress',
+  ChangePassword = 'ChangePassword',
+  EnterCurrentPassword = 'EnterCurrentPassword',
+  EnterNewPassword = 'EnterNewPassword',
+  SaveChanges = 'SaveChanges',
 }
 
