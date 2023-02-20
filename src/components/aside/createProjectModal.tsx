@@ -49,7 +49,7 @@ export const CreateProjectModal = ({ onClose }: CreateProjectModalProps) => {
 
   return (
     <Modal title={trans(Message.CreateNewProject)} onClose={onClose}>
-      <KeyboardHandler onEnter={handleSubmit} />
+      <KeyboardHandler onEnter={handleSubmit} onEsc={onClose} />
       <div className="add-member">
         <div className="add-member__field">
           <Input type="text"

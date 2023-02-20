@@ -4,13 +4,18 @@ import { FormattedMessage } from 'react-intl';
 import { Message } from '../languages/messages';
 import { Route } from '../../router/routes';
 import { MenuLink } from '../menuLink/menuLink';
-import { useState } from 'react';
 import { CreateProjectModal } from './createProjectModal';
+import React, { useState } from 'react';
 
 
 export const Aside = () => {
   const { projects } = useProjects();
   const [showCreate, setShowCreate] = useState(false);
+
+  const handleClickCreate = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCreate(true);
+  };
 
   return (
     <aside className="aside__container">
@@ -32,7 +37,7 @@ export const Aside = () => {
             <div className="projects__my-projects">
               <span className="projects__logo"></span>
               <FormattedMessage id={Message.MyProjects} />
-              <span className="projects__plus" onClick={() => setShowCreate(true)}></span>
+              <span className="projects__plus" onClick={handleClickCreate}></span>
               {showCreate && <CreateProjectModal onClose={() => setShowCreate(false)}></CreateProjectModal>}
             </div>
           </MenuLink>
