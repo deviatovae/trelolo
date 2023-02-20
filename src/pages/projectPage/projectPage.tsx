@@ -1,6 +1,5 @@
 import './projectPage.scss';
 import '../../components/sections/section.scss';
-import { ProjectsProvider } from '../../context/projectsContext';
 import { useParams } from 'react-router-dom';
 import { SectionsProvider } from '../../context/sectionsContext';
 import { MembersProvider } from '../../context/membersContext';
@@ -11,16 +10,14 @@ export const ProjectPage = () => {
   const { id: projectId } = useParams();
 
   return (
-    <ProjectsProvider>
-      <div className="project-page__container">
-        <SectionsProvider projectId={projectId || ''}>
-          <TasksProvider>
-            <MembersProvider projectId={projectId}>
-              <Sections />
-            </MembersProvider>
-          </TasksProvider>
-        </SectionsProvider>
-      </div>
-    </ProjectsProvider>
+    <div className="project-page__container">
+      <SectionsProvider projectId={projectId || ''}>
+        <TasksProvider>
+          <MembersProvider projectId={projectId}>
+            <Sections />
+          </MembersProvider>
+        </TasksProvider>
+      </SectionsProvider>
+    </div>
   );
 };

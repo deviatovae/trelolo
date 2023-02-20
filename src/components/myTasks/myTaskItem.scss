@@ -22,18 +22,25 @@
     max-width: 250px;
     overflow-y: hidden;
     font-size: 0.9rem;
+    transition: color 0.2s;
 
     &:hover {
       color: $mainBlueHover;
       cursor: pointer;
+      transition: color 0.2s;
     }
   }
+
+  &__project,
+  &__dueDate {
+    font-size: 0.8rem;
+  }
+
 
   &__project {
     max-width: 100px;
     overflow: hidden;
-    padding: 3px 8px;
-    font-size: 0.9rem;
+    padding: 4px 8px;
     background-color: $greylight;
     border-radius: 8px;
   }

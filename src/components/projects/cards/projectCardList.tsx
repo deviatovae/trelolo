@@ -28,13 +28,15 @@ export function ProjectCardList() {
   };
 
   return (
-    <div className="projects-cards__container">
-      <div className="projects-cards__content">
-        <h4><FormattedMessage id={Message.ManageProjects} /> ({count})</h4>
-        <div className="projects-cards__list">
-          {!showCreate && <div className="projects-cards__create" onClick={onClickCreate}>+ <FormattedMessage id={Message.CreateNewProject} /></div>}
-          {showCreate && <ProjectCreateCard onClose={close} onCreate={onCreateProject} errors={errors} />}
-          {projects.map(({ id, name }) => <ProjectCard key={id} id={id} name={name} />)}
+    <div className="myProjects-container">
+      <div className="projects-cards__container">
+        <div className="projects-cards__content">
+          <h4><FormattedMessage id={Message.ManageProjects} /> ({count})</h4>
+          <div className="projects-cards__list">
+            {!showCreate && <div className="projects-cards__create" onClick={onClickCreate}>+ <FormattedMessage id={Message.CreateNewProject} /></div>}
+            {showCreate && <ProjectCreateCard onClose={close} onCreate={onCreateProject} errors={errors} />}
+            {projects.map(({ id, name }) => <ProjectCard key={id} id={id} name={name} />)}
+          </div>
         </div>
       </div>
     </div>

@@ -4,13 +4,18 @@ import { FormattedMessage } from 'react-intl';
 import { Message } from '../languages/messages';
 import { Route } from '../../router/routes';
 import { MenuLink } from '../menuLink/menuLink';
-import { useState } from 'react';
 import { CreateProjectModal } from './createProjectModal';
+import React, { useState } from 'react';
 
 
 export const Aside = () => {
   const { projects } = useProjects();
-  const [showUpdate, setShowUpdate] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
+
+  const handleClickCreate = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowCreate(true);
+  };
 
   return (
     <aside className="aside__container">
@@ -28,12 +33,14 @@ export const Aside = () => {
           </div>
         </MenuLink>
         <div className="aside__projects">
-          <div className="projects__my-projects">
-            <span className="projects__logo"></span>
-            <FormattedMessage id={Message.MyProjects} />
-            <span className="projects__plus" onClick={() => setShowUpdate(true)}></span>
-            {showUpdate && <CreateProjectModal onClose={() => setShowUpdate(false)}></CreateProjectModal>}
-          </div>
+          <MenuLink to={Route.PROJECTS}>
+            <div className="projects__my-projects">
+              <span className="projects__logo"></span>
+              <FormattedMessage id={Message.MyProjects} />
+              <span className="projects__plus" onClick={handleClickCreate}></span>
+              {showCreate && <CreateProjectModal onClose={() => setShowCreate(false)}></CreateProjectModal>}
+            </div>
+          </MenuLink>
           <ul className="projects__list">
             {projects.map(({ name, id }) => <li className="" key={id}>
               <MenuLink className="projects__item" to={`/project/${id}`}>

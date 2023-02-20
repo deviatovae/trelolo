@@ -43,21 +43,25 @@
 
   &__add-btn {
     min-width: 60px;
+    width: initial;
     height: 36px;
-    border: solid 1px $greylight;
     border-radius: 6px;
     align-self: end;
-    color: $gray;
-  }
-
-  &__add-btn_active {
+    font-size: 16px;
     color: $white;
     background-color: $mainBlue;
     cursor: pointer;
     border: none;
 
-    &:hover{
+    &:hover {
       background-color: $mainBlueHover;
+    }
+
+    &:disabled {
+      color: $gray;
+      border: solid 1px $greylight;
+      background-color: initial;
+      cursor: default;
     }
   }
 

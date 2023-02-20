@@ -6,15 +6,18 @@ import { Main } from '../pages/main/main';
 import { MembersPage } from '../pages/membersPage/membersPage';
 import { AuthRoute } from '../components/authRoute/authRoute';
 import { ProjectPage } from '../pages/projectPage/projectPage';
+import { MyProjectsPage } from '../pages/myProjects/myProjects';
+
 import { ProfilePage } from '../pages/profilePage/profilePage';
 
 export enum Route {
     WELCOME = '/',
     LOGIN = '/login',
+    PROFILE = '/profile',
     MAIN = '/main',
     MEMBERS = '/members',
-    PROJECT = '/project/:id',
-    PROFILE = '/profile',
+    PROJECTS = '/projects',
+    PROJECT_BOARD = '/project/:id',
 }
 export const routes = [
     {
@@ -34,14 +37,18 @@ export const routes = [
                 children: [
                     {
                         path: Route.MAIN,
-                        element: <Main/>
+                        element: <Main />
                     },
                     {
                         path: Route.MEMBERS,
-                        element: <MembersPage/>
+                        element: <MembersPage />
                     },
                     {
-                        path: Route.PROJECT,
+                        path: Route.PROJECTS,
+                        element: <MyProjectsPage />
+                    },
+                    {
+                        path: Route.PROJECT_BOARD,
                         element: <ProjectPage />
                     },
                     {
