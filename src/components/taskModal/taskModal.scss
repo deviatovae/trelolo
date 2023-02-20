@@ -23,6 +23,8 @@
   }
 
   &-section {
+    animation: task-block 0.4s cubic-bezier(.92,.14,.4,.57);
+
     @at-root {
       div#{&} {
         height: 100%;
@@ -89,7 +91,6 @@
       div#{&} {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         gap: 20px;
         height: 100%;
       }
@@ -133,6 +134,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #edeae9;
 
     &-textarea {
       min-height: 100px;
@@ -145,8 +148,17 @@
     gap: 15px;
     width: 100%;
     height: 100%;
+    min-height: 150px;
     padding: 0;
+    margin: 0;
   }
+}
+
+.no-comments {
+  min-height: 150px;
+  align-self: center;
+  font-size: 12px;
+  color: $greylight;
 }
 
 .comment {
@@ -154,6 +166,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #edeae9;
   }
 
   &-button {
@@ -168,3 +182,8 @@
     }
   }
 }
+
+.task-hide {
+  animation: task-hide 0.4s ease-in-out;
+}
+

@@ -8,10 +8,12 @@ import { AuthRoute } from '../components/authRoute/authRoute';
 import { ProjectPage } from '../pages/projectPage/projectPage';
 import { MyProjectsPage } from '../pages/myProjects/myProjects';
 
+import { ProfilePage } from '../pages/profilePage/profilePage';
 
 export enum Route {
     WELCOME = '/',
     LOGIN = '/login',
+    PROFILE = '/profile',
     MAIN = '/main',
     MEMBERS = '/members',
     PROJECTS = '/projects',
@@ -48,6 +50,10 @@ export const routes = [
                     {
                         path: Route.PROJECT_BOARD,
                         element: <ProjectPage />
+                    },
+                    {
+                        path: Route.PROFILE,
+                        element: <ProfilePage />
                     }
                 ]
             },

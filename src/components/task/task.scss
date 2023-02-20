@@ -8,12 +8,23 @@
     box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
   }
 
+  &-name {
+    max-height: 40px;
+    word-break: break-all;
+    max-width: 200px;
+    overflow: hidden;
+  }
+
   &-title-logo-container,
   &-calendar-settings-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+  }
+
+  &-title-logo-container {
+    min-height: 60px;
   }
 
   &-calendar {

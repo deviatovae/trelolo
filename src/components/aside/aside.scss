@@ -92,12 +92,13 @@
         width: 26px;
         height: 26px;
         line-height: 32px;
+        transition: 0.3s background;
+        border-radius: 6px;
 
         &:hover {
             cursor: pointer;
             background-color: $asideHover;
-            border-radius: 6px;
-            transition: 0.2s all;
+            transition: 0.3s background;
         }
     }
 
@@ -109,13 +110,13 @@
 
     &__item {
         font-size: 14px;
-        transition: 0.2s all;
+        transition: 0.3s background;
         line-height: 36px;
 
         &:hover {
             cursor: pointer;
             background-color: $asideLink;
-            transition: 0.2s all;
+            transition: 0.3s background;
         }
 
         display: flex;

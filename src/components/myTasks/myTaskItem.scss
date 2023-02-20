@@ -22,10 +22,12 @@
     max-width: 250px;
     overflow-y: hidden;
     font-size: 0.9rem;
+    transition: color 0.2s;
 
     &:hover {
       color: $mainBlueHover;
       cursor: pointer;
+      transition: color 0.2s;
     }
   }
 
