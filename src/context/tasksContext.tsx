@@ -84,7 +84,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
         return {
           ...prev,
           [sectionId]: {
-            items: [...items, taskItem],
+            items: [...items, { ...taskItem, assignees: [] }],
             count: count + 1
           }
         };
@@ -182,8 +182,6 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       if (errors) {
         return errors;
       }
-
-      console.log(taskItem);
 
       setTasks((prev) => {
         const { sectionId } = taskItem;

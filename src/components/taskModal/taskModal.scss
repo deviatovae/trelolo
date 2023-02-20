@@ -52,6 +52,12 @@
           width: 20px;
           height: 20px;
           padding: 3px;
+
+          &:not(:disabled):hover {
+            cursor: pointer;
+            background-color: $borderBlueLight;
+            transition: transform 0.2s ease-in-out;
+          }
         }
 
         .delete {
@@ -63,25 +69,17 @@
           &::after {
             content: "";
             position: absolute;
-            left: 7px;
+            left: 6.5px;
             bottom: 1px;
             transform: rotate(45deg);
             height: 12px;
             width: 1px;
-            border-radius: 3px;
-            background-color: $gray;
+            border-radius: 1px;
+            background-color: $black;
           }
 
           &::after {
             transform: rotate(-45deg);
-          }
-
-          &:hover {
-
-            &::before,
-            &::after {
-              background-color: $white;
-            }
           }
         }
       }
@@ -94,7 +92,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 15px;
+        gap: 20px;
         height: 100%;
       }
     }
@@ -108,8 +106,6 @@
   }
 
   &-button {
-    display: flex;
-    gap: 5px;
     max-width: 130px;
     margin: 0;
     padding: 6px 8px;
@@ -121,11 +117,9 @@
     font-weight: 400;
 
     &:not(:disabled):hover {
-      color: $mainTextWhite;
-    }
-
-    .delete-bin {
-      background-image: url('../../assets/img/bin.svg');;
+      background-color: transparent;
+      color: $red;
+      border-color: red;
     }
   }
 
@@ -134,7 +128,7 @@
     grid-template-columns: 120px auto;
     justify-items: start;
     align-items: center;
-    gap: 20px;
+    gap: 30px 20px;
   }
 
   &-description {
@@ -142,8 +136,37 @@
     flex-direction: column;
     gap: 10px;
 
-    &-input {
-      height: 140px;
+    &-textarea {
+      min-height: 100px;
+    }
+  }
+
+  &-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+
+.comment {
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &-button {
+    align-self: flex-end;
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
     }
   }
 }

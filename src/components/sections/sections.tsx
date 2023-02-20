@@ -10,7 +10,7 @@ import { PreloaderCircle } from '../preloader/preloaderCircle';
 
 
 export const Sections = () => {
-  const { sections: { items: sections }, createSection, isFetchingSection } = useSections();
+  const { sections: { items: sections }, createSection, moveSection, isFetchingSection } = useSections();
   const { moveTask } = useTasks();
 
   const [showCreateSection, setShowCreateSection] = useState(false);
@@ -61,7 +61,11 @@ export const Sections = () => {
           }
         });
       case DnDType.Section:
-        break;
+        return moveSection(draggableId, toIndex).then((errors) => {
+          if (errors) {
+            console.error(errors);
+          }
+        });
     }
   };
 
@@ -76,8 +80,8 @@ export const Sections = () => {
                   <div className="columns-drop-container"
                        {...provided.droppableProps}
                        ref={provided.innerRef}>
-                    {sections.map((section) => (
-                      <Section key={section.id} section={section}></Section>
+                    {sections.map((section, idx) => (
+                      <Section key={section.id} section={section} idx={idx}></Section>
                     ))}
                     {provided.placeholder}
                   </div>

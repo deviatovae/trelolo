@@ -2,6 +2,7 @@ import { Task } from '../types/models';
 import React, { createContext, ReactNode, useState } from 'react';
 import { TaskModal } from '../components/taskModal/taskModal';
 import { TasksContextValue } from './tasksContext';
+import { CommentsProvider } from './commentsContext';
 
 interface TaskModalContextValue {
   showTaskModal: (task: Task, context: TasksContextValue) => void
@@ -33,7 +34,9 @@ export const TaskModalProvider = ({ children }: { children: ReactNode }) => {
   return (
     <TaskModalContext.Provider value={{ showTaskModal: show, closeTaskModal: close }}>
       {children}
-      {isOpen && task && <TaskModal task={task.task} context={task.context} onClose={close}></TaskModal>}
+      {isOpen && task && <CommentsProvider>
+        <TaskModal task={task.task} context={task.context} onClose={close}></TaskModal>
+        </CommentsProvider>}
     </TaskModalContext.Provider>
   );
 };

@@ -8,7 +8,15 @@ const Input = ({ type, classNameWrapper = '', className = '', placeholder, value
 
     return (
       <div className={classesWrapper}>
-          <input autoFocus={autoFocus} type={type} value={value} className={classes} placeholder={placeholder} onChange={onChange} onBlur={onBlur} disabled={disabled} />
+          <input 
+          autoFocus={autoFocus} 
+          type={type} 
+          value={value} 
+          className={classes} 
+          placeholder={placeholder} 
+          onChange={onChange} 
+          onBlur={onBlur} 
+          disabled={disabled} />
           {error && <span className="input-error-text">{error}</span>}
       </div>
     );
