@@ -1,6 +1,5 @@
 import './profilePage.scss';
 import { useAuth } from '../../hooks/auth';
-import Aside from '../../components/aside/aside';
 import { ProfilePerson } from './../../components/profileModal/profilePerson';
 import { FormattedMessage } from 'react-intl';
 import { Message } from '../../components/languages/messages';
@@ -37,7 +36,6 @@ export const ProfilePage = () => {
 
   return (
     <main className="profilePage__wrapper">
-      <Aside />
       <section className="profilePage__section-wrapper">
         <div className="profilePage__section">
           <div className="profilePage__header">
