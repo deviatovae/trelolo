@@ -75,6 +75,9 @@ export const translations = {
     [Message.EnterCurrentPassword]: 'Enter current password',
     [Message.EnterNewPassword]: 'Enter new password',
     [Message.SaveChanges]: 'Save',
+    [Message.Edited]: 'Edited',
+    [Message.NoComments]: 'No comments',
+    [Message.Today]: 'Today',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -149,5 +152,8 @@ export const translations = {
     [Message.EnterCurrentPassword]: 'Введите текущий пароль',
     [Message.EnterNewPassword]: 'Введите новый пароль',
     [Message.SaveChanges]: 'Сохранить',
+    [Message.Edited]: 'Отредактировано',
+    [Message.NoComments]: 'Пока нет комментариев',
+    [Message.Today]: 'Cегодня'
   },
 };

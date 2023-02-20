@@ -24,7 +24,7 @@ interface TaskModalProps {
   context: TasksContextValue
 }
 
-const DEFAULT_ASSIGNEE_OPTION = { value: '0', label: 'No assignee' }; 
+const DEFAULT_ASSIGNEE_OPTION = { value: '0', label: 'No assignee' };
 
 export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
@@ -86,7 +86,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     if (option?.value) {
       const newAssignee = {
         value: option.value,
-        label:  option.label,
+        label: option.label,
       };
 
       setAssignee(newAssignee);
@@ -134,13 +134,11 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
         <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
-      <Input placeholder="Write a task title" value={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
+      <Input placeholder="Write a task title" value={title} title={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
         <div className="assignee-info">
           <Select value={assignee} options={membersOptions} onChange={assigneeHandleChange} defaultValue={defaultValueAssignee}></Select>
-          {/* {userInfo && <UserIcon userId={userInfo.id}>{userInfo.name}</UserIcon>}
-          <p>{userInfo?.name}</p> */}
           <Button className="delete-button" onClick={deleteAssignee}>
             <div className="delete"></div>
           </Button>
@@ -163,24 +161,25 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
           onChange={descriptionOnChange}
           value={description} />
       </div>
-      <div className="separator-line"></div>
+      {!comments.count ? <span className='no-comments'>{trans(Message.NoComments)}</span> :
       <ul className="task-comments">
-        {comments.items.map(({ user: { id: userId, name }, text, createdAt, id, likes, isLiked }) => <Comment
+        {comments.items.map(({ user: { id: userId, name }, text, createdAt, updatedAt, id, likes, isLiked }) => <Comment
           key={id}
           userId={userId}
           commentId={id}
           name={name}
           text={text}
           createdAt={createdAt}
+          updatedAt={updatedAt}
           deleteComment={deleteComment}
           editComment={editComment}
           addLike={addLike}
           removeLike={removeLike}
           likes={likes}
           isLiked={isLiked}
-          />)}
+        />)}
       </ul>
-      <div className="separator-line"></div>
+      }
       <form action="" className="comment-form" onSubmit={onSubmitComment}>
         <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />
         <Button className="comment-button" disabled={!comment}>{trans(Message.Comment)}</Button>

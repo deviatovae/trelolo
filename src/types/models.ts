@@ -50,6 +50,7 @@ export interface Comment {
   likes: number,
   isLiked: boolean,
   createdAt: string
+  updatedAt: string
 }
 
 export interface Like {

@@ -26,7 +26,9 @@
   }
 
   &-time {
+    align-self: center;
     color: $gray;
+    font-size: 12px;
   }
 
   &-texteria,
@@ -93,7 +95,8 @@
     content: url('../../assets/img/like.svg');
 
     &:not(:disabled):hover {
-      background-color: $borderBlueLight;
+      content: url('../../assets/img/unlike.svg');
+      background-color: transparent;
     }
   }
 
@@ -102,6 +105,7 @@
 
     &:not(:disabled):hover {
       background-color: transparent;
+      content: url('../../assets/img/like.svg');
     }
   }
 
@@ -109,7 +113,8 @@
     content: url('../../assets/img/pencil.svg');
 
     &:not(:disabled):hover {
-      background-color: $borderBlueLight;
+      background-color: transparent;
+      content: url('../../assets/img/pencilHover.svg');
     }
   }
 
@@ -117,7 +122,8 @@
     content: url('../../assets/img/confirm.svg');
 
     &:not(:disabled):hover {
-      background-color: $lightGreen;
+      background-color: transparent;
+      content: url('../../assets/img/confirmHover.svg');
     }
   }
 
@@ -125,7 +131,8 @@
     content: url('../../assets/img/bin.svg');
 
     &:not(:disabled):hover {
-      background-color: $ligthRed;
+      background-color: transparent;
+      content: url('../../assets/img/binHover.svg');
     }
   }
 
