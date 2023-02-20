@@ -5,6 +5,7 @@ interface InputProp {
     className?: string,
     placeholder: string,
     value: string,
+    title?: string,
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
     error?: string,
