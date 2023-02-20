@@ -14,12 +14,12 @@ export const Welcome = () => {
 
   return (
     <div className="welcome-wrapper">
-      <div className="welcome-content wrapper _container">
+      <div className="welcome-content _container">
         <div className="welcome-content__left">
           <h1 className="welcome-content__header">
-            <FormattedMessage id={Message.WelcomeHeader}/>
+            <FormattedMessage id={Message.WelcomeHeader} />
           </h1>
-          <div className="welcome-content__description"><FormattedMessage id={Message.WelcomeDescription}/></div>
+          <div className="welcome-content__description"><FormattedMessage id={Message.WelcomeDescription} /></div>
           <div className="welcome-content__visuals visuals">
             <div className="visuals__card">
               <div className="visuals__icon visuals__icon_kanban"></div>
