@@ -55,26 +55,33 @@ export const Login = () => {
     };
 
     return (
-        <form onSubmit={onSubmit} className='login-form'>
+        <form onSubmit={onSubmit} className="login-form" autoComplete="on">
             <h1 className="login-title"><FormattedMessage id={Message.LoginTrelolo} /></h1>
             {errors && errors.map(error => <span className="login-error">{(typeof error === 'string' ? error : error.msg)}</span>)}
             {step === 1 ? <Input
               type="email"
+              name="email"
               placeholder={trans(Message.EnterEmail)}
               value={email.value}
               onChange={onChangeEmail}
               error={email.error}
               classNameWrapper="input-login-wrapper"
               disabled={isInProgress}
-            /> : <Input
-              type="password"
-              placeholder={trans(Message.EnterPassword)}
-              value={password.value}
-              onChange={onChangePassword}
-              error={password.error}
-              classNameWrapper="input-login-wrapper"
-              disabled={isInProgress}
-            />}
+              autoComplete="on"
+            /> : (<>
+                <Input type="hidden" name="email" value={email.value} autoComplete="on"/>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder={trans(Message.EnterPassword)}
+                  value={password.value}
+                  onChange={onChangePassword}
+                  error={password.error}
+                  classNameWrapper="input-login-wrapper"
+                  disabled={isInProgress}
+                  autoComplete="on"
+                />
+            </>)}
             <Button className='button-login' disabled={isInProgress}>
                 {step === 1 ? trans(Message.Continue) : trans(Message.LogIn)}
             </Button>

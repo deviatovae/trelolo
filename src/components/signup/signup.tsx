@@ -114,6 +114,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
             />
             <Input
               type="password"
+              autoComplete="new-password"
               placeholder={trans(Message.EnterPassword)}
               value={password.value}
               onChange={onChangePassword}
@@ -122,6 +123,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
             />
             <Input
               type="password"
+              autoComplete="new-password"
               placeholder={trans(Message.EnterPasswordConfirm)}
               value={passwordConfirmed.value}
               onChange={onChangePasswordConfirm}
