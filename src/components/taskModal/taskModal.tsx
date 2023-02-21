@@ -134,7 +134,13 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
         <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
-      <Input placeholder="Write a task title" value={title} title={title} type="text" onChange={onChangeTitle} onBlur={onBlurTitle} className="task-title-input"></Input>
+      <Input placeholder={trans(Message.WriteATaskTitle)}
+        value={title}
+        title={title}
+        type="text"
+        onChange={onChangeTitle}
+        onBlur={onBlurTitle}
+        className="task-title-input" />
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>
         <div className="assignee-info">
@@ -162,23 +168,23 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
           value={description} />
       </div>
       {!comments.count ? <span className='no-comments'>{trans(Message.NoComments)}</span> :
-      <ul className="task-comments">
-        {comments.items.map(({ user: { id: userId, name }, text, createdAt, updatedAt, id, likes, isLiked }) => <Comment
-          key={id}
-          userId={userId}
-          commentId={id}
-          name={name}
-          text={text}
-          createdAt={createdAt}
-          updatedAt={updatedAt}
-          deleteComment={deleteComment}
-          editComment={editComment}
-          addLike={addLike}
-          removeLike={removeLike}
-          likes={likes}
-          isLiked={isLiked}
-        />)}
-      </ul>
+        <ul className="task-comments">
+          {comments.items.map(({ user: { id: userId, name }, text, createdAt, updatedAt, id, likes, isLiked }) => <Comment
+            key={id}
+            userId={userId}
+            commentId={id}
+            name={name}
+            text={text}
+            createdAt={createdAt}
+            updatedAt={updatedAt}
+            deleteComment={deleteComment}
+            editComment={editComment}
+            addLike={addLike}
+            removeLike={removeLike}
+            likes={likes}
+            isLiked={isLiked}
+          />)}
+        </ul>
       }
       <form action="" className="comment-form" onSubmit={onSubmitComment}>
         <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />

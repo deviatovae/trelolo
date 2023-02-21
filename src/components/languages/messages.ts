@@ -45,11 +45,15 @@ export enum Message {
   MemberLabelEmail = 'MemberLabelEmail',
   EnterProjects = 'EnterProjects',
   Add = 'Add',
+  AddColumn = 'AddColumn',
+  WriteAColumnName = 'WriteAColumnName',
   EnterMemberEmail = 'EnterMemberEmail',
   CreateNewProjectShort = 'CreateNewProjectShort',
   MemberAlreadyExist = 'MemberAlreadyExist',
   MarkCompleted = 'MarkCompleted',
+  AddTask = 'AddTask',
   DeleteTask = 'DeleteTask',
+  WriteATaskTitle = 'WriteATaskTitle',
   Assignee = 'Assignee',
   DueDate = 'DueDate',
   NoDueDate = 'NoDueDate',
@@ -73,6 +77,7 @@ export enum Message {
   SaveChanges = 'SaveChanges',
   Edited = 'Edited',
   NoComments = 'NoComments',
-  Today = 'Today'
+  Today = 'Today',
+  AreYouSure = 'AreYouSure'
 }
 

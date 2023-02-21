@@ -1,9 +1,12 @@
 import './windowAdd.scss';
 import { ModalProps } from '../types/modalProps';
 import { useState } from 'react';
-
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
 
 export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
+  const { trans } = useTranslate();
+
   const [inputValue, setInputValue] = useState('');
   const handleCreateProject = () => onCreate(inputValue);
 
@@ -16,10 +19,10 @@ export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
   return (
     <div className="modal-overl">
       <div className="modal-main">
-        <input className='modal-main__project-name' placeholder={placeholderProps}
+        <input className="modal-main__project-name" placeholder={placeholderProps}
           onChange={(event) => setInputValue(event.target.value)} onKeyDown={CheckKeyDown}>
         </input>
-        <button className='modal-main__btn-create-project' disabled={inputValue.length === 0} onClick={handleCreateProject}>Create</button>
+        <button className="modal-main__btn-create-project" disabled={!inputValue.length} onClick={handleCreateProject}>{trans(Message.Create)}</button>
       </div>
     </div>
   );

@@ -7,9 +7,13 @@ import { Section } from './section';
 import { DnDType } from '../../types/types';
 import { useTasks } from '../../hooks/useTasks';
 import { PreloaderCircle } from '../preloader/preloaderCircle';
-
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
 
 export const Sections = () => {
+
+  const { trans } = useTranslate();
+
   const { sections: { items: sections }, createSection, moveSection, isFetchingSection } = useSections();
   const { moveTask } = useTasks();
 
@@ -88,8 +92,8 @@ export const Sections = () => {
                 )}
               </Droppable>
             </DragDropContext>
-            {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={'Write a column name'} />}
-            {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ Add column</span></div>}
+            {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={trans(Message.WriteAColumnName)} />}
+            {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ {trans(Message.AddColumn)}</span></div>}
           </div>
         </PreloaderCircle>
       </section>
