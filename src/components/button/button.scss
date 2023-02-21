@@ -15,7 +15,11 @@
   user-select: none;
   cursor: pointer;
   border: none;
-  transition: 0.3s transform, 0.3s background ;
+  transition: 0.3s transform, 0.3s background;
+
+  &:disabled {
+    cursor: default;
+  }
 
   &:not(:disabled):active {
     transition: 0.3s transform;
@@ -26,22 +30,8 @@
     transition: 0.3s background;
     background: $mainBlueHover;
   }
-
-  // @media screen and (max-width: 1100px) {
-  //   margin: 0 auto;
-  // }
 }
 
 .button_round {
   border-radius: 50px;
-}
-
-.header__user {
-  width: 40px;
-  height: 40px;
-  font-weight: 400;
-  border-radius: 50%;
-  font-size: 16px;
-  color: $white;
-  background: $mainBlue;
 }

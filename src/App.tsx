@@ -8,6 +8,7 @@ import { translations } from './components/languages/translations';
 import { LanguagesManager } from './components/languages/languagesManager';
 import { AuthProvider } from './context/authContext';
 import { setDefaultOptions } from 'date-fns';
+import 'react-tooltip/dist/react-tooltip.css';
 
 function App() {
   const { currentLocale, setLocale, fnsLocale } = LanguagesManager();

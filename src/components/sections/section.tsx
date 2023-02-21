@@ -8,6 +8,8 @@ import { DnDType } from '../../types/types';
 import { WindowDelete } from '../window/windowDelete';
 import { useSections } from '../../hooks/useSections';
 import { SectionNameInput } from './sectionNameInput';
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
 
 interface SectionProps {
   section: SectionModel
@@ -15,6 +17,8 @@ interface SectionProps {
 }
 
 export const Section = ({ section: { id, name }, idx }: SectionProps) => {
+  const { trans } = useTranslate();
+
   const { getTasks, createTask } = useTasks();
   const { deleteSection } = useSections();
   const { items: tasks } = getTasks(id);
@@ -104,7 +108,7 @@ export const Section = ({ section: { id, name }, idx }: SectionProps) => {
                 {showCreatTask && activeColumn === name && (
                   <WindowAddTask onCreateProject={(inputValue) => handleAddTask(inputValue)} onClickCross={handleCrossClick} />
                 )}
-                <div className="column-list-item__btn-add-task-plus" onClick={() => handleClickAddTaskPlus(name)}>+ Add task</div>
+                <span className="column-list-item__btn-add-task-plus" onClick={() => handleClickAddTaskPlus(name)}>+ {trans(Message.AddTask)}</span>
                 {provided.placeholder}
               </div>);
             }}

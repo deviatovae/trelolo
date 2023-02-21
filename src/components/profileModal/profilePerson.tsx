@@ -1,6 +1,5 @@
-import { UserIcon } from './../userIcon/userIcon';
-import { User }  from '../../types/models';
-
+import { User } from '../../types/models';
+import { UserIcon } from '../userIcon/userIcon';
 
 export const ProfilePerson = ({ id, name, email }: User) => {
   return (

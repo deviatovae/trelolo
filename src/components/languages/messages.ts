@@ -22,6 +22,9 @@ export enum Message {
   MyHome = 'MyHome',
   MyProjects = 'MyProjects',
   ManageProjects = 'ManageProjects',
+  ManageProjectsDescription = 'Create, change and delete your projects',
+  TeamProjects = 'TeamProjects',
+  TeamProjectsDescription = 'View team projects. Only the owner of the project can manage a team project',
   GoodMorning = 'goodMorning',
   GoodAfternoon = 'goodAfternoon',
   GoodEvening = 'goodEvening',
@@ -45,11 +48,15 @@ export enum Message {
   MemberLabelEmail = 'MemberLabelEmail',
   EnterProjects = 'EnterProjects',
   Add = 'Add',
+  AddColumn = 'AddColumn',
+  WriteAColumnName = 'WriteAColumnName',
   EnterMemberEmail = 'EnterMemberEmail',
   CreateNewProjectShort = 'CreateNewProjectShort',
   MemberAlreadyExist = 'MemberAlreadyExist',
   MarkCompleted = 'MarkCompleted',
+  AddTask = 'AddTask',
   DeleteTask = 'DeleteTask',
+  WriteATaskTitle = 'WriteATaskTitle',
   Assignee = 'Assignee',
   DueDate = 'DueDate',
   NoDueDate = 'NoDueDate',
@@ -73,6 +80,7 @@ export enum Message {
   SaveChanges = 'SaveChanges',
   Edited = 'Edited',
   NoComments = 'NoComments',
-  Today = 'Today'
+  Today = 'Today',
+  AreYouSure = 'AreYouSure'
 }
 

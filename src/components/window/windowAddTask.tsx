@@ -2,8 +2,12 @@ import './windowAddTask.scss';
 import React, { useRef, useState } from 'react';
 import { WindowProps } from './../../components/types/windowProps';
 import { MouseHandler } from '../mouse/mouseHandler';
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
 
 export const WindowAddTask = ({ onClickCross, onCreateProject }: WindowProps)=> {
+  const { trans } = useTranslate();
+
   const [inputValue, setInputValue] = useState('');
   const ref = useRef<HTMLInputElement>(null);
   const handleCreateProject = () => onCreateProject(inputValue);
@@ -21,12 +25,12 @@ export const WindowAddTask = ({ onClickCross, onCreateProject }: WindowProps)=> 
       <input
         autoFocus={true}
         className="window-add-task__input"
-        placeholder="Write a task name..."
+        placeholder={trans(Message.WriteATaskTitle)}
         onChange={(event) => setInputValue(event.target.value)}
         onKeyDown={CheckKeyDown}
       />
       <div className="window-add-task__buttons-container">
-        <button className="window-add-task__btn-add" disabled={inputValue.length === 0} onClick={handleCreateProject}>Add task</button>
+        <button className="window-add-task__btn-add" disabled={inputValue.length === 0} onClick={handleCreateProject}>{trans(Message.AddTask)}</button>
         <div className="window-add-task__cross-add" onClick={onClickCross}></div>
       </div>
     </div>
