@@ -68,7 +68,7 @@ export const translations = {
     [Message.EnterName]: 'Enter a name',
     [Message.MyProfile]: 'My profile',
     [Message.ProfileSettings]: 'Profile settings',
-    [Message.YourFullName]: 'Your full mame',
+    [Message.YourFullName]: 'Your full name',
     [Message.PickColor]: 'Pick color',
     [Message.EmailAddress]: 'Email address',
     [Message.ChangePassword]: 'Change password',

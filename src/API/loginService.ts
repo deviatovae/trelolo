@@ -7,3 +7,4 @@ export const createUser = (data: LoginData) => getResponse<User>({ url: 'user/re
 export const authorizeUser = (data: LoginData) => getResponse<LoginResponse>({ url: 'user/login', method: RequestMethod.POST, body: data });
 
 export const getUser = () => getResponse<User>({ url: 'user', method: RequestMethod.GET });
+

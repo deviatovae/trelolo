@@ -1,4 +1,5 @@
 import './profilePage.scss';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/auth';
 import { ProfilePerson } from './../../components/profileModal/profilePerson';
 import { FormattedMessage } from 'react-intl';
@@ -7,19 +8,34 @@ import { useTranslate } from '../../hooks/useTranslate';
 import { ColorPicker } from '../../components/colorPicker/colorPicker';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
+import { IconColorProvider } from '../../utils/iconColorProvider';
+
 
 export const ProfilePage = () => {
 
-  const { userInfo } = useAuth();
+  const { userInfo, updatedUser, updatedColor, getColor } = useAuth();
+  
   const { trans } = useTranslate();
-  // const [showColorPicker, setShowColorPicker] = useState(false);
+  const [newName, setNewName] = useState(userInfo?.name);
 
-  // const handlePickerBtnClick = () => {
-  //   setShowColorPicker(!showColorPicker); 
-  // };
 
-  const handleNameChange = () => {
+  const bgColor = IconColorProvider.getHSLColor(userInfo?.id ?? '', 60, 50);
+  const [selectedColor, setSelectedColor] = useState(bgColor);
+  
+  const colorStockExempel = () => {
+    const colorPickerExample = document?.querySelector('.profilePage__color-picer-example') as HTMLElement;
+    if (colorPickerExample) {
+      colorPickerExample.style.backgroundColor = selectedColor;
+    }
+  };
 
+  useEffect(() => {
+    colorStockExempel();
+  }, []);
+
+
+  const handleNameChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setNewName(e.target.value);
   };
 
   const handlePasswordChange = () => {
@@ -34,8 +50,18 @@ export const ProfilePage = () => {
 
   };
 
+  const handleSaveBtn = () => {
+    updatedUser(newName ?? '');
+    updatedColor(selectedColor);
+    console.log(getColor());
+  };
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+  };
+
+
   return (
-    <main className="profilePage__wrapper">
       <section className="profilePage__section-wrapper">
         <div className="profilePage__section">
           <div className="profilePage__header">
@@ -52,7 +78,7 @@ export const ProfilePage = () => {
                       <FormattedMessage id={Message.YourFullName} />
                       </div>
                       <Input type="text"
-                        value={userInfo?.name ?? ''}
+                        value={newName ?? ''}
                         onChange={handleNameChange}
                         className="profilePage__input-name profilePage-inputs"
                       />
@@ -61,12 +87,13 @@ export const ProfilePage = () => {
                       <div className="profilePage__color-header">
                       <FormattedMessage id={Message.PickColor} />
                       </div>
-                      <div className="profilePage__color-picer-btn" 
-                        // onClick={handlePickerBtnClick}
-                        >
+                      <div className="profilePage__color-picer-example"
+                      >
                       </div>
-                      <ColorPicker />
-                      {/* {showColorPicker && <ColorPicer />} */}
+                      <ColorPicker
+                        selectedColor={selectedColor}
+                        onColorChange={handleColorChange}
+                        />
                     </div>
                     <div className="profilePage__email-container">
                       <div className="profilePage__email-header">
@@ -106,6 +133,7 @@ export const ProfilePage = () => {
                    <Button 
                      className="profilePage__save-btn"
                     //  disabled
+                    onClick={handleSaveBtn}
                     >
                     {trans(Message.SaveChanges)}
                   </Button>
@@ -113,8 +141,7 @@ export const ProfilePage = () => {
               </div>
           </div>
         </div>
-        </section>
-    </main>
+      </section>
   );
 };
 

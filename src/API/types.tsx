@@ -71,3 +71,11 @@ export interface TaskUpdateData {
     dueDate?: string | null
     isCompleted?: boolean
 }
+
+
+export interface UpdateUser {
+    name: string,
+    currentPassword: string,
+    password: string,
+    colorHue: number | null,
+}
