@@ -9,6 +9,7 @@ export interface User {
 export interface Project {
   id: string
   name: string
+  ownerId: string
 }
 
 export interface Section {
