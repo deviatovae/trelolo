@@ -32,7 +32,11 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const submitSignup = async (info: LoginData): Promise<Response<User | null>> => {
     try {
       setIsInProgress(true);
-      return await createUser(info);
+      const result = await createUser(info);
+      if (!result.errors) {
+        await submitLogin({ email: info.email, password: info.password });
+      }
+      return result;
     } catch (error) {
       return wrapErrors(error);
     } finally {
