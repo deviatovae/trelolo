@@ -15,7 +15,11 @@
   user-select: none;
   cursor: pointer;
   border: none;
-  transition: 0.3s transform, 0.3s background ;
+  transition: 0.3s transform, 0.3s background;
+
+  &:disabled {
+    cursor: default;
+  }
 
   &:not(:disabled):active {
     transition: 0.3s transform;

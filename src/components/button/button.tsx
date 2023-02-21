@@ -2,6 +2,7 @@ import './button.scss';
 import React, { ReactNode } from 'react';
 
 interface ButtonProp {
+    id?: string
     isRound: boolean,
     children: ReactNode,
     onClick?: React.MouseEventHandler,
@@ -10,7 +11,7 @@ interface ButtonProp {
     disabled?: boolean
 }
 
-export default function Button({ isRound, children, onClick, className, bgColor, disabled }: ButtonProp) {
+export default function Button({ id, isRound, children, onClick, className, bgColor, disabled }: ButtonProp) {
     const roundClass = isRound ? 'button_round' : '';
     const classes = `button ${roundClass} ${className}`;
     const styles: React.CSSProperties = {};
@@ -19,10 +20,11 @@ export default function Button({ isRound, children, onClick, className, bgColor,
     }
 
     return <button
-        className={classes}
-        onClick={onClick}
-        style={styles}
-        disabled={disabled}
+      id={id}
+      className={classes}
+      onClick={onClick}
+      style={styles}
+      disabled={disabled}
     >{children}</button>;
 }
 
