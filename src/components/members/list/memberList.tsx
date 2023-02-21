@@ -18,9 +18,9 @@ export function MemberList() {
     <>
       {addMemberModal && <AddMemberModal onClose={() => setAddMemberModal(false)} />}
       <section className="members">
-        <p className="members__title"><FormattedMessage id={Message.Members} />({members.length})</p>
+        <p className="members__title"><FormattedMessage id={Message.Members} /> ({members.length})</p>
         <div className="members__list">
-          {members.map((member) => <Member key={member.id} member={member}/>)}
+          {members.map((member) => <Member key={member.id} member={member} />)}
           <MemberIcon label={trans(Message.AddMember)} isNew onClick={() => setAddMemberModal(true)}></MemberIcon>
         </div>
       </section>

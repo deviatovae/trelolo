@@ -7,6 +7,7 @@ import { Message } from '../../languages/messages';
 import { useState } from 'react';
 import { CreateProjectModal } from '../../aside/createProjectModal';
 import { NavLink } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 
 export function ProjectList() {
   const { trans } = useTranslate();
@@ -16,7 +17,7 @@ export function ProjectList() {
 
   return (
     <section className="members-page__projects projects">
-      <p className="projects__title">{trans(Message.Projects)}({count})</p>
+      <p className="projects__title">{trans(Message.Projects)} ({count})</p>
       <div className="projects__row project-row">
         <div className="project-row__icon_new"></div>
         <span className="project-row__name_new" onClick={() => setShowCreate(true)}>
@@ -33,7 +34,8 @@ export function ProjectList() {
               .filter(({ project: { id: projectId } }) => projectId === id)
               .map(({ id: memberId, user: { id: userId, name: userName } }) => (
                 <li key={memberId} className="row-members__member">
-                  <UserIcon userId={userId}>{userName}</UserIcon>
+                  <Tooltip anchorSelect={`#user-${userId}`} content={userName} variant="dark" />
+                  <UserIcon id={`user-${userId}`} userId={userId}>{userName}</UserIcon>
                 </li>)
               )}
           </ul>
