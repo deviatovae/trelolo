@@ -38,10 +38,7 @@ const Header = (props: HeaderProps) => {
             currentLocale={props.currentLocale}
             setLocale={props.setLocale}
           />
-          {userInfo && (<div onClick={handleUserIconClick} >
-            <UserIcon userId={userInfo.id}>{userInfo.name}</UserIcon>
-          </div>)}
-
+          {userInfo && <UserIcon userId={userInfo.id} onClick={handleUserIconClick}>{userInfo.name}</UserIcon>}
         </div>
       </div>
       {showModal && userInfo && (
