@@ -1,6 +1,8 @@
 import './windowDelete.scss';
 import React, { useEffect, useRef } from 'react';
 import { MouseHandler } from '../mouse/mouseHandler';
+import { useTranslate } from '../../hooks/useTranslate';
+import { Message } from '../languages/messages';
 
 interface WindowDeleteProps {
   deleteColumn: () => void
@@ -8,6 +10,8 @@ interface WindowDeleteProps {
 }
 
 export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
+  const { trans } = useTranslate();
+
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
 
   const checkKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === 13) {
-    deleteColumn();
+      deleteColumn();
     }
   };
 
@@ -31,10 +35,8 @@ export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
     <div className="window-delete" ref={ref}>
       <MouseHandler elementRef={ref} onClickOutside={onClose}></MouseHandler>
       <div className="window-delete__container">
-        <div className="window-delete__text">
-          are you sure?
-        </div>
-        <button className="window-delete__btn" onClick={handleDeleteColumn}>Delete</button>
+        <span className="window-delete__text">{trans(Message.AreYouSure)}? </span>
+        <button className="window-delete__btn" onClick={handleDeleteColumn}>{trans(Message.Delete)}</button>
       </div>
     </div>
   );
