@@ -24,7 +24,7 @@ export enum Message {
   ManageProjects = 'ManageProjects',
   ManageProjectsDescription = 'Create, change and delete your projects',
   TeamProjects = 'TeamProjects',
-  TeamProjectsDescription = 'View team projects. Only the owner of the project can manage a team project',
+  TeamProjectsDescription = 'TeamProjectsDescription',
   GoodMorning = 'goodMorning',
   GoodAfternoon = 'goodAfternoon',
   GoodEvening = 'goodEvening',

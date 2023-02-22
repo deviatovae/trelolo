@@ -11,7 +11,7 @@ import { useAuth } from '../../../hooks/auth';
 
 
 export function ProjectCardList() {
-  const { projects, count, addProject } = useProjects();
+  const { projects, addProject } = useProjects();
   const [showCreate, setShowCreate] = useState(false);
   const [errors, setErrors] = useState<Errors | null>(null);
 
@@ -42,7 +42,7 @@ export function ProjectCardList() {
         <div className="projects-cards__content">
           <div className="projects-cards__header">
             <h4 className={`tabs-content__tab-link ${!showTeamProjects ? 'active' : ''}`}
-                onClick={() => setTeamProjects(false)}>{trans(Message.ManageProjects)}({count})
+                onClick={() => setTeamProjects(false)}>{trans(Message.ManageProjects)}({myProjects.length})
             </h4>
             <h4 className={`tabs-content__tab-link ${showTeamProjects ? 'active' : ''}`}
                 onClick={() => setTeamProjects(true)}>{trans(Message.TeamProjects)}({teamProjects.length})
