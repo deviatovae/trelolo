@@ -13,10 +13,11 @@ interface MemberProps {
 export const Member = ({ member: { id, name, email, members } }: MemberProps) => {
   const { userInfo: currentUser } = useAuth();
   const [showUpdate, setShowUpdate] = useState(false);
+  const isOwner = id === currentUser?.id;
 
   return (
     <>
-      <MemberIcon label={getName(name)} isOwner={id === currentUser?.id} onClick={() => setShowUpdate(true)}>
+      <MemberIcon label={getName(name)} isOwner={isOwner} onClick={() => setShowUpdate(true)}>
         {getInitials(name)}
       </MemberIcon>
       {showUpdate && <UpdateMemberModal email={email} members={members} onClose={() => setShowUpdate(false)} />}

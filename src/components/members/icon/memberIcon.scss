@@ -19,8 +19,9 @@
     justify-content: center;
     background-color: $white;
     transition: background 0.2s;
-    
-    &:hover {
+    user-select: none;
+
+    &:not(&_owner):hover {
       cursor: pointer;
       background-color: $mainTextWhite;
       transition: background 0.2s;
