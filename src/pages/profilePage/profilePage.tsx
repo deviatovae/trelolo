@@ -50,10 +50,22 @@ export const ProfilePage = () => {
 
   };
 
+  const extractValСolor = (color: string) => {
+    const regex = /^hsl\((\d+(\.\d+)?)/;
+    const matches = color.match(regex);
+    if (matches) {
+      return Math.round(+matches[1]);
+    }
+  };
+
   const handleSaveBtn = () => {
     updatedUser(newName ?? '');
-    updatedColor(selectedColor);
-    console.log(getColor());
+
+    const color = extractValСolor(selectedColor);
+    if (color) {
+      updatedColor(color);
+    }
+    // bgColor = getColor();
   };
 
   const handleColorChange = (color: string) => {

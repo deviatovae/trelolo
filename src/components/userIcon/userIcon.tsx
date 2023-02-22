@@ -4,6 +4,9 @@ import { IconColorProvider } from '../../utils/iconColorProvider';
 import './userIcon.scss';
 import React from 'react';
 
+// import { useAuth } from '../../hooks/auth';
+
+
 interface UserIconProps {
     id?: string
     userId: string
@@ -13,6 +16,11 @@ interface UserIconProps {
 }
 
 export const UserIcon = ({ id, userId, children, className, onClick }: UserIconProps) => {
+
+    // const { getColor } = useAuth();
+    // const color = getColor();
+    // console.log(x);
+    // const bgColor = IconColorProvider.getHSLColor(`${color}`, 60, 50);
     const bgColor = IconColorProvider.getHSLColor(userId, 60, 50);
     const classes = `user-icon ${className || ''}`;
 
@@ -22,3 +30,4 @@ export const UserIcon = ({ id, userId, children, className, onClick }: UserIconP
 
     return <div id={id} className={classes} style={{ backgroundColor: bgColor }}>{getInitials(children)}</div>;
 };
+

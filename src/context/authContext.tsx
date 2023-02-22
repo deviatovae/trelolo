@@ -18,8 +18,8 @@ export interface InitialContext {
   getUserData: () => Promise<Response<User | null>>,
   logout: () => void
   updatedUser: (val: string) => void
-  updatedColor: (val: string) => void
-  getColor: () => Promise<Response<UpdateUser | null>>,
+  updatedColor: (val: number) => void
+  getColor: () => Promise<number | null | undefined>
 }
 
 export const getToken = () => localStorage.getItem('token') || '';
@@ -36,13 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
 
 
-  
-
 
   const updatedUser = async (newName: string) => {
     try {
       setIsInProgress(true);
-        console.log(newName, 'летит на бэк');
+        // console.log(newName, 'отправленое имя');
       return await updateUserName(newName);
     } catch (error) {
       return wrapErrors(error);
@@ -51,10 +49,10 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
-  const updatedColor = async (selectedColor: string) => {
+  const updatedColor = async (selectedColor: number) => {
     try {
       setIsInProgress(true);
-        console.log( `выбран ${selectedColor} цвет`);
+        // console.log(selectedColor, 'отправленый цвет');
       return await updateUserColor(selectedColor);
     } catch (error) {
       return wrapErrors(error);
@@ -63,15 +61,15 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
-  const getColor = async (): Promise<Response<UpdateUser | null>> => {
+  const getColor = async (): Promise<number | null | undefined> => {
     try {
-      return await getUserColor();
+      const { data: { colorHue } } = await getUserColor();
+      // console.log(colorHueб 'полученый с цвет');
+      return colorHue;
     } catch (error) {
-      return wrapErrors(error);
+      // return wrapErrors(error);
     }
   };
-
-
 
 
 
