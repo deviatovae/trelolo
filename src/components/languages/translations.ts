@@ -86,6 +86,9 @@ export const translations = {
     [Message.NoComments]: 'No comments',
     [Message.Today]: 'Today',
     [Message.AreYouSure]: 'Are you sure',
+    [Message.NoTasks]: 'No tasks',
+    [Message.TaskName]: 'Task name',
+    [Message.Project]: 'Project',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -171,5 +174,8 @@ export const translations = {
     [Message.NoComments]: 'Пока нет комментариев',
     [Message.Today]: 'Cегодня',
     [Message.AreYouSure]: 'Вы уверены',
+    [Message.NoTasks]: 'Нет задач',
+    [Message.TaskName]: 'Название задачи',
+    [Message.Project]: 'Проект',
   },
 };

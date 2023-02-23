@@ -81,6 +81,9 @@ export enum Message {
   Edited = 'Edited',
   NoComments = 'NoComments',
   Today = 'Today',
-  AreYouSure = 'AreYouSure'
+  AreYouSure = 'AreYouSure',
+  NoTasks = 'NoTasks',
+  TaskName = 'TaskName',
+  Project = 'Project'
 }
 
