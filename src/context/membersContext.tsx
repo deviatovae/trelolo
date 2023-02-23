@@ -111,6 +111,8 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
   }, [projects, selectedProjectId]);
 
   return (
-    <MembersContext.Provider value={{ members, addMember, addMembers, getUserWithMembers: getGroupedMembers, deleteMember, isFetchingMembers }}>{children}</MembersContext.Provider>
+    <MembersContext.Provider value={{ members, addMember, addMembers, getUserWithMembers: getGroupedMembers, deleteMember, isFetchingMembers }}>
+      {children}
+    </MembersContext.Provider>
   );
 };
