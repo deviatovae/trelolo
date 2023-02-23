@@ -8,10 +8,13 @@ import {
 } from '../API/projectService';
 import { Project } from '../types/models';
 import { castToErrors } from '../utils/errors';
+import { useAuth } from '../hooks/auth';
 
 export interface ProjectsContextValue {
   projects: Project[]
   count: number
+  getMyProjects: () => Project[]
+  getTeamProjects: () => Project[]
   getProject: (id: string) => Project | null
   addProject: (project: ProjectData) => Promise<Errors | null>
   updateProject: (id: string, project: ProjectData) => Promise<Errors | null>
@@ -22,6 +25,8 @@ export interface ProjectsContextValue {
 export const ProjectsContext = createContext<ProjectsContextValue>({
   projects: [],
   count: 0,
+  getMyProjects: () => [],
+  getTeamProjects: () => [],
   getProject: () => null,
   addProject: async () => null,
   updateProject: async () => null,
@@ -37,6 +42,9 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
 
   const [isFetchingProject, setIsFetchingProject] = useState<boolean>(true);
 
+  const { userInfo } = useAuth();
+  const getMyProjects = () => result.items.filter(project => project.ownerId === userInfo?.id);
+  const getTeamProjects = () => result.items.filter(project => project.ownerId !== userInfo?.id);
 
   const getProject = (id: string): Project | null => {
     return result.items.find(project => project.id === id) || null;
@@ -108,6 +116,16 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
   const { items: projects, count } = result;
 
   return (
-    <ProjectsContext.Provider value={{ projects, count, getProject, addProject, updateProject, deleteProject, isFetchingProject }}>{children}</ProjectsContext.Provider>
+    <ProjectsContext.Provider value={{
+      projects,
+      count,
+      getMyProjects,
+      getTeamProjects,
+      getProject,
+      addProject,
+      updateProject,
+      deleteProject,
+      isFetchingProject
+    }}>{children}</ProjectsContext.Provider>
   );
 };

@@ -4,7 +4,7 @@ import Select from '../../select/select';
 import React, { ChangeEvent, useState } from 'react';
 import './addMemberModal.scss';
 import { MultiValue } from 'react-select';
-import { Field } from '../../../types/types';
+import { Field, SelectOption } from '../../../types/types';
 import { validateEmail } from '../../../utils/validation';
 import { useTranslate } from '../../../hooks/useTranslate';
 import { Message } from '../../languages/messages';
@@ -19,14 +19,17 @@ interface AddMemberModalProps {
 
 export function AddMemberModal({ onClose }: AddMemberModalProps) {
   const { trans } = useTranslate();
-  type Option = { value: string, label: string };
-  const options: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
   const { addMembers, members: { items: members } } = useMembers();
-
   const [email, setEmail] = useState<Field>({ value: '', error: '' });
-  const [projects, setProjects] = useState<Option[]>([]);
+  const [projects, setProjects] = useState<SelectOption[]>([]);
   const canAdd = projects.length > 0 && email.value && !email.error;
-  const handleChange = (values: MultiValue<Option>) => {
+
+  const options: SelectOption[] = useProjects().getMyProjects().map(({ id, name }) => ({
+    value: id,
+    label: name,
+  }));
+
+  const handleChange = (values: MultiValue<SelectOption>) => {
     setProjects([...values]);
   };
 

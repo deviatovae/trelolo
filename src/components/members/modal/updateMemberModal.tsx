@@ -3,7 +3,7 @@ import { Modal } from '../../modal/modal';
 import Select from '../../select/select';
 import { useState } from 'react';
 import './addMemberModal.scss';
-import { MultiValue } from 'react-select';
+import { ActionMeta, MultiValue } from 'react-select';
 import { SelectOption } from '../../../types/types';
 import { useTranslate } from '../../../hooks/useTranslate';
 import { Message } from '../../languages/messages';
@@ -19,31 +19,55 @@ interface UpdateMemberModalProps {
   members: Member[]
 }
 
+const sortOptions = (values: readonly SelectOption[]) => {
+  return values
+    .filter((v) => v.isFixed)
+    .concat(values.filter((v) => !v.isFixed));
+};
+
 export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModalProps) {
   const { trans } = useTranslate();
   const { addMember, deleteMember } = useMembers();
-  const { projects: allProjects } = useProjects();
-  const projects = members.map(({ project }) => project);
+  const { projects, getMyProjects } = useProjects();
+  const myProjects = getMyProjects();
+  const memberProjects = members.map(({ project }) => project);
   const [inputError, setInputError] = useState('');
 
-  const projectToOption: (project: Project) => SelectOption = ({ id, name }) => ({ value: id, label: name });
-  const options: SelectOption[] = allProjects.map(projectToOption);
-  const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(projects.map(projectToOption));
+  const projectToOption: (project: Project) => SelectOption = ({ id, name }) => ({
+    value: id,
+    label: name,
+    isFixed: !myProjects.some((myProject) => myProject.id === id),
+  });
 
-  const handleChange = (values: MultiValue<SelectOption>) => {
-    setSelectedOptions([...values]);
+  const [values, setValues] = useState<SelectOption[]>(sortOptions(memberProjects.map(projectToOption)));
+  const options: SelectOption[] = projects.map(projectToOption);
+
+  const handleChange = (newValues: MultiValue<SelectOption>, meta: ActionMeta<SelectOption>) => {
+    switch (meta.action) {
+      case 'remove-value':
+      case 'pop-value':
+        if (meta.removedValue.isFixed) {
+          return;
+        }
+        break;
+      case 'clear':
+        setValues(sortOptions(options.filter((v) => v.isFixed)));
+        return;
+    }
+
+    setValues(sortOptions(newValues));
   };
 
   const handleSubmit = async () => {
     const addNewProjects = () => {
-      return selectedOptions
-        .filter(({ value }) => !projects.some(({ id }) => id === value))
+      return values
+        .filter(({ value }) => !memberProjects.some(({ id }) => id === value))
         .map(({ value }) => addMember(value, { email }));
     };
 
     const removeProjects = () => {
       return members
-        .filter(({ project: { id: projectId } }) => !selectedOptions.some(({ value }) => projectId === value))
+        .filter(({ project: { id: projectId } }) => !values.some(({ value }) => projectId === value))
         .map(({ id }) => deleteMember(id));
     };
 
@@ -72,7 +96,13 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
           </div>
           <div className="add-member__field">
             <p className="add-member__field-label">{trans(Message.MemberLabelProjects)}</p>
-            <Select isMulti options={options} value={selectedOptions} placeholder={trans(Message.EnterProjects)} onChange={handleChange}></Select>
+            <Select
+              isMulti
+              options={options}
+              value={values}
+              placeholder={trans(Message.EnterProjects)}
+              onChange={handleChange}
+            ></Select>
           </div>
           <button className="modal__add-btn modal__add-btn_active">
             {trans(Message.Update)}
