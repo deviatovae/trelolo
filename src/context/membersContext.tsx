@@ -1,4 +1,4 @@
-import { Member, UserMembers } from '../types/models';
+import { Member, UserWithMembers } from '../types/models';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { Errors, List, MemberData } from '../API/types';
 import { useProjects } from '../hooks/projects';
@@ -7,7 +7,7 @@ import { castToErrors } from '../utils/errors';
 
 export interface MembersContextValue {
   members: List<Member>
-  getGroupedMembers: () => UserMembers[],
+  getUserWithMembers: () => UserWithMembers[],
   addMembers: (email: string, projectIds: string[]) => Promise<(Errors | null)[]>
   addMember: (projectId: string, member: MemberData) => Promise<Errors | null>
   deleteMember: (id: string) => Promise<Errors | null>
@@ -21,7 +21,7 @@ export const MembersContext = createContext<MembersContextValue>({
   },
   addMember: async () => null,
   addMembers: async () => [],
-  getGroupedMembers: () => [],
+  getUserWithMembers: () => [],
   deleteMember: async () => null,
   isFetchingMembers: false
 });
@@ -37,12 +37,12 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
   const { projects } = useProjects();
   const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(true);
 
-  const getGroupedMembers = (): UserMembers[] => {
+  const getGroupedMembers = (): UserWithMembers[] => {
     const membersByUser = members.items.reduce((acc, member) => {
       const { user } = member;
       const { id: userId } = user;
       return acc.set(userId, { ...user, members: [...acc.get(userId)?.members || [], member] });
-    }, new Map<string, UserMembers>());
+    }, new Map<string, UserWithMembers>());
 
     return Array.from(membersByUser.values());
   };
@@ -111,6 +111,6 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
   }, [projects, selectedProjectId]);
 
   return (
-    <MembersContext.Provider value={{ members, addMember, addMembers, getGroupedMembers, deleteMember, isFetchingMembers }}>{children}</MembersContext.Provider>
+    <MembersContext.Provider value={{ members, addMember, addMembers, getUserWithMembers: getGroupedMembers, deleteMember, isFetchingMembers }}>{children}</MembersContext.Provider>
   );
 };
