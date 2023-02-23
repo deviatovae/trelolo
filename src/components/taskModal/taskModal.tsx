@@ -39,9 +39,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const { deleteTask, updateTask, moveTask } = context;
 
-  const { getGroupedMembers } = useMembers();
-  const members = getGroupedMembers();
-
+  const { members: { items: members } } = useMembers();
   const { sections } = useSections();
 
   // const projectsOptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
@@ -50,7 +48,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
     updateComments(task.id);
   }, [updateComments, task.id]);
 
-  const membersOptions: Option[] = members.map(({ id, name }) => ({ value: id, label: name }));
+  const membersOptions: Option[] = members.map(({ id, user: { name } }) => ({ value: id, label: name }));
 
   const statusOptions: Option[] = sections.items.map(({ id, name }) => ({ value: id, label: name }));
 

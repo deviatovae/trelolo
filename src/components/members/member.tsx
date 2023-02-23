@@ -1,13 +1,13 @@
 import { MemberIcon } from './icon/memberIcon';
 import { getInitials, getName } from '../../utils/format';
-import { UserMembers } from '../../types/models';
+import { UserWithMembers } from '../../types/models';
 import { useAuth } from '../../hooks/auth';
 import { UpdateMemberModal } from './modal/updateMemberModal';
 import { useState } from 'react';
 
 
 interface MemberProps {
-  member: UserMembers
+  member: UserWithMembers
 }
 
 export const Member = ({ member: { id, name, email, members } }: MemberProps) => {
