@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables';
 
 .my-tasks {
-  
+
   &-section {
     display: flex;
     flex-direction: column;
@@ -112,14 +112,12 @@
   align-self: center;
   text-align: center;
   font-size: 24px;
-}
 
-.no-tasks {
-    a {
-      color: $mainBlue;
-    }
+  a {
+    color: $mainBlue;
+  }
 
-    a:hover {
-      text-decoration: underline;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 }

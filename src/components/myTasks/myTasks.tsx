@@ -51,12 +51,12 @@ export const MyTasks = () => {
 
   const sortByDueDate = () => {
     if (dueDateSorted) {
-      setSortedItems(items.sort((rowA, rowB) => (rowA.dueDate || 0) > (rowB.dueDate || 0) ? -1 : 1));
-      setSortedMyTasks(myTasksItems.sort((rowA, rowB) => (rowA.dueDate || 0) > (rowB.dueDate || 0) ? -1 : 1));
+      setSortedItems(items.sort((rowA, rowB) => (rowA.dueDate || '') > (rowB.dueDate || '') ? -1 : 1));
+      setSortedMyTasks(myTasksItems.sort((rowA, rowB) => (rowA.dueDate || '') > (rowB.dueDate || '') ? -1 : 1));
       setDueDateSorted(false);
     } else {
-      setSortedItems(items.sort((rowA, rowB) => (rowA.dueDate || 0) > (rowB.dueDate || 0) ? 1 : -1));
-      setSortedMyTasks(myTasksItems.sort((rowA, rowB) => (rowA.dueDate || 0) > (rowB.dueDate || 0) ? 1 : -1));
+      setSortedItems(items.sort((rowA, rowB) => (rowA.dueDate || '') > (rowB.dueDate || '') ? 1 : -1));
+      setSortedMyTasks(myTasksItems.sort((rowA, rowB) => (rowA.dueDate || '') > (rowB.dueDate || '') ? 1 : -1));
       setDueDateSorted(true);
     }
   };
