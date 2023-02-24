@@ -1,53 +1,46 @@
 @import 'src/assets/styles/variables';
 
-.my-tasks-task-list {
-  &__item {
-    border-bottom: 1px solid $borderBlueLight;
+.task {
+  
+  &-row {
     height: 34px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
     overflow: visible;
-    position: relative;
     transition: box-shadow 0s ease-in;
     white-space: nowrap;
+    overflow-y: hidden;
+    font-size: 0.9rem;
+  }
 
-    &:first-child {
+  &-column {
+
+    &-name,
+    &-project,
+    &-duedate {
+      padding: 0;
+      border-bottom: 1px solid $borderBlueLight;
       border-top: 1px solid $borderBlueLight;
     }
   }
 
-  &__name {
+  &-cell {
     font-weight: 500;
     max-width: 250px;
-    overflow-y: hidden;
+    overflow: overlay;
     font-size: 0.9rem;
     transition: color 0.2s;
-
-    &:hover {
-      color: $mainBlueHover;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
+    border-bottom: 1px solid $borderBlueLight;
   }
 
-  &__project,
-  &__dueDate {
-    font-size: 0.8rem;
+  &-project-cell,
+  &-deadline-cell {
+    text-align: center;
   }
 
-
-  &__project {
-    max-width: 100px;
-    overflow: hidden;
+  &-project-link {
+    max-width: 150px;
+    overflow: auto;
     padding: 4px 8px;
     background-color: $greylight;
     border-radius: 8px;
-  }
-
-  &__dueDate {
-    display: inline-block;
-    min-width: 60px;
-    text-align: end;
   }
 }
