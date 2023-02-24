@@ -27,6 +27,10 @@ export default function Select<
       ...baseStyles,
       ...(option.isFixed ? { paddingRight: 6 } : {})
     }),
+    indicatorsContainer: (baseStyles, state) => ({
+      ...baseStyles,
+        cursor: 'pointer',
+    }),
     control: (baseStyles, state) => {
       return ({
         ...baseStyles,
