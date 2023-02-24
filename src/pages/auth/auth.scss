@@ -35,10 +35,14 @@
         bottom: 0;
         width: 25%;
         height: 390px;
-        background-image: url('../../assets/img/login-img.png');
+        background-image: url('../../assets/img/login.png');
         background-size: cover;
         background-position: center;
         z-index: -1;
+
+        @media screen and (max-width: 1180px) {
+            display: none;
+        }
     }
 
     &-separator {
