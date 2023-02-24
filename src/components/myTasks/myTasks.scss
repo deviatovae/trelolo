@@ -2,87 +2,45 @@
 
 .my-tasks {
 
-  &__container {
-    height: fit-content;
-    flex: 1;
+  &-section {
     display: flex;
-    max-width: 500px;
+    flex-direction: column;
+    width: 80%;
+    height: 430px;
     border-radius: 6px;
     border: solid 1px $borderBlueLight;
     background-color: $white;
-    max-height: 700px;
-    min-height: 200px;
     padding: 1.3rem;
     box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.1);
   }
 
-  &__content {
+  &-header {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
-}
-
-.my-tasks-content {
-
-  &__header {
-    display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     align-items: center;
+    margin: 0 3px 10px;
+  }
+
+  &-title {
+    margin: 0;
     font-size: 1rem;
-    font-weight: 700;
-    padding: 10px 0;
   }
 
-  &__tabs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  &__task-list {
-    flex: 1;
-    overflow-x: hidden;
-    padding: 0 5px 5px 5px;
-  }
-}
-
-.tabs-content {
-
-
-  &__title {
-    margin-bottom: 10px;
-  }
-
-  &__tabs-bar {
-    display: block;
-    margin: 0;
-  }
-
-  &__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  &-nav {
     display: flex;
     gap: 8px;
+    padding-bottom: 10px;
   }
 
-  &__tab {
-    margin: 0;
-    display: inline-flex;
-    list-style: none;
-    flex: 0 1 auto;
+  &-tab {
+    max-width: 130px;
+    padding: 10px 5px;
+    color: #6d6e6f;
+    background-color: transparent;
     font-size: 14px;
     font-weight: 500;
     line-height: normal;
     white-space: nowrap;
-  }
-
-  &__tab-link {
-    color: #6d6e6f;
-    font-weight: 500;
-    padding: 10px 5px;
     transition: color 0.2s, background 0.2s;
 
     &:hover {
@@ -96,6 +54,70 @@
       border-radius: 6px;
       color: $mainBlack;
       transition: color 0.2s, background 0.2s;
+
+      &:not(:disabled):hover {
+        transition: none;
+        background-color: $borderBlueLight;
+      }
     }
+
+    &:not(:disabled):active {
+      transition: none;
+      transform: none;
+    }
+
+    &:not(:disabled):hover {
+      transition: none;
+      background: transparent;
+    }
+  }
+
+  &-table-container {
+    overflow: auto;
+  }
+
+  &-table {
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+    &-head {
+      position: sticky;
+      top: 0;
+      background-color: $white;
+    }
+
+    &-body {
+      max-height: 210px;
+    }
+  }
+}
+
+.task-main-row {
+  cursor: pointer;
+  background-color: $borderBlueLight;
+}
+
+.sort-down {
+  content: "↓";
+}
+
+.sort-up {
+  content: "↑";
+}
+
+.no-tasks {
+  height: 100%;
+  transform: translate(0, 40%);
+  align-self: center;
+  text-align: center;
+  font-size: 24px;
+
+  a {
+    color: $mainBlue;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
