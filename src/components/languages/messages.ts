@@ -65,7 +65,7 @@ export enum Message {
   WhatIsThisTaskAbout = 'WhatIsThisTaskAbout',
   WriteAComment = 'WriteAComment',
   Comment = 'Comment',
-  MyTasks = 'MyTasks',
+  Tasks = 'Tasks',
   AllTasks = 'AllTasks',
   AssignedToMe = 'AssignedToMe',
   EnterName = 'EnterName',
@@ -84,6 +84,7 @@ export enum Message {
   AreYouSure = 'AreYouSure',
   NoTasks = 'NoTasks',
   TaskName = 'TaskName',
-  Project = 'Project'
+  Project = 'Project',
+  VisitProjects = 'VisitProjects'
 }
 
