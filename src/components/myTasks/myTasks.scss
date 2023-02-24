@@ -114,14 +114,12 @@
   font-size: 24px;
 }
 
-.visit-projects {
-  @at-root {
-    a#{&} {
+.no-tasks {
+    a {
       color: $mainBlue;
     }
 
     a:hover {
       text-decoration: underline;
     }
-  }
 }
