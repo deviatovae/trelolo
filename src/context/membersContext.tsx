@@ -4,6 +4,7 @@ import { Errors, List, MemberData } from '../API/types';
 import { useProjects } from '../hooks/projects';
 import { MemberService } from '../API/memberService';
 import { castToErrors } from '../utils/errors';
+import { useAuth } from '../hooks/auth';
 
 export interface MembersContextValue {
   members: List<Member>
@@ -32,7 +33,7 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     count: 0
   };
 
-
+  const { userInfo } = useAuth();
   const [members, setMembers] = useState(initialState);
   const { projects } = useProjects();
   const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(true);
@@ -44,7 +45,7 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
       return acc.set(userId, { ...user, members: [...acc.get(userId)?.members || [], member] });
     }, new Map<string, UserWithMembers>());
 
-    return Array.from(membersByUser.values());
+    return Array.from(membersByUser.values()).sort((a) => a.id === userInfo?.id ? -1 : 1);
   };
 
   const addMember = async (projectId: string, data: MemberData): Promise<Errors | null> => {

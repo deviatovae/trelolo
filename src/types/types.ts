@@ -6,6 +6,7 @@ export type Field = {
 export type SelectOption = {
   value: string
   label: string
+  isFixed?: boolean
 };
 
 export enum DnDType {
