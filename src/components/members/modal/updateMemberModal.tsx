@@ -51,7 +51,7 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
         }
         break;
       case 'clear':
-        setValues(sortOptions(values.filter((v) => v.isFixed)));
+        setValues(values.filter((v) => v.isFixed));
         return;
     }
 
