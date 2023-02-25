@@ -8,8 +8,8 @@ export class UserValidator {
 
   static validateConfirmPassword = (password: string, confirmPassword: string): string => {
     const isFilled = password || confirmPassword;
-    const isConfirmationMatch = password !== confirmPassword;
+    const isConfirmationMatch = password === confirmPassword;
 
-    return isFilled && isConfirmationMatch ? Message.InvalidPasswordConfirm : '';
+    return isFilled && !isConfirmationMatch ? Message.InvalidPasswordConfirm : '';
   };
 }

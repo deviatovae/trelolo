@@ -48,7 +48,8 @@ export const ProfilePage = () => {
 
   const handleCurrentPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCurrentPassword({ value, error: '', isChanged: !!value });
+    const isValid = value || (!newPassword.value && !confirmPassword.value);
+    setCurrentPassword({ value, error: !isValid ? trans(Message.EnterCurrentPassword) : '', isChanged: !!value });
   };
 
   const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +57,7 @@ export const ProfilePage = () => {
     if (!currentPassword.value) {
       setCurrentPassword(prev => ({ ...prev, error: value ? trans(Message.EnterCurrentPassword) : '' }));
     }
+    setConfirmPassword(prev => ({ ...prev, error: confirmPassword.value ? trans(UserValidator.validateConfirmPassword(value, confirmPassword.value)) : '' }));
     setNewPassword({ value, error: trans(UserValidator.validatePassword(value)), isChanged: !!value });
   };
 
@@ -174,14 +176,14 @@ export const ProfilePage = () => {
                     className="profilePage__password profilePage-inputs"
                     onChange={handleConfirmPasswordChange}
                   />
+                  <Button
+                    className="profilePage__save-btn"
+                    disabled={isSaveDisabled}
+                    onClick={handleSaveBtn}
+                  >
+                    {trans(Message.SaveChanges)}
+                  </Button>
                 </div>
-                <Button
-                  className="profilePage__save-btn"
-                  disabled={isSaveDisabled}
-                  onClick={handleSaveBtn}
-                >
-                  {trans(Message.SaveChanges)}
-                </Button>
               </div>
             </div>
           </div>

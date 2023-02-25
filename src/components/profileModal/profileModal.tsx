@@ -21,7 +21,7 @@ export const ProfileModal = ({ onClickOutside, userInfo, logout }: ProfileModalP
         </div>
         <ProfilePerson user={userInfo}/>
         <div className="modal-windows__line"></div>
-        <Link to={Route.PROFILE} className="modal-windows__profile">
+        <Link to={Route.PROFILE} onClick={onClickOutside} className="modal-windows__profile">
           <FormattedMessage id={Message.MyProfile} />
         </Link>
         <div className="modal-windows__log-out" onClick={handleLogOutClick}>
