@@ -24,7 +24,7 @@ export enum Message {
   ManageProjects = 'ManageProjects',
   ManageProjectsDescription = 'Create, change and delete your projects',
   TeamProjects = 'TeamProjects',
-  TeamProjectsDescription = 'View team projects. Only the owner of the project can manage a team project',
+  TeamProjectsDescription = 'TeamProjectsDescription',
   GoodMorning = 'goodMorning',
   GoodAfternoon = 'goodAfternoon',
   GoodEvening = 'goodEvening',
@@ -65,7 +65,7 @@ export enum Message {
   WhatIsThisTaskAbout = 'WhatIsThisTaskAbout',
   WriteAComment = 'WriteAComment',
   Comment = 'Comment',
-  MyTasks = 'MyTasks',
+  Tasks = 'Tasks',
   AllTasks = 'AllTasks',
   AssignedToMe = 'AssignedToMe',
   EnterName = 'EnterName',
@@ -81,6 +81,10 @@ export enum Message {
   Edited = 'Edited',
   NoComments = 'NoComments',
   Today = 'Today',
-  AreYouSure = 'AreYouSure'
+  AreYouSure = 'AreYouSure',
+  NoTasks = 'NoTasks',
+  TaskName = 'TaskName',
+  Project = 'Project',
+  VisitProjects = 'VisitProjects'
 }
 

@@ -11,8 +11,8 @@ import { Member } from '../member';
 export function MemberList() {
   const { trans } = useTranslate();
   const [addMemberModal, setAddMemberModal] = useState(false);
-  const { getGroupedMembers } = useMembers();
-  const members = getGroupedMembers();
+  const { getUserWithMembers } = useMembers();
+  const members = getUserWithMembers();
 
   return (
     <>

@@ -12,8 +12,7 @@ export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
   const context = useTasks();
   const { showTaskModal } = useTaskModal();
   const { name, assignees } = task;
-  const { getGroupedMembers } = useMembers();
-  const members = getGroupedMembers();
+  const { members: { items: members } } = useMembers();
 
   const assignee = members.find((member) => member.id === assignees[0]?.memberId);
 
@@ -29,7 +28,7 @@ export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
         >
           <div className="task-title-logo-container">
             <p className="task-name">{name}</p>
-            { assignee && <UserIcon userId={assignee.id}>{assignee.name}</UserIcon>}
+            {assignee && <UserIcon userId={assignee.user.id}>{assignee.user.name}</UserIcon>}
           </div>
           <div className="task-calendar-settings-container">
             <div className="task-deadline">

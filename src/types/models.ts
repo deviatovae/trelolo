@@ -26,7 +26,7 @@ export interface Member {
   user: User
 }
 
-export interface UserMembers {
+export interface UserWithMembers {
   id: string,
   name: string,
   email: string,

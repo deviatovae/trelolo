@@ -1,13 +1,14 @@
-import { Member, UserMembers } from '../types/models';
+import { Member, UserWithMembers } from '../types/models';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { Errors, List, MemberData } from '../API/types';
 import { useProjects } from '../hooks/projects';
 import { MemberService } from '../API/memberService';
 import { castToErrors } from '../utils/errors';
+import { useAuth } from '../hooks/auth';
 
 export interface MembersContextValue {
   members: List<Member>
-  getGroupedMembers: () => UserMembers[],
+  getUserWithMembers: () => UserWithMembers[],
   addMembers: (email: string, projectIds: string[]) => Promise<(Errors | null)[]>
   addMember: (projectId: string, member: MemberData) => Promise<Errors | null>
   deleteMember: (id: string) => Promise<Errors | null>
@@ -21,7 +22,7 @@ export const MembersContext = createContext<MembersContextValue>({
   },
   addMember: async () => null,
   addMembers: async () => [],
-  getGroupedMembers: () => [],
+  getUserWithMembers: () => [],
   deleteMember: async () => null,
   isFetchingMembers: false
 });
@@ -32,19 +33,19 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     count: 0
   };
 
-
+  const { userInfo } = useAuth();
   const [members, setMembers] = useState(initialState);
   const { projects } = useProjects();
   const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(true);
 
-  const getGroupedMembers = (): UserMembers[] => {
+  const getGroupedMembers = (): UserWithMembers[] => {
     const membersByUser = members.items.reduce((acc, member) => {
       const { user } = member;
       const { id: userId } = user;
       return acc.set(userId, { ...user, members: [...acc.get(userId)?.members || [], member] });
-    }, new Map<string, UserMembers>());
+    }, new Map<string, UserWithMembers>());
 
-    return Array.from(membersByUser.values());
+    return Array.from(membersByUser.values()).sort((a) => a.id === userInfo?.id ? -1 : 1);
   };
 
   const addMember = async (projectId: string, data: MemberData): Promise<Errors | null> => {
@@ -111,6 +112,8 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
   }, [projects, selectedProjectId]);
 
   return (
-    <MembersContext.Provider value={{ members, addMember, addMembers, getGroupedMembers, deleteMember, isFetchingMembers }}>{children}</MembersContext.Provider>
+    <MembersContext.Provider value={{ members, addMember, addMembers, getUserWithMembers: getGroupedMembers, deleteMember, isFetchingMembers }}>
+      {children}
+    </MembersContext.Provider>
   );
 };
