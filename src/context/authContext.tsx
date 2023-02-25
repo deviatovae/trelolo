@@ -1,25 +1,21 @@
 import React, { createContext, ReactElement, useCallback, useEffect, useState } from 'react';
-import { authorizeUser, createUser, getUser } from '../API/loginService';
-import { LoginData, LoginResponse, Response, UpdateUser } from '../API/types';
+import { UserService } from '../API/userService';
+import { Errors, LoginData, LoginResponse, Response, UpdateUserData } from '../API/types';
 import { User } from '../types/models';
-import { wrapErrors } from '../utils/errors';
+import { castToErrors, wrapErrors } from '../utils/errors';
 import { useNavigate } from 'react-router-dom';
 import { Route } from '../router/routes';
-import { updateUserName, updateUserColor, getUserColor } from '../API/updateUserService';
 
 export interface InitialContext {
   isAuth: boolean,
-  setIsAuth: (val: boolean) => void,
   submitSignup: (info: LoginData) => Promise<Response<User | null>>,
   submitLogin: (info: LoginData) => Promise<Response<LoginResponse | null>>,
   userInfo: User | null,
   token: string,
   isInProgress: boolean,
-  getUserData: () => Promise<Response<User | null>>,
   logout: () => void
-  updatedUser: (val: string) => void
-  updatedColor: (val: number) => void
-  getColor: () => Promise<number | null | undefined>
+  updateUser: (data: UpdateUserData) => Promise<Errors | null>
+  isFetchingUser: boolean
 }
 
 export const getToken = () => localStorage.getItem('token') || '';
@@ -31,54 +27,31 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [isAuth, setIsAuth] = useState(!!token);
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [isInProgress, setIsInProgress] = useState(false);
+  const [isFetchingUser, setIsFetchingUser] = useState(true);
   const navigate = useNavigate();
 
-
-
-
-
-  const updatedUser = async (newName: string) => {
+  const updateUser = async (data: UpdateUserData) => {
     try {
       setIsInProgress(true);
-        // console.log(newName, 'отправленое имя');
-      return await updateUserName(newName);
-    } catch (error) {
-      return wrapErrors(error);
+      const { errors, data: userData } = await UserService.updateUser(data);
+      if (errors) {
+        return errors;
+      }
+      setUserInfo((prev) => ({
+        ...prev,
+        ...userData
+      }));
+      return null;
+    } catch (e) {
+      return castToErrors(e);
     } finally {
       setIsInProgress(false);
     }
   };
-
-  const updatedColor = async (selectedColor: number) => {
-    try {
-      setIsInProgress(true);
-        // console.log(selectedColor, 'отправленый цвет');
-      return await updateUserColor(selectedColor);
-    } catch (error) {
-      return wrapErrors(error);
-    } finally {
-      setIsInProgress(false);
-    }
-  };
-
-  const getColor = async (): Promise<number | null | undefined> => {
-    try {
-      const { data: { colorHue } } = await getUserColor();
-      // console.log(colorHueб 'полученый с цвет');
-      return colorHue;
-    } catch (error) {
-      // return wrapErrors(error);
-    }
-  };
-
-
-
-
-
 
   const submitSignup = async (info: LoginData): Promise<Response<User | null>> => {
     try {
-      const result = await createUser(info);
+      const result = await UserService.createUser(info);
       if (!result.errors) {
         await submitLogin({ email: info.email, password: info.password });
       }
@@ -94,16 +67,13 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     setIsAuth(true);
   };
 
-  const updateUserInfo = useCallback(async (user?: User) => {
-    if (user) {
-      setUserInfo(user);
-    }
-
+  const fetchUser = useCallback(async () => {
     if (!token) {
       return;
     }
 
     const { data, errors } = await getUserData();
+    setIsFetchingUser(false);
     if (!errors && data) {
       setUserInfo(data);
     }
@@ -112,10 +82,10 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const submitLogin = async (info: LoginData): Promise<Response<LoginResponse | null>> => {
     setIsInProgress(true);
     try {
-      const response = await authorizeUser(info) as Response<LoginResponse>;
+      const response = await UserService.authorizeUser(info) as Response<LoginResponse>;
       const { data: { user, token: tokenResponse } } = response;
       await updateToken(tokenResponse);
-      await updateUserInfo(user);
+      setUserInfo(user);
       navigate(Route.MAIN);
 
       return response;
@@ -137,29 +107,26 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
   const getUserData = async (): Promise<Response<User | null>> => {
     try {
-      return await getUser() as Response<User>;
+      return await UserService.getUser() as Response<User>;
     } catch (error) {
       return wrapErrors(error);
     }
   };
 
   useEffect(() => {
-    updateUserInfo();
-  }, [updateUserInfo]);
+    fetchUser();
+  }, [fetchUser]);
 
   return <AuthContext.Provider value={{
     isAuth,
-    setIsAuth,
     submitSignup,
     submitLogin,
     userInfo,
     token,
     isInProgress,
-    getUserData,
     logout,
-    updatedUser,
-    updatedColor,
-    getColor,
+    updateUser,
+    isFetchingUser,
   }}>
     {children}
   </AuthContext.Provider>;

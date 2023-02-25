@@ -4,7 +4,7 @@ export interface User {
   id: string,
   name: string,
   email: string,
-  colorHue?: number | null,
+  colorHue: number | null,
 }
 
 export interface Project {

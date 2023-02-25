@@ -73,9 +73,10 @@ export interface TaskUpdateData {
 }
 
 
-export interface UpdateUser {
-    name: string,
-    currentPassword: string,
-    password: string,
-    colorHue: number | null,
+export interface UpdateUserData {
+    name?: string
+    email?: string
+    currentPassword?: string
+    password?: string
+    colorHue?: number
 }

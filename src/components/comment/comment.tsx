@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../hooks/auth';
 import { formatDateString } from '../../utils/formatDate';
 import Button from '../button/button';
@@ -11,7 +10,7 @@ import './types';
 import { CommentProp } from './types';
 import { Message } from '../languages/messages';
 
-export default function Comment({ className, text, userId, commentId, name, createdAt, updatedAt,
+export default function Comment({ className, text, user: { id: userId, name, colorHue }, commentId, createdAt, updatedAt,
   deleteComment, editComment, addLike, removeLike, likes, isLiked }: CommentProp) {
 
   const { trans } = useTranslate();
@@ -60,7 +59,7 @@ export default function Comment({ className, text, userId, commentId, name, crea
 
   return <li className={classes}>
     <div className="comment-wrapper">
-      {name && <UserIcon userId={userId}>{name}</UserIcon>}
+      {name && <UserIcon userId={userId} colorHue={colorHue}>{name}</UserIcon>}
       <div className="comment-info">
         <div className="comment-name-time">
           <span className="comment-name">{name}</span>

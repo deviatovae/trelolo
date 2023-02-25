@@ -28,7 +28,7 @@ export const Task = ({ task, index }: { task: TaskModel, index: number }) => {
         >
           <div className="task-title-logo-container">
             <p className="task-name">{name}</p>
-            {assignee && <UserIcon userId={assignee.user.id}>{assignee.user.name}</UserIcon>}
+            {assignee && <UserIcon userId={assignee.user.id} colorHue={assignee.user.colorHue}>{assignee.user.name}</UserIcon>}
           </div>
           <div className="task-calendar-settings-container">
             <div className="task-deadline">

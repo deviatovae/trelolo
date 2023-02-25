@@ -32,10 +32,10 @@ export function ProjectList() {
           <ul className="project-row__members row-members">
             {members
               .filter(({ project: { id: projectId } }) => projectId === id)
-              .map(({ id: memberId, user: { id: userId, name: userName } }) => (
+              .map(({ id: memberId, user: { id: userId, name: userName, colorHue } }) => (
                 <li key={memberId} className="row-members__member">
                   <Tooltip anchorSelect={`#user-${userId}`} content={userName} variant="dark" />
-                  <UserIcon id={`user-${userId}`} userId={userId}>{userName}</UserIcon>
+                  <UserIcon id={`user-${userId}`} userId={userId} colorHue={colorHue}>{userName}</UserIcon>
                 </li>)
               )}
           </ul>

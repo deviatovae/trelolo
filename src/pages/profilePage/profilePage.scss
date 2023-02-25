@@ -25,7 +25,7 @@
     padding-bottom: 20px;
     font-size: 20px;
     font-weight: 400;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     color: $mainBlack;
   }
 
@@ -58,14 +58,14 @@
   &__name-header,
   &__color-header,
   &__email-header,
-  &__pasword-header {
+  &__password-header {
     font-weight: 500;
     font-size: 16px;
     color: $greyDark;
     padding-bottom: 15px;
   }
 
-  &__color-picer-example {
+  &__color-picker-example {
     width: 80px;
     height: 46px;
     border-radius: 6px;
@@ -87,7 +87,7 @@
     width: 300px;
   }
 
-  &__pasword-container {
+  &__password-container {
     display: flex;
     flex-direction: column;
     gap: 50px
@@ -98,7 +98,7 @@
     height: 52px;
     background: $mainBlue;
     color: $white;
-    font-size: 14px;
+    font-size: 1rem;
     border: 1px solid $greylight;
     border-radius: 6px;
     display: flex;

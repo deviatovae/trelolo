@@ -4,7 +4,7 @@ import { useContext } from 'react';
 export const useTranslate = () => {
   const intl = useIntl();
   const { locale } = useContext(IntlContext);
-  const trans = (id: string) => intl.formatMessage({ id });
+  const trans = (id: string) => id ? intl.formatMessage({ id }) : '';
 
   return {
     trans,

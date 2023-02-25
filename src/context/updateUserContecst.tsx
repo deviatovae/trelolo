@@ -1,8 +1,4 @@
-
-import { createContext, ReactElement, useState } from 'react';
-import { updateUserName, updateUserColor, getUserColor } from '../API/updateUserService';
-import { Response, UpdateUser } from '../API/types';
-import { wrapErrors } from '../utils/errors';
+import { Response } from '../API/types';
 import { User } from '../types/models';
 
 
@@ -18,8 +14,8 @@ export interface InitialUpdate {
 
 // export const UdateUserProvider = ({ children }: { children: ReactElement }) => {
 //     const [, setIsInProgress] = useState(false);
-  
-  
+
+
 // const updatedUser = async (newName: string) => {
 //     try {
 //       setIsInProgress(true);

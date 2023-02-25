@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Field } from '../types/types';
 
 export const useFieldValidator = () => {
-  const validate = (errors: Errors, mapping: { [key: string]: Dispatch<SetStateAction<Field>> | undefined }) => {
+  const validate = <T extends Field>(errors: Errors, mapping: { [key: string]: Dispatch<SetStateAction<T>> | undefined }) => {
     errors.forEach(error => {
       if (typeof error === 'string') {
         return;
@@ -14,7 +14,7 @@ export const useFieldValidator = () => {
       const setField = mapping[param];
 
       if (setField) {
-        setField(({ value }) => ({ value, error: msg }));
+        setField((prev) => ({ ...prev, error: msg }));
       }
     });
   };

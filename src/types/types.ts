@@ -1,6 +1,10 @@
-export type Field = {
-  value: string
+export type Field<T = string> = {
+  value: T
   error: string
+};
+
+export type FieldChanges<T = string> = Field<T> & {
+  isChanged: boolean
 };
 
 export type SelectOption = {
