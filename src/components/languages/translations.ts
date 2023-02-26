@@ -29,7 +29,7 @@ export const translations = {
     [Message.MyProjects]: 'My projects',
     [Message.ManageProjects]: 'Manage projects',
     [Message.ManageProjectsDescription]: 'Create, change the name and delete your projects',
-    [Message.TeamProjects]: 'TeamProjects',
+    [Message.TeamProjects]: 'Team Projects',
     [Message.TeamProjectsDescription]: 'To view the team projects, ask your team member to invite you to their projects. ' +
     'Only the owner of the project can manage a team project.',
     [Message.MyHome]: 'Home',
@@ -120,8 +120,8 @@ export const translations = {
     [Message.ManageProjects]: 'Редактирование проектов',
     [Message.ManageProjectsDescription]: 'Создавай, меняй имя и удаляй свои проекты',
     [Message.TeamProjects]: 'Проекты моей команды',
-    [Message.TeamProjectsDescription]: 'Чтобы увидеть командные проекты, попросите участника команды пригласить вас в проект. ' +
-    'Только владелец проекта может управлять проектами.',
+    [Message.TeamProjectsDescription]: 'Чтобы увидеть командные проекты, попросите владельца проекта пригласить вас. ' +
+    'Управление проектами доступно только владельцу.',
     [Message.MyHome]: 'Главная',
     [Message.Projects]: 'Проекты',
     [Message.Members]: 'Участники',
