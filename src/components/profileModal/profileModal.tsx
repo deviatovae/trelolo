@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import { ProfilePerson } from './profilePerson';
 
 
-export const ProfileModal = ({ onClickOutside, userInfo: { id, name, email }, logout }: ProfileModalProps) => {
+export const ProfileModal = ({ onClickOutside, userInfo, logout }: ProfileModalProps) => {
   const handleLogOutClick = () => {
     logout();
   };
-  
+
   return (
 
     <div className="modal-overlay" onClick={onClickOutside}>
@@ -19,9 +19,9 @@ export const ProfileModal = ({ onClickOutside, userInfo: { id, name, email }, lo
         <div className="modal-windows__account">
           <FormattedMessage id={Message.Account} />
         </div>
-        <ProfilePerson id={id} name={name} email={email}/>
+        <ProfilePerson user={userInfo}/>
         <div className="modal-windows__line"></div>
-        <Link to={Route.PROFILE} className="modal-windows__profile">
+        <Link to={Route.PROFILE} onClick={onClickOutside} className="modal-windows__profile">
           <FormattedMessage id={Message.MyProfile} />
         </Link>
         <div className="modal-windows__log-out" onClick={handleLogOutClick}>

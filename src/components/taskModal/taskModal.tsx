@@ -167,11 +167,10 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
       </div>
       {!comments.count ? <span className='no-comments'>{trans(Message.NoComments)}</span> :
         <ul className="task-comments">
-          {comments.items.map(({ user: { id: userId, name }, text, createdAt, updatedAt, id, likes, isLiked }) => <Comment
+          {comments.items.map(({ user, text, createdAt, updatedAt, id, likes, isLiked }) => <Comment
             key={id}
-            userId={userId}
+            user={user}
             commentId={id}
-            name={name}
             text={text}
             createdAt={createdAt}
             updatedAt={updatedAt}

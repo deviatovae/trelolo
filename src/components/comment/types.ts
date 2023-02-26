@@ -1,11 +1,11 @@
 import { Errors } from '../../API/types';
+import { User } from '../../types/models';
 
 export interface CommentProp {
   text: string,
   className?: string,
-  userId: string,
+  user: User,
   commentId: string,
-  name: string,
   createdAt: string,
   updatedAt: string | undefined,
   deleteComment: (id: string) => Promise<Errors | null>,
