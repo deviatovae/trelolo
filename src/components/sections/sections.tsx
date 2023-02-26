@@ -15,7 +15,7 @@ export const Sections = () => {
   const { trans } = useTranslate();
 
   const { sections: { items: sections }, createSection, moveSection, isFetchingSection } = useSections();
-  const { moveTask } = useTasks();
+  const { moveTask, isTasksFetching } = useTasks();
 
   const [showCreateSection, setShowCreateSection] = useState(false);
   const [, setTaskNameInColumnWindow] = useState(false);
@@ -76,7 +76,7 @@ export const Sections = () => {
   return (
     <TaskModalProvider>
       <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
-        <PreloaderCircle isLoading={isFetchingSection}>
+        <PreloaderCircle isLoading={isFetchingSection || isTasksFetching}>
           <div className="project-page__column-list">
             <DragDropContext onDragEnd={onTaskDragEnd}>
               <Droppable droppableId="sections" direction="horizontal" type={DnDType.Section}>

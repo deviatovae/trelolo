@@ -12,6 +12,7 @@ export interface TasksContextValue {
   deleteTask: (id: string) => Promise<(Errors | null)>
   moveTask: (id: string, toSectionId: string, toIndex?: number) => Promise<(Errors | null)>
   getTasksAll: () => List<Task>
+  isTasksFetching: boolean
 }
 
 export const TasksContext = createContext<TasksContextValue>({
@@ -27,11 +28,13 @@ export const TasksContext = createContext<TasksContextValue>({
     items: [],
     count: 0
   }),
+  isTasksFetching: true,
 });
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<{ [key: string]: List<Task> }>({});
-  const { sections } = useSections();
+  const { sections, isFetchingSection } = useSections();
+  const [isTasksFetching, setIsTasksFetching] = useState(true);
 
   const fetchTasks = useCallback(async (): Promise<void> => {
     const sectionIds = sections.items.map(({ id }) => id);
@@ -43,7 +46,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     results.forEach(({ data: taskItems }, idx) => {
       setTasks(prev => ({ ...prev, [sectionIds[idx]]: taskItems }));
     });
-  }, [sections]);
+    setIsTasksFetching(isFetchingSection || false);
+  }, [isFetchingSection, sections.items]);
 
   const getTasks = (sectionId: string): List<Task> => {
     const { items, count } = tasks[sectionId] || { items: [], count: 0 };
@@ -207,6 +211,6 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   }, [fetchTasks]);
 
   return (
-    <TasksContext.Provider value={{ getTasks, getTasksAll, createTask, updateTask, deleteTask, moveTask }}>{children}</TasksContext.Provider>
+    <TasksContext.Provider value={{ getTasks, getTasksAll, createTask, updateTask, deleteTask, moveTask, isTasksFetching }}>{children}</TasksContext.Provider>
   );
 };
