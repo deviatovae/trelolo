@@ -41,6 +41,19 @@
     border-bottom: 1px solid $greylight;
   }
 
+  &__profile {
+
+    &:hover {
+      color: $mainBlue;
+    }
+  }
+
+  &__log-out {
+    &:hover {
+      color: $red;
+    }
+  }
+
   &__log-out,
   &__profile {
     box-sizing: border-box;
@@ -54,12 +67,7 @@
 
     &:hover {
       cursor: pointer;
-      color: $mainBlue;
       transition: 0.2s color;
-    }
-
-    &:active {
-
     }
   }
 }

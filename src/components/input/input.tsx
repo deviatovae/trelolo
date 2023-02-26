@@ -49,6 +49,7 @@ const Input = (
 Input.defaultProps = {
   placeholder: '',
   autoFocus: false,
+  autoComplete: 'new-password',
 };
 
 export default Input;
