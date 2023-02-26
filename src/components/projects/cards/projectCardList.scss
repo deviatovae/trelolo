@@ -97,19 +97,29 @@
     }
   }
 
-  &__name,
-  &__name>a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
+  // &__name,
+  // &__name>a {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   height: 100%;
+  //   width: 100%;
+  // }
 
-  &__name>a {
-    display: flex;
-    inline-size: 230px;
-    overflow-wrap: break-word;
+  // &__name>a {
+  //   display: flex;
+  //   inline-size: 230px;
+  //   overflow-wrap: break-word;
+  // }
+
+  &__name {
+    text-align: center;
+    padding: 0px 5px;
+    height: 20px;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &__create {

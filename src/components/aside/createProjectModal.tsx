@@ -53,12 +53,13 @@ export const CreateProjectModal = ({ onClose }: CreateProjectModalProps) => {
       <div className="add-member">
         <div className="add-member__field">
           <Input type="text"
-                 autoFocus={true}
-                 placeholder={trans(Message.EnterProjectName)}
-                 value={name.value}
-                 error={name.error}
-                 onChange={handleChangeName}
-                 disabled={isProcessing}
+            autoFocus={true}
+            placeholder={trans(Message.EnterProjectName)}
+            value={name.value}
+            error={name.error}
+            onChange={handleChangeName}
+            disabled={isProcessing}
+            maxLength={50}
           />
         </div>
         <Button className="modal__add-btn" disabled={!!name.error || !isChanged || isProcessing} onClick={handleSubmit}>
