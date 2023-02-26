@@ -1,5 +1,5 @@
 import App from '../App';
-import ErrorPage from '../pages/errorPage';
+import ErrorPage from '../pages/errorPage/errorPage';
 import { Auth } from '../pages/auth/auth';
 import { Welcome } from '../pages/welcome/welcome';
 import { Main } from '../pages/main/main';
