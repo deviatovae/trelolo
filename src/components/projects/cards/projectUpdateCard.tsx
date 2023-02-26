@@ -35,7 +35,7 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
         value={fieldName.value}
         onChange={handleNameChange}
         error={fieldName.error}
-        maxLength={50}
+        maxLength={180}
       />
       <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
         <FormattedMessage id={Message.Update} />
