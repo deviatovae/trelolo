@@ -19,8 +19,13 @@ export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
   return (
     <div className="modal-overl">
       <div className="modal-main">
-        <input className="modal-main__project-name" placeholder={placeholderProps}
-          onChange={(event) => setInputValue(event.target.value)} onKeyDown={CheckKeyDown}>
+        <input 
+          className="modal-main__project-name" 
+          placeholder={placeholderProps}
+          onChange={(event) => setInputValue(event.target.value)} 
+          onKeyDown={CheckKeyDown}
+          maxLength={30}
+          >
         </input>
         <button className="modal-main__btn-create-project" disabled={!inputValue.length} onClick={handleCreateProject}>{trans(Message.Create)}</button>
       </div>

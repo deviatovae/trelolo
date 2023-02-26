@@ -65,6 +65,7 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
         onChange={onChange}
         value={value}
         error={error}
+        maxLength={30}
       />
     </>);
   }

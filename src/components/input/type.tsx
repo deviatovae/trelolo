@@ -15,6 +15,7 @@ interface InputProp {
     inputRef?: RefObject<HTMLInputElement>
     autoFocus: boolean
     autoComplete?: string
+    maxLength?: number
 }
 
 export default InputProp;

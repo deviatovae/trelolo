@@ -16,7 +16,8 @@ const Input = (
     error,
     disabled,
     autoFocus,
-    autoComplete
+    autoComplete,
+    maxLength
   }: InputProp) => {
   const classesWrapper = `input-wrapper ${classNameWrapper}`;
   const classes = `input ${className} ${error ? 'input-error' : ''}`;
@@ -38,6 +39,7 @@ const Input = (
         onBlur={onBlur}
         disabled={disabled}
         {...additionalProps}
+        maxLength={maxLength}
       />
       {error && <span className="input-error-text">{error}</span>}
     </div>

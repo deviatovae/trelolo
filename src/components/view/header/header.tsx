@@ -31,7 +31,7 @@ const Header = (props: HeaderProps) => {
 
   return (
     <header className="header">
-      <div className="header__content _container">
+      <div className="header__content">
         <Logo />
         <div className="header__lang-user-wrapper">
           <LangSwitcher
