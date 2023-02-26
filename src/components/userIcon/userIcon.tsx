@@ -4,9 +4,6 @@ import { IconColorProvider } from '../../utils/iconColorProvider';
 import './userIcon.scss';
 import React from 'react';
 
-// import { useAuth } from '../../hooks/auth';
-
-
 interface UserIconProps {
     id?: string
     userId: string
