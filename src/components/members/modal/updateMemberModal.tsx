@@ -1,7 +1,7 @@
 import Input from '../../input/input';
 import { Modal } from '../../modal/modal';
 import Select from '../../select/select';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './addMemberModal.scss';
 import { ActionMeta, MultiValue } from 'react-select';
 import { SelectOption } from '../../../types/types';
@@ -12,6 +12,7 @@ import { Form } from 'react-router-dom';
 import { Member, Project } from '../../../types/models';
 import { useMembers } from '../../../hooks/members';
 import { errorsToString } from '../../../utils/errors';
+import Button from '../../button/button';
 
 interface UpdateMemberModalProps {
   onClose: () => void
@@ -32,6 +33,7 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
   const myProjects = getMyProjects();
   const memberProjects = members.map(({ project }) => project);
   const [inputError, setInputError] = useState('');
+  const [isInProgress, setIsInProgress] = useState(false);
 
   const projectToOption: (project: Project) => SelectOption = ({ id, name }) => ({
     value: id,
@@ -71,14 +73,16 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
         .map(({ id }) => deleteMember(id));
     };
 
+    setIsInProgress(true);
     const errors = await Promise.all([...addNewProjects(), ...removeProjects()]);
     const hasErrors = errors.filter(error => !!error).length;
 
     if (hasErrors) {
       setInputError(errorsToString(errors[0] || []));
     } else {
-      onClose();
+      await onClose();
     }
+    setIsInProgress(false);
   };
 
   return (
@@ -104,9 +108,9 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
               onChange={handleChange}
             ></Select>
           </div>
-          <button className="modal__add-btn modal__add-btn_active">
+          <Button className="modal__add-btn modal__add-btn_active" isLoading={isInProgress}>
             {trans(Message.Update)}
-          </button>
+          </Button>
         </div>
       </Form>
     </Modal>

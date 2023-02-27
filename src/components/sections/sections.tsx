@@ -31,12 +31,8 @@ export const Sections = () => {
     setShowCreateSection(!showCreateSection);
   };
 
-  const checkWindowAddOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (showCreateSection &&
-      (!(event.target as HTMLElement).classList.contains('modal-main')) &&
-      (!(event.target as HTMLElement).classList.contains('modal-main__project-name'))) {
-      setShowCreateSection(false);
-    }
+  const closeAddSection = () => {
+    setShowCreateSection(false);
   };
 
   const CheckKeyDown = (event: KeyboardEvent) => {
@@ -75,7 +71,7 @@ export const Sections = () => {
 
   return (
     <TaskModalProvider>
-      <section className="project-page__board" onClick={checkWindowAddOutsideClick}>
+      <section className="project-page__board">
         <PreloaderCircle isLoading={isFetchingSection || isTasksFetching}>
           <div className="project-page__column-list">
             <DragDropContext onDragEnd={onTaskDragEnd}>
@@ -92,7 +88,12 @@ export const Sections = () => {
                 )}
               </Droppable>
             </DragDropContext>
-            {showCreateSection && <WindowAdd showWindow={showCreateSection} onCreate={handleAddSection} placeholderProps={trans(Message.WriteAColumnName)} />}
+            {showCreateSection && <WindowAdd
+                showWindow={showCreateSection}
+                onCreate={handleAddSection}
+                onClickOutside={closeAddSection}
+                placeholderProps={trans(Message.WriteAColumnName)}
+            />}
             {!showCreateSection && <div className="project-page__column-list-btn" onClick={handleClickAddColumn}><span>+ {trans(Message.AddColumn)}</span></div>}
           </div>
         </PreloaderCircle>

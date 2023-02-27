@@ -1,5 +1,6 @@
 export interface ModalProps {
-  showWindow: boolean,
-  onCreate: (inputValue: string) => void;
-  placeholderProps: string,
+  showWindow: boolean
+  onCreate: (inputValue: string) => void
+  onClickOutside: () => void
+  placeholderProps: string
 }

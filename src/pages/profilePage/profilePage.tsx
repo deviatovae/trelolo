@@ -181,6 +181,7 @@ export const ProfilePage = () => {
                     className="profilePage__save-btn"
                     disabled={isSaveDisabled}
                     onClick={handleSaveBtn}
+                    isLoading={isInProgress}
                   >
                     {trans(Message.SaveChanges)}
                   </Button>

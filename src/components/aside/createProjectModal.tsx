@@ -62,7 +62,7 @@ export const CreateProjectModal = ({ onClose }: CreateProjectModalProps) => {
             maxLength={50}
           />
         </div>
-        <Button className="modal__add-btn" disabled={!!name.error || !isChanged || isProcessing} onClick={handleSubmit}>
+        <Button className="modal__add-btn" disabled={!!name.error || !isChanged} isLoading={isProcessing} onClick={handleSubmit}>
           {trans(Message.Create)}
         </Button>
       </div>
