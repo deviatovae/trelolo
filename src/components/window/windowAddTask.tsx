@@ -34,6 +34,7 @@ export const WindowAddTask = ({ onClickCross, onCreateProject }: WindowProps)=> 
         placeholder={trans(Message.WriteATaskTitle)}
         onChange={(event) => setInputValue(event.target.value)}
         onKeyDown={CheckKeyDown}
+        maxLength={100}
       />
       <div className="window-add-task__buttons-container">
         <Button className="window-add-task__btn-add" disabled={inputValue.length === 0} onClick={handleCreateProject} isLoading={isInProgress}>
