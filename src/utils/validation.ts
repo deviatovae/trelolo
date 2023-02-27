@@ -1,6 +1,8 @@
 export function validateName(name: string) {
-    const regex = /^(([\wа-яА-Я]){3,}) (([\wа-яА-Я]){3,})$/;
-    return regex.test(name);
+    const regex = /([a-z-A-Zа-яА-Я-]{3,})/g;
+    const result = name.match(regex);
+
+    return result && result.length >= 2;
 }
 
 export function validateEmail(email: string) {
