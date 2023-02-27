@@ -134,15 +134,14 @@ export const CommentsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateLikes = (like: Like) => {
-    const preparedComments = comments.items.map((comment) => {
-      if (comment.id === like.id) {
-        return { ...comment, ...like };
-      }
-      return comment;
-    });
 
     setComments(({ items, count }) => ({
-      items: preparedComments,
+      items: items.map((comment) => {
+        if (comment.id === like.id) {
+          return { ...comment, ...like };
+        }
+        return comment;
+      }),
       count
     }));
   };

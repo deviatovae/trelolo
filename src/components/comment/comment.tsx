@@ -16,6 +16,7 @@ export default function Comment({ className, text, user: { id: userId, name, col
   const { trans } = useTranslate();
   const { userInfo } = useAuth();
   const [comment, setComment] = useState(text);
+  const [isLikedComment, setIsLikedComment] = useState(isLiked);
   const [editDisabled, setEditDisabled] = useState(true);
 
   const commentTextarea = useRef<HTMLTextAreaElement>(null);
@@ -41,10 +42,12 @@ export default function Comment({ className, text, user: { id: userId, name, col
   };
 
   const onClickLike = () => {
+    setIsLikedComment(true);
     addLike(commentId);
   };
 
   const onClickUnLike = () => {
+    setIsLikedComment(false);
     removeLike(commentId);
   };
 
@@ -78,8 +81,8 @@ export default function Comment({ className, text, user: { id: userId, name, col
     </div>
     <div className="comment-management">
       <div className="comment-likes">
-        {!isLiked && <Button className="comment-like" onClick={onClickLike}><span></span></Button>}
-        {isLiked && <Button className="comment-unlike" onClick={onClickUnLike}><span>{likes}</span></Button>}
+        {!isLikedComment && <Button className="comment-like" onClick={onClickLike}><span></span></Button>}
+        {isLikedComment && <Button className="comment-unlike" onClick={onClickUnLike}><span>{likes}</span></Button>}
         <span className="comment-likes-count">{likes}</span>
       </div>
       {userInfo?.id === userId && <>
