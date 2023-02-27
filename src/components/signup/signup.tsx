@@ -130,7 +130,7 @@ export const Signup = ({ goToLogin }: SignUp) => {
               error={passwordConfirmed.error}
               classNameWrapper="input-signup-wrapper"
             />
-            <Button className="button-signup" disabled={isInProgress}><FormattedMessage id={Message.SignUp} /></Button>
+            <Button className="button-signup" isLoading={isInProgress}><FormattedMessage id={Message.SignUp} /></Button>
         </form>
     );
 };

@@ -1,14 +1,22 @@
 import './windowAdd.scss';
 import { ModalProps } from '../types/modalProps';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
+import Button from '../button/button';
+import { MouseHandler } from '../mouse/mouseHandler';
 
-export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
+export const WindowAdd = ({ onCreate, onClickOutside, placeholderProps }: ModalProps) => {
   const { trans } = useTranslate();
+  const ref = useRef<HTMLDivElement>(null);
 
   const [inputValue, setInputValue] = useState('');
-  const handleCreateProject = () => onCreate(inputValue);
+  const [isInProgress, setIsInProgress] = useState(false);
+  const handleCreateProject = async () => {
+    setIsInProgress(true);
+    await onCreate(inputValue);
+    setIsInProgress(false);
+  };
 
   const CheckKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
@@ -17,13 +25,18 @@ export const WindowAdd = ({ onCreate, placeholderProps }: ModalProps) => {
   };
 
   return (
-    <div className="modal-overl">
-      <div className="modal-main">
-        <input className="modal-main__project-name" placeholder={placeholderProps}
-          onChange={(event) => setInputValue(event.target.value)} onKeyDown={CheckKeyDown}>
-        </input>
-        <button className="modal-main__btn-create-project" disabled={!inputValue.length} onClick={handleCreateProject}>{trans(Message.Create)}</button>
+    <>
+      <MouseHandler elementRef={ref} onClickOutside={onClickOutside} />
+      <div className="modal-overl" ref={ref}>
+        <div className="modal-main">
+          <input className="modal-main__project-name" placeholder={placeholderProps}
+                 onChange={(event) => setInputValue(event.target.value)} onKeyDown={CheckKeyDown}>
+          </input>
+          <Button className="modal-main__btn-create-project" disabled={!inputValue.length} onClick={handleCreateProject} isLoading={isInProgress}>
+            {trans(Message.Create)}
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -1,5 +1,5 @@
 import './projectCardAction.scss';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Errors } from '../../../API/types';
 import Input from '../../input/input';
 import { Project } from '../../../types/models';
@@ -8,6 +8,7 @@ import { useFieldValidator } from '../../../hooks/validation';
 import { Message } from '../../languages/messages';
 import { FormattedMessage } from 'react-intl';
 import { useTranslate } from '../../../hooks/useTranslate';
+import Button from '../../button/button';
 
 interface ProjectUpdateCardProps {
   project: Project
@@ -20,10 +21,15 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
   const { trans } = useTranslate();
   const cardRef = useRef<HTMLDivElement>(null);
   const { fieldName, setFieldName, isChanged, handleNameChange } = useProjectCard({ onClose, onSubmit: onUpdate, name, cardRef });
+  const [isInProgress, setIsInProgress] = useState(false);
 
   const { validate } = useFieldValidator();
   validate(errors || [], { name: setFieldName });
-  const handleButtonClick = () => onUpdate(fieldName.value);
+  const handleButtonClick = async () => {
+    setIsInProgress(true);
+    await onUpdate(fieldName.value);
+    setIsInProgress(false);
+  };
 
   return (
     <div className="modal-main" ref={cardRef}>
@@ -36,9 +42,9 @@ export const ProjectUpdateCard = ({ project: { name }, onClose, onUpdate, errors
         onChange={handleNameChange}
         error={fieldName.error}
       />
-      <button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick}>
+      <Button className="modal-main__btn-create-project" disabled={!isChanged} onClick={handleButtonClick} isLoading={isInProgress}>
         <FormattedMessage id={Message.Update} />
-      </button>
+      </Button>
     </div>
   );
 };

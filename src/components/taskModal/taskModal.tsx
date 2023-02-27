@@ -4,7 +4,6 @@ import Select from '../select/select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
 import { Textearea } from '../textarea/textearea';
-// import { useProjects } from '../../hooks/projects';
 import { DatePicker } from '../date-picker/DatePicker';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
@@ -36,13 +35,13 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const [status, setStatus] = useState(task.sectionId || null);
   const [description, setDescription] = useState(task.description || '');
   const [comment, setComment] = useState('');
+  const [isDeleteInProgress, setIsDeleteInProgress] = useState(false);
+  const [isAddCommentInProgress, setIsAddCommentInProgress] = useState(false);
 
   const { deleteTask, updateTask, moveTask } = context;
 
   const { members: { items: members } } = useMembers();
   const { sections } = useSections();
-
-  // const projectsOptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
 
   useEffect(() => {
     updateComments(task.id);
@@ -59,6 +58,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
 
   const deleteCurrentTask = async () => {
+    setIsDeleteInProgress(true);
     const errors = await deleteTask(task.id);
     if (!errors) {
       onClose();
@@ -122,15 +122,16 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const onSubmitComment = async (e: FormEvent) => {
     e.preventDefault();
+    setIsAddCommentInProgress(true);
     await createComment(task.id, comment);
     setComment('');
+    setIsAddCommentInProgress(false);
   };
 
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
       <div className="task-management">
-        {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
-        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
+        <Button className="task-button" onClick={deleteCurrentTask} isLoading={isDeleteInProgress}>{trans(Message.DeleteTask)}</Button>
       </div>
       <Input placeholder={trans(Message.WriteATaskTitle)}
         value={title}
@@ -153,8 +154,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         </div>
         <span>{trans(Message.Status)}</span>
         <Select options={statusOptions} onChange={statusHandleChange} defaultValue={defaultValueStatus}></Select>
-        {/* <span>{trans(Message.Projects)}</span>
-        <Select isMulti options={projectsPptions} placeholder="Projects..."></Select> */}
       </div>
 
       <div className="task-description">
@@ -185,7 +184,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
       }
       <form action="" className="comment-form" onSubmit={onSubmitComment}>
         <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />
-        <Button className="comment-button" disabled={!comment}>{trans(Message.Comment)}</Button>
+        <Button className="comment-button" disabled={!comment} isLoading={isAddCommentInProgress}>{trans(Message.Comment)}</Button>
       </form>
     </Modal>
   );

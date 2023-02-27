@@ -30,6 +30,17 @@
     transition: 0.3s background;
     background: $mainBlueHover;
   }
+
+  &__loading{
+    border: 3px solid rgba(109, 130, 255, 0.2);
+    border-top: 3px solid $mainBlueHover;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: 7px;
+    transition: margin-left 0.3s ease-in-out;
+    animation: spin 1s linear infinite;
+  }
 }
 
 .button_round {

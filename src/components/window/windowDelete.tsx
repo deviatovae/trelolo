@@ -1,8 +1,9 @@
 import './windowDelete.scss';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MouseHandler } from '../mouse/mouseHandler';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
+import Button from '../button/button';
 
 interface WindowDeleteProps {
   deleteColumn: () => void
@@ -13,6 +14,7 @@ export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
   const { trans } = useTranslate();
 
   const ref = useRef<HTMLDivElement>(null);
+  const [isInProgress, setIsInProgress] = useState(false);
 
   useEffect(() => {
     document.addEventListener('keydown', checkKeyDown);
@@ -21,8 +23,10 @@ export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
     };
   });
 
-  const handleDeleteColumn = () => {
-    deleteColumn();
+  const handleDeleteColumn = async () => {
+    setIsInProgress(true);
+    await deleteColumn();
+    setIsInProgress(false);
   };
 
   const checkKeyDown = (event: KeyboardEvent) => {
@@ -36,7 +40,9 @@ export const WindowDelete = ({ deleteColumn, onClose }: WindowDeleteProps) => {
       <MouseHandler elementRef={ref} onClickOutside={onClose}></MouseHandler>
       <div className="window-delete__container">
         <span className="window-delete__text">{trans(Message.AreYouSure)}? </span>
-        <button className="window-delete__btn" onClick={handleDeleteColumn}>{trans(Message.Delete)}</button>
+        <Button className="window-delete__btn" onClick={handleDeleteColumn} isLoading={isInProgress}>
+          {trans(Message.Delete)}
+        </Button>
       </div>
     </div>
   );
