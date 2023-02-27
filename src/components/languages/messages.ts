@@ -85,6 +85,8 @@ export enum Message {
   NoTasks = 'NoTasks',
   TaskName = 'TaskName',
   Project = 'Project',
-  VisitProjects = 'VisitProjects'
+  VisitProjects = 'VisitProjects',
+  Oops = 'Oops',
+  PageNotFound = 'PageNotFound',
 }
 

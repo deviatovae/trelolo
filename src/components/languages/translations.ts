@@ -91,6 +91,8 @@ export const translations = {
     [Message.TaskName]: 'Task name',
     [Message.Project]: 'Project',
     [Message.VisitProjects]: 'Visit projects page',
+    [Message.Oops]: 'Oops!',
+    [Message.PageNotFound]: 'Page is not found',
   },
   [LOCALES.RUSSIAN]: {
     [Message.WelcomeHeader]: 'Рабочее пространство для вашей команды',
@@ -181,5 +183,7 @@ export const translations = {
     [Message.TaskName]: 'Название задачи',
     [Message.Project]: 'Проект',
     [Message.VisitProjects]: 'Посетите страницу проектов',
+    [Message.Oops]: 'Упс!',
+    [Message.PageNotFound]: 'Страница не найдена',
   },
 };
