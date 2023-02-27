@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: space-evenly;
   box-shadow: -13px 18px 13px -21px rgba(34, 60, 80, 0.56);
+  overflow: hidden;
 
 
   &__project-name {
@@ -28,6 +29,13 @@
     }
   }
 
+  & > h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+  }
+
+
   &__btn-create-project {
     width: 235px;
     height: 30px;
@@ -38,12 +46,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
+    transition: background 0.3s ease-in-out;
     font-size: 0.85rem;
 
     &:hover {
       cursor: pointer;
       background: $mainBlueHover;
+      transition: background 0.3s ease-in-out;
     }
 
     &:active {

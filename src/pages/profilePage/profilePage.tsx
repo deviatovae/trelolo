@@ -124,6 +124,7 @@ export const ProfilePage = () => {
                     error={name.error}
                     onChange={handleNameChange}
                     className="profilePage__input-name profilePage-inputs"
+                    maxLength={30}
                   />
                 </div>
                 <div className="profilePage__color-container">

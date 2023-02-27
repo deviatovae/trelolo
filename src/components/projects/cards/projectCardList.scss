@@ -79,16 +79,17 @@
     font-weight: 700;
     font-size: 18px;
     position: relative;
+    overflow: hidden;
 
     &:hover {
       cursor: pointer;
       transform: scale(1.02);
-      transition: transform 0.2s ease-in-out;
     }
 
     &:hover>.projects-cards__edit,
     &:hover>.projects-cards__delete {
-      display: block;
+      top: 4px;
+      transition: 0.3s all;
     }
 
     &:active {
@@ -97,19 +98,14 @@
     }
   }
 
-  &__name,
-  &__name>a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-
-  &__name>a {
-    display: flex;
-    inline-size: 230px;
-    overflow-wrap: break-word;
+  &__name {
+    text-align: center;
+    padding: 0px 5px;
+    max-height: 20px;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &__create {
@@ -137,7 +133,6 @@
 
   &__edit,
   &__delete {
-    display: none;
     padding: 5px;
     width: 25px;
     height: 25px;
@@ -146,9 +141,10 @@
     border-radius: 3px;
     position: absolute;
     z-index: 4;
-    top: 5px;
+    top: -40px;
+    overflow: hidden;
     right: 0;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, 0.3s top;
 
     &:hover {
       cursor: pointer;

@@ -139,6 +139,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         type="text"
         onChange={onChangeTitle}
         onBlur={onBlurTitle}
+        maxLength={100}
         className="task-title-input" />
       <div className="task-info">
         <span>{trans(Message.Assignee)}</span>

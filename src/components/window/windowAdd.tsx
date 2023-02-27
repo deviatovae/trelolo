@@ -29,7 +29,7 @@ export const WindowAdd = ({ onCreate, onClickOutside, placeholderProps }: ModalP
       <MouseHandler elementRef={ref} onClickOutside={onClickOutside} />
       <div className="modal-overl" ref={ref}>
         <div className="modal-main">
-          <input className="modal-main__project-name" placeholder={placeholderProps}
+          <input className="modal-main__project-name" placeholder={placeholderProps}  maxLength={25}
                  onChange={(event) => setInputValue(event.target.value)} onKeyDown={CheckKeyDown}>
           </input>
           <Button className="modal-main__btn-create-project" disabled={!inputValue.length} onClick={handleCreateProject} isLoading={isInProgress}>

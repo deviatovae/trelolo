@@ -65,15 +65,16 @@ export const SectionNameInput = ({ onMouseOver, onMouseOut, sectionId, name }: S
         onChange={onChange}
         value={value}
         error={error}
+        maxLength={25}
       />
     </>);
   }
 
   return (
     <div className="column-list-item__header"
-         onClick={edit}
-         onMouseOver={onMouseOver}
-         onMouseOut={onMouseOut}>
+      onClick={edit}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}>
       {name}
     </div>
   );
