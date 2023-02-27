@@ -9,11 +9,12 @@ interface ButtonProp {
     className?: string,
     bgColor?: string,
     disabled?: boolean
+    isLoading?: boolean
 }
 
-export default function Button({ id, isRound, children, onClick, className, bgColor, disabled }: ButtonProp) {
+export default function Button({ id, isRound, children, onClick, className, bgColor, disabled, isLoading }: ButtonProp) {
     const roundClass = isRound ? 'button_round' : '';
-    const classes = `button ${roundClass} ${className}`;
+    const classes = `button ${roundClass} ${className} ${isLoading}`;
     const styles: React.CSSProperties = {};
     if (bgColor) {
         styles.backgroundColor = bgColor;
@@ -24,10 +25,13 @@ export default function Button({ id, isRound, children, onClick, className, bgCo
       className={classes}
       onClick={onClick}
       style={styles}
-      disabled={disabled}
-    >{children}</button>;
+      disabled={disabled || isLoading}
+    >{children}
+        {isLoading && <span className="button__loading"></span>}
+    </button>;
 }
 
 Button.defaultProps = {
     isRound: false,
+    isLoading: false,
 };

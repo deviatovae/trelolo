@@ -14,7 +14,7 @@ export default function ErrorPage() {
 
   setDefaultOptions({ locale: fnsLocale });
   const error = useRouteError();
-  console.log(error);
+
   if (isRouteErrorResponse(error)) {
     return (
       <IntlProvider

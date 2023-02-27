@@ -18,13 +18,17 @@ export default function Comment({ className, text, user: { id: userId, name, col
   const [comment, setComment] = useState(text);
   const [isLikedComment, setIsLikedComment] = useState(isLiked);
   const [editDisabled, setEditDisabled] = useState(true);
+  const [isUpdateInProgress, setIsUpdateInProgress] = useState(false);
+  const [isDeleteInProgress, setIsDeleteInProgress] = useState(false);
 
   const commentTextarea = useRef<HTMLTextAreaElement>(null);
 
   const classes = `comment ${className}`;
 
-  const onClickDelete = () => {
-    deleteComment(commentId);
+  const onClickDelete = async () => {
+    setIsDeleteInProgress(true);
+    await deleteComment(commentId);
+    setIsDeleteInProgress(false);
   };
 
   const onClickEdit = () => {
@@ -51,8 +55,10 @@ export default function Comment({ className, text, user: { id: userId, name, col
     removeLike(commentId);
   };
 
-  const onClickSubmitEdit = () => {
-    editComment(commentId, comment);
+  const onClickSubmitEdit = async () => {
+    setIsUpdateInProgress(true);
+    await editComment(commentId, comment);
+    setIsUpdateInProgress(false);
     setEditDisabled(true);
   };
 
@@ -87,8 +93,8 @@ export default function Comment({ className, text, user: { id: userId, name, col
       </div>
       {userInfo?.id === userId && <>
         {editDisabled && <Button className="comment-edit" onClick={onClickEdit}><span></span></Button>}
-        {!editDisabled && <Button className="comment-submit-edit" onClick={onClickSubmitEdit}><span></span></Button>}
-        <Button className="comment-delete" onClick={onClickDelete}><span></span></Button>
+        {!editDisabled && <Button className="comment-submit-edit" onClick={onClickSubmitEdit} disabled={isUpdateInProgress}><span></span></Button>}
+        <Button className="comment-delete" onClick={onClickDelete} disabled={isDeleteInProgress}><span></span></Button>
       </>}
     </div>
   </li>;

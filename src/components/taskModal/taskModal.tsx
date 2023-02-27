@@ -35,6 +35,8 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   const [status, setStatus] = useState(task.sectionId || null);
   const [description, setDescription] = useState(task.description || '');
   const [comment, setComment] = useState('');
+  const [isDeleteInProgress, setIsDeleteInProgress] = useState(false);
+  const [isAddCommentInProgress, setIsAddCommentInProgress] = useState(false);
 
   const { deleteTask, updateTask, moveTask } = context;
 
@@ -56,6 +58,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
 
   const deleteCurrentTask = async () => {
+    setIsDeleteInProgress(true);
     const errors = await deleteTask(task.id);
     if (!errors) {
       onClose();
@@ -119,14 +122,16 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const onSubmitComment = async (e: FormEvent) => {
     e.preventDefault();
+    setIsAddCommentInProgress(true);
     await createComment(task.id, comment);
     setComment('');
+    setIsAddCommentInProgress(false);
   };
 
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
       <div className="task-management">
-        <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
+        <Button className="task-button" onClick={deleteCurrentTask} isLoading={isDeleteInProgress}>{trans(Message.DeleteTask)}</Button>
       </div>
       <Input placeholder={trans(Message.WriteATaskTitle)}
         value={title}
@@ -179,7 +184,7 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
       }
       <form action="" className="comment-form" onSubmit={onSubmitComment}>
         <Textearea placeholder={trans(Message.WriteAComment)} value={comment} onChange={commentOnChange} />
-        <Button className="comment-button" disabled={!comment}>{trans(Message.Comment)}</Button>
+        <Button className="comment-button" disabled={!comment} isLoading={isAddCommentInProgress}>{trans(Message.Comment)}</Button>
       </form>
     </Modal>
   );
