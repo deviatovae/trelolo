@@ -12,6 +12,7 @@ import { useProjects } from '../../../hooks/projects';
 import { Form } from 'react-router-dom';
 import { useMembers } from '../../../hooks/members';
 import { errorsToString } from '../../../utils/errors';
+import Button from '../../button/button';
 
 interface AddMemberModalProps {
   onClose: () => void
@@ -23,6 +24,7 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
   const [email, setEmail] = useState<Field>({ value: '', error: '' });
   const [projects, setProjects] = useState<SelectOption[]>([]);
   const canAdd = projects.length > 0 && email.value && !email.error;
+  const [isInProgress, setIsInProgress] = useState(false);
 
   const options: SelectOption[] = useProjects().getMyProjects().map(({ id, name }) => ({
     value: id,
@@ -44,7 +46,7 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
     if (!validateEmail(email.value)) {
       return setEmail(prev => ({ value: prev.value, error: trans(Message.InvalidEmail) }));
     }
-
+    setIsInProgress(true);
     const projectIds = projects.map(({ value: projectId }) => projectId);
     const errors = await addMembers(email.value, projectIds);
     const hasErrors = errors.filter(error => !!error).length;
@@ -52,8 +54,9 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
     if (hasErrors) {
       setEmail(prev => ({ value: prev.value, error: errorsToString(errors[0] || []) }));
     } else {
-      onClose();
+      await onClose();
     }
+    setIsInProgress(false);
   };
 
   return (
@@ -73,9 +76,9 @@ export function AddMemberModal({ onClose }: AddMemberModalProps) {
             <p className="add-member__field-label">{trans(Message.InviteMemberLabelProjects)}</p>
             <Select isMulti options={options} placeholder={trans(Message.EnterProjects)} onChange={handleChange}></Select>
           </div>
-          <button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')} disabled={!canAdd}>
+          <Button className={'modal__add-btn' + (canAdd ? ' modal__add-btn_active' : '')} disabled={!canAdd} isLoading={isInProgress}>
             {trans(Message.Add)}
-          </button>
+          </Button>
         </div>
       </Form>
     </Modal>

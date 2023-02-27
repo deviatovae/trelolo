@@ -33,21 +33,28 @@
     border: 1px solid $borderBlueLight;
     background: $mainBlue;
     color: $white;
-    transition: transform 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s, background 0.2s;
+    font-size: 0.8rem;
 
     &:hover {
       cursor: pointer;
       background: $mainBlueHover;
       transition: background 0.2s;
     }
-  
+
     &:active {
       transform: scale(0.98);
       transition: transform 0.1s;
+    }
+
+    &:disabled {
+      background: none;
+      color: $greylight;
+      cursor: default;
+      transform: none;
     }
   }
 }

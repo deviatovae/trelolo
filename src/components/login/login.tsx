@@ -82,7 +82,7 @@ export const Login = () => {
                   autoComplete="on"
                 />
             </>)}
-            <Button className='button-login' disabled={isInProgress}>
+            <Button className='button-login' isLoading={isInProgress}>
                 {step === 1 ? trans(Message.Continue) : trans(Message.LogIn)}
             </Button>
         </form>

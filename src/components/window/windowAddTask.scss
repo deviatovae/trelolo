@@ -11,8 +11,7 @@
   position: relative;
   margin: 0 auto;
   margin-bottom: 15px;
-  box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4); 
-  // animation: 0.2s ease-in-out 0s normal running add-animation;
+  box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
 
   &__input {
     margin: 0 auto;
@@ -20,6 +19,7 @@
     height: 40px;
     border-radius: 6px;
     border: 1px solid $borderBlueLight;
+    padding: 0 5px;
 
     &:focus {
       outline-offset: 0;
@@ -38,7 +38,8 @@
   }
 
   &__btn-add {
-    height: 25px;
+    width: fit-content;
+    height: 30px;
     border-radius: 6px;
     background-color: $mainBlue;
     border: none;
@@ -49,14 +50,13 @@
     justify-content: center;
     transition: transform 0.3s, background 0.3s;
 
-
     &:hover {
       cursor: pointer;
       background: $mainBlueHover;
       transition: background 0.3s;
 
     }
-    
+
     &:active {
       transform: scale(0.98);
       transition: transform 0.3s;

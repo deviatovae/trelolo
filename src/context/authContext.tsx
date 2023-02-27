@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
   const submitSignup = async (info: LoginData): Promise<Response<User | null>> => {
     try {
+      setIsInProgress(true);
       const result = await UserService.createUser(info);
       if (!result.errors) {
         await submitLogin({ email: info.email, password: info.password });
@@ -58,6 +59,8 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
       return result;
     } catch (error) {
       return wrapErrors(error);
+    } finally {
+      setIsInProgress(false);
     }
   };
 
