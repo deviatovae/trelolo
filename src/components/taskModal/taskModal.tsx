@@ -4,7 +4,6 @@ import Select from '../select/select';
 import Comment from '../comment/comment';
 import { Modal } from '../modal/modal';
 import { Textearea } from '../textarea/textearea';
-// import { useProjects } from '../../hooks/projects';
 import { DatePicker } from '../date-picker/DatePicker';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Message } from '../languages/messages';
@@ -41,8 +40,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
 
   const { members: { items: members } } = useMembers();
   const { sections } = useSections();
-
-  // const projectsOptions: Option[] = useProjects().projects.map(({ id, name }) => ({ value: id, label: name }));
 
   useEffect(() => {
     updateComments(task.id);
@@ -129,7 +126,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
   return (
     <Modal className="task-section" classNameWrapper="task-wrapper" classNameMain="task-main" onClose={onClose}>
       <div className="task-management">
-        {/* <Button className="task-button" onClick={completeTask}>✓ {trans(Message.MarkCompleted)}</Button> */}
         <Button className="task-button" onClick={deleteCurrentTask}>{trans(Message.DeleteTask)}</Button>
       </div>
       <Input placeholder={trans(Message.WriteATaskTitle)}
@@ -153,8 +149,6 @@ export function TaskModal({ onClose, task, context }: TaskModalProps) {
         </div>
         <span>{trans(Message.Status)}</span>
         <Select options={statusOptions} onChange={statusHandleChange} defaultValue={defaultValueStatus}></Select>
-        {/* <span>{trans(Message.Projects)}</span>
-        <Select isMulti options={projectsPptions} placeholder="Projects..."></Select> */}
       </div>
 
       <div className="task-description">
