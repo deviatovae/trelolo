@@ -1,5 +1,5 @@
 export function validateName(name: string) {
-    const regex = /^(?:\b\w{3,}\b\s*){2,}$/gm;
+    const regex = /^(([\wа-яА-Я]){3,}) (([\wа-яА-Я]){3,})$/;
     return regex.test(name);
 }
 

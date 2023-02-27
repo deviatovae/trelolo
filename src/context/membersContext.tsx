@@ -35,7 +35,7 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
 
   const { userInfo } = useAuth();
   const [members, setMembers] = useState(initialState);
-  const { projects } = useProjects();
+  const { projects, isFetchingProject } = useProjects();
   const [isFetchingMembers, setIsFetchingMembers] = useState<boolean>(true);
 
   const getGroupedMembers = (): UserWithMembers[] => {
@@ -95,11 +95,10 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     const selectedProject = selectedProjectId ? projects.find(({ id }) => id === selectedProjectId) : null;
     const usedProjects = selectedProject ? [selectedProject] : projects;
 
-
     usedProjects.reduce(async (acc, { id }) => {
       const { data } = await MemberService.getMembers(id);
       const { items, count } = await acc;
-      setIsFetchingMembers(false);
+
       return {
         items: [...items, ...data.items],
         count: count + data.count
@@ -108,8 +107,10 @@ export const MembersProvider = ({ children, projectId: selectedProjectId }: { ch
     }, Promise.resolve<List<Member>>({
       items: [],
       count: 0
-    })).then(result => setMembers(result));
-  }, [projects, selectedProjectId]);
+    }))
+      .then(result => setMembers(result))
+      .then(() => setIsFetchingMembers(isFetchingProject || false));
+  }, [isFetchingProject, projects, selectedProjectId]);
 
   return (
     <MembersContext.Provider value={{ members, addMember, addMembers, getUserWithMembers: getGroupedMembers, deleteMember, isFetchingMembers }}>

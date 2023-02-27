@@ -38,7 +38,6 @@ export const Aside = () => {
               <span className="projects__logo"></span>
               <FormattedMessage id={Message.MyProjects} />
               <span className="projects__plus" onClick={handleClickCreate}></span>
-              {showCreate && <CreateProjectModal onClose={() => setShowCreate(false)}></CreateProjectModal>}
             </div>
           </MenuLink>
           <ul className="projects__list">
@@ -48,6 +47,7 @@ export const Aside = () => {
               </MenuLink>
             </li>)}
           </ul>
+          {showCreate && <CreateProjectModal onClose={() => setShowCreate(false)}></CreateProjectModal>}
         </div>
       </div>
     </aside>
