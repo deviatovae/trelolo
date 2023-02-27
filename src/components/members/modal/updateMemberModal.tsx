@@ -29,7 +29,7 @@ const sortOptions = (values: readonly SelectOption[]) => {
 export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModalProps) {
   const { trans } = useTranslate();
   const { addMember, deleteMember } = useMembers();
-  const { projects, getMyProjects } = useProjects();
+  const { getMyProjects } = useProjects();
   const myProjects = getMyProjects();
   const memberProjects = members.map(({ project }) => project);
   const [inputError, setInputError] = useState('');
