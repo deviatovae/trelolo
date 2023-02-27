@@ -29,7 +29,7 @@ const sortOptions = (values: readonly SelectOption[]) => {
 export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModalProps) {
   const { trans } = useTranslate();
   const { addMember, deleteMember } = useMembers();
-  const { projects, getMyProjects } = useProjects();
+  const { getMyProjects } = useProjects();
   const myProjects = getMyProjects();
   const memberProjects = members.map(({ project }) => project);
   const [inputError, setInputError] = useState('');
@@ -42,7 +42,7 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
   });
 
   const [values, setValues] = useState<SelectOption[]>(sortOptions(memberProjects.map(projectToOption)));
-  const options: SelectOption[] = projects.map(projectToOption);
+  const options: SelectOption[] = myProjects.map(projectToOption);
 
   const handleChange = (newValues: MultiValue<SelectOption>, meta: ActionMeta<SelectOption>) => {
     switch (meta.action) {
