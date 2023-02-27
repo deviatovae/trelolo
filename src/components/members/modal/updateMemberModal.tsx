@@ -42,7 +42,7 @@ export function UpdateMemberModal({ onClose, email, members }: UpdateMemberModal
   });
 
   const [values, setValues] = useState<SelectOption[]>(sortOptions(memberProjects.map(projectToOption)));
-  const options: SelectOption[] = projects.map(projectToOption);
+  const options: SelectOption[] = myProjects.map(projectToOption);
 
   const handleChange = (newValues: MultiValue<SelectOption>, meta: ActionMeta<SelectOption>) => {
     switch (meta.action) {
