@@ -127,12 +127,16 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const moveTask = async (taskId: string, toSectionId: string, toIndex?: number) => {
     try {
       setTasks((sectionsTasks) => {
-        const moveToIndex = toIndex ?? tasks[toSectionId].count;
         const taskItem = getTask(taskId, sectionsTasks);
+        const moveToIndex = toIndex ?? sectionsTasks[toSectionId].count;
         const { sectionId: fromSectionId } = taskItem;
-        const fromIndex = tasks[fromSectionId].items.indexOf(taskItem);
+        const fromIndex = sectionsTasks[fromSectionId].items.indexOf(taskItem);
         const isSameSection = fromSectionId === toSectionId;
         const isSamePosition = fromIndex === moveToIndex;
+
+        if (fromIndex < 0) {
+          throw new Error('Current position is incorrect');
+        }
 
         if (isSameSection && isSamePosition) {
           return { ...sectionsTasks };
