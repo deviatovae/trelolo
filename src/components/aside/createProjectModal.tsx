@@ -59,7 +59,7 @@ export const CreateProjectModal = ({ onClose }: CreateProjectModalProps) => {
             error={name.error}
             onChange={handleChangeName}
             disabled={isProcessing}
-            maxLength={50}
+            maxLength={30}
           />
         </div>
         <Button className="modal__add-btn" disabled={!!name.error || !isChanged} isLoading={isProcessing} onClick={handleSubmit}>

@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: space-evenly;
   box-shadow: -13px 18px 13px -21px rgba(34, 60, 80, 0.56);
+  overflow: hidden;
 
 
   &__project-name {
@@ -29,9 +30,11 @@
   }
 
   & > h3 {
-    padding-left: 7px;
-    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
   }
+
 
   &__btn-create-project {
     width: 235px;

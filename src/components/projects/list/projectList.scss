@@ -24,7 +24,7 @@
   }
 
   &__icon {
-    background: url("../../../assets/img/projects__logo.svg");
+    background: url("../../../assets/img/projects__logo.svg") no-repeat center;
   }
 
   &__icon, &__icon_new {
@@ -34,7 +34,7 @@
   }
 
   &__icon_new {
-    background: url("../../../assets/img/new-project.svg");
+    background: url("../../../assets/img/new-project.svg") no-repeat center;
   }
 
   &__name {
