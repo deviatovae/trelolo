@@ -114,12 +114,12 @@
     height: 30px;
     padding: 5px;
     border-radius: 6px;
-    transition: ease-in-out 0.2s background;
+    transition: ease-in-out 0.2s;
 
     &:hover {
       cursor: pointer;
       background-color: $greylight;
-      transition: ease-in-out 0.2s background;
+      transition: ease-in-out 0.2s;
     }
   }
 }

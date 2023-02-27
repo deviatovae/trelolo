@@ -15,7 +15,6 @@ export const Main = () => {
           </MyTasksProvider>
         </div>
       </section>
-      {/*<div className="main__img"></div>*/}
     </>
   );
 };

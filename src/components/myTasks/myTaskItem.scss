@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables';
 
 .task {
-  
+
   &-row {
     height: 34px;
     overflow: visible;
@@ -25,7 +25,7 @@
   &-cell {
     font-weight: 500;
     max-width: 250px;
-    overflow: overlay;
+    overflow: hidden;
     font-size: 0.9rem;
     transition: color 0.2s;
     border-bottom: 1px solid $borderBlueLight;
