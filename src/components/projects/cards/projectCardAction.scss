@@ -43,11 +43,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
+    transition: background 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
       background: $mainBlueHover;
+      transition: background 0.3s ease-in-out;
     }
 
     &:active {

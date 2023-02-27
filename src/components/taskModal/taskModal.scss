@@ -52,11 +52,13 @@
           width: 20px;
           height: 20px;
           padding: 3px;
+      
+          transition: background 0.2s ease-in-out;
 
           &:not(:disabled):hover {
             cursor: pointer;
             background-color: $borderBlueLight;
-            transition: transform 0.2s ease-in-out;
+            transition: background 0.2s ease-in-out;
           }
         }
 
@@ -114,11 +116,13 @@
     color: $black;
     line-height: 14px;
     font-weight: 400;
+    transition: 0.3s background, 0.2s color, 0.3s border-color;
 
     &:not(:disabled):hover {
       background-color: transparent;
       color: $red;
       border-color: red;
+      transition: 0.3s background, 0.2s color, 0.3s border-color;
     }
   }
 
