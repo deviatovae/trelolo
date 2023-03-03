@@ -1,0 +1,11 @@
+@import "src/assets/styles/variables";
+.menu-link {
+  &:hover {
+    cursor: pointer;
+    background: $asideLink;
+  }
+}
+
+.menu-link_active {
+  background-color: $asideLink;
+}

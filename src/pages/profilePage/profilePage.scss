@@ -1,0 +1,140 @@
+@import "src/assets/styles/variables";
+
+.profilePage {
+
+  &__wrapper {
+    display: flex;
+    height:  calc(100%);
+    overflow: auto;
+  }
+
+  &__section-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  &__section {
+    position: relative;
+    padding-top: 20px;
+    height: 100%;
+    animation: profile-hide 0.6s ease-in-out;
+  }
+
+  &__header {
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: $mainBlack;
+  }
+
+  &__content-wrapper {
+    min-width: 780px;
+    min-height: 580px;
+    border-radius: 15px;
+    background: $white;
+    padding: 40px;
+    box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.06);
+  }
+
+  &__person-wrapper {
+    padding-bottom: 60px;
+  }
+
+  &__left-right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__left-side {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+  }
+
+  &__name-header,
+  &__color-header,
+  &__email-header,
+  &__password-header {
+    font-weight: 500;
+    font-size: 16px;
+    color: $greyDark;
+    padding-bottom: 15px;
+  }
+
+  &__color-picker-example {
+    width: 80px;
+    height: 46px;
+    border-radius: 6px;
+    background-color: $mainBlue;
+    // transition: transform 0.3s;
+
+    // &:hover {
+    //   cursor: pointer;
+    //   transition: transform 0.3s;
+    // }
+
+    // &:active {
+    //   transform: scale(0.98);
+    //   transition: transform 0.05s;
+    // }
+  }
+
+  &__right-side {
+    width: 300px;
+  }
+
+  &__password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px
+  }
+
+  &__save-btn {
+    width: fit-content;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+    align-self: end;
+
+    &:hover {
+      cursor: pointer;
+      background: $mainBlueHover;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.05s;
+    }
+
+    &:disabled {
+      background: $greylight;
+      color: $black;
+      cursor: auto;
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+  .profilePage-inputs {
+    width: 100%;
+    height: 45px;
+    border: 1px solid $greylight;
+    border-radius: 6px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $mainBlueHover;
+    }
+  }

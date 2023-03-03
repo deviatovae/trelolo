@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import Header from './components/view/header/header';
+import Footer from './components/view/footer/footer';
+import { Outlet } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import { LOCALES } from './components/languages/locales';
+import { translations } from './components/languages/translations';
+import { LanguagesManager } from './components/languages/languagesManager';
+import { AuthProvider } from './context/authContext';
+import { setDefaultOptions } from 'date-fns';
+import 'react-tooltip/dist/react-tooltip.css';
 
 function App() {
+  const { currentLocale, setLocale, fnsLocale } = LanguagesManager();
+
+  setDefaultOptions({ locale: fnsLocale });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <IntlProvider
+      messages={translations[currentLocale]}
+      locale={currentLocale}
+      defaultLocale={LOCALES.ENGLISH}
+    >
+      <AuthProvider>
+        <div className="app wrapper">
+          <Header currentLocale={currentLocale} setLocale={setLocale} />
+          <div className="app__content">
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
+      </AuthProvider>
+    </IntlProvider >
   );
 }
 

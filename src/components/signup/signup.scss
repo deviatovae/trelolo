@@ -1,0 +1,24 @@
+.signup {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 32px;
+
+        .button-signup {
+            width: 86%;
+            padding: 8px;
+        }
+
+        .input-signup-wrapper {
+            width: 86%;
+        }
+    }
+
+    &-title {
+        font-weight: 400;
+        margin: 0;
+    }
+}

@@ -1,0 +1,117 @@
+@import '/src/assets/styles/variables.scss';
+
+.welcome-wrapper {
+  background-color: $mainBg;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  max-width: 1920px;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 75px;
+
+  @media screen and (max-width: 1100px) {
+    flex-direction: column;
+    padding: 0 30px;
+  }
+
+  &__left {
+    flex: 0 0 45%;
+
+    @media screen and (max-width: 1100px) {
+      display: flex;
+      padding: 30px 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__header {
+    font-size: 2.5rem;
+    line-height: 2.8rem;
+    color: $black;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 1100px) {
+      text-align: center;
+    }
+  }
+
+  &__description {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: $mainBlack;
+    margin-bottom: 60px;
+
+    @media screen and (max-width: 1100px) {
+      text-align: center;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    max-width: 150px;
+    max-height: 50px;
+
+    @media screen and (max-width: 1100px) {
+      width: 100%;
+    }
+  }
+
+  &__img {
+    background: url('../../../src/assets/img/welcome.png') center no-repeat;
+    background-size: contain;
+    width: 640px;
+    height: 413px;
+  }
+}
+
+.visuals {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    background-size: contain;
+
+    &_kanban {
+      background: url("../../../src/assets/img/kanban.svg");
+    }
+
+    &_discuss {
+      background: url("../../../src/assets/img/discuss.svg");
+    }
+
+    &_due-date {
+      background: url("../../../src/assets/img/date.svg");
+    }
+  }
+
+  &__title {
+    color: $mainBlack;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}

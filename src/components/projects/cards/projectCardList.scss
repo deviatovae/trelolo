@@ -1,0 +1,199 @@
+@import 'src/assets/styles/variables';
+
+.myProjects-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  padding: 50px;
+}
+
+.projects-cards {
+
+  &__container {
+    display: flex;
+    width: 100%;
+    border-radius: 6px;
+    border: solid 1px $borderBlueLight;
+    background-color: $white;
+    padding: 1.3rem;
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.1);
+  }
+
+  &__header {
+    display: flex;
+    padding-left: 10px;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+
+    &>h4,
+    h6 {
+      padding-left: 14px;
+      margin: 0;
+      color: #6d6e6f;
+    }
+
+    &>h4 {
+      font-weight: 700;
+    }
+
+    &>h6 {
+      font-weight: 500;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__list {
+    padding: 10px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  &__item {
+    width: 260px;
+    height: 100px;
+    background-color: $asideBg;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $borderBlueLight;
+    transition: transform 0.2s ease-in-out;
+    color: $mainBlack;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+
+    &:hover>.projects-cards__edit,
+    &:hover>.projects-cards__delete {
+      top: 4px;
+      transition: 0.3s all;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__name {
+    text-align: center;
+    padding: 0px 5px;
+    max-height: 20px;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__create {
+    width: 260px;
+    height: 100px;
+    background-color: #ebecf0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $mainBlue;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+
+  &__edit,
+  &__delete {
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    background: center no-repeat;
+    background-size: contain;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 4;
+    top: -40px;
+    overflow: hidden;
+    right: 0;
+    transition: background 0.3s ease-in-out, 0.3s top;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $borderBlueLight;
+      transition: background 0.3s ease-in-out;
+    }
+  }
+
+  &__edit {
+    content: url("../../../assets/img/pencil.svg");
+    right: 28px;
+  }
+
+  &__delete {
+    content: url("../../../assets/img/cross.svg");
+    right: 3px;
+  }
+}
+
+.tabs-content {
+
+  &__tab {
+    margin: 0;
+    display: inline-flex;
+    list-style: none;
+    flex: 0 1 auto;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    white-space: nowrap;
+
+    &-link {
+      color: #6d6e6f;
+      font-weight: 500;
+      padding: 10px 5px;
+      transition: color 0.2s, background 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        color: $mainBlack;
+        transition: color 0.2s;
+      }
+
+      &.active {
+        background-color: $borderBlueLight;
+        border-radius: 6px;
+        color: $mainBlack;
+        transition: color 0.2s, background 0.2s;
+      }
+    }
+  }
+}
