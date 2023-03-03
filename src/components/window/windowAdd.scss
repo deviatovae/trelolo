@@ -1,5 +1,9 @@
 @import '/src/assets/styles/variables.scss';
 
+.modal-overl {
+  height: fit-content;
+}
+
 .modal-main {
   width: 260px;
   height: 100px;

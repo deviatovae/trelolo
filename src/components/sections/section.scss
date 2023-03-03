@@ -1,11 +1,13 @@
 @import "src/assets/styles/variables";
 .columns-drop-container {
   display: flex;
-  gap: 20px;
+
+  & > div {
+    margin-right: 20px;
+  }
 }
 
 .column-list-item {
-
   &__header-settings-container {
     min-width: 281px;
     display: flex;
