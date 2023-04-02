@@ -1,0 +1,46 @@
+@import 'src/assets/styles/variables';
+
+.task {
+
+  &-row {
+    height: 34px;
+    overflow: visible;
+    transition: box-shadow 0s ease-in;
+    white-space: nowrap;
+    overflow-y: hidden;
+    font-size: 0.9rem;
+  }
+
+  &-column {
+
+    &-name,
+    &-project,
+    &-duedate {
+      padding: 0;
+      border-bottom: 1px solid $borderBlueLight;
+      border-top: 1px solid $borderBlueLight;
+    }
+  }
+
+  &-cell {
+    font-weight: 500;
+    max-width: 250px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    border-bottom: 1px solid $borderBlueLight;
+  }
+
+  &-project-cell,
+  &-deadline-cell {
+    text-align: center;
+  }
+
+  &-project-link {
+    max-width: 150px;
+    overflow: auto;
+    padding: 4px 8px;
+    background-color: $greylight;
+    border-radius: 8px;
+  }
+}

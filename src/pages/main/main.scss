@@ -1,0 +1,32 @@
+@import "/src/assets/styles/variables";
+
+.main {
+
+  &__section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    position: relative;
+  }
+
+  &__img {
+    position: absolute;
+    bottom: -35px;
+    right: 0px;
+    background-size: contain;
+    width: 425px;
+    height: 284px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 0 25px 100px 25px;
+  }
+
+}
+

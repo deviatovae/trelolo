@@ -1,0 +1,12 @@
+@import "/src/assets/styles/variables";
+
+.color-picker {
+
+  &__wrapper {
+    padding-top: 20px;
+  }
+}
+
+.hue-horizontal {
+  width: 300px;
+}

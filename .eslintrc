@@ -6,7 +6,7 @@
       "node": true
     },
     "extends": [
-      "airbnb-typescript/base",
+      "airbnb-typescript",
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
       "react-app",
@@ -34,7 +34,8 @@
       "props": false
       }],
       "comma-dangle": "off",
-      "@typescript-eslint/comma-dangle": ["error", "only-multiline"]
+      "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}]
   },
   "ignorePatterns": ["*config.js"]
   }

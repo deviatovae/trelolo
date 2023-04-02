@@ -1,0 +1,60 @@
+@import "src/assets/styles/variables";
+
+.project-page {
+
+  &__container {
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+    max-height: calc(100vh - 100px);
+  }
+
+  &__board {
+    height: 100%;
+    overflow: auto auto;
+    user-select: none;
+  }
+
+  &__column-list {
+    padding: 25px;
+    height: 100%;
+    min-width: calc(100vw - 240px);
+    display: inline-flex;
+  }
+
+  &__column-list-item {
+    border-radius: 6px;
+    color: $mainBlack;
+  }
+
+  &__column-list-btn {
+    width: 260px;
+    height: 30px;
+    background-color: #EBECF0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $mainBlue;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover > span {
+      transform: scale(1.04);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+}
+

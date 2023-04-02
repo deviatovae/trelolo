@@ -1,0 +1,65 @@
+.task {
+  &-container {
+    width: 265px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-shadow: -3px 0px 12px -6px rgba(34, 60, 80, 0.4);
+  }
+
+  &-name {
+    max-height: 40px;
+    word-break: break-all;
+    max-width: 200px;
+    overflow: hidden;
+  }
+
+  &-title-logo-container,
+  &-calendar-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  &-title-logo-container {
+    min-height: 60px;
+  }
+
+  &-calendar {
+    border: 1px solid rgba(73, 75, 244, 0.5);
+    border-radius: 50%;
+    background: url(../../assets/img/clarity_date-line.svg) no-repeat center;
+  }
+
+  &-deadline {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  &-settings {
+    background: url(../../assets/img/settinfg_add_task.svg) no-repeat center;
+  }
+
+  &-settings,
+  &-calendar {
+
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.08);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: transform 0.1s ease-in-out;
+    }
+  }
+}

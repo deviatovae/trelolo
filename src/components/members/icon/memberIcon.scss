@@ -1,0 +1,61 @@
+@import "../../../assets/styles/variables";
+
+.member-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+
+  &__content {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+    border: solid 1px $borderBlueLight;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    transition: background 0.2s;
+    user-select: none;
+
+    &:not(&_owner):hover {
+      cursor: pointer;
+      background-color: $mainTextWhite;
+      transition: background 0.2s;
+    }
+  }
+
+  &__text {
+    color: $mainBlue;
+    font-size: 2.8rem;
+  }
+
+  &__label {
+    font-size: 1.1rem;
+  }
+
+  &__owner-icon {
+    background: url("../../../assets/img/star.svg");
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    right: -5px;
+  }
+}
+
+.plus {
+  color: $mainBlue;
+  width: 80px;
+  height: 80px;
+  background: url("../../../assets/img/plus.svg");
+  background-size: contain;
+}
+
+.hidden {
+  display: none;
+}
